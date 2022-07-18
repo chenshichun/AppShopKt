@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="360dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dimen_dp_20"
+            android:paddingVertical="@dimen/dimen_dp_20">
+
+            <TextView
+                android:id="@+id/pic_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/detail_btn_bg"
+                android:paddingHorizontal="@dimen/dimen_dp_20"
+                android:paddingVertical="@dimen/dimen_dp_5"
+                android:text="1/1"
+                android:textColor="#ffffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/video_pic_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="@dimen/dimen_dp_20">
+
+            <TextView
+                android:id="@+id/video_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/detail_red_btn_bg"
+                android:drawablePadding="@dimen/dimen_dp_5"
+                android:paddingHorizontal="@dimen/dimen_dp_10"
+                android:paddingVertical="@dimen/dimen_dp_5"
+                android:text="视频"
+                android:textColor="#ffffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/pic_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_dp_20"
+                android:background="@drawable/detail_btn_bg"
+                android:paddingHorizontal="@dimen/dimen_dp_20"
+                android:paddingVertical="@dimen/dimen_dp_5"
+                android:text="图片"
+                android:textColor="#ffffffff"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

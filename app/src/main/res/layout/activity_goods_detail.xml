@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dimen_dp_50">
+
+            <include
+                android:id="@+id/layout_goods_details_banner"
+                layout="@layout/layout_goods_details_banner" />
+
+            <include
+                android:id="@+id/layout_goods_details_head"
+                layout="@layout/layout_goods_details_head" />
+
+            <include
+                android:id="@+id/layout_goods_details_middle"
+                layout="@layout/layout_goods_details_middle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_dp_15"
+                android:background="@drawable/bg_white_8"
+                android:orientation="vertical"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宝贝详情"
+                    android:textColor="@color/color_333"
+                    android:textStyle="bold" />
+
+                <com.app.shop.view.LollipopFixedWebView
+                    android:id="@+id/webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14.5dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="@dimen/dimen_dp_45">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_gray_circle"
+            android:src="@drawable/icon_goods_back" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_gray_circle"
+            android:src="@drawable/icon_goods_more" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/layout_goods_details_bottom"
+        layout="@layout/layout_goods_details_bottom" />
+
+</RelativeLayout>

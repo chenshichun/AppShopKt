@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_8"
+    android:layout_margin="@dimen/dimen_dp_15"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="10dp">
+
+    <TextView
+        android:id="@+id/tv_integral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%d 易货积分"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_sell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已售%d件"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/color_333"
+        android:textSize="@dimen/dimen_font_20"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/tv_integral"
+        app:layout_constraintTop_toBottomOf="@id/tv_integral"
+        android:text="这是商品标题" />
+
+    <TextView
+        android:id="@+id/tv_shop_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/icon_goods_shop"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:textColor="@color/color_666"
+        app:layout_constraintLeft_toLeftOf="@id/tv_integral"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:text="店铺名称" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/icon_name"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:textColor="@color/color_666"
+        app:layout_constraintLeft_toLeftOf="@id/tv_integral"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shop_name"
+        android:text="店家名称" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
