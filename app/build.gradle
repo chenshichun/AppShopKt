@@ -64,6 +64,34 @@ android {
                 outputFileName = "${apkName}"
             }
     }
+
+    dexOptions {
+        javaMaxHeapSize "6g"
+        maxProcessCount 4
+    }
+
+    flavorDimensions "tier"
+
+    productFlavors {
+
+        Testing {
+            buildConfigField 'String', 'BASE_URL', '"https://dev.kjmall.cc/"'
+            buildConfigField 'String', 'WHICH_SERVER', '"Testing"'
+            dimension "tier"
+        }
+
+        Development {
+            buildConfigField 'String', 'BASE_URL', '"https://dev.kjmall.cc/"'
+            buildConfigField 'String', 'WHICH_SERVER', '"Development"'
+            dimension "tier"
+        }
+
+        Product {
+            buildConfigField 'String', 'BASE_URL', '"https://dev.kjmall.cc/"'
+            buildConfigField 'String', 'WHICH_SERVER', '"Product"'
+            dimension "tier"
+        }
+    }
 }
 
 dependencies {

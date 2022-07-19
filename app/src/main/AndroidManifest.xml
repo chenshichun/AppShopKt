@@ -58,7 +58,9 @@
         <activity android:name=".ui.activity.OrderActivity" />
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.AttentionActivity" />
-        <activity android:name=".ui.activity.SearchActivity"/>
+        <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.MerchantSettledActivity" />
+
     </application>
 
 </manifest>

@@ -35,7 +35,7 @@ class NetworkInterceptor : Interceptor {
         request = chain.request()
 
         val builder = chain.request().newBuilder()
-        val token: String? = AccountManager().getToken()
+        val token: String? = AccountManager.getToken()
 
         request = if (!TextUtils.isEmpty(token)) {
             builder

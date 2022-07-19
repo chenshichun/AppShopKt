@@ -2,6 +2,7 @@ package com.app.shop.service
 
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.HotSearchBean
+import com.app.shop.bean.UserDataBean
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,9 +14,6 @@ import retrofit2.http.GET
  *
  */
 interface HomeService {
-    @GET("api/hot-search")
-    fun getHotSearch(): Call<BaseNetModel<ArrayList<HotSearchBean>>>
-
-    @GET("api/hot-search")
-    suspend fun getHotSearchNew(): Response<BaseNetModel<ArrayList<HotSearchBean>>>
+    @GET("user/myinfo")
+    suspend fun getMyInfo():Response<BaseNetModel<UserDataBean>>
 }

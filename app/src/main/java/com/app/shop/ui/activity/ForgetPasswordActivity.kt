@@ -6,6 +6,7 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivityForgetPasswordBinding
 import com.app.shop.ui.contract.ForgetPasswordContract
 import com.app.shop.ui.presenter.ForgetPasswordPresent
+import com.gyf.immersionbar.ktx.immersionBar
 
 /**
  * @author chenshichun
@@ -19,6 +20,10 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, Forge
     }
 
     override fun initView() {
+        immersionBar {
+            statusBarColor(R.color.white)
+            statusBarDarkFont(true)
+        }
         binding.ivBack.setOnClickListener(this)
     }
 

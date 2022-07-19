@@ -35,7 +35,7 @@ class BaseApplication : Application() {
         // toast初始化
         ToastUtil.init(this)
 
-        AccountManager(this)
+        AccountManager.init(this)
     }
 
     /*

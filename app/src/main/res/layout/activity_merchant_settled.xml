@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.activity.OrderActivity">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/layout_head" />
+
+    <include layout="@layout/line" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="商户名称" />
+
+                <EditText
+                    style="@style/merchant_et"
+                    android:hint="请输入商户名称" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="商户负责人" />
+
+                <EditText
+                    style="@style/merchant_et"
+                    android:hint="请输入商户负责人姓名" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="客服电话" />
+
+                <EditText
+                    style="@style/merchant_et"
+                    android:hint="请输入客服电话"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="负责人电话" />
+
+                <EditText
+                    style="@style/merchant_et"
+                    android:hint="请输入负责人电话"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="商户地址" />
+
+                <TextView
+                    style="@style/merchant_et"
+                    android:text="请选择地址信息" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="商户详细地址" />
+
+                <EditText
+                    style="@style/merchant_et"
+                    android:hint="请输入商户详细地址" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

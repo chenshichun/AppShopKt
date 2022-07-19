@@ -7,6 +7,7 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivityAccountLoginBinding
 import com.app.shop.ui.contract.AccountLoginContract
 import com.app.shop.ui.presenter.AccountLoginPresenter
+import com.gyf.immersionbar.ktx.immersionBar
 
 /**
  * @author chenshichun
@@ -21,6 +22,10 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
     }
 
     override fun initView() {
+        immersionBar {
+            statusBarColor(R.color.white)
+            statusBarDarkFont(true)
+        }
         binding.ivBack.setOnClickListener(this)
         binding.tvRegister.setOnClickListener(this)
         binding.tvCodeLogin.setOnClickListener(this)

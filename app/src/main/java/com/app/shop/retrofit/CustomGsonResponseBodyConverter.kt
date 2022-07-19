@@ -7,6 +7,7 @@ import com.app.shop.manager.ApiException
 import com.app.shop.manager.HttpStatus
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
+import com.orhanobut.logger.Logger
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import java.io.*
@@ -24,16 +25,19 @@ class CustomGsonResponseBodyConverter<T>() :
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Throws(IOException::class)
+    @Throws(ApiException::class)
     override fun convert(value: ResponseBody): T {
         val response = value.string()
         val httpStatus = gson!!.fromJson(response, HttpStatus::class.java)
         if (httpStatus.isCodeInvalid) {
-            if (httpStatus.isNeedLogin && AccountManager().isLogin()) {
-                AccountManager().signOut()
+            if (httpStatus.isNeedLogin && AccountManager.isLogin()) {
+                AccountManager.signOut()
             }
             value.close()
-            throw ApiException(httpStatus.code, httpStatus.message)
+            Logger.d(httpStatus.code)
+            Logger.d(httpStatus.msg)
+
+            //throw ApiException(httpStatus.code, httpStatus.msg)
         }
         val contentType = value.contentType()
         val charset =

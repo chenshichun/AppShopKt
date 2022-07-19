@@ -6,8 +6,8 @@ class HttpStatus {
     @SerializedName("code")
     val code = 0
 
-    @SerializedName("message")
-    val message: String? = null
+    @SerializedName("msg")
+    val msg: String? = null
 
     /**
      * API是否请求失败

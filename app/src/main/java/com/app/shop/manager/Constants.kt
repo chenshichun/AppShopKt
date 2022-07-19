@@ -8,7 +8,7 @@ package com.app.shop.manager
  */
 class Constants {
     companion object {
-        const val WEB_RESP_CODE_SUCCESS = 200
+        const val WEB_RESP_CODE_SUCCESS = 0
         const val TOKEN_EXPRIED = 10000
         const val LOGIN_OUT = 402 // 您的账号在其他地方登录，已退出登录
     }

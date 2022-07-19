@@ -57,9 +57,9 @@ class MmkvUtil {
         }
     }
 
-    fun <T : Parcelable?> get(key: String?, tClass: Class<T>?): T {
+    fun <T : Parcelable?> get(key: String?, tClass: Class<T>?): T? {
         val mmkv = MMKV.defaultMMKV()
-        return mmkv.decodeParcelable(key, tClass)!!
+        return mmkv.decodeParcelable(key, tClass)
     }
 
 

@@ -7,10 +7,12 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.HotSearchBean
 import com.app.shop.databinding.ActivityMainBinding
+import com.app.shop.manager.AccountManager
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
 import com.app.shop.ui.contract.MainContract
 import com.app.shop.ui.presenter.MainPresenter
+import com.app.shop.util.ToastUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
@@ -26,13 +28,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
     }
 
     override fun initView() {
+        Logger.d(AccountManager.isLogin())
+        Logger.d(AccountManager.getToken())
         immersionBar {
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
-        mPresenter?.testPresenter()
-        mPresenter?.hotSearch()
-        // mPresenter?.hotNewSearch()
 
         val navView: BottomNavigationView = binding.navView
 
@@ -44,26 +45,5 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                 statusBarColor(if (destination.id == R.id.navigation_mine) R.color.color_bg else R.color.white)
             }
         }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = ApiRequest.create(HomeService::class.java).getHotSearchNew()
-            if (response.body() == null) {
-                Logger.d("无网络")
-            } else {
-                Logger.d(response.body()!!.data?.get(1)?.keyword)
-            }
-        }
     }
-
-    override fun testView(string: String) {
-    }
-
-    override fun hotSearch(data: BaseNetModel<ArrayList<HotSearchBean>>) {
-        Logger.d(data.data!![0].keyword)
-    }
-
-    override fun hotNewSearch(data: BaseNetModel<ArrayList<HotSearchBean>>) {
-        Logger.d(data.data!![0].keyword)
-    }
-
 }

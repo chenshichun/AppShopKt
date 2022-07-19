@@ -5,4 +5,5 @@
     <string name="network_busy" translatable="false">网络繁忙</string>
     <string name="reacquire" translatable="false">重新获取</string>
     <string name="upload_fail" translatable="false">上传文件出错，请检查您的网络以及文件大小</string>
+    <string name="inv_code">邀请码：%s</string>
 </resources>

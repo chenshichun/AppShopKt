@@ -21,35 +21,4 @@ import retrofit2.Response
  */
 class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter {
 
-    override fun testPresenter() {
-        mView!!.testView("ss")
-    }
-
-    override fun hotSearch() {
-        ApiRequest.create(HomeService::class.java).getHotSearch()
-            .enqueue(object : Callback<BaseNetModel<ArrayList<HotSearchBean>>> {
-                override fun onResponse(
-                    call: Call<BaseNetModel<ArrayList<HotSearchBean>>>,
-                    response: Response<BaseNetModel<ArrayList<HotSearchBean>>>
-                ) {
-                    if (response.body() == null) {
-                        ToastUtil.showToast("无网络")
-                        Logger.d("无网络")
-                        return
-                    }else{
-                        mView!!.hotSearch(response.body()!!)
-                    }
-                }
-
-                override fun onFailure(
-                    call: Call<BaseNetModel<ArrayList<HotSearchBean>>>,
-                    t: Throwable
-                ) {
-                }
-
-            })
-    }
-
-    override fun hotNewSearch() {
-    }
 }
