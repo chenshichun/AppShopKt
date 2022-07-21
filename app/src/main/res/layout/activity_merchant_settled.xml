@@ -30,6 +30,7 @@
                     android:text="商户名称" />
 
                 <EditText
+                    android:id="@+id/et_m_name"
                     style="@style/merchant_et"
                     android:hint="请输入商户名称" />
             </LinearLayout>
@@ -43,6 +44,7 @@
                     android:text="商户负责人" />
 
                 <EditText
+                    android:id="@+id/et_legal_name"
                     style="@style/merchant_et"
                     android:hint="请输入商户负责人姓名" />
             </LinearLayout>
@@ -56,6 +58,7 @@
                     android:text="客服电话" />
 
                 <EditText
+                    android:id="@+id/et_service_phone"
                     style="@style/merchant_et"
                     android:hint="请输入客服电话"
                     android:inputType="phone" />
@@ -70,6 +73,7 @@
                     android:text="负责人电话" />
 
                 <EditText
+                    android:id="@+id/et_legal_phone"
                     style="@style/merchant_et"
                     android:hint="请输入负责人电话"
                     android:inputType="phone" />
@@ -97,11 +101,250 @@
                     android:text="商户详细地址" />
 
                 <EditText
+                    android:id="@+id/et_m_addr_detail"
                     style="@style/merchant_et"
                     android:hint="请输入商户详细地址" />
             </LinearLayout>
 
             <include layout="@layout/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="商户类型" />
+
+                <com.app.shop.view.MultiLineRadioGroup
+                    android:id="@+id/mMultiLineRadioGroup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="个人"></RadioButton>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="个体工商户"></RadioButton>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="企业"></RadioButton>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="其他组织"></RadioButton>
+                    </LinearLayout>
+                </com.app.shop.view.MultiLineRadioGroup>
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_dp_10"
+                android:text="经营者信息"
+                android:textColor="@color/color_333"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="经营者姓名" />
+
+                <EditText
+                    android:id="@+id/et_employee_name"
+                    style="@style/merchant_et"
+                    android:hint="请输入经营者姓名" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="证件类型" />
+
+                <TextView
+                    style="@style/merchant_et"
+                    android:text="中国大陆居民身份证" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="商户类型" />
+
+                <TextView
+                    android:id="@+id/tv_e_type"
+                    style="@style/merchant_et"
+                    android:text="线上联盟商家" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="证件号码" />
+
+                <EditText
+                    android:id="@+id/et_id_num"
+                    style="@style/merchant_et"
+                    android:hint="请输入证件号码" />
+            </LinearLayout>
+
+            <include layout="@layout/line" />
+
+            <LinearLayout style="@style/merchant_ll">
+
+                <TextView
+                    style="@style/merchant_txt"
+                    android:text="证件照片" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:background="#FFC107"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="#FFC107"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="*正面"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="*国徽面"
+                    android:textColor="@color/red" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv3"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:background="#FFC107"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="#FFC107"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="*手持照片"
+                    android:textColor="@color/red" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/red"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:text="提示：平台禁止" />
+
+            <TextView
+                android:id="@+id/tv_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_red_5"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="保存"
+                android:textColor="@color/white" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

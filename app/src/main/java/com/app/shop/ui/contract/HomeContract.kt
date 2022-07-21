@@ -1,6 +1,9 @@
 package com.app.shop.ui.contract
 
 import com.app.shop.base.BaseContract
+import com.app.shop.bean.BannerBean
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.ProdBean
 
 /**
  * @author chenshichun
@@ -10,8 +13,16 @@ import com.app.shop.base.BaseContract
  */
 interface HomeContract : BaseContract {
     interface View : BaseContract.BaseView {
+        fun getBannerList(mData:BaseNetModel<BannerBean>)
+        fun getProdHomeData(mData: BaseNetModel<ProdBean>)
+        fun getProdFeaturedData(mData: BaseNetModel<ProdBean>)
+        fun getProdRecommendData(mData: BaseNetModel<ProdBean>)
     }
 
     interface Presenter {
+        fun getBannerList()
+        fun getProdHomeData()
+        fun getProdFeaturedData()
+        fun getProdRecommendData()
     }
 }

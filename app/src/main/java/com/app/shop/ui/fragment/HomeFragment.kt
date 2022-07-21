@@ -18,15 +18,22 @@ import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.adapter.MyAdapter
 import com.app.shop.base.BaseFragment
+import com.app.shop.bean.BannerBean
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.Prod
+import com.app.shop.bean.ProdBean
 import com.app.shop.databinding.FragmentHomeBinding
 import com.app.shop.ui.activity.GoodsDetailActivity
 import com.app.shop.ui.activity.SearchActivity
 import com.app.shop.ui.contract.HomeContract
 import com.app.shop.ui.presenter.HomePresenter
 import com.app.shop.util.ToastUtil
+import com.app.shop.view.GlideImageLoader
 import com.desmond.citypicker.bin.CityPicker
 import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.youth.banner.BannerConfig
+import com.youth.banner.listener.OnBannerListener
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -56,9 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         R.drawable.icon_10
     )
     private lateinit var goodsAdapter: GoodsAdapter
-    private var goodsList: ArrayList<String>? = ArrayList()
+    private var goodsList: ArrayList<Prod>? = ArrayList()
     private lateinit var mLocationClient: AMapLocationClient
     private lateinit var mLocationOption: AMapLocationClientOption
+
+
+    override fun getPresenter(): HomePresenter {
+        return HomePresenter()
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
@@ -91,6 +103,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         }
         getCurrentLocationLatLng()
         getLocation()
+
+        mPresenter!!.getBannerList()
+        mPresenter!!.getProdHomeData()
+        mPresenter!!.getProdFeaturedData()
+        mPresenter!!.getProdRecommendData()
     }
 
     /*
@@ -131,13 +148,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
      * 定位回调监听器
      */
     private var mLocationListener =
-        AMapLocationListener { amapLocation ->
-            if (amapLocation != null) {
-                if (amapLocation.errorCode == 0) {
+        AMapLocationListener { ampLocation ->
+            if (ampLocation != null) {
+                if (ampLocation.errorCode == 0) {
                     //获取纬度
-                    val currentLat = amapLocation.latitude
+                    val currentLat = ampLocation.latitude
                     //获取经度
-                    val currentLon = amapLocation.longitude
+                    val currentLon = ampLocation.longitude
 
 
                     val location = Location("")
@@ -150,8 +167,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                     //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                     Logger.e(
                         "location Error, ErrCode:"
-                                + amapLocation.errorCode + ", errInfo:"
-                                + amapLocation.errorInfo
+                                + ampLocation.errorCode + ", errInfo:"
+                                + ampLocation.errorInfo
                     )
                 }
             }
@@ -212,8 +229,47 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             }
     }
 
+    /*
+    * 首页banner数据
+    * */
+    override fun getBannerList(mData: BaseNetModel<BannerBean>) {
+        var listPath = mutableListOf<String>()
+        for (slide in mData.data!!.slide) {
+            listPath.add(slide.img_url)
+        }
+        binding.banner.setImageLoader(GlideImageLoader())
+        binding.banner.setImages(listPath);
+        binding.banner.setDelayTime(2000)
+        binding.banner.isAutoPlay(true)
+        binding.banner.setIndicatorGravity(BannerConfig.CENTER)
+        binding.banner.setOnBannerListener(object : OnBannerListener {
+            override fun OnBannerClick(position: Int) {
+            }
+        })
+        binding.banner.start()
+    }
 
-    override fun getPresenter(): HomePresenter {
-        return HomePresenter()
+
+    /*
+    * 首页商品数据
+    * */
+    @SuppressLint("NotifyDataSetChanged")
+    override fun getProdHomeData(mData: BaseNetModel<ProdBean>) {
+        goodsList!!.addAll(mData.data!!.prods)
+        goodsAdapter.notifyDataSetChanged()
+    }
+
+    /*
+    * 精选好物
+    * */
+    override fun getProdFeaturedData(mData: BaseNetModel<ProdBean>) {
+
+    }
+
+    /*
+    *  推荐商品
+    * */
+    override fun getProdRecommendData(mData: BaseNetModel<ProdBean>) {
+
     }
 }

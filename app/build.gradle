@@ -65,11 +65,6 @@ android {
             }
     }
 
-    dexOptions {
-        javaMaxHeapSize "6g"
-        maxProcessCount 4
-    }
-
     flavorDimensions "tier"
 
     productFlavors {
@@ -129,13 +124,15 @@ dependencies {
     // 圆形头像
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     // 图片框架
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
     implementation 'com.google.android.material:material:1.1.0-alpha10'
     // 查看图片
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     // toast工具
     implementation 'com.github.GrenderG:Toasty:1.5.2'
+    implementation 'io.github.muddz:styleabletoast:2.4.0'
     // XEditText文本输入框
     implementation 'com.xw.repo:xedittext:2.2.6@aar'
     // 城市选择
@@ -156,6 +153,8 @@ dependencies {
     implementation "androidx.room:room-ktx:2.2.5"//Coroutines support for Room 协程操作库
     // 瀑布流布局
     implementation 'com.google.android:flexbox:0.3.0-alpha3'
+    // 照片选择
+    implementation 'io.github.lucksiege:pictureselector:v3.10.5'
 }
 
 def releaseTime() {

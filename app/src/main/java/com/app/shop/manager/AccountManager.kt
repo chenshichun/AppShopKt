@@ -20,8 +20,8 @@ class AccountManager {
 
         fun init(context: Context?) {
             this.applicationContext = context
-            mAccount = MmkvUtil().get(BaseConstant.TAG_USER_BEAN, UserBean::class.java)
-            mAuthorizationToken = MmkvUtil().get(BaseConstant.TAG_TOKEN, "") as String?
+            mAccount = MmkvUtil.get(BaseConstant.TAG_USER_BEAN, UserBean::class.java)
+            mAuthorizationToken = MmkvUtil.get(BaseConstant.TAG_TOKEN, "") as String?
         }
 
         fun getAccountInfo(): UserBean? {
@@ -34,12 +34,12 @@ class AccountManager {
 
         fun signInToken(token: String) {
             mAuthorizationToken = token
-            MmkvUtil().put(BaseConstant.TAG_TOKEN, token)
+            MmkvUtil.put(BaseConstant.TAG_TOKEN, token)
         }
 
         fun signIn(account: UserBean) {
             mAccount = account
-            MmkvUtil().put(BaseConstant.TAG_USER_BEAN, account)
+            MmkvUtil.put(BaseConstant.TAG_USER_BEAN, account)
         }
 
         fun isLogin(): Boolean {
@@ -51,8 +51,8 @@ class AccountManager {
             mAccount = null
             mAuthorizationToken = ""
 
-            MmkvUtil().put(BaseConstant.TAG_TOKEN, mAuthorizationToken)
-            MmkvUtil().put(BaseConstant.TAG_USER_BEAN, mAccount)
+            MmkvUtil.put(BaseConstant.TAG_TOKEN, mAuthorizationToken)
+            MmkvUtil.put(BaseConstant.TAG_USER_BEAN, mAccount)
         }
     }
 }

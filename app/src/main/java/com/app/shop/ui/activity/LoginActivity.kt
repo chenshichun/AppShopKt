@@ -5,10 +5,12 @@ import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.SmsType
 import com.app.shop.bean.UserDataBean
 import com.app.shop.databinding.ActivityLoginBinding
 import com.app.shop.manager.AccountManager
-import com.app.shop.req.SmsReq
+import com.app.shop.req.SmsLoginReq
+import com.app.shop.req.SmsSendReq
 import com.app.shop.ui.contract.LoginContract
 import com.app.shop.ui.presenter.LoginPresent
 import com.app.shop.util.TimerUnit
@@ -58,10 +60,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
                 )
             )
             R.id.tv_get_code -> {// 获取验证码
-                if (timer == null) {
-                    timer = TimerUnit(binding.tvGetCode)
+                if (binding.etPhone.text.toString().isEmpty()) {
+                    ToastUtil.showToast("请输入手机号码")
+                    return
                 }
-                timer?.startTime()
+
+                var smsSendReq = SmsSendReq()
+                smsSendReq.phone = binding.etPhone.text.toString()
+                smsSendReq.sms_type = SmsType.login.name
+                mPresenter!!.smsCode(smsSendReq)
             }
             R.id.tv_login -> {
                 if (!binding.checkbox.isChecked) {
@@ -77,16 +84,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
                     return
                 }
 
-                val smsReq = SmsReq()
-                smsReq.phone = binding.etPhone.text.toString()
-                smsReq.verify_code = binding.etCode.text.toString()
-                mPresenter!!.smsLogin(smsReq)
+                val smsLoginReq = SmsLoginReq()
+                smsLoginReq.phone = binding.etPhone.text.toString()
+                smsLoginReq.verify_code = binding.etCode.text.toString()
+                mPresenter!!.smsLogin(smsLoginReq)
             }
         }
     }
 
+    override fun smsCode(mData: BaseNetModel<Any>) {
+        if (timer == null) {
+            timer = TimerUnit(binding.tvGetCode)
+        }
+        timer?.startTime()
+    }
+
     override fun smsLogin(mData: BaseNetModel<UserDataBean>) {
-        Logger.d(mData.data!!.user!!.token)
         AccountManager.signIn(mData.data!!.user!!)
         AccountManager.signInToken(mData.data!!.user!!.token!!)
         Logger.d(AccountManager.isLogin())

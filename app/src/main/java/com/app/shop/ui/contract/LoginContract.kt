@@ -3,7 +3,8 @@ package com.app.shop.ui.contract
 import com.app.shop.base.BaseContract
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UserDataBean
-import com.app.shop.req.SmsReq
+import com.app.shop.req.SmsLoginReq
+import com.app.shop.req.SmsSendReq
 
 /**
  * @author chenshichun
@@ -13,10 +14,12 @@ import com.app.shop.req.SmsReq
  */
 interface LoginContract {
     interface View : BaseContract.BaseView {
+        fun smsCode(mData: BaseNetModel<Any>)
         fun smsLogin(mData: BaseNetModel<UserDataBean>)
     }
 
     interface Presenter {
-        fun smsLogin(smsReq: SmsReq)
+        fun smsCode(smsSendReq: SmsSendReq)
+        fun smsLogin(smsReq: SmsLoginReq)
     }
 }

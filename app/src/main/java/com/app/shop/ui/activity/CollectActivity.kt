@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.Prod
 import com.app.shop.databinding.ActivityCollectBinding
 import com.app.shop.ui.contract.CollectContract
 import com.app.shop.ui.presenter.CollectPresent
@@ -13,7 +14,7 @@ import com.gyf.immersionbar.ktx.immersionBar
 class CollectActivity : BaseActivity<ActivityCollectBinding, CollectPresent>(),
     CollectContract.View {
     private lateinit var goodsAdapter: GoodsAdapter
-    private var goodsList: ArrayList<String>? = ArrayList()
+    private var goodsList: ArrayList<Prod>? = ArrayList()
 
     override fun getPresenter(): CollectPresent {
         return CollectPresent()

@@ -34,9 +34,6 @@ class CustomGsonResponseBodyConverter<T>() :
                 AccountManager.signOut()
             }
             value.close()
-            Logger.d(httpStatus.code)
-            Logger.d(httpStatus.msg)
-
             //throw ApiException(httpStatus.code, httpStatus.msg)
         }
         val contentType = value.contentType()

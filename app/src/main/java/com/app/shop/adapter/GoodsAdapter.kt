@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.shop.bean.Prod
 import com.app.shop.databinding.ItemGoodsBinding
+import com.bumptech.glide.Glide
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -14,7 +17,7 @@ import com.app.shop.databinding.ItemGoodsBinding
  * 描述：
  *
  */
-class GoodsAdapter(private val context: Context, val mData: List<String>?) :
+class GoodsAdapter(private val context: Context, val mData: ArrayList<Prod>?) :
     RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
     private var mOnItemClickListener: OnItemClickListener? = null
 
@@ -29,6 +32,12 @@ class GoodsAdapter(private val context: Context, val mData: List<String>?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.nameTv.text = mData!![position].prod_name
+        Glide.with(context)
+            .load("https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64"/*mData[position].pic*/)
+            .into(holder.goodsIv)
+        holder.tvIntegral.text = "￥${mData[position].price}"
+        holder.tvCountSell.text = "${mData[position].sold_num}人已购买"
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)
         }
@@ -39,7 +48,7 @@ class GoodsAdapter(private val context: Context, val mData: List<String>?) :
     }
 
     override fun getItemCount(): Int {
-        return 15
+        return mData!!.size
     }
 
     inner class ViewHolder(binding: ItemGoodsBinding) :

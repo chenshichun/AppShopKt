@@ -3,7 +3,7 @@ package com.app.shop.util
 import android.content.Context
 import android.widget.Toast
 import com.app.shop.R
-import es.dmoral.toasty.Toasty
+import io.github.muddz.styleabletoast.StyleableToast
 
 
 /**
@@ -21,21 +21,14 @@ class ToastUtil {
         }
 
         fun showNoIntentToast() {
-            context?.let { Toasty.normal(it, R.string.network_busy, Toast.LENGTH_SHORT).show() }
+            context?.let { showToast(it.getString(R.string.network_busy)) }
         }
 
         /***
-         *通常的Toast
+         *通用的Toast
          */
         fun showToast(message: String) {
-            context?.let { Toasty.normal(it, message, Toast.LENGTH_SHORT).show() }
-        }
-
-        /***
-         * 带图片Toast
-         */
-        fun showToast(message: String, int: Int) {
-            context?.let { Toasty.normal(it, message, int).show() }
+            context?.let { StyleableToast.makeText(it, message, Toast.LENGTH_SHORT, R.style.my_toast).show() };
         }
     }
 }

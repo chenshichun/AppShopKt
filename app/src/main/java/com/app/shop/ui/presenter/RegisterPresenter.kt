@@ -1,9 +1,9 @@
 package com.app.shop.ui.presenter
 
-import android.provider.SyncStateContract
 import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
 import com.app.shop.req.RegisterReq
+import com.app.shop.req.SmsSendReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.LoginService
 import com.app.shop.ui.contract.RegisterContract
@@ -19,6 +19,22 @@ import kotlinx.coroutines.launch
  *
  */
 class RegisterPresenter : BasePresenter<RegisterContract.View>(), RegisterContract.Presenter {
+
+    override fun smsCode(smsSendReq: SmsSendReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(LoginService::class.java).smsCode(smsSendReq)
+            if (response.body() == null) {
+                ToastUtil.showNoIntentToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.smsCode(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
 
     override fun smsRegister(registerReq: RegisterReq) {
         CoroutineScope(Dispatchers.Main).launch {

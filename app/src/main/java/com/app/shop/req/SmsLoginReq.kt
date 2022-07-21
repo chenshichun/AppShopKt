@@ -6,7 +6,7 @@ package com.app.shop.req
  * 描述：
  *
  */
-class SmsReq {
+class SmsLoginReq {
     var phone: String? = null
     var verify_code: String? = null
 }

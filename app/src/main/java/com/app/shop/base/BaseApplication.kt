@@ -2,6 +2,8 @@ package com.app.shop.base
 
 import android.app.Application
 import android.content.Context
+import android.view.Gravity
+import com.app.shop.R
 import com.app.shop.manager.AccountManager
 import com.app.shop.util.ToastUtil
 import com.orhanobut.logger.AndroidLogAdapter
@@ -9,6 +11,7 @@ import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.tencent.mmkv.MMKV
+import es.dmoral.toasty.Toasty
 
 
 /**
@@ -34,14 +37,17 @@ class BaseApplication : Application() {
         MMKV.initialize(this);
         // toast初始化
         ToastUtil.init(this)
-
         AccountManager.init(this)
+
+        Toasty.Config.getInstance().
+        supportDarkTheme(true)
+            .apply()
     }
 
     /*
     * 初始化日志
     * */
-    fun initLogger() {
+    private fun initLogger() {
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(false) // 是否显示线程信息，默认为ture
             .methodCount(5) // 显示的方法行数，默认为2
