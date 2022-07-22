@@ -1,11 +1,13 @@
 package com.app.shop.base
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.app.shop.view.ShowAlertDialog
 import com.dylanc.viewbinding.inflateBindingWithGeneric
 
 /**
@@ -20,6 +22,7 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
 
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
+    protected var dialog: Dialog? = null
 
     override fun showError(e: Throwable?) {
 
@@ -69,5 +72,18 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
             mPresenter?.detachView()
         }
         System.gc()
+    }
+
+    open fun showLoadingDialog() {
+        if (null == dialog) {
+            dialog = ShowAlertDialog.loadingDialog(activity)
+        }
+        dialog!!.show()
+    }
+
+    open fun closeLoadingDialog() {
+        if (null != dialog) {
+            dialog!!.dismiss()
+        }
     }
 }

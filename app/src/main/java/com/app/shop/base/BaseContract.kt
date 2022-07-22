@@ -1,5 +1,7 @@
 package com.app.shop.base
 
+import com.uber.autodispose.AutoDisposeConverter
+
 /**
  * @author chenshichun
  * 创建日期：2022/7/4
@@ -18,9 +20,16 @@ interface BaseContract {
 
     interface BaseView {
         /**
-         * @param flag 用于标记对应接口
-         * @param e 错误信息
+         * 显示加载中
          */
-        fun showError( e: Throwable?)
+        fun showLoading()
+
+        /**
+         * 隐藏加载
+         */
+        fun hideLoading()
+
+        fun showError(e: Throwable?)
+
     }
 }

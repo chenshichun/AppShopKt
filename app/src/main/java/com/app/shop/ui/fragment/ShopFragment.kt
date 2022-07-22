@@ -30,4 +30,12 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopPresenter>(), ShopCon
     override fun getPresenter(): ShopPresenter {
         return ShopPresenter()
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

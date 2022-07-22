@@ -84,4 +84,12 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         }
         binding.layoutGoodsDetailsBanner.viewPager.adapter = BannerAdapter(mViewList)
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

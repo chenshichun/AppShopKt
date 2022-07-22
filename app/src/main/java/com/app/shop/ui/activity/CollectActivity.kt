@@ -41,5 +41,11 @@ class CollectActivity : BaseActivity<ActivityCollectBinding, CollectPresent>(),
             }
         })
     }
+    override fun showLoading() {
+        showLoadingDialog()
+    }
 
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

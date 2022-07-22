@@ -64,4 +64,12 @@ class OrderActivity : BaseActivity<ActivityOrderBinding, OrderPresenter>(), Orde
         }
 
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

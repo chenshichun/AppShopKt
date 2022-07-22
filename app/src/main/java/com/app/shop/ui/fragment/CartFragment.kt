@@ -46,4 +46,12 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             isEdit = !isEdit
         }
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

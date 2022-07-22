@@ -85,4 +85,12 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
         startActivity(Intent(this@AccountLoginActivity, MainActivity::class.java))
         finish()
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

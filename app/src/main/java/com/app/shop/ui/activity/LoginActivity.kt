@@ -1,7 +1,9 @@
 package com.app.shop.ui.activity
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
@@ -64,7 +66,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
                     ToastUtil.showToast("请输入手机号码")
                     return
                 }
-
                 var smsSendReq = SmsSendReq()
                 smsSendReq.phone = binding.etPhone.text.toString()
                 smsSendReq.sms_type = SmsType.login.name
@@ -107,4 +108,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         finish()
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
+
 }

@@ -84,4 +84,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchPresenter>(), S
             searchAdapter.notifyDataSetChanged()
         }
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

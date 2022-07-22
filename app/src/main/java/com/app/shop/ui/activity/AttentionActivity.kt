@@ -28,5 +28,11 @@ class AttentionActivity : BaseActivity<ActivityAttentionBinding, AttentionPresen
             finish()
         }
     }
+    override fun showLoading() {
+        showLoadingDialog()
+    }
 
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

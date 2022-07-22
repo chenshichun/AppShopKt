@@ -21,7 +21,9 @@ class MinePresenter : BasePresenter<MineContract.View>(),
 
     override fun getMyInfo() {
         CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
             val response = ApiRequest.create(HomeService::class.java).getMyInfo()
+            mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()
             } else {

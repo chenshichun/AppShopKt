@@ -94,14 +94,14 @@
                     <com.youth.banner.Banner
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/design_default_color_error" />
+                        android:layout_height="120dp"
+                        android:layout_marginTop="10dp"
+                        app:image_scale_type="fit_xy" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/bg_white_8"
                         android:paddingHorizontal="10dp"
                         android:paddingTop="15dp"

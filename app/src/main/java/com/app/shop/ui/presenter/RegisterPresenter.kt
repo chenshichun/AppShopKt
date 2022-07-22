@@ -22,7 +22,9 @@ class RegisterPresenter : BasePresenter<RegisterContract.View>(), RegisterContra
 
     override fun smsCode(smsSendReq: SmsSendReq) {
         CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).smsCode(smsSendReq)
+            mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()
             } else {
@@ -38,7 +40,9 @@ class RegisterPresenter : BasePresenter<RegisterContract.View>(), RegisterContra
 
     override fun smsRegister(registerReq: RegisterReq) {
         CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).smsRegister(registerReq)
+            mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()
             } else {

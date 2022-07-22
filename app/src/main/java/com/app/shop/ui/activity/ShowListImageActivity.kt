@@ -61,5 +61,11 @@ class ShowListImageActivity : BaseActivity<ActivityShowListImageBinding, ShowLis
             }
         })
     }
+    override fun showLoading() {
+        showLoadingDialog()
+    }
 
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

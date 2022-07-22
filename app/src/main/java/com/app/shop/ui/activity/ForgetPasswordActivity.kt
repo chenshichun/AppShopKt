@@ -32,4 +32,12 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, Forge
             R.id.iv_back -> finish()
         }
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

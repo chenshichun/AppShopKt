@@ -88,6 +88,7 @@
                     android:text="商户地址" />
 
                 <TextView
+                    android:id="@+id/tv_address"
                     style="@style/merchant_et"
                     android:text="请选择地址信息" />
             </LinearLayout>
@@ -162,6 +163,10 @@
             </LinearLayout>
 
             <include layout="@layout/line" />
+
+            <include
+                android:id="@+id/layout_subject_information"
+                layout="@layout/layout_subject_information" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -248,7 +253,7 @@
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:background="#FFC107"
+                    android:background="@drawable/ps_ic_placeholder"
                     android:scaleType="centerCrop" />
 
                 <ImageView
@@ -257,7 +262,7 @@
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="#FFC107"
+                    android:background="@drawable/ps_ic_placeholder"
                     android:scaleType="centerCrop" />
             </LinearLayout>
 
@@ -294,7 +299,7 @@
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:background="#FFC107"
+                    android:background="@drawable/ps_ic_placeholder"
                     android:scaleType="centerCrop" />
 
                 <ImageView
@@ -302,7 +307,7 @@
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="#FFC107"
+                    android:background="@drawable/ps_ic_placeholder"
                     android:visibility="invisible" />
             </LinearLayout>
 
@@ -332,7 +337,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_dp_10"
-                android:text="提示：平台禁止" />
+                android:text="提示：平台禁止发布黄赌毒、谣言及政治等一切法律禁止的内容；另禁发布与平台同性质的软件，拉人信息(加群，加微信，QQ等)，违者将冻结账户，谢谢合作！" />
 
             <TextView
                 android:id="@+id/tv_save"

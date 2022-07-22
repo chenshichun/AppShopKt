@@ -26,4 +26,12 @@ class OrderFragment : BaseFragment<FragmentOrderBinding, OrderFragmentPresenter>
     override fun getPresenter(): OrderFragmentPresenter {
         return OrderFragmentPresenter()
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

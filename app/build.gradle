@@ -155,6 +155,12 @@ dependencies {
     implementation 'com.google.android:flexbox:0.3.0-alpha3'
     // 照片选择
     implementation 'io.github.lucksiege:pictureselector:v3.10.5'
+    // loading库
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    // 联动选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
+    // json
+    implementation 'com.alibaba:fastjson:1.2.46'
 }
 
 def releaseTime() {

@@ -21,7 +21,9 @@ class AccountLoginPresenter : BasePresenter<AccountLoginContract.View>(),
     AccountLoginContract.Presenter {
     override fun pwdLogin(pwdLoginReq: PwdLoginReq) {
         CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).pwdLogin(pwdLoginReq)
+            mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()
             } else {

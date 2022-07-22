@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_subject_information"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        android:id="@+id/tv_subject_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E4E4E4"
+        android:gravity="center"
+        android:paddingVertical="@dimen/dimen_dp_15"
+        android:text="+主体信息"
+        android:textColor="@color/color_333"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_subject_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dimen_dp_10"
+            android:text="主体信息"
+            android:textColor="@color/color_333"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <include layout="@layout/line" />
+
+        <LinearLayout style="@style/merchant_ll">
+
+            <TextView
+                style="@style/merchant_txt"
+                android:text="主体名称" />
+
+            <EditText
+                android:id="@+id/et_c_name"
+                style="@style/merchant_et"
+                android:hint="请输入主体姓名" />
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+
+        <LinearLayout style="@style/merchant_ll">
+
+            <TextView
+                style="@style/merchant_txt"
+                android:text="营业执照编号" />
+
+            <EditText
+                android:id="@+id/et_lice_num"
+                style="@style/merchant_et"
+                android:hint="请输入营业执照编号" />
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+
+        <LinearLayout style="@style/merchant_ll">
+
+            <TextView
+                style="@style/merchant_txt"
+                android:text="注册地址" />
+
+            <TextView
+                android:id="@+id/tv_lice_area_full"
+                style="@style/merchant_et"
+                android:text="选择地址信息" />
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+
+        <LinearLayout style="@style/merchant_ll">
+
+            <TextView
+                style="@style/merchant_txt"
+                android:text="详细地址" />
+
+            <EditText
+                android:id="@+id/et_lice_area_detail"
+                style="@style/merchant_et"
+                android:hint="请输入详细地址" />
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_dp_10"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv0"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/ps_ic_placeholder"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ps_ic_placeholder"
+                android:scaleType="centerCrop"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="*添加营业执照"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/red"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

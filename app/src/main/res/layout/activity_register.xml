@@ -151,7 +151,7 @@
             android:layout_marginTop="@dimen/dimen_dp_40"
             android:background="@drawable/bg_red_20"
             android:gravity="center"
-            android:paddingVertical="10dp"
+            android:paddingVertical="15dp"
             android:text="注册"
             android:textColor="@color/white" />
 

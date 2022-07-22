@@ -66,4 +66,12 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvName.text = mData.data!!.user!!.nick_name
         binding.tvInvCode.text = "邀请码：${mData.data!!.user!!.inv_code}"
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
 }

@@ -1,11 +1,11 @@
 package com.app.shop.base
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.app.shop.R
+import com.app.shop.view.ShowAlertDialog
 import com.dylanc.viewbinding.inflateBindingWithGeneric
-import com.gyf.immersionbar.ktx.immersionBar
 
 /**
  * @author chenshichun
@@ -17,6 +17,7 @@ abstract class BaseActivity<VB : ViewBinding, P : BaseContract.BasePresenter> : 
     BaseContract.BaseView {
     protected var mPresenter: P? = null
     protected lateinit var binding: VB
+    protected var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,4 +44,18 @@ abstract class BaseActivity<VB : ViewBinding, P : BaseContract.BasePresenter> : 
         }
         System.gc()
     }
+
+    open fun showLoadingDialog() {
+        if (null == dialog) {
+            dialog = ShowAlertDialog.loadingDialog(this)
+        }
+        dialog!!.show()
+    }
+
+    open fun closeLoadingDialog() {
+        if (null != dialog) {
+            dialog!!.dismiss()
+        }
+    }
+
 }

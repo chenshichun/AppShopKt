@@ -22,7 +22,9 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
 
     override fun smsCode(smsSendReq: SmsSendReq) {
         CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).smsCode(smsSendReq)
+            mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()
             } else {
@@ -38,7 +40,9 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
 
     override fun smsLogin(smsReq: SmsLoginReq) {
         CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).smsLogin(smsReq)
+            mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()
             } else {

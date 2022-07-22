@@ -45,5 +45,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                 statusBarColor(if (destination.id == R.id.navigation_mine) R.color.color_bg else R.color.white)
             }
         }
+
+    }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
     }
 }

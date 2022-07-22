@@ -242,10 +242,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         binding.banner.setDelayTime(2000)
         binding.banner.isAutoPlay(true)
         binding.banner.setIndicatorGravity(BannerConfig.CENTER)
-        binding.banner.setOnBannerListener(object : OnBannerListener {
-            override fun OnBannerClick(position: Int) {
-            }
-        })
+        binding.banner.setOnBannerListener {
+                position -> Logger.d(position)
+        }
         binding.banner.start()
     }
 
@@ -272,4 +271,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     override fun getProdRecommendData(mData: BaseNetModel<ProdBean>) {
 
     }
+
+    override fun showLoading() {
+        showLoadingDialog()
+    }
+
+    override fun hideLoading() {
+        closeLoadingDialog()
+    }
+
 }
