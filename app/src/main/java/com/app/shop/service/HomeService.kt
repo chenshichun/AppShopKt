@@ -4,7 +4,6 @@ import com.app.shop.bean.*
 import com.app.shop.req.MerchantSettledReq
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -56,6 +55,6 @@ interface HomeService {
     * 上传文件
     * */
     @Multipart
-    @POST("comm/upload")
+    @PUT("comm/upload")
     suspend fun upload(@Part file: MultipartBody.Part,@Part("usage") description: RequestBody): Response<BaseNetModel<UploadBean>>
 }

@@ -8,13 +8,17 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
         mavenCentral()
+        jcenter()
+        maven {
+            url "https://bintray.com/wechat-sdk-team/maven"  //配置仓库即可
+        }
         maven { url 'https://jitpack.io'}
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven {url 'https://maven.aliyun.com/repository/public'}
         maven { url "https://kotlin.bintray.com/kotlinx/" }
+        google()
     }
 }
 rootProject.name = "AppShopKt"

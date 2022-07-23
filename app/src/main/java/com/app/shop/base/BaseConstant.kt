@@ -14,6 +14,7 @@ class BaseConstant {
         const val TAG_USER_BEAN = "tag_user_bean"
         const val ACCESS_TOKEN = "Authorization" //X-Access-Token
         const val TAG_TOKEN = "tag_user_token"
-        const val HOST: String = BuildConfig.BASE_URL;
+        const val HOST: String = BuildConfig.BASE_URL
+        const val WX_APP_ID = "wx2887110e9b3b2bf1"
     }
 }

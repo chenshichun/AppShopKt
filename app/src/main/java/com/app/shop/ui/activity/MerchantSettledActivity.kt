@@ -22,12 +22,12 @@ import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
+import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
-
 
 /**
  * @author chenshichun
@@ -68,8 +68,8 @@ class MerchantSettledActivity :
         binding.layoutSubjectInformation.tvLiceAreaFull.setOnClickListener(this)
         binding.layoutSubjectInformation.tvSubjectInformation.setOnClickListener(this)
 
-        binding.mMultiLineRadioGroup.check(1)
         binding.mMultiLineRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            Logger.d(checkedId)
             if (checkedId == 1) {
                 binding.layoutSubjectInformation.layoutSubjectInformation.visibility = View.GONE
                 binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
@@ -80,6 +80,8 @@ class MerchantSettledActivity :
                 binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
             }
         }
+
+        binding.mMultiLineRadioGroup.check(1)
     }
 
     override fun upload(mData: BaseNetModel<UploadBean>) {
@@ -277,7 +279,7 @@ class MerchantSettledActivity :
 
                                     val description: RequestBody = RequestBody.create(
                                         MediaType.parse("multipart/form-data"),
-                                        "profile_pic"
+                                        "merchant"
                                     )
                                     mPresenter!!.upload(fromData, description)
                                 }

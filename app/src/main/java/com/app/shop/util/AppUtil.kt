@@ -13,7 +13,7 @@ import android.os.Build
  * 描述：
  *
  */
-class AppUtil {
+object AppUtil {
     /**
      * 检测是否安装支付宝
      *

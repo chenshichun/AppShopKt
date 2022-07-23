@@ -51,7 +51,7 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Cache-Control")
                 .addHeader("User-Agent", "android")
                 .addHeader("X-API-VERSION",
-                    BaseApplication.mContext?.let { AppUtil().getVersionCode(it) })
+                    BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header(
                     "Cache-Control",
                     "public,max-age=" + CACHE_AGE_SEC
@@ -63,7 +63,7 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Cache-Control")
                 .addHeader("User-Agent", "android")
                 .addHeader("X-API-VERSION",
-                    BaseApplication.mContext?.let { AppUtil().getVersionCode(it) })
+                    BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header("Cache-Control", "public,max-age=" + CACHE_AGE_SEC)
                 .build()
         } else {
@@ -72,7 +72,7 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Cache-Control") //
                 .addHeader("User-Agent", "android")
                 .addHeader("X-API-VERSION",
-                    BaseApplication.mContext?.let { AppUtil().getVersionCode(it) })
+                    BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header(
                     "Cache-Control",
                     "public,only-if-cached,max-stale=" + CACHE_STALE_SEC
@@ -83,7 +83,7 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Cache-Control") //
                 .addHeader("User-Agent", "android")
                 .addHeader("X-API-VERSION",
-                    BaseApplication.mContext?.let { AppUtil().getVersionCode(it) })
+                    BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header("Cache-Control", "public,only-if-cached,max-stale=" + CACHE_STALE_SEC)
                 .build()
         }

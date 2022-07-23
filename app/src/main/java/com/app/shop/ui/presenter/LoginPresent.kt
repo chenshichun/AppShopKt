@@ -4,6 +4,7 @@ import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
 import com.app.shop.req.SmsLoginReq
 import com.app.shop.req.SmsSendReq
+import com.app.shop.req.WxLoginReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.LoginService
 import com.app.shop.ui.contract.LoginContract
@@ -30,7 +31,6 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsCode(response.body()!!)
-                    ToastUtil.showToast(response.body()!!.msg.toString())
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }
@@ -42,6 +42,23 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
         CoroutineScope(Dispatchers.Main).launch {
             mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).smsLogin(smsReq)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoIntentToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.smsLogin(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun wechatLogin(wxLoginReq: WxLoginReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(LoginService::class.java).wechatLogin(wxLoginReq)
             mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoIntentToast()

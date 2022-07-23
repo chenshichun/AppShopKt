@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     tools:context=".ui.activity.LoginActivity">
 
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_dp_15"
             android:layout_marginTop="@dimen/dimen_dp_40"
-            android:background="@drawable/bg_red_20"
+            android:background="@drawable/confirm_bg"
             android:gravity="center"
             android:paddingVertical="15dp"
             android:text="登录"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_dp_15"
             android:layout_marginTop="@dimen/dimen_dp_40"
-            android:background="@drawable/bg_red_20"
+            android:background="@drawable/confirm_bg"
             android:gravity="center"
             android:paddingVertical="15dp"
             android:text="微信登录"

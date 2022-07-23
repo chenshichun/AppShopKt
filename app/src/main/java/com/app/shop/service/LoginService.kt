@@ -2,10 +2,7 @@ package com.app.shop.service
 
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UserDataBean
-import com.app.shop.req.PwdLoginReq
-import com.app.shop.req.RegisterReq
-import com.app.shop.req.SmsLoginReq
-import com.app.shop.req.SmsSendReq
+import com.app.shop.req.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -28,6 +25,13 @@ interface LoginService {
     * */
     @POST("user/login/pwd")
     suspend fun pwdLogin(@Body pwdLoginReq: PwdLoginReq): Response<BaseNetModel<UserDataBean>>
+
+    /*
+    * 微信登录
+    *
+    */
+    @POST("user/login/wechat")
+    suspend fun wechatLogin(@Body wxLoginReq: WxLoginReq): Response<BaseNetModel<UserDataBean>>
 
     /*
     * 注册
