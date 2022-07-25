@@ -22,7 +22,7 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
 
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
-    protected var dialog: Dialog? = null
+    private var dialog: Dialog? = null
 
     override fun showError(e: Throwable?) {
 

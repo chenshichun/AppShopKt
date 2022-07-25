@@ -28,7 +28,7 @@ object ToastUtil {
         /***
          *通用的Toast
          */
-        fun showToast(message: String) {
+        fun showToast(message: String?) {
             context?.let { StyleableToast.makeText(it, message, Toast.LENGTH_SHORT, R.style.my_toast).show() };
         }
 }

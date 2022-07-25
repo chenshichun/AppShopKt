@@ -1,6 +1,7 @@
 package com.app.shop.service
 
 import com.app.shop.bean.*
+import com.app.shop.req.CertReq
 import com.app.shop.req.MerchantSettledReq
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -56,5 +57,26 @@ interface HomeService {
     * */
     @Multipart
     @PUT("comm/upload")
-    suspend fun upload(@Part file: MultipartBody.Part,@Part("usage") description: RequestBody): Response<BaseNetModel<UploadBean>>
+    suspend fun upload(
+        @Part file: MultipartBody.Part,
+        @Part("usage") description: RequestBody
+    ): Response<BaseNetModel<UploadBean>>
+
+    /*
+    * 签到
+    * */
+    @GET("user/sign")
+    suspend fun sign(): Response<BaseNetModel<Any>>
+
+    /*
+    * 积分明细
+    * */
+    @GET("user/list/point")
+    suspend fun listPoint(): Response<BaseNetModel<PointBean>>
+
+    /*
+    * 实名认证
+    * */
+    @POST("user/cert")
+    suspend fun cert(@Body certReq: CertReq): Response<BaseNetModel<Any>>
 }

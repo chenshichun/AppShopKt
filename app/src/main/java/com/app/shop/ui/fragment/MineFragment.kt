@@ -59,6 +59,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvAttention.setOnClickListener(this)
         binding.tvOutLogin.setOnClickListener(this)
         binding.tvMerchantSettled.setOnClickListener(this)
+        binding.llPointsDetails.setOnClickListener(this)
+        binding.tvAboutUs.setOnClickListener(this)
     }
 
     override fun getPresenter(): MinePresenter {
@@ -79,6 +81,12 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 cbm.text = AccountManager.getAccountInfo()!!.inv_code
                 ToastUtil.showToast("邀请码复制成功")
             }
+            R.id.ll_points_details -> startActivity(
+                Intent(
+                    activity,
+                    PointsDetailsActivity::class.java
+                )
+            )
             R.id.tv_show_all_order -> startActivity(Intent(activity, OrderActivity::class.java))
             R.id.tv_order_1 -> startActivity(Intent(activity, OrderActivity::class.java))
             R.id.tv_order_2 -> startActivity(Intent(activity, OrderActivity::class.java))
@@ -100,7 +108,10 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 builder.setPositiveButton("确定") { _, _ ->
                     AccountManager.signOut()
                     startActivity(Intent(activity, LoginActivity::class.java))
-                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main)
+                    Navigation.findNavController(
+                        requireActivity(),
+                        R.id.nav_host_fragment_activity_main
+                    )
                         .navigate(R.id.navigation_home)
                 }
                 builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
@@ -109,6 +120,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
             R.id.tv_merchant_settled -> {// 商户入驻
                 startActivity(Intent(activity, MerchantSettledActivity::class.java))
             }
+            R.id.tv_about_us -> startActivity(Intent(activity, AboutUsActivity::class.java))
         }
     }
 

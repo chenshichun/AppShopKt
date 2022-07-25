@@ -117,6 +117,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_points_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -395,6 +396,7 @@
                     android:textColor="@color/color_333" />
 
                 <TextView
+                    android:id="@+id/tv_about_us"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

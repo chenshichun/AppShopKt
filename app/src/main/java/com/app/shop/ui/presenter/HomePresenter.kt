@@ -77,4 +77,18 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         }
     }
 
+    override fun sign() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).sign()
+            if (response.body() == null) {
+                ToastUtil.showNoIntentToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.sign(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
 }

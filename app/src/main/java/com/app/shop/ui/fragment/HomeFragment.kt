@@ -8,6 +8,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.view.View
+import android.widget.AdapterView
 import androidx.annotation.RequiresApi
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +18,7 @@ import com.amap.api.location.AMapLocationListener
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.adapter.MyAdapter
+import com.app.shop.adapter.OrderAdapter
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BannerBean
 import com.app.shop.bean.BaseNetModel
@@ -33,9 +35,9 @@ import com.desmond.citypicker.bin.CityPicker
 import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.youth.banner.BannerConfig
-import com.youth.banner.listener.OnBannerListener
 import java.util.*
 import kotlin.collections.ArrayList
+import android.widget.AdapterView.OnItemClickListener;
 
 
 /**
@@ -44,7 +46,8 @@ import kotlin.collections.ArrayList
  * 描述：首页
  *
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeContract.View {
+class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeContract.View,
+    OnItemClickListener {
 
     private val texts = arrayOf(
         "积分易货", "福利专区", "生活服务", "新人专区",
@@ -75,6 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
         binding.gridView.adapter = MyAdapter(activity, images, texts)
+        binding.gridView.onItemClickListener = this
 
         goodsAdapter = activity?.let { GoodsAdapter(it, goodsList) }!!
         binding.mRecyclerView.layoutManager = GridLayoutManager(activity, 2)
@@ -242,8 +246,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         binding.banner.setDelayTime(2000)
         binding.banner.isAutoPlay(true)
         binding.banner.setIndicatorGravity(BannerConfig.CENTER)
-        binding.banner.setOnBannerListener {
-                position -> Logger.d(position)
+        binding.banner.setOnBannerListener { position ->
+            Logger.d(position)
         }
         binding.banner.start()
     }
@@ -272,6 +276,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
     }
 
+    /*
+    * 签到
+    * */
+    override fun sign(mData: BaseNetModel<Any>) {
+        ToastUtil.showToast(mData.msg)
+    }
+
     override fun showLoading() {
         showLoadingDialog()
     }
@@ -280,4 +291,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         closeLoadingDialog()
     }
 
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        when (p2) {
+            4 -> {// 签到
+                mPresenter!!.sign()
+            }
+        }
+    }
 }

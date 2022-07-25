@@ -30,6 +30,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppShopKt"
         tools:targetApi="31">
+        <!--屏幕适配start-->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="780" />
+        <!--屏幕适配end-->
+
+        <!--沉浸式状态栏start-->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.4" /> <!-- 适配华为（huawei）刘海屏 -->
@@ -39,6 +49,8 @@
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
+        <!--沉浸式状态栏end-->
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="e3fd9a8e388a6477778cbb845d10be37" /> <!-- 高德地图定位 -->
@@ -67,7 +79,13 @@
         <activity android:name=".ui.activity.MerchantSettledActivity" />
         <activity android:name=".ui.activity.BindActivity" />
         <activity android:name=".ui.activity.ModifyNickNameActivity" />
-        <activity android:name=".ui.activity.AccountSecurityActivity"/>
+        <activity android:name=".ui.activity.AccountSecurityActivity" />
+        <activity android:name=".ui.activity.PointsDetailsActivity" />
+        <activity android:name=".ui.activity.ReflectAccountActivity" />
+        <activity android:name=".ui.activity.PayPasswordActivity" />
+        <activity android:name=".ui.activity.ChangeBindPhoneActivity" />
+        <activity android:name=".ui.activity.VerifiedActivity" />
+        <activity android:name=".ui.activity.AboutUsActivity" />
     </application>
 
 </manifest>
