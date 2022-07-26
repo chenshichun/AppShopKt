@@ -110,6 +110,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
                 mPresenter!!.smsLogin(smsLoginReq)
             }
             R.id.tv_wx_login -> {
+                if (!binding.checkbox.isChecked) {
+                    ToastUtil.showToast("请阅读并同意《隐私政策》和《用户服务协议》")
+                    return
+                }
                 if (AppUtil.isWeixinAvilible(this)) {
                     //初始化登录请求对象
                     val req = SendAuth.Req()
@@ -124,12 +128,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
     }
 
     override fun smsCode(mData: BaseNetModel<Any>) {
+        ToastUtil.showToast(mData.msg)
         if (timer == null) {
             timer = TimerUnit(binding.tvGetCode)
         }
         timer?.startTime()
     }
 
+
+    /*
+    * 短信登录成功
+    * */
     override fun smsLogin(mData: BaseNetModel<UserDataBean>) {
         ToastUtil.showToast(mData.msg!!)
         AccountManager.signIn(mData.data!!.user!!)
@@ -138,13 +147,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
         finish()
     }
 
+    /*
+    * 微信登录成功
+    * */
     override fun wechatLogin(mData: BaseNetModel<UserDataBean>) {
-        /*ToastUtil.showToast(mData.msg!!)
+        ToastUtil.showToast(mData.msg!!)
         AccountManager.signIn(mData.data!!.user!!)
         AccountManager.signInToken(mData.data!!.user!!.token!!)
         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        finish()*/
-        startActivity(Intent(this@LoginActivity,BindActivity::class.java))
+        finish()
+    }
+
+    /*
+    * 绑定手机号
+    * */
+    override fun bindPhone() {
+        startActivity(Intent(this@LoginActivity, BindActivity::class.java))
     }
 
     override fun showLoading() {
@@ -156,11 +174,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
     }
 
     override fun onWxLoginFiled(errorCode: Int) {
-        ToastUtil.showToast("登录失败")
+        ToastUtil.showToast("微信登录失败，请换个方式登录")
     }
 
     override fun onWxLoginSuccess(code: String?, state: String?) {
-        ToastUtil.showToast("登录成功$code")
         val wxLoginReq = WxLoginReq()
         wxLoginReq.wechat_id = code
         mPresenter!!.wechatLogin(wxLoginReq)

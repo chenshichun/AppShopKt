@@ -19,6 +19,7 @@ interface LoginContract {
         fun smsCode(mData: BaseNetModel<Any>)
         fun smsLogin(mData: BaseNetModel<UserDataBean>)
         fun wechatLogin(mData: BaseNetModel<UserDataBean>)
+        fun bindPhone()
     }
 
     interface Presenter {

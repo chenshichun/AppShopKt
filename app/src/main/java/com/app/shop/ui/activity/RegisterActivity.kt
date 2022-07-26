@@ -81,6 +81,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
     }
 
     override fun smsCode(mData: BaseNetModel<Any>) {
+        ToastUtil.showToast(mData.msg)
         if (timer == null) {
             timer = TimerUnit(binding.tvGetSmsCode)
         }

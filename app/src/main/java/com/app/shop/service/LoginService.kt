@@ -44,4 +44,10 @@ interface LoginService {
     * */
     @POST("user/sms")
     suspend fun smsCode(@Body smsSendReq: SmsSendReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 绑定手机
+    * */
+    @POST("register/bind/wechat")
+    suspend fun bindWechat(@Body bindWechatReq: BindWechatReq): Response<BaseNetModel<Any>>
 }

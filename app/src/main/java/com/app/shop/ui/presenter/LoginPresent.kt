@@ -64,9 +64,10 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
                 ToastUtil.showNoIntentToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
-                    mView!!.smsLogin(response.body()!!)
-                } else {
+                    mView!!.wechatLogin(response.body()!!)
+                } else {// 去绑定微信
                     ToastUtil.showToast(response.body()!!.msg.toString())
+                    mView!!.bindPhone()
                 }
             }
         }
