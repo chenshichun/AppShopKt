@@ -1,14 +1,14 @@
 package com.app.shop.base
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.app.shop.view.ShowAlertDialog
 import com.dylanc.viewbinding.inflateBindingWithGeneric
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.core.BasePopupView
 
 /**
  * @author chenshichun
@@ -22,7 +22,7 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
 
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
-    private var dialog: Dialog? = null
+    protected var loadingPopup: BasePopupView? = null
 
     override fun showError(e: Throwable?) {
 
@@ -75,15 +75,16 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
     }
 
     open fun showLoadingDialog() {
-        if (null == dialog) {
-            dialog = ShowAlertDialog.loadingDialog(activity)
+        if (null == loadingPopup) {
+            loadingPopup = XPopup.Builder(activity).asLoading()
         }
-        dialog!!.show()
+        loadingPopup!!.show()
     }
 
     open fun closeLoadingDialog() {
-        if (null != dialog) {
-            dialog!!.dismiss()
+        if (null != loadingPopup) {
+            loadingPopup!!.dismiss()
         }
     }
+
 }

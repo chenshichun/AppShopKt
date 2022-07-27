@@ -1,11 +1,11 @@
 package com.app.shop.base
 
-import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.app.shop.view.ShowAlertDialog
 import com.dylanc.viewbinding.inflateBindingWithGeneric
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.core.BasePopupView
 
 /**
  * @author chenshichun
@@ -17,8 +17,7 @@ abstract class BaseActivity<VB : ViewBinding, P : BaseContract.BasePresenter> : 
     BaseContract.BaseView {
     protected var mPresenter: P? = null
     protected lateinit var binding: VB
-    protected var dialog: Dialog? = null
-
+    private var loadingPopup: BasePopupView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter = getPresenter()
@@ -46,15 +45,15 @@ abstract class BaseActivity<VB : ViewBinding, P : BaseContract.BasePresenter> : 
     }
 
     open fun showLoadingDialog() {
-        if (null == dialog) {
-            dialog = ShowAlertDialog.loadingDialog(this)
+        if (null == loadingPopup) {
+            loadingPopup = XPopup.Builder(this).asLoading()
         }
-        dialog!!.show()
+        loadingPopup!!.show()
     }
 
     open fun closeLoadingDialog() {
-        if (null != dialog) {
-            dialog!!.dismiss()
+        if (null != loadingPopup) {
+            loadingPopup!!.dismiss()
         }
     }
 

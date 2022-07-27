@@ -1,9 +1,8 @@
 package com.app.shop.base
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.view.Gravity
-import com.app.shop.R
 import com.app.shop.manager.AccountManager
 import com.app.shop.util.ToastUtil
 import com.orhanobut.logger.AndroidLogAdapter
@@ -22,6 +21,7 @@ import es.dmoral.toasty.Toasty
  */
 class BaseApplication : Application() {
     companion object {
+        @SuppressLint("StaticFieldLeak")
         var mContext: Context? = null
         fun getContext(): Context? {
             return mContext
@@ -34,7 +34,7 @@ class BaseApplication : Application() {
         // Logger日志初始化
         initLogger()
         // 腾讯mmkv存储初始化
-        MMKV.initialize(this);
+        MMKV.initialize(this)
         // toast初始化
         ToastUtil.init(this)
         AccountManager.init(this)

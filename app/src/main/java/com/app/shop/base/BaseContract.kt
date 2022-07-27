@@ -1,15 +1,9 @@
 package com.app.shop.base
 
-import com.uber.autodispose.AutoDisposeConverter
-
 /**
  * @author chenshichun
  * 创建日期：2022/7/4
  * 描述：
- *
- */
-/**
- * @author ludoven
  */
 interface BaseContract {
     interface BasePresenter {

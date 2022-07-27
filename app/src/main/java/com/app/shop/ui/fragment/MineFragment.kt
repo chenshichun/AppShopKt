@@ -61,6 +61,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvMerchantSettled.setOnClickListener(this)
         binding.llPointsDetails.setOnClickListener(this)
         binding.tvAboutUs.setOnClickListener(this)
+        binding.tvInviteFriends.setOnClickListener(this)
     }
 
     override fun getPresenter(): MinePresenter {
@@ -80,6 +81,9 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 val cbm = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 cbm.text = AccountManager.getAccountInfo()!!.inv_code
                 ToastUtil.showToast("邀请码复制成功")
+            }
+            R.id.tv_invite_friends -> {
+                startActivity(Intent(activity, InviteFriendsActivity::class.java))
             }
             R.id.ll_points_details -> startActivity(
                 Intent(
@@ -118,9 +122,26 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 builder.create().show()
             }
             R.id.tv_merchant_settled -> {// 商户入驻
-                startActivity(Intent(activity, MerchantSettledActivity::class.java))
+                XPopup.Builder(context)
+                    .isDestroyOnDismiss(true)
+                    .isDarkTheme(false)
+                    .hasShadowBg(true)
+                    .moveUpToKeyboard(false)
+                    .isCoverSoftInput(true)
+                    .asBottomList(
+                        "",
+                        arrayOf("新商户入驻", "商户修改")
+                    ) { position, _ ->
+                        when (position) {
+                            0 -> {// 新商户入驻
+                                startActivity(Intent(activity, MerchantSettledActivity::class.java))
+                            }
+                            1 -> {// 商户修改
+                            }
+                        }
+                    }.show()
             }
-            R.id.tv_about_us -> startActivity(Intent(activity, AboutUsActivity::class.java))
+            R.id.tv_about_us -> startActivity(Intent(activity, /*AboutUsActivity*/AddressListActivity::class.java))
         }
     }
 
@@ -131,6 +152,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         ToastUtil.showToast("头像上传成功")
     }
 
+    @SuppressLint("SetTextI18n")
     override fun getMyInfo(mData: BaseNetModel<UserDataBean>) {
         AccountManager.signIn(mData.data!!.user!!)
         context?.let { Glide.with(it).load(mData.data!!.user!!.profile_pic).into(binding.ivHead) }

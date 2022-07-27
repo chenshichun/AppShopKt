@@ -46,7 +46,7 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, Forge
                     ToastUtil.showToast("请输入手机号码")
                     return
                 }
-                var smsSendReq = SmsSendReq()
+                val smsSendReq = SmsSendReq()
                 smsSendReq.phone = binding.etPhone.text.toString()
                 smsSendReq.sms_type = SmsType.resetpwd.name
                 mPresenter!!.smsCode(smsSendReq)

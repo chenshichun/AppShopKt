@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
+import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -24,10 +26,12 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.orhanobut.logger.Logger
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.whygraphics.multilineradiogroup.MultiLineRadioGroup
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+
 
 /**
  * @author chenshichun
@@ -68,20 +72,21 @@ class MerchantSettledActivity :
         binding.layoutSubjectInformation.tvLiceAreaFull.setOnClickListener(this)
         binding.layoutSubjectInformation.tvSubjectInformation.setOnClickListener(this)
 
-        binding.mMultiLineRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            Logger.d(checkedId)
-            if (checkedId == 1) {
-                binding.layoutSubjectInformation.layoutSubjectInformation.visibility = View.GONE
-                binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
-            } else {
-                binding.layoutSubjectInformation.tvSubjectInformation.visibility = View.VISIBLE
-                binding.layoutSubjectInformation.layoutSubjectInformation.visibility =
-                    View.VISIBLE
-                binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
-            }
-        }
+        binding.mMultiLineRadioGroup.setOnCheckedChangeListener(
+            MultiLineRadioGroup.OnCheckedChangeListener { _, button ->
+                Logger.d(button.text )
+                if (button.text == "个人") {
+                    binding.layoutSubjectInformation.layoutSubjectInformation.visibility = View.GONE
+                    binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
+                } else {
+                    binding.layoutSubjectInformation.tvSubjectInformation.visibility = View.VISIBLE
+                    binding.layoutSubjectInformation.layoutSubjectInformation.visibility =
+                        View.VISIBLE
+                    binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
+                }
+            })
 
-        binding.mMultiLineRadioGroup.check(1)
+        binding.mMultiLineRadioGroup.checkAt(0)
     }
 
     override fun upload(mData: BaseNetModel<UploadBean>) {

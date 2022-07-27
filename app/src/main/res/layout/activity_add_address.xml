@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.activity.ModifyNickNameActivity">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/layout_head" />
+
+    <include layout="@layout/line" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:hint="收货人"
+        android:padding="15dp"
+        android:textColor="@color/color_333"
+        android:textSize="14sp" />
+
+    <include layout="@layout/line" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="手机号码"
+        android:inputType="phone"
+        android:padding="15dp"
+        android:textColor="@color/color_333"
+        android:textSize="14sp" />
+
+    <include layout="@layout/line" />
+
+    <TextView
+        android:id="@+id/tv_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:text="选择地址"
+        android:textColor="@color/color_333"
+        android:textSize="14sp" />
+
+    <include layout="@layout/line" />
+
+    <EditText
+        android:id="@+id/et_detail_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="详细地址：如道路，门牌号，小区，楼栋号，单元室等"
+        android:padding="15dp"
+        android:textColor="@color/color_333"
+        android:textSize="14sp" />
+
+    <include layout="@layout/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="设为默认地址"
+            android:textColor="@color/color_333"
+            android:textSize="14sp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:layout_marginHorizontal="@dimen/dimen_dp_15"
+        android:layout_marginTop="@dimen/dimen_dp_40"
+        android:background="@drawable/confirm_bg"
+        android:text="保存"
+        android:textColor="@color/white" />
+
+</LinearLayout>

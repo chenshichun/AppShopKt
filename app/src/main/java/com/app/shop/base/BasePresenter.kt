@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference
 open class BasePresenter<V: BaseContract.BaseView> : BaseContract.BasePresenter {
     protected var mView: V? = null
     private var weakView: WeakReference<BaseContract.BaseView>? = null
-    protected var listReqs: MutableList<Disposable> =
+    private var listReqs: MutableList<Disposable> =
         ArrayList()
 
     override fun attachView(view: BaseContract.BaseView) {

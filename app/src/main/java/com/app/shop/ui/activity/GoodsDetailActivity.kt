@@ -13,8 +13,10 @@ import com.app.shop.bean.LunboBean
 import com.app.shop.databinding.ActivityGoodsDetailBinding
 import com.app.shop.ui.contract.GoodsDetailContract
 import com.app.shop.ui.presenter.GoodsDetailPresenter
+import com.app.shop.view.pop.SpecificationPop
 import com.bumptech.glide.Glide
 import com.gyf.immersionbar.ktx.immersionBar
+import com.lxj.xpopup.XPopup
 import com.orhanobut.logger.Logger
 
 /**
@@ -38,6 +40,7 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         }
         binding.ivBack.setOnClickListener(this)
         binding.ivMore.setOnClickListener(this)
+        binding.layoutGoodsDetailsBottom.tvBuy.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -47,6 +50,14 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
             }
             R.id.iv_more -> {
                 Logger.d("iv_more")
+            }
+            R.id.tv_buy -> {// 立即购买
+                val specificationPop = SpecificationPop(this)
+                XPopup.Builder(this)
+                    .moveUpToKeyboard(false)
+                    .isViewMode(true)
+                    .isDestroyOnDismiss(true)
+                    .asCustom(specificationPop).show()
             }
         }
     }

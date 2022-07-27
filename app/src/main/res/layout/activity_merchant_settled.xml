@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:multi_line_radio_group="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ui.activity.OrderActivity">
 
@@ -120,47 +121,13 @@
                     style="@style/merchant_txt"
                     android:text="商户类型" />
 
-                <com.app.shop.view.MultiLineRadioGroup
+                <com.whygraphics.multilineradiogroup.MultiLineRadioGroup
                     android:id="@+id/mMultiLineRadioGroup"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="个人"></RadioButton>
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="个体工商户"></RadioButton>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="企业"></RadioButton>
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="其他组织"></RadioButton>
-                    </LinearLayout>
-                </com.app.shop.view.MultiLineRadioGroup>
+                    multi_line_radio_group:default_button="button_2"
+                    multi_line_radio_group:max_in_row="2"
+                    multi_line_radio_group:radio_buttons="@array/radio_buttons" />
             </LinearLayout>
 
             <include layout="@layout/line" />
