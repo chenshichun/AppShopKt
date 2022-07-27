@@ -54,7 +54,7 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
             R.id.tv_buy -> {// 立即购买
                 val specificationPop = SpecificationPop(this)
                 XPopup.Builder(this)
-                    .moveUpToKeyboard(false)
+                    .moveUpToKeyboard(true)
                     .isViewMode(true)
                     .isDestroyOnDismiss(true)
                     .asCustom(specificationPop).show()

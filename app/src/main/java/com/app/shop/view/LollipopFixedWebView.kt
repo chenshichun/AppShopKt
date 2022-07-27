@@ -48,7 +48,7 @@ class LollipopFixedWebView : WebView {
 
     companion object {
         fun getFixedContext(context: Context): Context {
-            return if (Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT < 23) context.createConfigurationContext(
+            return if (Build.VERSION.SDK_INT < 23) context.createConfigurationContext(
                 Configuration()
             ) else context
         }

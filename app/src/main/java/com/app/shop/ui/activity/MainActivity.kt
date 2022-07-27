@@ -6,22 +6,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
-import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.HotSearchBean
 import com.app.shop.databinding.ActivityMainBinding
 import com.app.shop.manager.AccountManager
-import com.app.shop.retrofit.ApiRequest
-import com.app.shop.service.HomeService
 import com.app.shop.ui.contract.MainContract
 import com.app.shop.ui.presenter.MainPresenter
-import com.app.shop.util.ToastUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainContract.View {
 

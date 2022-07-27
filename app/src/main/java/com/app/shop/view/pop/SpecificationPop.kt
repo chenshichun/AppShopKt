@@ -2,8 +2,10 @@ package com.app.shop.view.pop
 
 import android.content.Context
 import android.widget.TextView
+import androidx.viewbinding.ViewBinding
 import com.app.shop.R
 import com.lxj.xpopup.core.BottomPopupView
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -13,6 +15,8 @@ import com.lxj.xpopup.core.BottomPopupView
  */
 class SpecificationPop(context: Context) : BottomPopupView(context) {
     lateinit var tvBuy: TextView
+    var binding: ViewBinding? = null
+
     override fun getImplLayoutId(): Int {
         return R.layout.pop_specification
     }
@@ -21,7 +25,7 @@ class SpecificationPop(context: Context) : BottomPopupView(context) {
         super.onCreate()
         tvBuy = findViewById(R.id.tv_buy)
         tvBuy.setOnClickListener {
-
+            Logger.d("立即购买")
         }
     }
 }

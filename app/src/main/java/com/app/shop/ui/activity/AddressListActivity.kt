@@ -18,7 +18,7 @@ import com.gyf.immersionbar.ktx.immersionBar
 class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressListPresenter>(),
     AddressListContract.View {
 
-    lateinit var addressAdapter: AddressAdapter
+    private lateinit var addressAdapter: AddressAdapter
 
     override fun getPresenter(): AddressListPresenter {
         return AddressListPresenter()

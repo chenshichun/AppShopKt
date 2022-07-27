@@ -85,7 +85,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginC
                     ToastUtil.showToast("请输入手机号码")
                     return
                 }
-                var smsSendReq = SmsSendReq()
+                val smsSendReq = SmsSendReq()
                 smsSendReq.phone = binding.etPhone.text.toString()
                 smsSendReq.sms_type = SmsType.login.name
                 mPresenter!!.smsCode(smsSendReq)

@@ -43,7 +43,7 @@ class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
                     ToastUtil.showToast("请输入手机号码")
                     return
                 }
-                var smsSendReq = SmsSendReq()
+                val smsSendReq = SmsSendReq()
                 smsSendReq.phone = binding.etPhone.text.toString()
                 smsSendReq.sms_type = SmsType.register.name
                 mPresenter!!.smsCode(smsSendReq)
@@ -61,7 +61,7 @@ class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
                     ToastUtil.showToast("请输入验证码")
                     return
                 }
-                var bindWechatReq = BindWechatReq(
+                val bindWechatReq = BindWechatReq(
                     "1234",
                     binding.etPassword.text.toString(),
                     binding.etPhone.text.toString(),

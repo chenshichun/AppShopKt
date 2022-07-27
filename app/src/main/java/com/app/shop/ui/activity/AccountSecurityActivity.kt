@@ -3,11 +3,9 @@ package com.app.shop.ui.activity
 import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.Navigation
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivityAccountSecurityBinding
-import com.app.shop.manager.AccountManager
 import com.app.shop.ui.contract.AccountSecurityContract
 import com.app.shop.ui.presenter.AccountSecurityPresenter
 import com.gyf.immersionbar.ktx.immersionBar

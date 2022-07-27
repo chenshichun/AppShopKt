@@ -4,8 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
-import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.Toast
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -219,6 +217,7 @@ class MerchantSettledActivity :
     /**
      * 显示地址选择
      */
+    @SuppressLint("SetTextI18n")
     private fun showAddressPicker(
         provinceItems: MutableList<AddressInfoPO>,
         cityItems: MutableList<MutableList<AddressInfoPO>>,
