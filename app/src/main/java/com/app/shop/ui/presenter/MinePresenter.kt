@@ -26,7 +26,7 @@ class MinePresenter : BasePresenter<MineContract.View>(),
             val response = ApiRequest.create(HomeService::class.java).upload(file, description)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.upload(response.body()!!)
@@ -43,7 +43,7 @@ class MinePresenter : BasePresenter<MineContract.View>(),
             val response = ApiRequest.create(HomeService::class.java).getMyInfo()
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getMyInfo(response.body()!!)

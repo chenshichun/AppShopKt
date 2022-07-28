@@ -17,14 +17,14 @@ import kotlinx.coroutines.launch
  * 描述：
  *
  */
-class ForgetPasswordPresent : BasePresenter<ForgetPasswordContract.View>(), ForgetPasswordContract.Presenter {
+class ForgetPasswordPresenter : BasePresenter<ForgetPasswordContract.View>(), ForgetPasswordContract.Presenter {
     override fun smsCode(smsSendReq: SmsSendReq) {
         CoroutineScope(Dispatchers.Main).launch {
             mView!!.showLoading()
             val response = ApiRequest.create(LoginService::class.java).smsCode(smsSendReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsCode(response.body()!!)

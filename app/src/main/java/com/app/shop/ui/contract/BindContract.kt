@@ -11,7 +11,7 @@ import com.app.shop.req.SmsSendReq
  * 描述：
  *
  */
-class BindContract : BaseContract {
+interface BindContract : BaseContract {
     interface View : BaseContract.BaseView {
         fun smsCode(mData: BaseNetModel<Any>)
         fun bindWechat(mData: BaseNetModel<Any>)

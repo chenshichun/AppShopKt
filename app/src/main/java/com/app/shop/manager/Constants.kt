@@ -11,5 +11,7 @@ class Constants {
         const val WEB_RESP_CODE_SUCCESS = 0
         const val TOKEN_EXPRIED = 10000
         const val LOGIN_OUT = 402 // 您的账号在其他地方登录，已退出登录
+
+        const val CATEGORY_TYPE: String = "CATEGORY_TYPE"
     }
 }

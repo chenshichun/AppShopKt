@@ -8,7 +8,7 @@ import com.app.shop.bean.SmsType
 import com.app.shop.databinding.ActivityForgetPasswordBinding
 import com.app.shop.req.SmsSendReq
 import com.app.shop.ui.contract.ForgetPasswordContract
-import com.app.shop.ui.presenter.ForgetPasswordPresent
+import com.app.shop.ui.presenter.ForgetPasswordPresenter
 import com.app.shop.util.TimerUnit
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
@@ -18,13 +18,13 @@ import com.gyf.immersionbar.ktx.immersionBar
  * 创建日期：2022/7/13
  * 描述：忘记密码
  */
-class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, ForgetPasswordPresent>(),
+class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, ForgetPasswordPresenter>(),
     ForgetPasswordContract.View, View.OnClickListener {
 
     private var timer: TimerUnit? = null
 
-    override fun getPresenter(): ForgetPasswordPresent {
-        return ForgetPasswordPresent()
+    override fun getPresenter(): ForgetPasswordPresenter {
+        return ForgetPasswordPresenter()
     }
 
     override fun initView() {

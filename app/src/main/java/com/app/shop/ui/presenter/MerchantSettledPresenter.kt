@@ -13,7 +13,6 @@ import com.app.shop.util.FileUtil
 import com.app.shop.util.ToastUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +33,7 @@ class MerchantSettledPresenter : BasePresenter<MerchantSettledContract.View>(),
             val response = ApiRequest.create(HomeService::class.java).upload(file, description)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.upload(response.body()!!)
@@ -53,7 +52,7 @@ class MerchantSettledPresenter : BasePresenter<MerchantSettledContract.View>(),
                 ApiRequest.create(HomeService::class.java).merchantApply(merchantSettledReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.merchantApply(response.body()!!)

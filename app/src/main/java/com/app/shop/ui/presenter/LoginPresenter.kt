@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
  * 描述：
  *
  */
-class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presenter {
+class LoginPresenter : BasePresenter<LoginContract.View>(), LoginContract.Presenter {
 
     override fun smsCode(smsSendReq: SmsSendReq) {
         CoroutineScope(Dispatchers.Main).launch {
@@ -27,7 +27,7 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
             val response = ApiRequest.create(LoginService::class.java).smsCode(smsSendReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsCode(response.body()!!)
@@ -44,7 +44,7 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
             val response = ApiRequest.create(LoginService::class.java).smsLogin(smsReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsLogin(response.body()!!)
@@ -61,7 +61,7 @@ class LoginPresent : BasePresenter<LoginContract.View>(), LoginContract.Presente
             val response = ApiRequest.create(LoginService::class.java).wechatLogin(wxLoginReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.wechatLogin(response.body()!!)

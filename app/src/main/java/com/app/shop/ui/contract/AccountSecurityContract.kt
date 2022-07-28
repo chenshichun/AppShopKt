@@ -8,7 +8,7 @@ import com.app.shop.base.BaseContract
  * 描述：
  *
  */
-class AccountSecurityContract : BaseContract {
+interface AccountSecurityContract : BaseContract {
     interface View : BaseContract.BaseView {
     }
 

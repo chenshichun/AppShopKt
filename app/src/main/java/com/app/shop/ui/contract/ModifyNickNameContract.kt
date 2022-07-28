@@ -8,7 +8,7 @@ import com.app.shop.base.BaseContract
  * 描述：
  *
  */
-class ModifyNickNameContract : BaseContract {
+interface ModifyNickNameContract : BaseContract {
     interface View : BaseContract.BaseView {
     }
 

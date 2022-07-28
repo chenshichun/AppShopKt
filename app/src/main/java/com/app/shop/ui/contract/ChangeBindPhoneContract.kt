@@ -8,7 +8,7 @@ import com.app.shop.base.BaseContract
  * 描述：
  *
  */
-class ChangeBindPhoneContract : BaseContract {
+interface ChangeBindPhoneContract : BaseContract {
     interface View : BaseContract.BaseView {
     }
 

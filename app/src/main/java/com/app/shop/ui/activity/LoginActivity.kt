@@ -14,7 +14,7 @@ import com.app.shop.req.SmsLoginReq
 import com.app.shop.req.SmsSendReq
 import com.app.shop.req.WxLoginReq
 import com.app.shop.ui.contract.LoginContract
-import com.app.shop.ui.presenter.LoginPresent
+import com.app.shop.ui.presenter.LoginPresenter
 import com.app.shop.util.AppUtil
 import com.app.shop.util.TimerUnit
 import com.app.shop.util.ToastUtil
@@ -30,13 +30,13 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * 创建日期：2022/7/13
  * 描述：登录
  */
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresent>(), LoginContract.View,
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), LoginContract.View,
     View.OnClickListener, WXEntryActivity.Back {
 
     private var api: IWXAPI? = null
 
-    override fun getPresenter(): LoginPresent {
-        return LoginPresent()
+    override fun getPresenter(): LoginPresenter {
+        return LoginPresenter()
     }
 
     override fun initView() {

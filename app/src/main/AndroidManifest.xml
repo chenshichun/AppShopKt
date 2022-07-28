@@ -14,7 +14,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".base.BaseApplication"
@@ -30,6 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppShopKt"
         tools:targetApi="31">
+
         <!-- 屏幕适配start -->
         <meta-data
             android:name="design_width_in_dp"
@@ -96,7 +98,8 @@
         </activity>
         <activity android:name=".ui.activity.InviteFriendsActivity" />
         <activity android:name=".ui.activity.AddressListActivity" />
-        <activity android:name=".ui.activity.AddAddressActivity"/>
+        <activity android:name=".ui.activity.AddAddressActivity" />
+        <activity android:name=".ui.activity.CategoryListActivity"/>
     </application>
 
 </manifest>

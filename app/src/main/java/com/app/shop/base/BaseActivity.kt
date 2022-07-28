@@ -31,10 +31,6 @@ abstract class BaseActivity<VB : ViewBinding, P : BaseContract.BasePresenter> : 
 
     protected abstract fun initView()
 
-    override fun showError(e: Throwable?) {
-
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         if (mPresenter != null) {

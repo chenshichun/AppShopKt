@@ -26,7 +26,7 @@ class RegisterPresenter : BasePresenter<RegisterContract.View>(), RegisterContra
             val response = ApiRequest.create(LoginService::class.java).smsCode(smsSendReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsCode(response.body()!!)
@@ -43,7 +43,7 @@ class RegisterPresenter : BasePresenter<RegisterContract.View>(), RegisterContra
             val response = ApiRequest.create(LoginService::class.java).smsRegister(registerReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsRegister(response.body()!!)

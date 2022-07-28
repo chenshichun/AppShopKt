@@ -25,7 +25,7 @@ class AccountLoginPresenter : BasePresenter<AccountLoginContract.View>(),
             val response = ApiRequest.create(LoginService::class.java).pwdLogin(pwdLoginReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.pwdLogin(response.body()!!)

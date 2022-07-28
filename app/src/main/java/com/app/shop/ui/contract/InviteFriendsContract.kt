@@ -8,7 +8,7 @@ import com.app.shop.base.BaseContract
  * 描述：
  *
  */
-class InviteFriendsContract : BaseContract {
+interface InviteFriendsContract : BaseContract {
     interface View : BaseContract.BaseView {
     }
 

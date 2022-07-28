@@ -23,7 +23,5 @@ interface BaseContract {
          */
         fun hideLoading()
 
-        fun showError(e: Throwable?)
-
     }
 }

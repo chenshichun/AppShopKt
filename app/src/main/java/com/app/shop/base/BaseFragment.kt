@@ -22,11 +22,7 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
 
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
-    protected var loadingPopup: BasePopupView? = null
-
-    override fun showError(e: Throwable?) {
-
-    }
+    private var loadingPopup: BasePopupView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

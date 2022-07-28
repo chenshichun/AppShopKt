@@ -24,7 +24,7 @@ class PointsDetailsPresenter : BasePresenter<PointsDetailsContract.View>(),
             val response = ApiRequest.create(HomeService::class.java).listPoint()
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.listPoint(response.body()!!)

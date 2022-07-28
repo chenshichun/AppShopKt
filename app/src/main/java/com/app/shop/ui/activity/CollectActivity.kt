@@ -8,16 +8,16 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.bean.Prod
 import com.app.shop.databinding.ActivityCollectBinding
 import com.app.shop.ui.contract.CollectContract
-import com.app.shop.ui.presenter.CollectPresent
+import com.app.shop.ui.presenter.CollectPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
-class CollectActivity : BaseActivity<ActivityCollectBinding, CollectPresent>(),
+class CollectActivity : BaseActivity<ActivityCollectBinding, CollectPresenter>(),
     CollectContract.View {
     private lateinit var goodsAdapter: GoodsAdapter
     private var goodsList: ArrayList<Prod>? = ArrayList()
 
-    override fun getPresenter(): CollectPresent {
-        return CollectPresent()
+    override fun getPresenter(): CollectPresenter {
+        return CollectPresenter()
     }
 
     override fun initView() {

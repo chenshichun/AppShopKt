@@ -24,7 +24,7 @@ class VerifiedPresenter : BasePresenter<VerifiedContract.View>(), VerifiedContra
             val response = ApiRequest.create(HomeService::class.java).cert(certReq)
             mView!!.hideLoading()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.cert(response.body()!!)

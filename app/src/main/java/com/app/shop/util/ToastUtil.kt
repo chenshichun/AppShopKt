@@ -21,7 +21,7 @@ object ToastUtil {
             context = c
         }
 
-        fun showNoIntentToast() {
+        fun showNoNetworkToast() {
             context?.let { showToast(it.getString(R.string.network_busy)) }
         }
 

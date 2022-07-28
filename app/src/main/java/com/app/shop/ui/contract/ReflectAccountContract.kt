@@ -8,7 +8,7 @@ import com.app.shop.base.BaseContract
  * 描述：
  *
  */
-class ReflectAccountContract: BaseContract {
+interface ReflectAccountContract: BaseContract {
     interface View : BaseContract.BaseView {
     }
 

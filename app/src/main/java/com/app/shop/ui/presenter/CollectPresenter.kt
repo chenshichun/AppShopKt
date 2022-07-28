@@ -8,5 +8,5 @@ import com.app.shop.ui.contract.CollectContract
  * 创建日期：2022/7/18
  * 描述：
  */
-class CollectPresent : BasePresenter<CollectContract.View>(), CollectContract.Presenter {
+class CollectPresenter : BasePresenter<CollectContract.View>(), CollectContract.Presenter {
 }

@@ -7,6 +7,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
+import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.annotation.RequiresApi
@@ -20,10 +21,6 @@ import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.adapter.MyAdapter
 import com.app.shop.adapter.OrderAdapter
 import com.app.shop.base.BaseFragment
-import com.app.shop.bean.BannerBean
-import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.Prod
-import com.app.shop.bean.ProdBean
 import com.app.shop.databinding.FragmentHomeBinding
 import com.app.shop.ui.activity.GoodsDetailActivity
 import com.app.shop.ui.activity.SearchActivity
@@ -38,6 +35,10 @@ import com.youth.banner.BannerConfig
 import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.AdapterView.OnItemClickListener;
+import com.app.shop.bean.*
+import com.app.shop.manager.Constants
+import com.app.shop.ui.activity.CategoryListActivity
+import com.app.shop.util.IntentUtil
 
 
 /**
@@ -47,7 +48,7 @@ import android.widget.AdapterView.OnItemClickListener;
  *
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeContract.View,
-    OnItemClickListener {
+    OnItemClickListener, View.OnClickListener {
 
     private val texts = arrayOf(
         "积分易货", "福利专区", "生活服务", "新人专区",
@@ -112,6 +113,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         mPresenter!!.getProdHomeData()
         mPresenter!!.getProdFeaturedData()
         mPresenter!!.getProdRecommendData()
+
+        binding.layoutHomeMiddle.llChosen.setOnClickListener(this)
+        binding.layoutHomeMiddle.llNew.setOnClickListener(this)
+        binding.layoutHomeMiddle.llRecommend.setOnClickListener(this)
+        binding.layoutHomeMiddle.llGroupBuy.setOnClickListener(this)
+        binding.layoutHomeMiddle.llSelling.setOnClickListener(this)
     }
 
     /*
@@ -263,20 +270,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     }
 
     /*
-    * 精选好物
-    * */
-    override fun getProdFeaturedData(mData: BaseNetModel<ProdBean>) {
-
-    }
-
-    /*
-    *  推荐商品
-    * */
-    override fun getProdRecommendData(mData: BaseNetModel<ProdBean>) {
-
-    }
-
-    /*
     * 签到
     * */
     override fun sign(mData: BaseNetModel<Any>) {
@@ -297,5 +290,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                 mPresenter!!.sign()
             }
         }
+    }
+
+    override fun onClick(p0: View?) {
+        val bundle = Bundle()
+        when (p0!!.id) {
+            R.id.ll_chosen ->
+                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CHOSE.ordinal)
+            R.id.ll_selling ->
+                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.SELLING.ordinal)
+            R.id.ll_new -> bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.NEW.ordinal)
+            R.id.ll_group_buy -> bundle.putInt(
+                Constants.CATEGORY_TYPE,
+                CategoryType.GROUP_BUY.ordinal
+            )
+            R.id.ll_recommend -> bundle.putInt(
+                Constants.CATEGORY_TYPE,
+                CategoryType.RECOMMEND.ordinal
+            )
+        }
+        IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
     }
 }

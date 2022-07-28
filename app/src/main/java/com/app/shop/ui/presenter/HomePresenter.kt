@@ -21,7 +21,7 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getBannerList()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getBannerList(response.body()!!)
@@ -36,7 +36,7 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getProdHomeData()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getProdHomeData(response.body()!!)
@@ -51,7 +51,7 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getProdFeaturedData()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getProdHomeData(response.body()!!)
@@ -66,7 +66,7 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getProdRecommendData()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getProdHomeData(response.body()!!)
@@ -81,7 +81,7 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).sign()
             if (response.body() == null) {
-                ToastUtil.showNoIntentToast()
+                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.sign(response.body()!!)
