@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
  * 描述：
  *
  */
-class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter {
+class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
     override fun getBannerList() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getBannerList()
@@ -32,45 +32,18 @@ class HomePresenter: BasePresenter<HomeContract.View>(), HomeContract.Presenter 
         }
     }
 
-    override fun getProdHomeData() {
-        CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdHomeData()
-            if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
-            } else {
-                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
-                    mView!!.getProdHomeData(response.body()!!)
-                } else {
-                    ToastUtil.showToast(response.body()!!.msg.toString())
-                }
-            }
-        }
-    }
 
-    override fun getProdFeaturedData() {
+    override fun getProdHomeData(page: Int, size: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdFeaturedData()
+            val response = ApiRequest.create(HomeService::class.java).getProdHomeData(page, size)
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
+                mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getProdHomeData(response.body()!!)
                 } else {
-                    ToastUtil.showToast(response.body()!!.msg.toString())
-                }
-            }
-        }
-    }
-
-    override fun getProdRecommendData() {
-        CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdRecommendData()
-            if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
-            } else {
-                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
-                    mView!!.getProdHomeData(response.body()!!)
-                } else {
+                    mView!!.showError()
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }
             }

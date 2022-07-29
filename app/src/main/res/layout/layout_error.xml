@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="error~"
+        android:text="请求出错拉~"
         android:textColor="#333333"
         android:textSize="18sp" />
 
@@ -17,5 +17,6 @@
         android:id="@+id/tv_reload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点击重试"/>
+        android:layout_marginTop="@dimen/dimen_dp_10"
+        android:text="点击重试" />
 </LinearLayout>

@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
 
+
 class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainContract.View {
 
     override fun getPresenter(): MainPresenter {
@@ -43,7 +44,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                     startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
-
         }
     }
 

@@ -4,7 +4,7 @@ import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.SmsType
+import com.app.shop.bean.type.SmsType
 import com.app.shop.databinding.ActivityForgetPasswordBinding
 import com.app.shop.req.SmsSendReq
 import com.app.shop.ui.contract.ForgetPasswordContract

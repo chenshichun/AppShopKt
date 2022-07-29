@@ -13,9 +13,11 @@ import com.app.shop.bean.PointBean
 interface PointsDetailsContract : BaseContract {
     interface View : BaseContract.BaseView {
         fun listPoint(mData: BaseNetModel<PointBean>)
+        fun noNetworkView()
+        fun showError()
     }
 
     interface Presenter {
-        fun listPoint()
+        fun listPoint(page:Int,size:Int)
     }
 }

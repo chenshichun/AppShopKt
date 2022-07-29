@@ -6,6 +6,7 @@ import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
 import com.app.shop.ui.contract.MineContract
 import com.app.shop.util.ToastUtil
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

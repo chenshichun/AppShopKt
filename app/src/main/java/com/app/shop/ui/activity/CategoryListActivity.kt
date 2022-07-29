@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.base.BaseActivity
-import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.CategoryType
-import com.app.shop.bean.Prod
-import com.app.shop.bean.ProdBean
+import com.app.shop.bean.*
+import com.app.shop.bean.type.CategoryType
+import com.app.shop.bean.type.SortType
 import com.app.shop.databinding.ActivityCategoryListBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
@@ -32,10 +31,14 @@ import com.kingja.loadsir.core.LoadSir
  */
 class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryListPresenter>(),
     CategoryListContract.View, View.OnClickListener {
-    var type: Int = 0
+
+    private var type: Int = 0
     private lateinit var goodsAdapter: GoodsAdapter
-    private var goodsList: ArrayList<Prod>? = ArrayList()
+    private var goodsList = mutableListOf<Prod>()
     private lateinit var loadService: LoadService<Any>
+    private var page: Int = 1
+    private var size: Int = 10
+    private var sort: String = SortType.ASC_FINAL.sortType
 
     override fun getPresenter(): CategoryListPresenter {
         return CategoryListPresenter()
@@ -69,26 +72,28 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
         })
 
         loadService = LoadSir.getDefault().register(binding.refreshLayout) {
-            getData()
+            initData()
         }
-        getData()
 
         binding.refreshLayout.setOnRefreshListener {
-            getData()
+            page = 1
+            initData()
         }
 
         binding.refreshLayout.setOnLoadMoreListener {
-
+            page++
+            initData()
         }
 
+        initData()
     }
 
-    private fun getData() {
+    private fun initData() {
         loadService.showCallback(LoadingCallback::class.java)
         when (type) {
-            0 -> mPresenter!!.getProdRecommendData()
-            1 -> mPresenter!!.getProdFeaturedData()
-            else -> mPresenter!!.getProdFeaturedData()
+            0 -> mPresenter!!.getProdRecommendData(page, size, sort)
+            1 -> mPresenter!!.getProdFeaturedData(page, size, sort)
+            else -> mPresenter!!.getProdFeaturedData(page, size, sort)
         }
     }
 
@@ -100,13 +105,25 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
         binding.refreshLayout.finishRefresh()
         binding.refreshLayout.finishLoadMore()
 
-        if (mData.data!!.prods.isEmpty()) {
-            loadService.showCallback(EmptyCallBack::class.java)
+        if (page == 1) {
+            if (mData.data!!.prods.isEmpty()) {// 空数据
+                loadService.showCallback(EmptyCallBack::class.java)
+            } else {
+                goodsList.clear()
+                goodsList.addAll(mData.data!!.prods)
+                goodsAdapter.notifyDataSetChanged()
+                loadService.showSuccess()
+            }
         } else {
             loadService.showSuccess()
-            goodsList!!.addAll(mData.data!!.prods)
-            goodsAdapter.notifyDataSetChanged()
+            if (mData.data!!.prods.isEmpty()) {
+                page--
+            } else {
+                goodsList.addAll(mData.data!!.prods)
+                goodsAdapter.notifyDataSetChanged()
+            }
         }
+
     }
 
     override fun noNetworkView() {
@@ -129,12 +146,21 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
         when (p0!!.id) {
             R.id.ll_complex -> {
                 updateSortUi(0)
+                sort = SortType.ASC_PRICE.sortType
+                page = 1
+                initData()
             }
             R.id.ll_sales -> {
                 updateSortUi(1)
+                sort = SortType.DESC_SOLD.sortType
+                page = 1
+                initData()
             }
             R.id.ll_low_price -> {
                 updateSortUi(2)
+                sort = SortType.ASC_PRICE.sortType
+                page = 1
+                initData()
             }
         }
     }

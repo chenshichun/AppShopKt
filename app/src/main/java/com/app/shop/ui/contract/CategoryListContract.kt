@@ -10,7 +10,7 @@ import com.app.shop.bean.ProdBean
  * 描述：
  *
  */
-interface CategoryListContract :BaseContract{
+interface CategoryListContract : BaseContract {
     interface View : BaseContract.BaseView {
         fun getProdHomeData(mData: BaseNetModel<ProdBean>)
         fun noNetworkView()
@@ -18,7 +18,7 @@ interface CategoryListContract :BaseContract{
     }
 
     interface Presenter {
-        fun getProdFeaturedData()
-        fun getProdRecommendData()
+        fun getProdFeaturedData(page: Int, size: Int, sort: String)
+        fun getProdRecommendData(page: Int, size: Int, sort: String)
     }
 }

@@ -7,6 +7,7 @@ import com.app.shop.base.BaseFragment
 import com.app.shop.databinding.FragmentCartBinding
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun

@@ -105,9 +105,10 @@
                         android:textSize="16sp" />
 
                     <ImageView
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/txt"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt1"
                         android:scaleType="centerCrop" />
                 </LinearLayout>
             </LinearLayout>
@@ -155,9 +156,10 @@
                         android:textSize="16sp" />
 
                     <ImageView
-                        android:layout_width="200dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/txt"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt2"
                         android:scaleType="centerCrop" />
                 </LinearLayout>
             </LinearLayout>
@@ -196,23 +198,29 @@
                 android:textColor="@color/color_666"
                 android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/bg_red_20"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:text="GO"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:background="@drawable/txt"
-                android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_red_20"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="GO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt3"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -242,23 +250,29 @@
                 android:textColor="@color/color_666"
                 android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/bg_red_20"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:text="GO"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:background="@drawable/txt"
-                android:scaleType="centerCrop" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_red_20"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="GO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt4"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

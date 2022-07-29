@@ -25,20 +25,31 @@ interface HomeService {
     /*
     * 首页商品
     * */
-    @GET("prod/home")
-    suspend fun getProdHomeData(): Response<BaseNetModel<ProdBean>>
+    @GET("prod/all")
+    suspend fun getProdHomeData(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<BaseNetModel<ProdBean>>
 
     /*
     * 精选商品
     * */
     @GET("prod/featured")
-    suspend fun getProdFeaturedData(): Response<BaseNetModel<ProdBean>>
+    suspend fun getProdFeaturedData(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): Response<BaseNetModel<ProdBean>>
 
     /*
     * 推荐商品
     * */
     @GET("prod/recommend")
-    suspend fun getProdRecommendData(): Response<BaseNetModel<ProdBean>>
+    suspend fun getProdRecommendData(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String
+    ): Response<BaseNetModel<ProdBean>>
 
     /*
     * 用户信息
@@ -72,7 +83,10 @@ interface HomeService {
     * 积分明细
     * */
     @GET("user/list/point")
-    suspend fun listPoint(): Response<BaseNetModel<PointBean>>
+    suspend fun listPoint(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<BaseNetModel<PointBean>>
 
     /*
     * 实名认证

@@ -19,7 +19,6 @@ import com.amap.api.location.AMapLocationListener
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.adapter.MyAdapter
-import com.app.shop.adapter.OrderAdapter
 import com.app.shop.base.BaseFragment
 import com.app.shop.databinding.FragmentHomeBinding
 import com.app.shop.ui.activity.GoodsDetailActivity
@@ -36,9 +35,15 @@ import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.AdapterView.OnItemClickListener;
 import com.app.shop.bean.*
+import com.app.shop.bean.type.CategoryType
+import com.app.shop.loadsir.EmptyCallBack
+import com.app.shop.loadsir.ErrorCallback
+import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.ui.activity.CategoryListActivity
 import com.app.shop.util.IntentUtil
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 
 
 /**
@@ -49,6 +54,9 @@ import com.app.shop.util.IntentUtil
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeContract.View,
     OnItemClickListener, View.OnClickListener {
+    private lateinit var loadService: LoadService<Any>
+    private var page: Int = 1
+    private var size: Int = 10
 
     private val texts = arrayOf(
         "积分易货", "福利专区", "生活服务", "新人专区",
@@ -67,7 +75,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         R.drawable.icon_10
     )
     private lateinit var goodsAdapter: GoodsAdapter
-    private var goodsList: ArrayList<Prod>? = ArrayList()
+    private var goodsList = mutableListOf<Prod>()
+
     private lateinit var mLocationClient: AMapLocationClient
     private lateinit var mLocationOption: AMapLocationClientOption
 
@@ -109,16 +118,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         getCurrentLocationLatLng()
         getLocation()
 
-        mPresenter!!.getBannerList()
-        mPresenter!!.getProdHomeData()
-        mPresenter!!.getProdFeaturedData()
-        mPresenter!!.getProdRecommendData()
-
         binding.layoutHomeMiddle.llChosen.setOnClickListener(this)
         binding.layoutHomeMiddle.llNew.setOnClickListener(this)
         binding.layoutHomeMiddle.llRecommend.setOnClickListener(this)
         binding.layoutHomeMiddle.llGroupBuy.setOnClickListener(this)
         binding.layoutHomeMiddle.llSelling.setOnClickListener(this)
+
+        loadService = LoadSir.getDefault().register(binding.refreshLayout) {
+            initData()
+        }
+
+        binding.refreshLayout.setOnRefreshListener {
+            page = 1
+            initData()
+        }
+
+        binding.refreshLayout.setOnLoadMoreListener {
+            page++
+            initData()
+        }
+        initData()
+        mPresenter!!.getBannerList()
+
+        Logger.d("chenshichun1")
+    }
+
+    private fun initData() {
+        mPresenter!!.getProdHomeData(page, size)
     }
 
     /*
@@ -244,12 +270,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     * 首页banner数据
     * */
     override fun getBannerList(mData: BaseNetModel<BannerBean>) {
-        var listPath = mutableListOf<String>()
+        val listPath = mutableListOf<String>()
         for (slide in mData.data!!.slide) {
             listPath.add(slide.img_url)
         }
         binding.banner.setImageLoader(GlideImageLoader())
-        binding.banner.setImages(listPath);
+        binding.banner.setImages(listPath)
         binding.banner.setDelayTime(2000)
         binding.banner.isAutoPlay(true)
         binding.banner.setIndicatorGravity(BannerConfig.CENTER)
@@ -259,14 +285,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         binding.banner.start()
     }
 
-
     /*
     * 首页商品数据
     * */
     @SuppressLint("NotifyDataSetChanged")
     override fun getProdHomeData(mData: BaseNetModel<ProdBean>) {
-        goodsList!!.addAll(mData.data!!.prods)
-        goodsAdapter.notifyDataSetChanged()
+        binding.refreshLayout.finishRefresh()
+        binding.refreshLayout.finishLoadMore()
+
+        if (page == 1) {
+            if (mData.data!!.prods.isEmpty()) {// 空数据
+                loadService.showCallback(EmptyCallBack::class.java)
+            } else {
+                goodsList.clear()
+                goodsList.addAll(mData.data!!.prods)
+                goodsAdapter.notifyDataSetChanged()
+                loadService.showSuccess()
+            }
+        } else {
+            loadService.showSuccess()
+            if (mData.data!!.prods.isEmpty()) {
+                page--
+            } else {
+                goodsList.addAll(mData.data!!.prods)
+                goodsAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     /*
@@ -274,6 +318,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     * */
     override fun sign(mData: BaseNetModel<Any>) {
         ToastUtil.showToast(mData.msg)
+    }
+
+    override fun noNetworkView() {
+        loadService.showCallback(NetWorkErrorCallBack::class.java)
+    }
+
+    override fun showError() {
+        loadService.showCallback(ErrorCallback::class.java)
     }
 
     override fun showLoading() {
@@ -288,6 +340,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         when (p2) {
             4 -> {// 签到
                 mPresenter!!.sign()
+            }
+            else -> {
+                val bundle = Bundle()
+                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CHOSE.ordinal)
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
         }
     }

@@ -40,9 +40,7 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter = getPresenter()
-        if (mPresenter != null) {
-            mPresenter?.attachView(this)
-        }
+        mPresenter?.attachView(this)
 
     }
 

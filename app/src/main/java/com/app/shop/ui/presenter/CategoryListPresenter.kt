@@ -17,9 +17,9 @@ import kotlinx.coroutines.launch
  *
  */
 class CategoryListPresenter :BasePresenter<CategoryListContract.View>(),CategoryListContract.Presenter{
-    override fun getProdFeaturedData() {
+    override fun getProdFeaturedData(page: Int,size:Int,sort:String) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdFeaturedData()
+            val response = ApiRequest.create(HomeService::class.java).getProdFeaturedData(page,size,sort)
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
@@ -34,9 +34,9 @@ class CategoryListPresenter :BasePresenter<CategoryListContract.View>(),Category
         }
     }
 
-    override fun getProdRecommendData() {
+    override fun getProdRecommendData(page: Int,size:Int,sort:String) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdRecommendData()
+            val response = ApiRequest.create(HomeService::class.java).getProdRecommendData(page,size,sort)
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
             } else {

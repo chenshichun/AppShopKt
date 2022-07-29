@@ -43,8 +43,10 @@ import java.io.File
 class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineContract.View,
     View.OnClickListener {
 
+    override fun getPresenter(): MinePresenter {
+        return MinePresenter()
+    }
     override fun initView() {
-        mPresenter!!.getMyInfo()
         binding.ivHead.setOnClickListener(this)
         binding.tvNickName.setOnClickListener(this)
         binding.tvAccountSecurity.setOnClickListener(this)
@@ -62,10 +64,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.llPointsDetails.setOnClickListener(this)
         binding.tvAboutUs.setOnClickListener(this)
         binding.tvInviteFriends.setOnClickListener(this)
-    }
 
-    override fun getPresenter(): MinePresenter {
-        return MinePresenter()
+        mPresenter!!.getMyInfo()
     }
 
     override fun onClick(p0: View?) {
@@ -90,7 +90,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                     activity,
                     PointsDetailsActivity::class.java
                 )
-            )
+            )//积分明细
             R.id.tv_show_all_order -> startActivity(Intent(activity, OrderActivity::class.java))
             R.id.tv_order_1 -> startActivity(Intent(activity, OrderActivity::class.java))
             R.id.tv_order_2 -> startActivity(Intent(activity, OrderActivity::class.java))
@@ -104,7 +104,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                     activity,
                     AccountSecurityActivity::class.java
                 )
-            )
+            )//账号安全
             R.id.tv_out_login -> {
                 val builder = activity?.let { AlertDialog.Builder(it) }!!
                 builder.setMessage("您确定要退出登录吗？")
@@ -141,7 +141,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                         }
                     }.show()
             }
-            R.id.tv_about_us -> startActivity(Intent(activity, /*AboutUsActivity*/AddressListActivity::class.java))
+            R.id.tv_about_us -> startActivity(Intent(activity, AboutUsActivity::class.java))
         }
     }
 

@@ -1,4 +1,4 @@
-package com.app.shop.bean
+package com.app.shop.bean.type
 
 /**
  * @author chenshichun

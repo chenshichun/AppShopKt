@@ -27,7 +27,7 @@ data class Prod(
     val ori_point: Int,
     val ori_price: Int,
     val pic: String,
-    val price: Int,
+    val price: String,
     val prod_id: Long,
     val prod_name: String,
     val prod_type: Int,

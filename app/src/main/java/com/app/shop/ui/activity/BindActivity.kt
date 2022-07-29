@@ -3,7 +3,7 @@ package com.app.shop.ui.activity
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
-import com.app.shop.bean.SmsType
+import com.app.shop.bean.type.SmsType
 import com.app.shop.databinding.ActivityBindBinding
 import com.app.shop.req.BindWechatReq
 import com.app.shop.req.SmsSendReq

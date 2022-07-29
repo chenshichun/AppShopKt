@@ -5,6 +5,7 @@ import com.app.shop.bean.BannerBean
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.ProdBean
 import retrofit2.Response
+import retrofit2.http.Query
 
 /**
  * @author chenshichun
@@ -17,13 +18,17 @@ interface HomeContract : BaseContract {
         fun getBannerList(mData: BaseNetModel<BannerBean>)
         fun getProdHomeData(mData: BaseNetModel<ProdBean>)
         fun sign(mData: BaseNetModel<Any>)
+        fun noNetworkView()
+        fun showError()
     }
 
     interface Presenter {
         fun getBannerList()
-        fun getProdHomeData()
-        fun getProdFeaturedData()
-        fun getProdRecommendData()
+        fun getProdHomeData(
+            page: Int,
+            size: Int,
+        )
+
         fun sign()
     }
 }
