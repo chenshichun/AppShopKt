@@ -4,6 +4,8 @@ import android.content.Context
 import android.widget.TextView
 import androidx.viewbinding.ViewBinding
 import com.app.shop.R
+import com.app.shop.ui.activity.ConfirmOrderActivity
+import com.app.shop.util.IntentUtil
 import com.lxj.xpopup.core.BottomPopupView
 import com.orhanobut.logger.Logger
 
@@ -26,6 +28,8 @@ class SpecificationPop(context: Context) : BottomPopupView(context) {
         tvBuy = findViewById(R.id.tv_buy)
         tvBuy.setOnClickListener {
             Logger.d("立即购买")
+            IntentUtil.get()!!.goActivity(context, ConfirmOrderActivity::class.java)
+            dismiss()
         }
     }
 }

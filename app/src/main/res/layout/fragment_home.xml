@@ -13,22 +13,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/head_cl"
+            style="@style/head_cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingTop="25dp"
-            android:paddingBottom="15dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/head_title_tv"
                 android:text="易货君商城"
-                android:textColor="@color/color_333"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

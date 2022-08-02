@@ -22,6 +22,7 @@ import com.app.shop.ui.presenter.MinePresenter
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideEngine
 import com.bumptech.glide.Glide
+import com.gyf.immersionbar.ktx.immersionBar
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.entity.LocalMedia
@@ -46,6 +47,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
     override fun getPresenter(): MinePresenter {
         return MinePresenter()
     }
+
     override fun initView() {
         binding.ivHead.setOnClickListener(this)
         binding.tvNickName.setOnClickListener(this)
@@ -112,11 +114,6 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 builder.setPositiveButton("确定") { _, _ ->
                     AccountManager.signOut()
                     startActivity(Intent(activity, LoginActivity::class.java))
-                    Navigation.findNavController(
-                        requireActivity(),
-                        R.id.nav_host_fragment_activity_main
-                    )
-                        .navigate(R.id.navigation_home)
                 }
                 builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
                 builder.create().show()

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.LoginActivity">
 
     <LinearLayout
@@ -46,7 +46,8 @@
             android:hint="请输入手机号"
             android:inputType="number"
             android:paddingVertical="10dp"
-            android:textColor="@color/color_333" />
+            android:textColor="@color/color_333"
+            android:textSize="14sp" />
 
         <include layout="@layout/line" />
 
@@ -58,7 +59,8 @@
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:paddingVertical="10dp"
-            android:textColor="@color/color_333" />
+            android:textColor="@color/color_333"
+            android:textSize="14sp" />
 
         <include layout="@layout/line" />
 
@@ -76,7 +78,8 @@
                 android:hint="请输入验证码"
                 android:inputType="text"
                 android:paddingVertical="10dp"
-                android:textColor="@color/color_333" />
+                android:textColor="@color/color_333"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_get_sms_code"
@@ -103,7 +106,8 @@
                 android:hint="请输入邀请码"
                 android:inputType="text"
                 android:paddingVertical="10dp"
-                android:textColor="@color/color_333" />
+                android:textColor="@color/color_333"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"

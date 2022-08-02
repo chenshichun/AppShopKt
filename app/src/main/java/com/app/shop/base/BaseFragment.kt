@@ -70,7 +70,8 @@ abstract class BaseFragment<VB : ViewBinding, P : BaseContract.BasePresenter> :
 
     open fun showLoadingDialog() {
         if (null == loadingPopup) {
-            loadingPopup = XPopup.Builder(activity).asLoading()
+            loadingPopup = XPopup.Builder(activity).hasShadowBg(false)
+                .asLoading()
         }
         loadingPopup!!.show()
     }

@@ -1,6 +1,7 @@
 package com.app.shop.ui.activity
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -8,9 +9,11 @@ import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UserDataBean
 import com.app.shop.databinding.ActivityAccountLoginBinding
 import com.app.shop.manager.AccountManager
+import com.app.shop.manager.Constants
 import com.app.shop.req.PwdLoginReq
 import com.app.shop.ui.contract.AccountLoginContract
 import com.app.shop.ui.presenter.AccountLoginPresenter
+import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
@@ -37,11 +40,24 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
         binding.tvLogin.setOnClickListener(this)
         binding.tvCodeLogin.setOnClickListener(this)
         binding.tvForgetPassword.setOnClickListener(this)
+        binding.tvPrivacyPolicy.setOnClickListener(this)
+        binding.tvUserAgreement.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
+        val bundle = Bundle()
         when (view!!.id) {
             R.id.iv_back -> finish()
+            R.id.tv_privacy_policy -> {
+                bundle.putString(Constants.WEB_TITLE, "隐私政策")
+                bundle.putString(Constants.WEB_URL, Constants.PRIVACT_POLICY_URL)
+                IntentUtil.get()!!.goActivity(this, WebViewActivity::class.java, bundle)
+            }
+            R.id.tv_user_agreement -> {
+                bundle.putString(Constants.WEB_TITLE, "用户协议")
+                bundle.putString(Constants.WEB_URL, Constants.USET_AGREEMENT_URL)
+                IntentUtil.get()!!.goActivity(this, WebViewActivity::class.java, bundle)
+            }
             R.id.tv_code_login -> finish()
             R.id.tv_login -> {
                 if (!binding.checkbox.isChecked) {

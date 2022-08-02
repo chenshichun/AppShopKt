@@ -139,8 +139,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         }
         initData()
         mPresenter!!.getBannerList()
-
-        Logger.d("chenshichun1")
     }
 
     private fun initData() {

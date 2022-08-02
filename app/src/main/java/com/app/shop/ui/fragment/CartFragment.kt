@@ -7,7 +7,6 @@ import com.app.shop.base.BaseFragment
 import com.app.shop.databinding.FragmentCartBinding
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
-import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -17,8 +16,8 @@ import com.orhanobut.logger.Logger
  */
 class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
     CartContract.View {
-    var cartAdapter: CartAdapter? = null
-    var isEdit: Boolean = true //  true 编辑  false 完成
+    private var cartAdapter: CartAdapter? = null
+    private var isEdit: Boolean = true //  true 编辑  false 完成
 
     override fun getPresenter(): CartPresenter {
         return CartPresenter()
