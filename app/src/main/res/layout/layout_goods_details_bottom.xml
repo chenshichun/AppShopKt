@@ -41,7 +41,7 @@
             <ImageView
                 android:layout_width="@dimen/dimen_dp_20"
                 android:layout_height="@dimen/dimen_dp_20"
-                android:background="@drawable/icon_cart" />
+                android:background="@drawable/icon_cart_normal" />
 
             <TextView
                 android:layout_width="wrap_content"

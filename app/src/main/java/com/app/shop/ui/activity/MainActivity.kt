@@ -19,28 +19,27 @@ import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
-import kotlin.math.log
 import kotlin.system.exitProcess
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainContract.View {
 
-    private var mTitles = arrayListOf("首页", "分类", "线下联盟商家", "购物车", "我的")
+    private var mTitles = arrayListOf("首页", "分类", "本地商家", "购物车", "我的")
     private var mFragments = arrayListOf<Fragment>()
     private val mTabEntities = arrayListOf<CustomTabEntity>()
     private val mIconUnselectedIds = intArrayOf(
-        R.drawable.icon_home,
-        R.drawable.icon_classification,
-        R.drawable.icon_shop,
-        R.drawable.icon_cart,
-        R.drawable.icon_mine
+        R.drawable.icon_home_normal,
+        R.drawable.icon_classification_normal,
+        R.drawable.icon_shop_normal,
+        R.drawable.icon_cart_normal,
+        R.drawable.icon_mine_normal
     )
     private val mIconSelectIds = intArrayOf(
-        R.drawable.icon_home_select,
-        R.drawable.icon_classification_select,
-        R.drawable.icon_shop_selsect,
-        R.drawable.icon_cart_select,
-        R.drawable.icon_mine_select
+        R.drawable.icon_home_normal,
+        R.drawable.icon_classification_normal,
+        R.drawable.icon_shop_normal,
+        R.drawable.icon_cart_normal,
+        R.drawable.icon_mine_normal
     )
     private var currentPosition = 0
 
@@ -72,7 +71,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
     private fun initTabItems() {
         for (i in mTitles.indices) {
-            Logger.d(mTitles[i])
             mTabEntities.add(TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectedIds[i]))
         }
         binding.mBottomNavigationBar.setTabData(

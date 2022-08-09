@@ -81,4 +81,14 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/color_333</item>
     </style>
+
+    <style name="tv_order">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_333</item>
+        <item name="android:textSize">13sp</item>
+    </style>
 </resources>

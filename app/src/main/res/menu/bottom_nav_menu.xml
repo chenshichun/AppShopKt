@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/icon_home_normal"
         android:title="首页" />
 
     <item
@@ -13,14 +13,14 @@
 
     <item
         android:id="@+id/navigation_shop"
-        android:icon="@drawable/icon_shop"
+        android:icon="@drawable/icon_shop_normal"
         android:title="线下联盟商家" />
     <item
         android:id="@+id/navigation_cart"
-        android:icon="@drawable/icon_cart"
+        android:icon="@drawable/icon_cart_normal"
         android:title="购物车" />
     <item
         android:id="@+id/navigation_mine"
-        android:icon="@drawable/icon_mine"
+        android:icon="@drawable/icon_mine_normal"
         android:title="我的" />
 </menu>

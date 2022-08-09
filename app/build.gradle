@@ -166,7 +166,7 @@ dependencies {
     // pop
     implementation 'com.github.li-xiaojun:XPopup:2.8.13'
     // SuperTextView
-    implementation 'com.github.lygttpod:SuperTextView:2.3.0'
+    implementation 'com.github.lygttpod:SuperTextView:2.4.6'
     // webview
     implementation 'com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx'
     // 屏幕适配
@@ -178,6 +178,7 @@ dependencies {
     // 刷新，加载更多
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
 }
 
 def releaseTime() {

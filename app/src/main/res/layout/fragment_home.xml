@@ -4,69 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_bg">
+    android:background="@drawable/bg_home">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/head_cl"
-            style="@style/head_cl"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView2">
 
             <TextView
-                android:id="@+id/textView2"
-                style="@style/head_title_tv"
-                android:text="易货君商城"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_marginRight="3.5dp"
+                android:background="@drawable/bg_white_20"
+                android:drawableRight="@drawable/icon_down"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="7dp"
+                android:text="义乌"
+                android:textColor="#025AE8"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_white_20"
+                android:drawableLeft="@drawable/icon_search"
+                android:drawablePadding="5dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView2">
+                android:padding="8dp"
+                android:text="输入商家、品类"
+                android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:drawableRight="@drawable/icon_down"
-                    android:gravity="center"
-                    android:text="义乌"
-                    android:textColor="@color/color_333" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/icon_message" />
 
-                <TextView
-                    android:id="@+id/tv_search"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_search"
-                    android:drawableLeft="@drawable/icon_search"
-                    android:drawablePadding="5dp"
-                    android:gravity="center_vertical"
-                    android:padding="8dp"
-                    android:text="输入关键字搜索商品" />
+            <ImageView
+                android:id="@+id/iv_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/icon_scan" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/icon_message" />
+        </LinearLayout>
 
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lableRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_tab" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/icon_classification" />
+
+        </LinearLayout>
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
@@ -87,15 +106,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical"
-                        android:paddingHorizontal="15dp">
+                        android:paddingHorizontal="6dp">
 
                         <com.youth.banner.Banner
                             android:id="@+id/banner"
                             android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:layout_marginTop="10dp"
-                            app:image_scale_type="fit_xy" />
+                            android:layout_height="150dp"
+                            app:image_scale_type="center_crop" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -117,6 +136,7 @@
                             android:id="@+id/layout_home_middle"
                             layout="@layout/layout_home_middle" />
 
+
                     </LinearLayout>
 
                     <RelativeLayout
@@ -127,8 +147,8 @@
                             android:id="@+id/mRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="15dp"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="5dp"
                             tools:itemCount="2"
                             tools:listitem="@layout/item_goods" />
                     </RelativeLayout>

@@ -3,47 +3,56 @@ package com.app.shop.ui.fragment
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Outline
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.adapter.MyAdapter
+import com.app.shop.adapter.TabAdapter
 import com.app.shop.base.BaseFragment
-import com.app.shop.databinding.FragmentHomeBinding
-import com.app.shop.ui.activity.GoodsDetailActivity
-import com.app.shop.ui.activity.SearchActivity
-import com.app.shop.ui.contract.HomeContract
-import com.app.shop.ui.presenter.HomePresenter
-import com.app.shop.util.ToastUtil
-import com.app.shop.view.GlideImageLoader
-import com.desmond.citypicker.bin.CityPicker
-import com.orhanobut.logger.Logger
-import com.tbruyelle.rxpermissions2.RxPermissions
-import com.youth.banner.BannerConfig
-import java.util.*
-import kotlin.collections.ArrayList
-import android.widget.AdapterView.OnItemClickListener;
 import com.app.shop.bean.*
 import com.app.shop.bean.type.CategoryType
+import com.app.shop.databinding.FragmentHomeBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.ui.activity.CategoryListActivity
+import com.app.shop.ui.activity.GoodsDetailActivity
+import com.app.shop.ui.activity.SearchActivity
+import com.app.shop.ui.contract.HomeContract
+import com.app.shop.ui.presenter.HomePresenter
 import com.app.shop.util.IntentUtil
+import com.app.shop.util.ToastUtil
+import com.app.shop.view.GlideImageLoader
+import com.desmond.citypicker.bin.CityPicker
+import com.just.agentweb.AgentActionFragment.REQUEST_CODE
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.orhanobut.logger.Logger
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.uuzuche.lib_zxing.activity.CaptureActivity
+import com.uuzuche.lib_zxing.activity.CodeUtils
+import com.youth.banner.BannerConfig
+import java.util.*
 
 
 /**
@@ -57,10 +66,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     private lateinit var loadService: LoadService<Any>
     private var page: Int = 1
     private var size: Int = 10
+    private lateinit var register: ActivityResultLauncher<Intent>
 
     private val texts = arrayOf(
-        "积分易货", "福利专区", "生活服务", "新人专区",
-        "签到", "助农扶农", "红木家具", "汽车", "房产", "二手市场"
+        "签到", "积分易货", "福利专区", "生活服务", "助农扶农",
+        "红木家具", "汽车易货", "房产易货", "二手市场", "新人专区"
     )
     private val images = arrayOf(
         R.drawable.icon_1,
@@ -74,8 +84,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         R.drawable.icon_9,
         R.drawable.icon_10
     )
+    private lateinit var tabAdapter: TabAdapter
     private lateinit var goodsAdapter: GoodsAdapter
     private var goodsList = mutableListOf<Prod>()
+    private var tabsList = mutableListOf<TabBean>()
 
     private lateinit var mLocationClient: AMapLocationClient
     private lateinit var mLocationOption: AMapLocationClientOption
@@ -89,6 +101,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     override fun initView() {
         binding.gridView.adapter = MyAdapter(activity, images, texts)
         binding.gridView.onItemClickListener = this
+
+        val tabBean = TabBean(true, "全部")
+        tabsList.add(tabBean)
+        val tabBean1 = TabBean(false, "生鲜果蔬")
+        tabsList.add(tabBean1)
+        val tabBean2 = TabBean(false, "百货")
+        tabsList.add(tabBean2)
+        val tabBean3 = TabBean(false, "食品")
+        tabsList.add(tabBean3)
+        val tabBean4 = TabBean(false, "美妆")
+        tabsList.add(tabBean4)
+        val tabBean5 = TabBean(false, "母婴")
+        tabsList.add(tabBean5)
+        val tabBean6 = TabBean(false, "男装")
+        tabsList.add(tabBean6)
+        val tabBean7 = TabBean(false, "女装")
+        tabsList.add(tabBean7)
+        tabAdapter = activity?.let { TabAdapter(tabsList) }!!
+
+        val layoutManager = LinearLayoutManager(activity)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.lableRv.layoutManager = layoutManager
+        binding.lableRv.adapter = tabAdapter
 
         goodsAdapter = activity?.let { GoodsAdapter(it, goodsList) }!!
         binding.mRecyclerView.layoutManager = GridLayoutManager(activity, 2)
@@ -117,7 +152,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         }
         getCurrentLocationLatLng()
         getLocation()
-
+        binding.ivScan.setOnClickListener(this)
         binding.layoutHomeMiddle.llChosen.setOnClickListener(this)
         binding.layoutHomeMiddle.llNew.setOnClickListener(this)
         binding.layoutHomeMiddle.llRecommend.setOnClickListener(this)
@@ -139,6 +174,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         }
         initData()
         mPresenter!!.getBannerList()
+
+        register = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            Logger.d("不11为空" + it.resultCode)
+            val data = it.data
+            val resultCode = it.resultCode
+            if (resultCode == REQUEST_CODE) {
+                if (null != data) {
+                    Logger.d("不为空")
+                    val bundle: Bundle? = data.extras
+                    if (bundle!!.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                        Logger.d("111111")
+                        val result = bundle.getString(CodeUtils.RESULT_STRING)
+                        Logger.d(result)
+                        ToastUtil.showToast(result)
+                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                        ToastUtil.showToast("解析二维码失败")
+                    }
+                }
+            }
+        }
     }
 
     private fun initData() {
@@ -275,6 +332,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         binding.banner.setImageLoader(GlideImageLoader())
         binding.banner.setImages(listPath)
         binding.banner.setDelayTime(2000)
+        binding.banner.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                outline.setRoundRect(0, 0, view.width, view.height, 20f)
+            }
+        }
+        binding.banner.clipToOutline = true
         binding.banner.isAutoPlay(true)
         binding.banner.setIndicatorGravity(BannerConfig.CENTER)
         binding.banner.setOnBannerListener { position ->
@@ -347,23 +410,52 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun onClick(p0: View?) {
         val bundle = Bundle()
         when (p0!!.id) {
-            R.id.ll_chosen ->
+            R.id.iv_scan -> {
+                RxPermissions(this)
+                    .request(permission.WRITE_EXTERNAL_STORAGE, permission.CAMERA)
+                    .subscribe { granted: Boolean ->
+                        if (granted) { // 用户已经同意该权限
+                            register.launch(Intent(context, CaptureActivity::class.java))
+                        } else {
+                            Toast.makeText(
+                                activity,
+                                "拒绝",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+            }
+            R.id.ll_chosen -> {
                 bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CHOSE.ordinal)
-            R.id.ll_selling ->
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+            }
+            R.id.ll_selling -> {
                 bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.SELLING.ordinal)
-            R.id.ll_new -> bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.NEW.ordinal)
-            R.id.ll_group_buy -> bundle.putInt(
-                Constants.CATEGORY_TYPE,
-                CategoryType.GROUP_BUY.ordinal
-            )
-            R.id.ll_recommend -> bundle.putInt(
-                Constants.CATEGORY_TYPE,
-                CategoryType.RECOMMEND.ordinal
-            )
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+            }
+            R.id.ll_new -> {
+                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.NEW.ordinal)
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+            }
+            R.id.ll_group_buy -> {
+                bundle.putInt(
+                    Constants.CATEGORY_TYPE,
+                    CategoryType.GROUP_BUY.ordinal
+                )
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+            }
+            R.id.ll_recommend -> {
+                bundle.putInt(
+                    Constants.CATEGORY_TYPE,
+                    CategoryType.RECOMMEND.ordinal
+                )
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+            }
         }
-        IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
     }
 }

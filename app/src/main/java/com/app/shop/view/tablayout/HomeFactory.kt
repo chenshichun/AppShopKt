@@ -1,13 +1,7 @@
 package com.app.shop.view.tablayout
 
 import com.app.shop.base.BaseFragment
-import com.app.shop.view.tablayout.HomeFactory
-import com.app.shop.ui.fragment.HomeFragment
-import com.app.shop.ui.fragment.ClassificationFragment
-import com.app.shop.ui.fragment.ShopFragment
-import com.app.shop.ui.fragment.CartFragment
-import com.app.shop.ui.fragment.MineFragment
-import java.util.LinkedHashMap
+import com.app.shop.ui.fragment.*
 
 /**
  * @author chenshichun
@@ -28,7 +22,7 @@ object HomeFactory {
             1 -> fragment = ClassificationFragment()
             2 -> fragment = ShopFragment()
             3 -> fragment = CartFragment()
-            4 -> fragment = MineFragment()
+            4 -> fragment = MineNewFragment()
         }
 
         // 存储到缓存

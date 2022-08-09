@@ -18,6 +18,7 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
+import com.uuzuche.lib_zxing.activity.ZXingLibrary
 import es.dmoral.toasty.Toasty
 
 
@@ -72,7 +73,7 @@ class BaseApplication : Application() {
             .setDefaultCallback(LoadingCallback::class.java)
             .commit()
 
-
+        ZXingLibrary.initDisplayOpinion(this)
     }
 
     /*

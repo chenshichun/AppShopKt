@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/icon_shop"
+            android:drawableLeft="@drawable/icon_shop_normal"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="一通商场"
