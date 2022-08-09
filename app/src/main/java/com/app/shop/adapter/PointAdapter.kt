@@ -29,7 +29,7 @@ class PointAdapter(private val context: Context, val mData: List<PlBean>?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvTitle.text = mData!![position]!!.source
+        holder.tvTitle.text = mData!![position].source
         holder.tvTime.text = mData[position].created_at
         holder.tvPoint.text= mData[position].points.toString()
 

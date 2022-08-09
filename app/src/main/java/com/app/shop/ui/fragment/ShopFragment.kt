@@ -1,10 +1,10 @@
 package com.app.shop.ui.fragment
 
 import androidx.recyclerview.widget.GridLayoutManager
-import com.app.shop.adapter.CartGoodsAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.adapter.OfflineShopAdapter
-import com.app.shop.databinding.FragmentShopBinding
 import com.app.shop.base.BaseFragment
+import com.app.shop.databinding.FragmentShopBinding
 import com.app.shop.ui.contract.ShopContract
 import com.app.shop.ui.presenter.ShopPresenter
 
@@ -19,7 +19,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopPresenter>(), ShopCon
 
     override fun initView() {
         offlineShopAdapter = activity?.let { OfflineShopAdapter(it, null) }!!
-        binding.mRecyclerView.layoutManager = GridLayoutManager(activity, 2)
+        binding.mRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.mRecyclerView.adapter = offlineShopAdapter
         offlineShopAdapter.setOnItemClickListener(object : OfflineShopAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {

@@ -33,13 +33,13 @@ class MyImageAdapter(private val imageUrls: List<String>, val activity: AppCompa
             builder.setTitle("提示")
             builder.setPositiveButton(
                 "确定"
-            ) { dialog, which ->
+            ) { dialog, _ ->
                 onItemClickListener!!.savePic(url)
                 dialog.dismiss()
             }
             builder.setNegativeButton(
                 "取消"
-            ) { dialog, which -> dialog.dismiss() }
+            ) { dialog, _ -> dialog.dismiss() }
             builder.create().show()
 
             false

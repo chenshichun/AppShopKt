@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,51 +10,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/head_cl"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/head_cl">
-
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/head_title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="线上联盟商家"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_classification">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_height="32dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="35dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView2">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_search"
+                    android:background="@drawable/bg_white_20"
                     android:drawableLeft="@drawable/icon_search"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:padding="8dp"
-                    android:text="输入关键字搜索商品" />
+                    android:text="请输入产品名检索" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/icon_message" />
-
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,23 +52,24 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/white"
                 tools:listitem="@layout/item_left_recycle" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dimen_dp_10"
-                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="@dimen/dimen_dp_8"
+                android:layout_marginVertical="8dp"
                 android:layout_weight="3"
                 android:background="@drawable/bg_white_8"
                 android:orientation="vertical"
-                android:padding="@dimen/dimen_dp_10">
+                android:paddingLeft="8dp"
+                android:paddingBottom="@dimen/dimen_dp_10">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="服装"
+                    android:layout_marginTop="@dimen/dimen_dp_8"
                     android:textColor="@color/color_333"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -92,7 +78,7 @@
                     android:id="@+id/right_recycleview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_dp_10" />
+                    />
 
             </LinearLayout>
         </LinearLayout>

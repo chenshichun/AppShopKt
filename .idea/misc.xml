@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/bg_black_20.xml" value="0.1305" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/bg_check.xml" value="0.1335" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/bg_gray_circle.xml" value="0.1325" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/bg_power_15.xml" value="0.1305" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/bg_red_20.xml" value="0.1105" />
@@ -42,6 +43,7 @@
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_mine.xml" value="0.1665" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_mine_select.xml" value="0.1665" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_name.xml" value="0.1665" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_search.xml" value="0.152" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_shop.xml" value="0.1665" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_shop_normal.xml" value="0.152" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/drawable/icon_shop_selsect.xml" value="0.1665" />
@@ -81,18 +83,18 @@
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_web_view.xml" value="0.1875" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_cart.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_classification.xml" value="0.22" />
-        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_mine.xml" value="0.14666666666666667" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_new_mine.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_order.xml" value="0.223731884057971" />
-        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_shop.xml" value="0.2033514492753623" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_shop.xml" value="0.1" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_address.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_cart.xml" value="0.3333333333333333" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_cart_shop_goods.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_goods.xml" value="0.2033514492753623" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_grid.xml" value="0.2033514492753623" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_left_recycle.xml" value="0.21557971014492755" />
-        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_offline_shop.xml" value="0.14666666666666667" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_offline_shop.xml" value="0.1" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_order.xml" value="0.24003623188405798" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_order_goods.xml" value="0.20199275362318841" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_points.xml" value="0.22" />
@@ -118,6 +120,8 @@
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/view_guide_two.xml" value="0.17028985507246377" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/view_guide_video.xml" value="0.17028985507246377" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2734375" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.152" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.152" />
         <entry key="..\:/csc/AppShopKt/test/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="..\:/csc/AppShopKt/test/src/main/res/layout/fragment_home.xml" value="0.2734375" />
       </map>

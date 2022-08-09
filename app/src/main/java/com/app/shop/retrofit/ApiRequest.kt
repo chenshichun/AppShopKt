@@ -20,7 +20,7 @@ class ApiRequest private constructor() {
 
     companion object {
         private var instance: ApiRequest? = null
-            private get() {
+            get() {
                 if (field == null) {
                     field = ApiRequest()
                 }

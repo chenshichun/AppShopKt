@@ -39,7 +39,7 @@ class SecondaryClassificationAdapter(private val context: Context, val mData: Li
     }
 
     override fun getItemCount(): Int {
-        return if (mData == null || mData?.size == 0) 6 else mData.size
+        return if (mData == null || mData.isEmpty()) 6 else mData.size
     }
 
     inner class ViewHolder(binding: ItemRightRecycleBinding) :
