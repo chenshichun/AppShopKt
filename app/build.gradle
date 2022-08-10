@@ -178,7 +178,10 @@ dependencies {
     // 刷新，加载更多
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+    // 二维码库
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
+    //materialratingbar
+    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
 }
 
 def releaseTime() {

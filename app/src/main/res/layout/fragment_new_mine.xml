@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="70dp"
     android:background="@drawable/bg_mine">
 
     <LinearLayout
@@ -548,5 +547,8 @@
                     android:background="@drawable/go_right" />
             </RelativeLayout>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_dp_20"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

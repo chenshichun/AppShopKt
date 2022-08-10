@@ -15,9 +15,9 @@
 
     <ImageView
         android:id="@+id/iv_goods"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="#FF9800"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/icon_clothing"
         app:layout_constraintLeft_toRightOf="@id/checkbox"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +25,9 @@
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="130dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingLeft="150dp"
         android:text="这是一件商品的标题有点长分多行显示有很长很长哦啦啦啦啦啦啦显示的下吗看看效果"
         android:textColor="@color/color_333"
         android:textSize="14sp"
@@ -37,55 +39,65 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_5"
+        android:layout_marginBottom="5dp"
         android:text="规格"
         android:textColor="@color/color_999"
         android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintBottom_toTopOf="@id/tv_price" />
 
     <TextView
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_dp_5"
+        android:layout_marginBottom="5dp"
         android:text="¥120"
-        android:textColor="#E91E63"
+        android:textColor="#fffc4353"
         android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="@id/tv_specification"
-        app:layout_constraintTop_toBottomOf="@id/tv_specification" />
+        app:layout_constraintBottom_toTopOf="@id/tv_integral"
+        app:layout_constraintLeft_toLeftOf="@id/tv_specification" />
+
+    <TextView
+        android:id="@+id/tv_integral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_integral"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="2.5dp"
+        android:text="100易货积分"
+        android:textColor="#ff965e0e"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+        app:layout_constraintLeft_toLeftOf="@id/tv_price" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/tv_price"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_price">
+        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+        app:layout_constraintRight_toRightOf="parent">
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            android:textColor="@color/color_333"
-            android:textSize="20sp" />
+            android:background="@drawable/icon_reduce"
+            />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="#E8E3E3"
-            android:paddingHorizontal="@dimen/dimen_dp_20"
+            android:background="@null"
+            android:textSize="11sp"
+            android:paddingHorizontal="@dimen/dimen_dp_10"
             android:paddingVertical="@dimen/dimen_dp_5"
             android:text="1"
             android:textColor="@color/color_333" />
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+"
-            android:textColor="@color/color_333"
-            android:textSize="20sp" />
+            android:background="@drawable/icon_add"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

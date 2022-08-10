@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.adapter.OfflineShopAdapter
 import com.app.shop.base.BaseFragment
 import com.app.shop.databinding.FragmentShopBinding
+import com.app.shop.ui.activity.StoreHomepageActivity
 import com.app.shop.ui.contract.ShopContract
 import com.app.shop.ui.presenter.ShopPresenter
+import com.app.shop.util.IntentUtil
 
 /**
  * @author chenshichun
@@ -21,8 +23,9 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopPresenter>(), ShopCon
         offlineShopAdapter = activity?.let { OfflineShopAdapter(it, null) }!!
         binding.mRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.mRecyclerView.adapter = offlineShopAdapter
-        offlineShopAdapter.setOnItemClickListener(object : OfflineShopAdapter.OnItemClickListener{
+        offlineShopAdapter.setOnItemClickListener(object : OfflineShopAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
+                IntentUtil.get()!!.goActivity(activity, StoreHomepageActivity::class.java)
             }
         })
     }

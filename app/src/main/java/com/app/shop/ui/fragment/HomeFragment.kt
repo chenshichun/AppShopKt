@@ -175,24 +175,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         initData()
         mPresenter!!.getBannerList()
 
+        // 注册扫描二维码
         register = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            Logger.d("不11为空" + it.resultCode)
             val data = it.data
-            val resultCode = it.resultCode
-            if (resultCode == REQUEST_CODE) {
-                if (null != data) {
-                    Logger.d("不为空")
-                    val bundle: Bundle? = data.extras
-                    if (bundle!!.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                        Logger.d("111111")
-                        val result = bundle.getString(CodeUtils.RESULT_STRING)
-                        Logger.d(result)
-                        ToastUtil.showToast(result)
-                    } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                        ToastUtil.showToast("解析二维码失败")
-                    }
+            if (null != data) {
+                val bundle: Bundle? = data.extras
+                if (bundle!!.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    val result = bundle.getString(CodeUtils.RESULT_STRING)
+                    Logger.d(result)
+                    ToastUtil.showToast(result)
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    ToastUtil.showToast("解析二维码失败")
                 }
             }
         }
@@ -399,7 +394,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         when (p2) {
-            4 -> {// 签到
+            0 -> {// 签到
                 mPresenter!!.sign()
             }
             else -> {
@@ -419,7 +414,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                     .request(permission.WRITE_EXTERNAL_STORAGE, permission.CAMERA)
                     .subscribe { granted: Boolean ->
                         if (granted) { // 用户已经同意该权限
-                            register.launch(Intent(context, CaptureActivity::class.java))
+                            register.launch(Intent(activity, CaptureActivity::class.java))
                         } else {
                             Toast.makeText(
                                 activity,

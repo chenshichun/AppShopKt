@@ -47,8 +47,8 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
         binding.ivQrCode.setImageBitmap(
             CodeUtils.createImage(
                 mData.data!!.user!!.inv_code,
-                400,
-                400,
+                200,
+                200,
                 null
             )
         )

@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -36,10 +36,10 @@
         <!-- 屏幕适配start -->
         <meta-data
             android:name="design_width_in_dp"
-            android:value="360" />
+            android:value="374" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="780" /> <!-- 屏幕适配end -->
+            android:value="826" /> <!-- 屏幕适配end -->
         <!-- 沉浸式状态栏start -->
         <meta-data
             android:name="android.max_aspect"
@@ -102,8 +102,9 @@
         <activity android:name=".ui.activity.AddAddressActivity" />
         <activity android:name=".ui.activity.CategoryListActivity" />
         <activity android:name=".ui.activity.WebViewActivity" />
-        <activity android:name=".ui.activity.ConfirmOrderActivity"/>
-        <activity android:name=".ui.activity.PayOrderActivity"/>
+        <activity android:name=".ui.activity.ConfirmOrderActivity" />
+        <activity android:name=".ui.activity.PayOrderActivity" />
+        <activity android:name=".ui.activity.StoreHomepageActivity"/>
     </application>
 
 </manifest>
