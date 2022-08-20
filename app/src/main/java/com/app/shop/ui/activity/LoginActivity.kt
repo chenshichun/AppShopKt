@@ -44,7 +44,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
 
     override fun initView() {
         immersionBar {
-            statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
 

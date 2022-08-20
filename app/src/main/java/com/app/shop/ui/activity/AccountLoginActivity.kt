@@ -32,7 +32,6 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
 
     override fun initView() {
         immersionBar {
-            statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
         binding.ivBack.setOnClickListener(this)

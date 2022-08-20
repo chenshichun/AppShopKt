@@ -280,7 +280,7 @@
                 <TextView
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_7"
-                    android:text="待发货" />
+                    android:text="已核销" />
 
                 <View
                     android:layout_width="0dp"
@@ -394,6 +394,7 @@
                 android:background="#E5E5E5" />
 
             <RelativeLayout
+                android:id="@+id/ll_attention"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:paddingLeft="7dp"
@@ -420,6 +421,7 @@
             <include layout="@layout/line" />
 
             <RelativeLayout
+                android:id="@+id/ll_merchant_settled"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:paddingLeft="7dp"
@@ -446,6 +448,7 @@
             <include layout="@layout/line" />
 
             <RelativeLayout
+                android:id="@+id/ll_address"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:paddingLeft="7dp"
@@ -472,6 +475,7 @@
             <include layout="@layout/line" />
 
             <RelativeLayout
+                android:id="@+id/ll_scan"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:paddingLeft="7dp"
@@ -498,6 +502,7 @@
             <include layout="@layout/line" />
 
             <RelativeLayout
+                android:id="@+id/ll_verified"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:paddingLeft="7dp"
@@ -524,6 +529,7 @@
             <include layout="@layout/line" />
 
             <RelativeLayout
+                android:id="@+id/ll_setting"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:paddingLeft="7dp"

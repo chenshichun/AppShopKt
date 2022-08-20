@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="默认地址"
-        android:textColor="@color/red"
+        android:textColor="@color/blue"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/line" />

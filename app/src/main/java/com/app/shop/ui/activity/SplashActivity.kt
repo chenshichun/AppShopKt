@@ -27,7 +27,6 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         ImmersionBar.with(this)
-            .statusBarColor(R.color.white) //状态栏颜色，不写默认透明色
             .statusBarDarkFont(true)//状态栏字体是深色，不写默认为亮色
             .init()
 

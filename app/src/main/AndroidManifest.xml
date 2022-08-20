@@ -104,7 +104,8 @@
         <activity android:name=".ui.activity.WebViewActivity" />
         <activity android:name=".ui.activity.ConfirmOrderActivity" />
         <activity android:name=".ui.activity.PayOrderActivity" />
-        <activity android:name=".ui.activity.StoreHomepageActivity"/>
+        <activity android:name=".ui.activity.StoreHomepageActivity" />
+        <activity android:name=".ui.activity.SettingActivity"/>
     </application>
 
 </manifest>

@@ -33,7 +33,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
 
     override fun initView() {
         immersionBar {
-            statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
         binding.ivBack.setOnClickListener(this)
