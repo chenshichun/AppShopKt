@@ -38,70 +38,78 @@
 
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="72dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_cart" />
+                android:layout_marginBottom="72dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <View
-                        android:layout_width="40dp"
-                        android:layout_height="1dp"
-                        android:background="@color/color_999" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_cart" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="1dp"
+                            android:background="@color/color_999" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                            android:text="小易也是有底线的哦"
+                            android:textColor="@color/color_999"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="1dp"
+                            android:background="@color/color_999" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-                        android:text="小易也是有底线的哦"
-                        android:textColor="@color/color_999"
-                        android:textSize="12sp" />
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="37dp"
+                        android:text="猜你喜欢"
+                        android:textColor="#ff3a57f1"
+                        android:textSize="21sp" />
 
-                    <View
-                        android:layout_width="40dp"
-                        android:layout_height="1dp"
-                        android:background="@color/color_999" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/goods_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="5dp"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_goods">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="37dp"
-                    android:text="猜你喜欢"
-                    android:textColor="#ff3a57f1"
-                    android:textSize="21sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/goods_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="5dp"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/item_goods">
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -117,9 +125,11 @@
             android:orientation="horizontal">
 
             <CheckBox
+                style="@style/CustomCheckBoxTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_dp_10"
+                android:padding="@dimen/dimen_dp_5"
                 android:text="全选"
                 android:textColor="@color/color_666"
                 android:textSize="12sp" />

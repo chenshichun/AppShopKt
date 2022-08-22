@@ -33,6 +33,8 @@ class PointsDetailsActivity : BaseActivity<ActivityPointsDetailsBinding, PointsD
     private var page: Int = 1
     private var size: Int = 10
 
+    private var type = 0
+
     override fun getPresenter(): PointsDetailsPresenter {
         return PointsDetailsPresenter()
     }
@@ -43,7 +45,12 @@ class PointsDetailsActivity : BaseActivity<ActivityPointsDetailsBinding, PointsD
             statusBarDarkFont(true)
         }
 
-        binding.viewHead.tvTitle.text = "积分明细"
+        type = intent.getIntExtra("point_type", 0)
+        when (type) {
+            0 -> binding.viewHead.tvTitle.text = "赠送积分明细"
+            1 -> binding.viewHead.tvTitle.text = "易货积分明细"
+            2 -> binding.viewHead.tvTitle.text = "消费积分明细"
+        }
         binding.viewHead.ivBack.setOnClickListener {
             finish()
         }

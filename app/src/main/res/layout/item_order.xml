@@ -33,7 +33,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="待付款"
-            android:textColor="#FF0000" />
+            android:textColor="@color/blue" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -54,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/hollow_red_5_bg"
+        android:background="@drawable/hollow_blue_5_bg"
         android:paddingHorizontal="@dimen/dimen_dp_10"
         android:paddingVertical="@dimen/dimen_dp_5"
         android:text="确认收货"
-        android:textColor="@color/red" />
+        android:textColor="@color/blue" />
 
 </LinearLayout>

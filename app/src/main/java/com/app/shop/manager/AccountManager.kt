@@ -21,7 +21,7 @@ class AccountManager {
         fun init(context: Context?) {
             this.applicationContext = context
             mAccount = MmkvUtil.get(BaseConstant.TAG_USER_BEAN, UserBean::class.java)
-            mAuthorizationToken = MmkvUtil.get(BaseConstant.TAG_TOKEN, "") as String?
+            mAuthorizationToken = MmkvUtil[BaseConstant.TAG_TOKEN, ""] as String?
         }
 
         fun getAccountInfo(): UserBean? {

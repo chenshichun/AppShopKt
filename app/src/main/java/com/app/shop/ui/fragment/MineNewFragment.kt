@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import com.app.shop.R
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BaseNetModel
@@ -20,6 +21,7 @@ import com.app.shop.manager.AccountManager
 import com.app.shop.ui.activity.*
 import com.app.shop.ui.contract.MineContract
 import com.app.shop.ui.presenter.MinePresenter
+import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideEngine
 import com.bumptech.glide.Glide
@@ -64,6 +66,13 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
         binding.llVerified.setOnClickListener(this)
         binding.llMerchantSettled.setOnClickListener(this)
         binding.llSetting.setOnClickListener(this)
+        binding.tvMyTeam.setOnClickListener(this)
+        binding.tvMyPurse.setOnClickListener(this)
+        binding.tvPoints1.setOnClickListener(this)
+        binding.tvPoints2.setOnClickListener(this)
+        binding.tvPoints3.setOnClickListener(this)
+        binding.tvMyPrivilege.setOnClickListener(this)
+        binding.tvInviteFriends.setOnClickListener(this)
 
         // 注册扫描二维码
         register = registerForActivityResult(
@@ -83,13 +92,14 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.iv_head -> {// 设置头像
                 headIvEvent()
             }
             R.id.tv_nick_name -> {// 修改昵称
-                startActivity(Intent(activity, ModifyNickNameActivity::class.java))
+                IntentUtil.get()!!.goActivity(activity, ModifyNickNameActivity::class.java)
             }
             R.id.tv_inv_code -> {// 邀请码
                 //获取系统剪贴板
@@ -97,8 +107,50 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
                 cbm.text = AccountManager.getAccountInfo()!!.inv_code
                 ToastUtil.showToast("邀请码复制成功")
             }
+            R.id.tv_my_purse -> {// 余额
+                IntentUtil.get()!!.goActivity(activity, MyPurseActivity::class.java)
+            }
+            R.id.tv_my_team -> {// 我的团队
+                IntentUtil.get()!!.goActivity(activity, MyTeamActivity::class.java)
+            }
             R.id.ll_attention -> {// 我的关注
-                startActivity(Intent(activity, AttentionActivity::class.java))
+                IntentUtil.get()!!.goActivity(activity, AttentionActivity::class.java)
+            }
+            R.id.tv_points_1 -> {
+                val bundle = Bundle()
+                bundle.putInt("point_type", 0)
+                IntentUtil.get()!!.goActivity(activity, PointsDetailsActivity::class.java, bundle)
+            }
+            R.id.tv_points_2 -> {
+                val bundle = Bundle()
+                bundle.putInt("point_type", 1)
+                IntentUtil.get()!!.goActivity(activity, PointsDetailsActivity::class.java, bundle)
+            }
+            R.id.tv_points_3 -> {
+                val bundle = Bundle()
+                bundle.putInt("point_type", 2)
+                IntentUtil.get()!!.goActivity(activity, PointsDetailsActivity::class.java, bundle)
+            }
+            R.id.tv_my_privilege -> {// 我的特权
+                val builder = activity?.let { AlertDialog.Builder(it) }!!
+                builder.setMessage(
+                    "1.享有该VIP级别易货时服务费的优惠。\n"
+                            + "2.享有分享商品给好友易货的服务费的佣金。\n"
+                            + "3.邀请好友加入获得易货积分奖励。\n"
+                            + "4.邀请商家入驻，获得商家引流流水的佣金。\n"
+                            + "5.分享越多，收益越多。\n"
+                            + "6.为平台引流500活跃粉丝以上，还可以被吸纳为分红股东。\n"
+                )
+                builder.setTitle("我的特权")
+                builder.setPositiveButton("我要升级") { dialog, _ ->
+                    startActivity(Intent(activity, InviteFriendsActivity::class.java))
+                    dialog.dismiss()
+                }
+                builder.setNegativeButton("关闭") { dialog, _ -> dialog.dismiss() }
+                builder.create().show()
+            }
+            R.id.tv_invite_friends -> {
+                startActivity(Intent(activity, InviteFriendsActivity::class.java))
             }
             R.id.ll_merchant_settled -> {// 商户入驻
                 XPopup.Builder(context)
@@ -120,7 +172,7 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
                         }
                     }.show()
             }
-            R.id.ll_scan -> {
+            R.id.ll_scan -> {//  扫码
                 RxPermissions(this)
                     .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                     .subscribe { granted: Boolean ->
@@ -135,13 +187,13 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
                         }
                     }
             }
-            R.id.ll_address->{
+            R.id.ll_address -> {// 地址
                 startActivity(Intent(activity, AddressListActivity::class.java))
             }
-            R.id.ll_verified -> {
+            R.id.ll_verified -> {// 实名认证
                 startActivity(Intent(activity, VerifiedActivity::class.java))
             }
-            R.id.ll_setting->{
+            R.id.ll_setting -> {// 设置
                 startActivity(Intent(activity, SettingActivity::class.java))
             }
         }

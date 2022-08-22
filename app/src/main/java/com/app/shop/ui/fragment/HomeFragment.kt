@@ -29,6 +29,7 @@ import com.app.shop.adapter.MyAdapter
 import com.app.shop.adapter.TabAdapter
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.*
+import com.app.shop.bean.event.PageEvent
 import com.app.shop.bean.type.CategoryType
 import com.app.shop.databinding.FragmentHomeBinding
 import com.app.shop.loadsir.EmptyCallBack
@@ -44,7 +45,6 @@ import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideImageLoader
 import com.desmond.citypicker.bin.CityPicker
-import com.just.agentweb.AgentActionFragment.REQUEST_CODE
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.orhanobut.logger.Logger
@@ -52,6 +52,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uuzuche.lib_zxing.activity.CaptureActivity
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.youth.banner.BannerConfig
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 
 
@@ -147,8 +148,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             startActivity(Intent(activity, SearchActivity::class.java))
         }
 
-        binding.tvAddress.setOnClickListener {
+        binding.tvAddress.setOnClickListener {// 选择城市
             getCityData()
+        }
+
+        binding.ivClassification.setOnClickListener {// 分类
+            EventBus.getDefault().post(PageEvent(1))
         }
         getCurrentLocationLatLng()
         getLocation()
@@ -161,6 +166,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
         loadService = LoadSir.getDefault().register(binding.refreshLayout) {
             initData()
+            mPresenter!!.getBannerList()
         }
 
         binding.refreshLayout.setOnRefreshListener {
@@ -294,19 +300,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                         //自定义热门城市，输入数据库中的城市id（_id），非必选项，默认为数据库中的热门城市
                         .setHotCitiesId("299", "98", "146")
                         // 设置标题栏背景，非必选项
-                        .setTitleBarDrawable(R.color.white)
+                        .setTitleBarDrawable(R.drawable.bg_withdraw)
                         // 设置搜索框背景，非必选项
-                        .setSearchViewDrawable(R.color.color_bg)
+                        .setSearchViewDrawable(R.drawable.bg_white_20)
                         // 设置搜索框字体颜色，非必选项
                         .setSearchViewTextColor(R.color.color_333)
                         // 设置右边检索栏字体颜色，非必选项
                         .setIndexBarTextColor(R.color.color_333)
                         // 设置返回按钮图片，非必选项
-                        .setTitleBarBackBtnDrawable(R.drawable.icon_back)
-                        .setUseImmerseBar(false)
+                        .setTitleBarBackBtnDrawable(R.drawable.icon_white_back)
+                        .setUseImmerseBar(true)
                         .setMaxHistory(0)
                         .setOnCityPickerCallBack {
-                            binding.tvAddress.text = it.cityName
+                            binding.tvAddress.text =
+                                if (it.cityName.length > 3) (it.cityName.substring(
+                                    0,
+                                    3
+                                ) + "...") else it.cityName
                         }
                         .setUseGpsCity(true)
                         .open()

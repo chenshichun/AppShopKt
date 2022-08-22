@@ -32,7 +32,7 @@
             android:clipChildren="false"
             app:tl_iconMargin="@dimen/dimen_dp_0"
             app:tl_indicator_height="0dp"
-            app:tl_textSelectColor="@color/red"
+            app:tl_textSelectColor="@color/blue"
             app:tl_textUnselectColor="@color/color_999"
             app:tl_textsize="11sp"
             app:tl_underline_color="@color/black"

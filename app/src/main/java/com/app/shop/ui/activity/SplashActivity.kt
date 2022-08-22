@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.shop.R
 import com.app.shop.databinding.ActivitySplashBinding
 import com.app.shop.manager.AccountManager
+import com.app.shop.util.IntentUtil
+import com.app.shop.util.MmkvUtil
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -20,6 +22,7 @@ import kotlinx.coroutines.launch
  */
 class SplashActivity : AppCompatActivity() {
     private var binding: ActivitySplashBinding? = null
+    private var flag = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +34,35 @@ class SplashActivity : AppCompatActivity() {
             .init()
 
         GlobalScope.launch(Dispatchers.Main) {
-            delay(3000)
-            startActivity(
-                Intent(
+            delay(2000)
+            if (MmkvUtil["welcomeGuide", true] as Boolean) {
+                if (flag == 0) {
+                    IntentUtil.get()!!
+                        .goActivity(this@SplashActivity, WelcomeGuideActivity::class.java)
+                    MmkvUtil.put("welcomeGuide", false)
+                }
+            } else {
+                if (flag == 0) {
+                    IntentUtil.get()!!.goActivity(
+                        this@SplashActivity,
+                        if (AccountManager.isLogin()) MainActivity::class.java else LoginActivity::class.java
+                    )
+                }
+            }
+            finish()
+        }
+
+        binding!!.tvJump.setOnClickListener {
+            flag = 1
+            if (MmkvUtil["welcomeGuide", true] as Boolean) {
+                IntentUtil.get()!!.goActivity(this@SplashActivity, WelcomeGuideActivity::class.java)
+                MmkvUtil.put("welcomeGuide", false)
+            } else {
+                IntentUtil.get()!!.goActivity(
                     this@SplashActivity,
                     if (AccountManager.isLogin()) MainActivity::class.java else LoginActivity::class.java
                 )
-            )
+            }
             finish()
         }
     }

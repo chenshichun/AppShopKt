@@ -8,7 +8,6 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.Navigation
 import com.app.shop.R
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BaseNetModel
@@ -19,10 +18,10 @@ import com.app.shop.manager.AccountManager
 import com.app.shop.ui.activity.*
 import com.app.shop.ui.contract.MineContract
 import com.app.shop.ui.presenter.MinePresenter
+import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideEngine
 import com.bumptech.glide.Glide
-import com.gyf.immersionbar.ktx.immersionBar
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.entity.LocalMedia
@@ -66,7 +65,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.llPointsDetails.setOnClickListener(this)
         binding.tvAboutUs.setOnClickListener(this)
         binding.tvInviteFriends.setOnClickListener(this)
-
+        binding.llMyTeam.setOnClickListener(this)
         mPresenter!!.getMyInfo()
     }
 
@@ -139,6 +138,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                     }.show()
             }
             R.id.tv_about_us -> startActivity(Intent(activity, AboutUsActivity::class.java))
+            R.id.ll_my_team -> IntentUtil.get()!!.goActivity(activity, MyTeamActivity::class.java) // 我的团队
         }
     }
 

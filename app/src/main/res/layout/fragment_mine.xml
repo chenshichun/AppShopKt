@@ -92,6 +92,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_my_team"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
