@@ -2,6 +2,7 @@ package com.app.shop.view
 
 import android.content.Context
 import android.widget.ImageView
+import com.app.shop.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -18,6 +19,8 @@ class GlideImageLoader : ImageLoader() {
         imageView?.let {
             Glide.with(context)
                 .load(path)
+                .placeholder(R.drawable.icon_default_pic)
+                .error(R.drawable.icon_default_pic)
                 .into(it)
         }
     }

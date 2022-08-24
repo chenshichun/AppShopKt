@@ -59,6 +59,17 @@ interface HomeService {
     ): Response<BaseNetModel<ClassificationBean>>
 
     /*
+    * 指定分类下的数据
+    * */
+    @GET("prod/by_cate_id")
+    suspend fun getCateByIdData(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("cate_id") cateId: String,
+        @Query("sort") sort: String
+    ): Response<BaseNetModel<ProdBean>>
+
+    /*
     * 购物车
     * */
     @GET("user/cart/list")

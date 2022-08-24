@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -160,11 +161,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         getCurrentLocationLatLng()
         getLocation()
         binding.ivScan.setOnClickListener(this)
-        binding.layoutHomeMiddle.llChosen.setOnClickListener(this)
         binding.layoutHomeMiddle.llNew.setOnClickListener(this)
-        binding.layoutHomeMiddle.llRecommend.setOnClickListener(this)
-        binding.layoutHomeMiddle.llGroupBuy.setOnClickListener(this)
-        binding.layoutHomeMiddle.llSelling.setOnClickListener(this)
+        binding.layoutHomeMiddle.llCenter.setOnClickListener(this)
+        binding.layoutHomeMiddle.llLarge.setOnClickListener(this)
+        binding.layoutHomeMiddle.llSpikeBuy.setOnClickListener(this)
 
         loadService = LoadSir.getDefault().register(binding.refreshLayout) {
             initData()
@@ -423,7 +423,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             }
             else -> {
                 val bundle = Bundle()
-                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CHOSE.ordinal)
+                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CENTER.ordinal)
+                bundle.putString(Constants.CATEGORY_NAME, texts[p2])
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
         }
@@ -449,29 +450,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                     }
 
             }
-            R.id.ll_chosen -> {
-                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CHOSE.ordinal)
-                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
-            }
-            R.id.ll_selling -> {
-                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.SELLING.ordinal)
-                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
-            }
             R.id.ll_new -> {
                 bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.NEW.ordinal)
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
-            R.id.ll_group_buy -> {
+            R.id.ll_large -> {
                 bundle.putInt(
                     Constants.CATEGORY_TYPE,
-                    CategoryType.GROUP_BUY.ordinal
+                    CategoryType.LARGE_GOODS.ordinal
                 )
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
-            R.id.ll_recommend -> {
+            R.id.ll_center -> {
                 bundle.putInt(
                     Constants.CATEGORY_TYPE,
-                    CategoryType.RECOMMEND.ordinal
+                    CategoryType.CENTER.ordinal
+                )
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+            }
+            R.id.ll_spike_buy -> {
+                bundle.putInt(
+                    Constants.CATEGORY_TYPE,
+                    CategoryType.SPIKE.ordinal
                 )
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }

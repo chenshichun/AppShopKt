@@ -6,9 +6,8 @@ package com.app.shop.bean.type
  * 描述：
  */
 enum class CategoryType(val categoryName: String) {
-    RECOMMEND("为你推荐"),
-    CHOSE("精选好物"),
-    SELLING("热卖榜单"),
+    CENTER("运营中心"),
+    SPIKE("限时秒杀"),
     NEW("每日上新"),
-    GROUP_BUY("拼团购"),
+    LARGE_GOODS("大件商品易货区"),
 }

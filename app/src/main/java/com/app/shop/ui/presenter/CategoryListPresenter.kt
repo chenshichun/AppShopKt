@@ -16,12 +16,14 @@ import kotlinx.coroutines.launch
  * 描述：
  *
  */
-class CategoryListPresenter :BasePresenter<CategoryListContract.View>(),CategoryListContract.Presenter{
-    override fun getProdFeaturedData(page: Int,size:Int,sort:String) {
+class CategoryListPresenter : BasePresenter<CategoryListContract.View>(),
+    CategoryListContract.Presenter {
+
+    override fun getCateByIdData(page: Int, size: Int, cateId: String, sort: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdFeaturedData(page,size,sort)
+            val response =
+                ApiRequest.create(HomeService::class.java).getCateByIdData(page, size, cateId, sort)
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
@@ -34,15 +36,34 @@ class CategoryListPresenter :BasePresenter<CategoryListContract.View>(),Category
         }
     }
 
-    override fun getProdRecommendData(page: Int,size:Int,sort:String) {
+    override fun getProdFeaturedData(page: Int, size: Int, sort: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdRecommendData(page,size,sort)
+            val response =
+                ApiRequest.create(HomeService::class.java).getProdFeaturedData(page, size, sort)
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
+                mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getProdHomeData(response.body()!!)
                 } else {
+                    mView!!.showError()
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun getProdRecommendData(page: Int, size: Int, sort: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response =
+                ApiRequest.create(HomeService::class.java).getProdRecommendData(page, size, sort)
+            if (response.body() == null) {
+                mView!!.noNetworkView()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.getProdHomeData(response.body()!!)
+                } else {
+                    mView!!.showError()
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }
             }

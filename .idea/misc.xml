@@ -108,13 +108,13 @@
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_write_off_order.xml" value="0.20018115942028986" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_cart.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_classification.xml" value="0.22" />
-        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_mine.xml" value="0.22" />
-        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_new_mine.xml" value="0.1" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_new_mine.xml" value="0.16666666666666666" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_order.xml" value="0.223731884057971" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/fragment_shop.xml" value="0.1" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_address.xml" value="0.22" />
-        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_cart.xml" value="0.3333333333333333" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_cart.xml" value="0.1" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_cart_shop_goods.xml" value="0.1" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_goods.xml" value="0.2033514492753623" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_grid.xml" value="0.2033514492753623" />

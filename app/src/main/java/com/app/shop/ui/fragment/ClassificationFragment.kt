@@ -1,6 +1,7 @@
 package com.app.shop.ui.fragment
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.adapter.PrimaryClassificationAdapter
@@ -12,12 +13,16 @@ import com.app.shop.bean.ChildrenBean
 import com.app.shop.bean.ClassificationBean
 import com.app.shop.bean.event.CateEvent
 import com.app.shop.bean.event.PageEvent
+import com.app.shop.bean.type.CategoryType
 import com.app.shop.databinding.FragmentClassificationBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
+import com.app.shop.manager.Constants
+import com.app.shop.ui.activity.CategoryListActivity
 import com.app.shop.ui.contract.ClassificationContract
 import com.app.shop.ui.presenter.ClassificationPresenter
+import com.app.shop.util.IntentUtil
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import kotlinx.coroutines.Dispatchers
@@ -77,7 +82,10 @@ class ClassificationFragment :
         mSecondaryClassificationAdapter.setOnItemClickListener(object :
             SecondaryClassificationAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-
+                val bundle = Bundle()
+                bundle.putString(Constants.CATEGORY_ID, childrenBeanList[position].category_id)
+                bundle.putString(Constants.CATEGORY_NAME, childrenBeanList[position].category_name)
+                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
         })
 

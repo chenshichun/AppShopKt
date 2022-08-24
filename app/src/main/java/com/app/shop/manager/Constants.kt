@@ -16,6 +16,8 @@ class Constants {
         const val USET_AGREEMENT_URL = "https://dev.kjmall.cc/d/eula.txt"
 
         const val CATEGORY_TYPE: String = "CATEGORY_TYPE"
+        const val CATEGORY_ID: String = "CATEGORY_ID"
+        const val CATEGORY_NAME: String = "CATEGORY_NAME"
         const val WEB_URL: String = "WEB_URL"
         const val WEB_TITLE: String = "WEB_TITLE"
         const val ORDER_TPYE: String = "order_type"

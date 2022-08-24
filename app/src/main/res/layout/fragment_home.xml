@@ -90,7 +90,9 @@
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:srlAccentColor="@android:color/white"
+            >
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/mNestedScrollView"
@@ -112,7 +114,8 @@
                         <com.youth.banner.Banner
                             android:id="@+id/banner"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp" />
+                            android:layout_height="180dp"
+                            app:image_scale_type="fit_xy" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -152,6 +155,18 @@
                     </RelativeLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
+
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@android:color/white"
+                app:srlTextSizeTitle="16sp"
+                app:srlFinishDuration="500"
+                app:srlDrawableSize="20dp"
+                app:srlDrawableArrowSize="20dp"
+                app:srlDrawableProgressSize="20dp"
+                app:srlDrawableMarginRight="20dp"
+                app:srlClassicsSpinnerStyle="Translate"/>
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     </LinearLayout>

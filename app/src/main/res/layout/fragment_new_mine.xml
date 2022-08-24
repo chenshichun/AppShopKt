@@ -422,7 +422,7 @@
                     android:gravity="center"
                     android:text="我的关注"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -449,7 +449,7 @@
                     android:gravity="center"
                     android:text="商家入驻"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -476,7 +476,7 @@
                     android:gravity="center"
                     android:text="收货地址"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -503,7 +503,7 @@
                     android:gravity="center"
                     android:text="扫一扫"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -530,7 +530,7 @@
                     android:gravity="center"
                     android:text="实名认证"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -557,7 +557,7 @@
                     android:gravity="center"
                     android:text="商家后台"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -584,7 +584,7 @@
                     android:gravity="center"
                     android:text="设置"
                     android:textColor="#ff282828"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"

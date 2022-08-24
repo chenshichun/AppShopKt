@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
             .init()
 
         GlobalScope.launch(Dispatchers.Main) {
-            delay(2000)
+            delay(3000)
             if (MmkvUtil["welcomeGuide", true] as Boolean) {
                 if (flag == 0) {
                     IntentUtil.get()!!

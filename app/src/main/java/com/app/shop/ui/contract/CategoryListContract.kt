@@ -18,6 +18,7 @@ interface CategoryListContract : BaseContract {
     }
 
     interface Presenter {
+        fun getCateByIdData(page: Int, size: Int, cateId: String, sort: String)
         fun getProdFeaturedData(page: Int, size: Int, sort: String)
         fun getProdRecommendData(page: Int, size: Int, sort: String)
     }

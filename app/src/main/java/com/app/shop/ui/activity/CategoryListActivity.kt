@@ -22,7 +22,7 @@ import com.app.shop.ui.presenter.CategoryListPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -33,6 +33,9 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
     CategoryListContract.View, View.OnClickListener {
 
     private var type: Int = 0
+    private lateinit var cateId: String
+    private lateinit var cateName: String
+
     private lateinit var goodsAdapter: GoodsAdapter
     private var goodsList = mutableListOf<Prod>()
     private lateinit var loadService: LoadService<Any>
@@ -52,10 +55,14 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
         binding.viewHead.ivBack.setOnClickListener {
             finish()
         }
+
+        cateName = intent.getStringExtra(Constants.CATEGORY_NAME).toString()
+        cateId = intent.getStringExtra(Constants.CATEGORY_ID).toString()
+
         type = intent.getIntExtra(Constants.CATEGORY_TYPE, 0)
 
         binding.viewHead.tvTitle.text =
-            CategoryType.values()[type].categoryName
+            if (cateName != "null") cateName else CategoryType.values()[type].categoryName
 
         binding.llComplex.setOnClickListener(this)
         binding.llSales.setOnClickListener(this)
@@ -67,7 +74,7 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
 
         goodsAdapter.setOnItemClickListener(object : GoodsAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                startActivity(Intent(this@CategoryListActivity, GoodsDetailActivity::class.java))
+                // startActivity(Intent(this@CategoryListActivity, GoodsDetailActivity::class.java))
             }
         })
 
@@ -90,10 +97,14 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
 
     private fun initData() {
         loadService.showCallback(LoadingCallback::class.java)
-        when (type) {
-            0 -> mPresenter!!.getProdRecommendData(page, size, sort)
-            1 -> mPresenter!!.getProdFeaturedData(page, size, sort)
-            else -> mPresenter!!.getProdFeaturedData(page, size, sort)
+        if (cateId != "null") {
+            mPresenter!!.getCateByIdData(page, size, cateId, sort)
+        } else {
+            when (type) {
+                0 -> mPresenter!!.getProdRecommendData(page, size, sort)
+                1 -> mPresenter!!.getProdFeaturedData(page, size, sort)
+                else -> mPresenter!!.getProdFeaturedData(page, size, sort)
+            }
         }
     }
 
@@ -171,7 +182,7 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
                 binding.tvComplex.setTextColor(
                     ContextCompat.getColor(
                         this@CategoryListActivity,
-                        R.color.red
+                        R.color.blue
                     )
                 )
                 binding.ivComplex.visibility = View.VISIBLE
@@ -201,7 +212,7 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
                 binding.tvSales.setTextColor(
                     ContextCompat.getColor(
                         this@CategoryListActivity,
-                        R.color.red
+                        R.color.blue
                     )
                 )
                 binding.ivSales.visibility = View.VISIBLE
@@ -231,7 +242,7 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
                 binding.tvLowPrice.setTextColor(
                     ContextCompat.getColor(
                         this@CategoryListActivity,
-                        R.color.red
+                        R.color.blue
                     )
                 )
                 binding.ivLowPrice.visibility = View.VISIBLE

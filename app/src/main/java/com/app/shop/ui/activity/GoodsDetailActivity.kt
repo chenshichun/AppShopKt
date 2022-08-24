@@ -142,10 +142,10 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
 
         })
         binding.banner.setOnBannerListener { position ->
-            val bundle = Bundle()
+            /*val bundle = Bundle()
             bundle.putStringArrayList("paths", images as ArrayList<String>?)
             bundle.putInt("index", position)
-            IntentUtil.get()!!.goActivity(this, GoodsDetailActivity::class.java, bundle)
+            IntentUtil.get()!!.goActivity(this, GoodsDetailActivity::class.java, bundle)*/
         }
         binding.banner.start()
     }

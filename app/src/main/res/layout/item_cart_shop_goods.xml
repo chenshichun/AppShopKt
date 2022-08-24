@@ -101,6 +101,7 @@
                     android:layout_height="wrap_content"
                     android:background="#F2F2F2"
                     android:inputType="number"
+                    android:layout_marginHorizontal="5dp"
                     android:paddingHorizontal="@dimen/dimen_dp_20"
                     android:paddingVertical="@dimen/dimen_dp_5"
                     android:text="1"

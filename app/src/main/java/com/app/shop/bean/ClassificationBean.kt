@@ -22,7 +22,7 @@ data class CateBean(
 )
 
 data class ChildrenBean(
-    val category_id: Int,
+    val category_id: String,
     val category_name: String,
     val children: List<Any>,
     val created_at: String,

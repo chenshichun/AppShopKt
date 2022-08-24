@@ -46,7 +46,7 @@ import java.io.File
 /**
  * @author chenshichun
  * 创建日期：2022/8/8
- * 描述：
+ * 描述：我的
  *
  */
 class MineFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), MineContract.View,
