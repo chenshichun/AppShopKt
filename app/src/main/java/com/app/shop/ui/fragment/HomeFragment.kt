@@ -29,6 +29,7 @@ import com.app.shop.adapter.MyAdapter
 import com.app.shop.adapter.TabAdapter
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.*
+import com.app.shop.bean.event.CateEvent
 import com.app.shop.bean.event.PageEvent
 import com.app.shop.bean.type.CategoryType
 import com.app.shop.databinding.FragmentHomeBinding
@@ -93,6 +94,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     private lateinit var mLocationClient: AMapLocationClient
     private lateinit var mLocationOption: AMapLocationClientOption
 
+    private var cateBeanList = mutableListOf<CateBean>()
+
 
     override fun getPresenter(): HomePresenter {
         return HomePresenter()
@@ -103,23 +106,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         binding.gridView.adapter = MyAdapter(activity, images, texts)
         binding.gridView.onItemClickListener = this
 
-        val tabBean = TabBean(true, "全部")
-        tabsList.add(tabBean)
-        val tabBean1 = TabBean(false, "生鲜果蔬")
-        tabsList.add(tabBean1)
-        val tabBean2 = TabBean(false, "百货")
-        tabsList.add(tabBean2)
-        val tabBean3 = TabBean(false, "食品")
-        tabsList.add(tabBean3)
-        val tabBean4 = TabBean(false, "美妆")
-        tabsList.add(tabBean4)
-        val tabBean5 = TabBean(false, "母婴")
-        tabsList.add(tabBean5)
-        val tabBean6 = TabBean(false, "男装")
-        tabsList.add(tabBean6)
-        val tabBean7 = TabBean(false, "女装")
-        tabsList.add(tabBean7)
-        tabAdapter = activity?.let { TabAdapter(tabsList) }!!
+        tabAdapter = activity?.let { TabAdapter(cateBeanList) }!!
+        tabAdapter.setOnItemClickListener(object : TabAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                for (cateBean in cateBeanList) {
+                    cateBean.isCheck = false
+                }
+                cateBeanList[position].isCheck = true
+
+                tabAdapter.notifyDataSetChanged()
+                if (position != 0) {
+                    EventBus.getDefault().post(PageEvent(1))
+                    EventBus.getDefault().post(CateEvent(position - 1))
+                }
+            }
+        })
 
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
@@ -132,7 +133,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
         goodsAdapter.setOnItemClickListener(object : GoodsAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                startActivity(Intent(activity, GoodsDetailActivity::class.java))
+                IntentUtil.get()!!
+                    .goActivity(activity, GoodsDetailActivity::class.java, goodsList[position])
             }
         })
 
@@ -167,6 +169,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         loadService = LoadSir.getDefault().register(binding.refreshLayout) {
             initData()
             mPresenter!!.getBannerList()
+            mPresenter!!.getCateList()
         }
 
         binding.refreshLayout.setOnRefreshListener {
@@ -180,6 +183,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
         }
         initData()
         mPresenter!!.getBannerList()
+        mPresenter!!.getCateList()
 
         // 注册扫描二维码
         register = registerForActivityResult(
@@ -324,6 +328,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                     ToastUtil.showToast("需要权限")
                 }
             }
+    }
+
+    override fun getCateList(mData: BaseNetModel<ClassificationBean>) {
+        cateBeanList.clear()
+        var cateBean = CateBean(
+            "", "全部", arrayListOf(), "", 0, "", "", "", "", 0, 0, "", "", true
+        )
+        cateBeanList.add(cateBean)
+        cateBeanList.addAll(mData.data!!.cate)
+        tabAdapter.notifyDataSetChanged()
     }
 
     /*

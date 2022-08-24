@@ -52,6 +52,20 @@ interface HomeService {
     ): Response<BaseNetModel<ProdBean>>
 
     /*
+    * 分类数据
+    * */
+    @GET("comm/cate/list")
+    suspend fun getCateList(
+    ): Response<BaseNetModel<ClassificationBean>>
+
+    /*
+    * 购物车
+    * */
+    @GET("user/cart/list")
+    suspend fun getCartData(
+    ): Response<BaseNetModel<CartBean>>
+
+    /*
     * 用户信息
     * */
     @GET("user/myinfo")

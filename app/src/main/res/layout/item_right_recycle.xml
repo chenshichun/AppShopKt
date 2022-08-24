@@ -16,7 +16,7 @@
             android:id="@+id/iv_goods"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/icon_clothing"
+            tools:background="@drawable/icon_clothing"
             android:scaleType="centerCrop" />
 
         <TextView

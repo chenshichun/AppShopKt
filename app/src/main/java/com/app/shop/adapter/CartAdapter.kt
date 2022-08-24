@@ -1,10 +1,13 @@
 package com.app.shop.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.shop.bean.ShopBean
 import com.app.shop.databinding.ItemCartBinding
 
 /**
@@ -13,11 +16,11 @@ import com.app.shop.databinding.ItemCartBinding
  * 描述：购物车Adapter
  *
  */
-class CartAdapter(private val context: Context, val mData: List<String>?) :
+class CartAdapter(private val context: Context, val mData: List<ShopBean>?) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-    private var mOnItemClickListener: OnItemClickLisenter? = null
+    private var mOnItemClickListener: OnItemClickListener? = null
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickLisenter?) {
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
         mOnItemClickListener = onItemClickListener
     }
 
@@ -27,31 +30,70 @@ class CartAdapter(private val context: Context, val mData: List<String>?) :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val cartGoodsAdapter = CartGoodsAdapter(context, null)
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+
+        holder.checkBox.isChecked = mData!![position].isCheck
+
+        val cartGoodsAdapter = CartGoodsAdapter(context, mData[position].prods)
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
         holder.recyclerView.adapter = cartGoodsAdapter
-        cartGoodsAdapter.setOnItemClickListener(object : CartGoodsAdapter.OnItemClickLisenter {
-            override fun onItemClick(position: Int) {
+        cartGoodsAdapter.setOnItemClickListener(object :
+            CartGoodsAdapter.OnItemClickListener {
+            override fun onItemClick(position1: Int) {
+                mOnItemClickListener!!.onDetailClick(position, position1)
+            }
+
+            override fun deleteClick(position1: Int) {
+                mOnItemClickListener!!.deleteClick(position, position1)
+            }
+
+            override fun checkClick(position1: Int) {
+                mOnItemClickListener!!.checkClick(position, position1)
+            }
+
+            override fun reduceClick(position1: Int) {
+                mOnItemClickListener!!.reduceClick(position, position1)
+            }
+
+            override fun addClick(position1: Int) {
+                mOnItemClickListener!!.addClick(position, position1)
+            }
+
+            override fun modifyClick(position1: Int) {
+                mOnItemClickListener!!.modifyClick(position, position1)
             }
         })
 
-        holder.itemView.setOnClickListener {
-            mOnItemClickListener?.onItemClick(position)
+        holder.checkBox.setOnClickListener{
+            mOnItemClickListener!!.checkClick(position)
         }
     }
 
-    interface OnItemClickLisenter {
-        fun onItemClick(position: Int)
+    interface OnItemClickListener {
+
+        fun onDetailClick(position: Int, position1: Int)
+
+        fun checkClick(position: Int)
+
+        fun deleteClick(position: Int, position1: Int)
+
+        fun checkClick(position: Int, position1: Int)
+
+        fun reduceClick(position: Int, position1: Int)
+
+        fun addClick(position: Int, position1: Int)
+
+        fun modifyClick(position: Int, position1: Int)
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return mData!!.size
     }
 
     inner class ViewHolder(binding: ItemCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val recyclerView: RecyclerView = binding.mRecyclerView
+        val checkBox: CheckBox = binding.checkbox
     }
 
 }

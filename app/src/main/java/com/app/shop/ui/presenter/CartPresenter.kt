@@ -19,11 +19,29 @@ import kotlinx.coroutines.launch
  */
 class CartPresenter : BasePresenter<CartContract.View>(),
     CartContract.Presenter {
+    override fun getCartData() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).getCartData()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+                mView!!.noNetworkView()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.getCartData(response.body()!!)
+                } else {
+                    mView!!.showError()
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
 
     override fun getGoodsData(page: Int, size: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).getProdRecommendData(page, size,
-                SortType.ASC_FINAL.sortType)
+            val response = ApiRequest.create(HomeService::class.java).getProdRecommendData(
+                page, size,
+                SortType.ASC_FINAL.sortType
+            )
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()

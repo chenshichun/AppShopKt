@@ -164,7 +164,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun getData(position: PageEvent) {
         GlobalScope.launch(Dispatchers.Main) {
-            delay(2000)
+            delay(200)
             binding.mBottomNavigationBar.currentTab = position.position
         }
     }

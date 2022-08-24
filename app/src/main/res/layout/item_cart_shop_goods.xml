@@ -1,104 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingVertical="@dimen/dimen_dp_10">
+    android:layout_height="wrap_content">
 
-    <CheckBox
-        android:id="@+id/checkbox"
-        style="@style/CustomCheckBoxTheme"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_goods" />
-
-    <ImageView
-        android:id="@+id/iv_goods"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/icon_clothing"
-        app:layout_constraintLeft_toRightOf="@id/checkbox"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_name"
+    <com.mcxtzhang.swipemenulib.SwipeMenuLayout
+        android:id="@+id/swipeMenuLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:paddingLeft="150dp"
-        android:text="这是一件商品的标题有点长分多行显示有很长很长哦啦啦啦啦啦啦显示的下吗看看效果"
-        android:textColor="@color/color_333"
-        android:textSize="14sp"
-        app:layout_constraintLeft_toRightOf="@id/iv_goods"
-        app:layout_constraintTop_toTopOf="@id/iv_goods" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_specification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_dp_10"
-        android:layout_marginBottom="5dp"
-        android:text="规格"
-        android:textColor="@color/color_999"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="@id/tv_name"
-        app:layout_constraintBottom_toTopOf="@id/tv_price" />
-
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:text="¥120"
-        android:textColor="#fffc4353"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_integral"
-        app:layout_constraintLeft_toLeftOf="@id/tv_specification" />
-
-    <TextView
-        android:id="@+id/tv_integral"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_integral"
-        android:paddingHorizontal="7dp"
-        android:paddingVertical="2.5dp"
-        android:text="100易货积分"
-        android:textColor="#ff965e0e"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
-        app:layout_constraintLeft_toLeftOf="@id/tv_price" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/icon_reduce"
-            />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:textSize="11sp"
             android:paddingHorizontal="@dimen/dimen_dp_10"
-            android:paddingVertical="@dimen/dimen_dp_5"
-            android:text="1"
-            android:textColor="@color/color_333" />
+            android:paddingVertical="@dimen/dimen_dp_10">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_add"
-            />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <CheckBox
+                android:id="@+id/checkbox"
+                style="@style/CustomCheckBoxTheme"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_goods" />
+
+            <ImageView
+                android:id="@+id/iv_goods"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/icon_clothing"
+                app:layout_constraintLeft_toRightOf="@id/checkbox"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingLeft="150dp"
+                android:text="这是一件商品的标题有点长分多行显示有很长很长哦啦啦啦啦啦啦显示的下吗看看效果"
+                android:textColor="@color/color_333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toRightOf="@id/iv_goods"
+                app:layout_constraintTop_toTopOf="@id/iv_goods" />
+
+            <TextView
+                android:id="@+id/tv_specification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_dp_10"
+                android:layout_marginBottom="5dp"
+                android:text="规格"
+                android:textColor="@color/color_999"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_price"
+                app:layout_constraintLeft_toLeftOf="@id/tv_name" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="¥120"
+                android:textColor="#fffc4353"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_integral"
+                app:layout_constraintLeft_toLeftOf="@id/tv_specification" />
+
+            <TextView
+                android:id="@+id/tv_integral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_integral"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="2.5dp"
+                android:text="100易货积分"
+                android:textColor="#ff965e0e"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+                app:layout_constraintLeft_toLeftOf="@id/tv_price" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_reduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_reduce" />
+
+                <TextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#F2F2F2"
+                    android:inputType="number"
+                    android:paddingHorizontal="@dimen/dimen_dp_20"
+                    android:paddingVertical="@dimen/dimen_dp_5"
+                    android:text="1"
+                    android:textColor="@color/color_333"
+                    android:textSize="11sp" />
+
+                <ImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_add" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/bt_delete"
+            android:layout_width="@dimen/dimen_dp_80"
+            android:layout_height="match_parent"
+            android:background="@drawable/delete_bg"
+            android:text="删除"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
+</RelativeLayout>

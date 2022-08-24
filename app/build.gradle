@@ -180,8 +180,11 @@ dependencies {
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
     // 二维码库
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
-    //materialratingbar
+    //materialratingbar 星星评分
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+    // 滑动删除
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+
 }
 
 def releaseTime() {

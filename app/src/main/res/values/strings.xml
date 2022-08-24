@@ -6,4 +6,8 @@
     <string name="reacquire" translatable="false">重新获取</string>
     <string name="upload_fail" translatable="false">上传文件出错，请检查您的网络以及文件大小</string>
     <string name="inv_code">邀请码：%s</string>
+    <string name="goods_sell">已售%d件</string>
+    <string name="goods_integral">%s 易货积分</string>
+    <string name="goods_price">￥%s</string>
+    <string name="detail_pic">&lt;img src=\%s&gt;</string>
 </resources>

@@ -17,6 +17,24 @@ import kotlinx.coroutines.launch
  *
  */
 class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
+
+    override fun getCateList() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).getCateList()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+                mView!!.noNetworkView()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.getCateList(response.body()!!)
+                } else {
+                    mView!!.showError()
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
     override fun getBannerList() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getBannerList()

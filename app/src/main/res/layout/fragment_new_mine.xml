@@ -223,6 +223,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_show_all_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -247,26 +248,31 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_order_1"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_1"
                     android:text="待付款" />
 
                 <TextView
+                    android:id="@+id/tv_order_2"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_2"
                     android:text="待发货" />
 
                 <TextView
+                    android:id="@+id/tv_order_3"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_3"
                     android:text="待收货" />
 
                 <TextView
+                    android:id="@+id/tv_order_4"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_4"
                     android:text="待评价" />
 
                 <TextView
+                    android:id="@+id/tv_order_5"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_5"
                     android:text="退款售后" />
@@ -279,11 +285,13 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_order_6"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_6"
                     android:text="预约订单" />
 
                 <TextView
+                    android:id="@+id/tv_order_7"
                     style="@style/tv_order"
                     android:drawableTop="@drawable/icon_order_7"
                     android:text="已核销" />

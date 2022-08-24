@@ -14,6 +14,7 @@
         android:paddingVertical="5dp">
 
         <LinearLayout
+            android:id="@+id/ll_goods_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -22,7 +23,7 @@
             <ImageView
                 android:layout_width="@dimen/dimen_dp_20"
                 android:layout_height="@dimen/dimen_dp_20"
-                android:background="@drawable/icon_goods_detail_home" />
+                android:background="@drawable/icon_goods_home" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_goods_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -41,26 +43,7 @@
             <ImageView
                 android:layout_width="@dimen/dimen_dp_20"
                 android:layout_height="@dimen/dimen_dp_20"
-                android:background="@drawable/icon_cart_normal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="购物车" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/dimen_dp_20"
-                android:layout_height="@dimen/dimen_dp_20"
-                android:background="@drawable/icon_goods_detail_uncollect" />
+                android:background="@drawable/icon_goods_uncollect" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,17 +52,50 @@
                 android:text="收藏" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_goods_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_dp_20"
+                android:layout_height="@dimen/dimen_dp_20"
+                android:background="@drawable/icon_goods_cart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="购物车" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_add_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/hollow_blue_20"
+            android:gravity="center"
+            android:paddingVertical="@dimen/dimen_dp_10"
+            android:text="加入购物车"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/dimen_font_15" />
+
         <TextView
             android:id="@+id/tv_buy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_red_20"
+            android:background="@drawable/confirm_bg"
             android:gravity="center"
             android:paddingVertical="@dimen/dimen_dp_10"
             android:text="立即购买"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_font_20" />
+            android:textSize="@dimen/dimen_font_15" />
     </LinearLayout>
 </RelativeLayout>

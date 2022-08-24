@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.shop.bean.CateBean
 import com.app.shop.bean.TabBean
 import com.app.shop.databinding.ItemTabBinding
 
@@ -14,7 +15,7 @@ import com.app.shop.databinding.ItemTabBinding
  * 描述：
  *
  */
-class TabAdapter(private val mData: List<TabBean>?) :
+class TabAdapter(private val mData: List<CateBean>?) :
     RecyclerView.Adapter<TabAdapter.ViewHolder>() {
     private var mOnItemClickListener: OnItemClickListener? = null
 
@@ -29,7 +30,7 @@ class TabAdapter(private val mData: List<TabBean>?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nameTv.text = mData!![position].name
+        holder.nameTv.text = mData!![position].category_name
         holder.lineView.visibility = if (mData[position].isCheck) View.VISIBLE else View.GONE
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)

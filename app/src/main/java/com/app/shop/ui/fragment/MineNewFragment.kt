@@ -2,6 +2,7 @@ package com.app.shop.ui.fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
 import com.app.shop.R
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BaseNetModel
@@ -73,6 +75,14 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
         binding.tvPoints3.setOnClickListener(this)
         binding.tvMyPrivilege.setOnClickListener(this)
         binding.tvInviteFriends.setOnClickListener(this)
+        binding.tvOrder1.setOnClickListener(this)
+        binding.tvOrder2.setOnClickListener(this)
+        binding.tvOrder3.setOnClickListener(this)
+        binding.tvOrder4.setOnClickListener(this)
+        binding.tvOrder5.setOnClickListener(this)
+        binding.tvOrder6.setOnClickListener(this)
+        binding.tvOrder7.setOnClickListener(this)
+        binding.tvShowAllOrder.setOnClickListener(this)
 
         // 注册扫描二维码
         register = registerForActivityResult(
@@ -102,9 +112,11 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
                 IntentUtil.get()!!.goActivity(activity, ModifyNickNameActivity::class.java)
             }
             R.id.tv_inv_code -> {// 邀请码
-                //获取系统剪贴板
-                val cbm = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                cbm.text = AccountManager.getAccountInfo()!!.inv_code
+                val clipboardManager =
+                    activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clipData =
+                    ClipData.newPlainText("Label", AccountManager.getAccountInfo()!!.inv_code)
+                clipboardManager.setPrimaryClip(clipData)
                 ToastUtil.showToast("邀请码复制成功")
             }
             R.id.tv_my_purse -> {// 余额
@@ -112,6 +124,21 @@ class MineNewFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), M
             }
             R.id.tv_my_team -> {// 我的团队
                 IntentUtil.get()!!.goActivity(activity, MyTeamActivity::class.java)
+            }
+            R.id.tv_show_all_order -> startActivity(Intent(activity, OrderActivity::class.java))
+            R.id.tv_order_1 -> startActivity(Intent(activity, OrderActivity::class.java))
+            R.id.tv_order_2 -> startActivity(Intent(activity, OrderActivity::class.java))
+            R.id.tv_order_3 -> startActivity(Intent(activity, OrderActivity::class.java))
+            R.id.tv_order_4 -> startActivity(Intent(activity, OrderActivity::class.java))
+            R.id.tv_order_5 -> IntentUtil.get()!!
+                .goActivity(activity, RefundAfterSaleActivity::class.java)
+            R.id.tv_order_6 -> {
+                IntentUtil.get()!!
+                    .goActivity(activity, ReservationOrderActivity::class.java)
+            }
+            R.id.tv_order_7 -> {
+                IntentUtil.get()!!
+                    .goActivity(activity, WriteOffOrderActivity::class.java)
             }
             R.id.ll_attention -> {// 我的关注
                 IntentUtil.get()!!.goActivity(activity, AttentionActivity::class.java)

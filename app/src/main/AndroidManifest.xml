@@ -33,7 +33,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppShopKt"
         tools:targetApi="31">
-
         <!-- 屏幕适配start -->
         <meta-data
             android:name="design_width_in_dp"
@@ -65,7 +64,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.activity.GoodsDetailActivity" />
         <activity android:name=".ui.activity.ShowListImageActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
@@ -111,7 +112,10 @@
         <activity android:name=".ui.activity.MyTeamActivity" />
         <activity android:name=".ui.activity.MyPurseActivity" />
         <activity android:name=".ui.activity.WithdrawActivity" />
-        <activity android:name=".ui.activity.WithdrawalAccountActivity"/>
+        <activity android:name=".ui.activity.WithdrawalAccountActivity" />
+        <activity android:name=".ui.activity.RefundAfterSaleActivity" />
+        <activity android:name=".ui.activity.ReservationOrderActivity" />
+        <activity android:name=".ui.activity.WriteOffOrderActivity" />
     </application>
 
 </manifest>

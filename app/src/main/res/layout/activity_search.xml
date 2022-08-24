@@ -25,6 +25,7 @@
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
             android:hint="请输入品类，产品"
+            android:textSize="14sp"
             android:imeOptions="actionSearch"
             android:padding="8dp"
             android:textColor="@color/color_333" />

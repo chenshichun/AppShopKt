@@ -8,10 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
         android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:paddingHorizontal="8dp"
+        android:background="@color/white"
         android:paddingVertical="5dp">
 
         <CheckBox
@@ -19,6 +17,7 @@
             style="@style/CustomCheckBoxTheme"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/dimen_dp_10"
             app:layout_constraintBottom_toBottomOf="@id/tv_shop_name"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_shop_name" />

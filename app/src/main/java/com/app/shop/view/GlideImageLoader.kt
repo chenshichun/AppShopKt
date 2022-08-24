@@ -18,7 +18,6 @@ class GlideImageLoader : ImageLoader() {
         imageView?.let {
             Glide.with(context)
                 .load(path)
-                .apply(RequestOptions().transform(RoundedCorners(20))) //圆角半径
                 .into(it)
         }
     }

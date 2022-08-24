@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:visibility="gone">
+    >
 
     <TextView
         android:id="@+id/tv_subject_information"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="#E4E4E4"
         android:gravity="center"
-        android:paddingVertical="@dimen/dimen_dp_15"
+        android:paddingVertical="@dimen/dimen_dp_10"
         android:text="+主体信息"
         android:textColor="@color/color_333"
         android:textSize="20sp" />
@@ -101,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
-                android:background="@drawable/ps_ic_placeholder"
+                android:background="@drawable/icon_add_pic"
                 android:scaleType="centerCrop" />
 
             <ImageView

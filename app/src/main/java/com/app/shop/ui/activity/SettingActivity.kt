@@ -9,10 +9,12 @@ import com.app.shop.databinding.ActivitySettingBinding
 import com.app.shop.manager.AccountManager
 import com.app.shop.ui.contract.SettingContract
 import com.app.shop.ui.presenter.SettingPresenter
+import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
 
-class SettingActivity : BaseActivity<ActivitySettingBinding,SettingPresenter>(),SettingContract.View ,
-    View.OnClickListener{
+class SettingActivity : BaseActivity<ActivitySettingBinding, SettingPresenter>(),
+    SettingContract.View,
+    View.OnClickListener {
     override fun getPresenter(): SettingPresenter {
         return SettingPresenter()
     }
@@ -43,21 +45,18 @@ class SettingActivity : BaseActivity<ActivitySettingBinding,SettingPresenter>(),
     }
 
     override fun onClick(p0: View?) {
-        when(p0!!.id){
-            R.id.stv_1->{
-
+        when (p0!!.id) {
+            R.id.stv_1 -> {
+                ToastUtil.showToast("当前是最新版本")
             }
-            R.id.stv_2->{
-                Intent(
-                    this,
-                    AccountSecurityActivity::class.java
-                )
+            R.id.stv_2 -> {
+                startActivity(Intent(this, AccountSecurityActivity::class.java))
             }
-            R.id.stv_3->{
+            R.id.stv_3 -> {
                 startActivity(Intent(this, AboutUsActivity::class.java))
             }
-            R.id.stv_4->{
-                val builder =  AlertDialog.Builder(this)
+            R.id.stv_4 -> {
+                val builder = AlertDialog.Builder(this)
                 builder.setMessage("您确定要退出登录吗？")
                 builder.setTitle("提示")
                 builder.setPositiveButton("确定") { _, _ ->
