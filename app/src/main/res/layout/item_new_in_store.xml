@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_white_8"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_goods"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/icon_default_pic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+        app:layout_constraintLeft_toRightOf="@id/iv_goods"
+        app:layout_constraintTop_toTopOf="@id/iv_goods">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="店铺名称"
+            android:textColor="@color/color_333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="已售0件"
+            android:textColor="@color/color_999"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/hollow_blue_20"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:text="更多商品"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_goods" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_goods"
+        app:layout_constraintTop_toBottomOf="@id/iv_goods"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

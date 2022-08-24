@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivityOrderBinding
+import com.app.shop.manager.Constants
 import com.app.shop.ui.contract.OrderContract
 import com.app.shop.ui.fragment.OrderFragment
 import com.app.shop.ui.presenter.OrderPresenter
@@ -19,9 +20,10 @@ import com.gyf.immersionbar.ktx.immersionBar
  */
 class OrderActivity : BaseActivity<ActivityOrderBinding, OrderPresenter>(), OrderContract.View {
 
-    private val mTitles = arrayOf("待付款", "待发货", "待收货", "待评价")
+    private val mTitles = arrayOf("全部", "待付款", "待发货", "待收货", "待评价")
     private var mFragments = ArrayList<Fragment>()
     private lateinit var mAdapter: MyPagerAdapter
+    private var orderType = 0
 
     override fun getPresenter(): OrderPresenter {
         return OrderPresenter()
@@ -38,6 +40,8 @@ class OrderActivity : BaseActivity<ActivityOrderBinding, OrderPresenter>(), Orde
             finish()
         }
 
+        orderType = intent.getIntExtra(Constants.ORDER_TPYE, 0)
+
         for (title in mTitles) {
             mFragments.add(OrderFragment())
         }
@@ -46,6 +50,8 @@ class OrderActivity : BaseActivity<ActivityOrderBinding, OrderPresenter>(), Orde
         binding.slidingTabLayout.setViewPager(binding.viewPager)
         binding.slidingTabLayout.showMsg(3, 5)
         binding.slidingTabLayout.setMsgMargin(3, 0f, 10f)
+
+        binding.viewPager.currentItem = orderType
     }
 
     private inner class MyPagerAdapter(fm: FragmentManager?) :

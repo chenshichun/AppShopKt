@@ -18,6 +18,7 @@ class Constants {
         const val CATEGORY_TYPE: String = "CATEGORY_TYPE"
         const val WEB_URL: String = "WEB_URL"
         const val WEB_TITLE: String = "WEB_TITLE"
+        const val ORDER_TPYE: String = "order_type"
 
 
     }

@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.app.shop.ui.fragment.MineFragment"
+        android:name="com.app.shop.ui.fragment.MineOldFragment"
         android:label="fragment_mine"
         tools:layout="@layout/fragment_mine" />
 

@@ -23,7 +23,6 @@ class CartPresenter : BasePresenter<CartContract.View>(),
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getCartData()
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
@@ -43,7 +42,6 @@ class CartPresenter : BasePresenter<CartContract.View>(),
                 SortType.ASC_FINAL.sortType
             )
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {

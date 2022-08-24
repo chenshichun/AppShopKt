@@ -22,7 +22,6 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getCateList()
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
@@ -39,7 +38,6 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getBannerList()
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getBannerList(response.body()!!)
@@ -55,7 +53,6 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getProdHomeData(page, size)
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {

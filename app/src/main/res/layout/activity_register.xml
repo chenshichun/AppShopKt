@@ -152,7 +152,8 @@
                     android:id="@+id/tv_privacy_policy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="《隐私政策》" />
+                    android:text="《隐私政策》"
+                    android:textColor="@color/blue" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -164,7 +165,8 @@
                     android:id="@+id/tv_user_agreement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="《用户服务协议》" />
+                    android:text="《用户服务协议》"
+                    android:textColor="@color/blue" />
             </LinearLayout>
 
             <TextView

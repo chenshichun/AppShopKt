@@ -20,12 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/white"
-        tl:tl_indicator_color="@color/red"
+        tl:tl_indicator_color="@color/blue"
         tl:tl_indicator_height="1.5dp"
-        tl:tl_indicator_width_equal_title="true"
         tl:tl_tab_padding="22dp"
-        tl:tl_tab_space_equal="true"
-        tl:tl_textSelectColor="@color/red"
+        tl:tl_textSelectColor="@color/blue"
         tl:tl_textUnselectColor="@color/color_333"
        />
 

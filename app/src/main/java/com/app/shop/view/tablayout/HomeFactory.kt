@@ -22,7 +22,7 @@ object HomeFactory {
             1 -> fragment = ClassificationFragment()
             2 -> fragment = ShopFragment()
             3 -> fragment = CartFragment()
-            4 -> fragment = MineNewFragment()
+            4 -> fragment = MineFragment()
         }
 
         // 存储到缓存

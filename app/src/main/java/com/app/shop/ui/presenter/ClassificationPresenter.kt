@@ -23,7 +23,6 @@ class ClassificationPresenter : BasePresenter<ClassificationContract.View>(),
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).getCateList()
             if (response.body() == null) {
-                ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
