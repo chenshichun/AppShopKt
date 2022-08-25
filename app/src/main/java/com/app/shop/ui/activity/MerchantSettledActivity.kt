@@ -269,8 +269,8 @@ class MerchantSettledActivity :
                         .setMaxSelectNum(1)
                         .forResult(object : OnResultCallbackListener<LocalMedia?> {
                             override fun onResult(result: ArrayList<LocalMedia?>?) {
-                                for (locatMedia in result!!) {
-                                    val file = File(locatMedia!!.realPath)
+                                for (localMedia in result!!) {
+                                    val file = File(localMedia!!.realPath)
                                     val requestBody = RequestBody.create(
                                         MediaType.parse("multipart/form-data"),
                                         file

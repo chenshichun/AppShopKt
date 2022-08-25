@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.OrderActivity">
+    tools:context=".ui.activity.MyPurseActivity">
 
     <include
         android:id="@+id/view_head"
@@ -195,19 +195,4 @@
         app:sRightIconRes="@drawable/go_right"
         app:sUseRipple="false" />
 
-    <com.allen.library.SuperTextView
-        android:id="@+id/stv_4"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_dp_50"
-        android:background="@null"
-        android:gravity="center_vertical"
-        app:sDividerLineType="bottom"
-        app:sLeftIconHeight="25dp"
-        app:sLeftIconRes="@drawable/icon_password"
-        app:sLeftIconWidth="25dp"
-        app:sLeftTextColor="@color/color_333"
-        app:sLeftTextSize="@dimen/dimen_font_16"
-        app:sLeftTextString="验证码和密码"
-        app:sRightIconRes="@drawable/go_right"
-        app:sUseRipple="false" />
 </LinearLayout>

@@ -13,7 +13,7 @@ import com.app.shop.util.IntentUtil
 /**
  * @author chenshichun
  * 创建日期：2022/7/4
- * 描述：线下联盟商店
+ * 描述：本地商家
  *
  */
 class ShopFragment : BaseFragment<FragmentShopBinding, ShopPresenter>(), ShopContract.View {

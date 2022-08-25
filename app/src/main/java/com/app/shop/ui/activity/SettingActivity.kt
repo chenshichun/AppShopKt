@@ -61,7 +61,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingPresenter>()
                 builder.setTitle("提示")
                 builder.setPositiveButton("确定") { _, _ ->
                     AccountManager.signOut()
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, AccountLoginActivity::class.java))
                 }
                 builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
                 builder.create().show()

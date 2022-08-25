@@ -105,7 +105,7 @@ class WelcomeGuideActivity : AppCompatActivity() {
 
         goTv = view3.findViewById(R.id.tv_go)
         goTv.setOnClickListener {
-            IntentUtil.get()!!.goActivity(this, LoginActivity::class.java)
+            IntentUtil.get()!!.goActivity(this, AccountLoginActivity::class.java)
             finish()
         }
     }

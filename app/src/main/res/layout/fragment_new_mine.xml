@@ -71,6 +71,7 @@
             <ImageView
                 android:id="@+id/iv_qr_code"
                 android:layout_width="73dp"
+                android:visibility="invisible"
                 android:layout_height="73dp"
                 android:layout_marginRight="18dp"
                 app:layout_constraintRight_toLeftOf="@id/iv_customer_service"
@@ -127,7 +128,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/icon_mine_3"
                 android:gravity="center"
-                android:text="赠送积分"
+                android:text="奖励积分"
                 android:textColor="#ffffffff"
                 android:textSize="12sp" />
 

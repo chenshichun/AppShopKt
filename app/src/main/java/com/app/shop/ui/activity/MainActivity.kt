@@ -95,7 +95,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                     2 -> currentPosition = 2
                     3 -> currentPosition = 3
                     4 -> if (!AccountManager.isLogin()) {
-                        IntentUtil.get()!!.goActivity(this@MainActivity, LoginActivity::class.java)
+                        IntentUtil.get()!!.goActivity(this@MainActivity, AccountLoginActivity::class.java)
                         binding.mBottomNavigationBar.currentTab = currentPosition
                     } else {
                         currentPosition = 4

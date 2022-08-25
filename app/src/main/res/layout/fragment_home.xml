@@ -91,8 +91,7 @@
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srlAccentColor="@android:color/white"
-            >
+            app:srlAccentColor="@android:color/white">
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/mNestedScrollView"
@@ -137,7 +136,12 @@
                             android:id="@+id/layout_home_middle"
                             layout="@layout/layout_home_middle" />
 
-
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="20dp"
+                            android:background="@drawable/icon_home_today" />
                     </LinearLayout>
 
                     <RelativeLayout
@@ -148,8 +152,6 @@
                             android:id="@+id/mRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="1dp"
-                            android:layout_marginRight="5dp"
                             tools:itemCount="2"
                             tools:listitem="@layout/item_goods" />
                     </RelativeLayout>
@@ -160,13 +162,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srlAccentColor="@android:color/white"
-                app:srlTextSizeTitle="16sp"
-                app:srlFinishDuration="500"
-                app:srlDrawableSize="20dp"
+                app:srlClassicsSpinnerStyle="Translate"
                 app:srlDrawableArrowSize="20dp"
-                app:srlDrawableProgressSize="20dp"
                 app:srlDrawableMarginRight="20dp"
-                app:srlClassicsSpinnerStyle="Translate"/>
+                app:srlDrawableProgressSize="20dp"
+                app:srlDrawableSize="20dp"
+                app:srlFinishDuration="500"
+                app:srlTextSizeTitle="16sp" />
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     </LinearLayout>

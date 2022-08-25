@@ -6,7 +6,6 @@ package com.app.shop.bean.type
  * 描述：
  */
 enum class CategoryType(val categoryName: String) {
-    CENTER("运营中心"),
     SPIKE("限时秒杀"),
     NEW("每日上新"),
     LARGE_GOODS("大件商品易货区"),

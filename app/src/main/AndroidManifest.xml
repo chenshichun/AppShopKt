@@ -112,10 +112,11 @@
         <activity android:name=".ui.activity.MyTeamActivity" />
         <activity android:name=".ui.activity.MyPurseActivity" />
         <activity android:name=".ui.activity.WithdrawActivity" />
-        <activity android:name=".ui.activity.WithdrawalAccountActivity" />
         <activity android:name=".ui.activity.RefundAfterSaleActivity" />
         <activity android:name=".ui.activity.ReservationOrderActivity" />
         <activity android:name=".ui.activity.WriteOffOrderActivity" />
+        <activity android:name=".ui.activity.OperationsCenterActivity" />
+        <activity android:name=".ui.activity.EvaluationActivity"/>
     </application>
 
 </manifest>

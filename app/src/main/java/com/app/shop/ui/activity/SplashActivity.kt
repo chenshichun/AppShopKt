@@ -45,7 +45,7 @@ class SplashActivity : AppCompatActivity() {
                 if (flag == 0) {
                     IntentUtil.get()!!.goActivity(
                         this@SplashActivity,
-                        if (AccountManager.isLogin()) MainActivity::class.java else LoginActivity::class.java
+                        if (AccountManager.isLogin()) MainActivity::class.java else AccountLoginActivity::class.java
                     )
                 }
             }
@@ -60,7 +60,7 @@ class SplashActivity : AppCompatActivity() {
             } else {
                 IntentUtil.get()!!.goActivity(
                     this@SplashActivity,
-                    if (AccountManager.isLogin()) MainActivity::class.java else LoginActivity::class.java
+                    if (AccountManager.isLogin()) MainActivity::class.java else AccountLoginActivity::class.java
                 )
             }
             finish()

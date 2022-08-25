@@ -32,7 +32,6 @@ class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>()
         binding.stv1.setOnClickListener(this)
         binding.stv2.setOnClickListener(this)
         binding.stv3.setOnClickListener(this)
-        binding.stv4.setOnClickListener(this)
     }
 
     override fun showLoading() {
@@ -52,12 +51,9 @@ class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>()
 
             }
             R.id.stv_2 -> {// 修改提现账号
-                IntentUtil.get()!!.goActivity(this, WithdrawalAccountActivity::class.java)
+                IntentUtil.get()!!.goActivity(this, ReflectAccountActivity::class.java)
             }
             R.id.stv_3 -> {
-
-            }
-            R.id.stv_4 -> {
 
             }
         }

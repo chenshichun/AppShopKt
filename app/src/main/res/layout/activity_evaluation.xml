@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg_color"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/layout_head" />
+
+    <include layout="@layout/line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_white_8"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_goods"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/icon_default_pic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+            app:layout_constraintLeft_toRightOf="@id/iv_goods"
+            app:layout_constraintTop_toTopOf="@id/iv_goods">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商品名称"
+                android:textColor="@color/color_333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="￥100"
+                android:textColor="@color/red" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/bg_white_8"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享你的使用体验吧"
+            android:textColor="@color/color_333"
+            android:textSize="14sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_evaluation_et"
+            android:gravity="left"
+            android:hint="写出您的感受，可以帮助更多小朋友哦~"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务评分"
+                android:textColor="@color/color_333"
+                android:textSize="14sp" />
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                style="@style/Widget.MaterialRatingBar.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_dp_10"
+                android:maxHeight="16dp"
+                android:minHeight="16dp"
+                app:mrb_progressTint="@color/red"
+                app:mrb_secondaryProgressTint="@color/red" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            tools:listitem="@layout/item_multiple_images"
+            tools:itemCount="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:layout_marginHorizontal="@dimen/dimen_dp_15"
+        android:layout_marginTop="@dimen/dimen_dp_40"
+        android:background="@drawable/confirm_bg"
+        android:text="发表评价"
+        android:textColor="@color/white" />
+
+</LinearLayout>

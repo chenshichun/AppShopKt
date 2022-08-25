@@ -40,6 +40,7 @@ import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.ui.activity.CategoryListActivity
 import com.app.shop.ui.activity.GoodsDetailActivity
+import com.app.shop.ui.activity.OperationsCenterActivity
 import com.app.shop.ui.activity.SearchActivity
 import com.app.shop.ui.contract.HomeContract
 import com.app.shop.ui.presenter.HomePresenter
@@ -332,7 +333,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
     override fun getCateList(mData: BaseNetModel<ClassificationBean>) {
         cateBeanList.clear()
-        var cateBean = CateBean(
+        val cateBean = CateBean(
             "", "全部", arrayListOf(), "", 0, "", "", "", "", 0, 0, "", "", true
         )
         cateBeanList.add(cateBean)
@@ -423,7 +424,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             }
             else -> {
                 val bundle = Bundle()
-                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.CENTER.ordinal)
+                bundle.putInt(Constants.CATEGORY_TYPE, CategoryType.NEW.ordinal)
                 bundle.putString(Constants.CATEGORY_NAME, texts[p2])
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
@@ -462,11 +463,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
             R.id.ll_center -> {
-                bundle.putInt(
-                    Constants.CATEGORY_TYPE,
-                    CategoryType.CENTER.ordinal
-                )
-                IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
+                IntentUtil.get()!!.goActivity(activity, OperationsCenterActivity::class.java)
             }
             R.id.ll_spike_buy -> {
                 bundle.putInt(

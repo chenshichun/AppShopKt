@@ -9,6 +9,9 @@ import com.app.shop.ui.contract.MyTeamContract
 import com.app.shop.ui.presenter.MyTeamPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
+/*
+* 我的团队
+* */
 class MyTeamActivity : BaseActivity<ActivityMyTeamBinding, MyTeamPresenter>(), MyTeamContract.View {
 
     private lateinit var myTeamAdapter: MyTeamAdapter
