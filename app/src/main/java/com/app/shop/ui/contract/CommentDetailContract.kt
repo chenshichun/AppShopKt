@@ -4,11 +4,11 @@ import com.app.shop.base.BaseContract
 
 /**
  * @author chenshichun
- * 创建日期：2022/8/1
+ * 创建日期：2022/8/26
  * 描述：
  *
  */
-interface ConfirmOrderContract : BaseContract {
+interface CommentDetailContract : BaseContract {
     interface View : BaseContract.BaseView {
     }
 

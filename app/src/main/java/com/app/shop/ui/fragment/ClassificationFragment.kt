@@ -20,6 +20,7 @@ import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.ui.activity.CategoryListActivity
+import com.app.shop.ui.activity.MessageActivity
 import com.app.shop.ui.contract.ClassificationContract
 import com.app.shop.ui.presenter.ClassificationPresenter
 import com.app.shop.util.IntentUtil
@@ -88,6 +89,10 @@ class ClassificationFragment :
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
         })
+
+        binding.ivMessage.setOnClickListener{
+            IntentUtil.get()!!.goActivity(activity, MessageActivity::class.java)
+        }
 
         loadService = LoadSir.getDefault().register(binding.llCate) {
             initData()

@@ -5,11 +5,13 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.annotation.RequiresApi
 import androidx.viewpager.widget.ViewPager
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -18,12 +20,14 @@ import com.app.shop.bean.event.PageEvent
 import com.app.shop.databinding.ActivityGoodsDetailBinding
 import com.app.shop.ui.contract.GoodsDetailContract
 import com.app.shop.ui.presenter.GoodsDetailPresenter
+import com.app.shop.util.CommonUtil
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideImageLoader
 import com.app.shop.view.pop.SpecificationPop
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lxj.xpopup.XPopup
+import com.orhanobut.logger.Logger
 import com.youth.banner.BannerConfig
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -35,6 +39,7 @@ import java.util.*
  */
 class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetailPresenter>(),
     GoodsDetailContract.View, View.OnClickListener {
+    private var alphaH = 0f
 
     private lateinit var prod: Prod
 
@@ -42,6 +47,7 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         return GoodsDetailPresenter()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun initView() {
         immersionBar {
             statusBarDarkFont(true)
@@ -50,19 +56,35 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         prod = IntentUtil.getParcelableExtra<Prod>(this)!!
         updateUi(prod)
 
-        binding.ivBack.setOnClickListener(this)
+        binding.viewHead.tvTitle.text = "商品详情"
+        binding.viewHead.clHead.alpha = 0f
+
+        binding.ivGoodsBack.setOnClickListener(this)
+        binding.viewHead.ivBack.setOnClickListener(this)
         binding.layoutGoodsDetailsBottom.tvBuy.setOnClickListener(this)
         binding.layoutGoodsDetailsMiddle.tvBuyReasonShare.setOnClickListener(this)
         binding.layoutGoodsDetailsBottom.llGoodsHome.setOnClickListener(this)
         binding.layoutGoodsDetailsBottom.llGoodsCollect.setOnClickListener(this)
         binding.layoutGoodsDetailsBottom.llGoodsCart.setOnClickListener(this)
+        binding.layoutGoodsDetailsComment.tvShowMore.setOnClickListener(this)
+        alphaH = CommonUtil.dip2px(this, 200f).toFloat()
+        binding.scrollview.setOnScrollChangeListener { _, _, p2, _, _ ->
+            Logger.d(p2)
+            var alpha: Float = p2 / alphaH
+            if (alpha > 1) {
+                alpha = 1f
+            }
+            binding.ivGoodsBack.alpha = 1 - alpha
+            binding.viewTop.alpha = alpha
+            binding.viewHead.clHead.alpha = alpha
+        }
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.iv_back -> {
-                finish()
-            }
+            R.id.iv_back -> finish()
+            R.id.iv_goods_back -> finish()
+
             R.id.tv_buy -> {// 立即购买
                 val specificationPop = SpecificationPop(this)
                 XPopup.Builder(this)
@@ -78,16 +100,19 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
                 clipboardManager.setPrimaryClip(clipData)
                 ToastUtil.showToast("已复制文案")
             }
-            R.id.ll_goods_home->{
+            R.id.ll_goods_home -> {
                 EventBus.getDefault().post(PageEvent(0))
-                IntentUtil.get()!!.goActivityKill(this,MainActivity::class.java)
+                IntentUtil.get()!!.goActivityKill(this, MainActivity::class.java)
             }
-            R.id.ll_goods_cart->{
+            R.id.ll_goods_cart -> {
                 EventBus.getDefault().post(PageEvent(3))
-                IntentUtil.get()!!.goActivityKill(this,MainActivity::class.java)
+                IntentUtil.get()!!.goActivityKill(this, MainActivity::class.java)
             }
-            R.id.ll_goods_collect->{
+            R.id.ll_goods_collect -> {
 
+            }
+            R.id.tv_show_more -> {
+                IntentUtil.get()!!.goActivity(this, CommentDetailActivity::class.java)
             }
         }
     }
@@ -105,15 +130,24 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
     * */
     private fun updateUi(prod: Prod) {
         getBanner(prod.imgs)
+
+        binding.layoutGoodsDetailsHead.tvIntegral.visibility =
+            if (prod.ori_point.equals("0")) View.INVISIBLE else View.VISIBLE
+
+        binding.layoutGoodsDetailsHead.tvPrice.visibility =
+            if (prod.ori_point.equals("0")) View.VISIBLE else View.GONE
+
         binding.layoutGoodsDetailsHead.tvIntegral.text =
             String.format(getString(R.string.goods_integral), prod.ori_point)
+
+        binding.layoutGoodsDetailsHead.tvPrice.text =
+            String.format(getString(R.string.goods_price), prod.price)
+
         binding.layoutGoodsDetailsHead.tvName.text = prod.prod_name
         binding.layoutGoodsDetailsHead.tvSell.text =
             String.format(getString(R.string.goods_sell), prod.sold_num)
-        binding.layoutGoodsDetailsHead.tvPrice.text =
-            String.format(getString(R.string.goods_price), prod.price)
         binding.layoutGoodsDetailsMiddle.tvBuyReason.text = prod.brief
-        //htmlData(prod.content!!)
+        htmlData(prod.content!!)
     }
 
     /*
@@ -142,10 +176,10 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
 
         })
         binding.banner.setOnBannerListener { position ->
-            /*val bundle = Bundle()
+            val bundle = Bundle()
             bundle.putStringArrayList("paths", images as ArrayList<String>?)
             bundle.putInt("index", position)
-            IntentUtil.get()!!.goActivity(this, GoodsDetailActivity::class.java, bundle)*/
+            IntentUtil.get()!!.goActivity(this, ShowListImageActivity::class.java, bundle)
         }
         binding.banner.start()
     }
@@ -203,7 +237,7 @@ ${"$"}img[img].style.height ='auto'
         webSettings.loadsImagesAutomatically = true //支持自动加载图片
         webSettings.defaultTextEncodingName = "utf-8" //设置编码格式
         binding.webView.webViewClient = object : WebViewClient() {
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
             }
 

@@ -10,6 +10,7 @@ import com.app.shop.ui.contract.ShowListImageContract
 import com.app.shop.ui.presenter.ShowListImagePresenter
 import com.app.shop.util.BitmapUtil
 import com.app.shop.util.ToastUtil
+import com.gyf.immersionbar.ktx.immersionBar
 
 /**
  * @author chenshichun
@@ -30,6 +31,11 @@ class ShowListImageActivity : BaseActivity<ActivityShowListImageBinding, ShowLis
 
     @SuppressLint("SetTextI18n")
     override fun initView() {
+
+        immersionBar {
+            statusBarDarkFont(true)
+        }
+
         imageUrls = intent.getStringArrayListExtra("paths")!!
         currentPosition = intent.getIntExtra("index", 0)
 

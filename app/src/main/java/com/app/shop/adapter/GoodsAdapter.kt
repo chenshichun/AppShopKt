@@ -3,6 +3,7 @@ package com.app.shop.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -39,11 +40,18 @@ class GoodsAdapter(private val context: Context, val mData: List<Prod>?) :
         }
         holder.nameTv.text = mData[position].prod_name
         Glide.with(context)
-            .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.yzcdn.cn%2Fupload_files%2F2019%2F11%2F20%2FFhnBVAU31lKPK3JC5CFnPSRn8-a9.jpg%3FimageView2%2F2%2Fw%2F580%2Fh%2F580%2Fq%2F75%2Fformat%2Fjpg&refer=http%3A%2F%2Fimg.yzcdn.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1661677814&t=4f7368b0439925fa1b999c90a4fd0f27" /*mData [position].pic*/)
+            .load(mData[position].pic)
             .placeholder(R.drawable.icon_default_pic)
             .error(R.drawable.icon_default_pic)
             .into(holder.goodsIv)
-        holder.tvIntegral.text = "￥${mData[position].price}"
+
+        holder.tvIntegral.visibility =
+            if (mData[position].ori_point.equals("0")) View.GONE else View.VISIBLE
+        holder.tvPrice.visibility =
+            if (mData[position].ori_point.equals("0")) View.VISIBLE else View.GONE
+        holder.tvIntegral.text =
+            String.format(context.getString(R.string.goods_integral), mData[position].ori_point)
+        holder.tvPrice.text = "￥${mData[position].price}"
         holder.tvCountSell.text = "${mData[position].sold_num}人已购买"
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)
@@ -62,6 +70,7 @@ class GoodsAdapter(private val context: Context, val mData: List<Prod>?) :
         RecyclerView.ViewHolder(binding.root) {
         val goodsIv: ImageView = binding.ivGoods
         val nameTv: TextView = binding.tvName
+        val tvPrice: TextView = binding.tvPrice
         val tvIntegral: TextView = binding.tvIntegral
         val tvCountSell: TextView = binding.tvCountSell
     }

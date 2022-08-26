@@ -38,10 +38,7 @@ import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
-import com.app.shop.ui.activity.CategoryListActivity
-import com.app.shop.ui.activity.GoodsDetailActivity
-import com.app.shop.ui.activity.OperationsCenterActivity
-import com.app.shop.ui.activity.SearchActivity
+import com.app.shop.ui.activity.*
 import com.app.shop.ui.contract.HomeContract
 import com.app.shop.ui.presenter.HomePresenter
 import com.app.shop.util.IntentUtil
@@ -158,6 +155,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
         binding.ivClassification.setOnClickListener {// 分类
             EventBus.getDefault().post(PageEvent(1))
+        }
+
+        binding.ivMessage.setOnClickListener{// 消息
+            IntentUtil.get()!!.goActivity(activity,MessageActivity::class.java)
         }
         getCurrentLocationLatLng()
         getLocation()
