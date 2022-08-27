@@ -17,7 +17,7 @@ import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UploadBean
 import com.app.shop.bean.UserDataBean
-import com.app.shop.databinding.FragmentNewMineBinding
+import com.app.shop.databinding.FragmentMineBinding
 import com.app.shop.manager.AccountManager
 import com.app.shop.manager.Constants
 import com.app.shop.ui.activity.*
@@ -49,7 +49,7 @@ import java.io.File
  * 描述：我的
  *
  */
-class MineFragment : BaseFragment<FragmentNewMineBinding, MinePresenter>(), MineContract.View,
+class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineContract.View,
     View.OnClickListener {
     private lateinit var register: ActivityResultLauncher<Intent>
 
