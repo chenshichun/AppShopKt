@@ -8,6 +8,7 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivityStoreHomepageBinding
 import com.app.shop.ui.contract.StoreHomepageContract
 import com.app.shop.ui.presenter.StoreHomepagePresenter
+import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
 
 /**
@@ -39,6 +40,7 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
         })
 
         binding.ivBack.setOnClickListener(this)
+        binding.tvShopName.setOnClickListener(this)
     }
 
     override fun showLoading() {
@@ -54,6 +56,8 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
             R.id.iv_back -> {
                 finish()
             }
+            R.id.tv_shop_name -> IntentUtil.get()!!
+                .goActivity(this, StoreImpressionActivity::class.java)
         }
     }
 }

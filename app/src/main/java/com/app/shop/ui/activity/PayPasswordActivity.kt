@@ -11,7 +11,6 @@ import com.gyf.immersionbar.ktx.immersionBar
  * @author chenshichun
  * 创建日期：2022/7/25
  * 描述：支付密码
- *
  */
 class PayPasswordActivity : BaseActivity<ActivityPayPasswordBinding, PayPasswordPresenter>(),
     PayPasswordContract.View {

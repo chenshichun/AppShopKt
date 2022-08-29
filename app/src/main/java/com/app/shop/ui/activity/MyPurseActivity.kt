@@ -9,9 +9,11 @@ import com.app.shop.ui.presenter.MyPursePresenter
 import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
 
-/*
-* 我的钱包
-* */
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：我的钱包
+ */
 class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>(),
     MyPurseContract.View, View.OnClickListener {
     override fun getPresenter(): MyPursePresenter {

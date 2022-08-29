@@ -11,9 +11,11 @@ import com.app.shop.ui.contract.WithdrawContract
 import com.app.shop.ui.presenter.WithdrawPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
-/*
-* 提现
-* */
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：提现
+ */
 class WithdrawActivity : BaseActivity<ActivityWithdrawBinding, WithdrawPresenter>(),
     WithdrawContract.View {
 

@@ -1,6 +1,7 @@
 package com.app.shop.ui.activity
 
 import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.AddressAdapter
@@ -38,6 +39,31 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
         addressAdapter = AddressAdapter(this, null)
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = addressAdapter
+        addressAdapter.setOnItemClickListener(object : AddressAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+            }
+
+            override fun onItemDeleteClick(position: Int) {// 删除地址
+                val builder = AlertDialog.Builder(this@AddressListActivity)
+                builder.setMessage(
+                    "确定要删除该地址？"
+                )
+                builder.setTitle("删除地址")
+                builder.setPositiveButton("确定") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
+                builder.create().show()
+            }
+
+            override fun onItemEditClick(position: Int) {// 编辑
+            }
+
+            override fun onDefaultCheck(position: Int) {// 默认地址
+            }
+
+        })
+
         binding.tvAddAddress.setOnClickListener {
             startActivity(Intent(this, AddAddressActivity::class.java))
         }

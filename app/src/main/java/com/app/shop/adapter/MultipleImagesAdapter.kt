@@ -23,10 +23,6 @@ class MultipleImagesAdapter(val context: Context, val mData: List<String>?, var 
     private var addImgSrc = 0
     private var maxImages = 3
 
-    fun getMaxImages(): Int {
-        return maxImages
-    }
-
     fun setAddImg(addImgSrc: Int) {
         this.addImgSrc = addImgSrc
     }

@@ -10,9 +10,9 @@ import com.app.shop.adapter.MultipleImagesAdapter
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UploadBean
-import com.app.shop.databinding.ActivityEvaluationBinding
-import com.app.shop.ui.contract.EvaluationContract
-import com.app.shop.ui.presenter.EvaluationPresenter
+import com.app.shop.databinding.ActivityComplaintBinding
+import com.app.shop.ui.contract.ComplaintContract
+import com.app.shop.ui.presenter.ComplaintPresenter
 import com.app.shop.util.CommonUtil
 import com.app.shop.util.IntentUtil
 import com.app.shop.view.GlideEngine
@@ -29,17 +29,17 @@ import java.io.File
 
 /**
  * @author chenshichun
- * 创建日期：2022/7/4
- * 描述：商品评价
+ * 创建日期：2022/8/29
+ * 描述：投诉
  */
-class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPresenter>(),
-    EvaluationContract.View {
+class ComplaintActivity : BaseActivity<ActivityComplaintBinding, ComplaintPresenter>(),
+    ComplaintContract.View {
 
     private lateinit var multipleImagesAdapter: MultipleImagesAdapter
     private var imgList = mutableListOf<String>()
 
-    override fun getPresenter(): EvaluationPresenter {
-        return EvaluationPresenter()
+    override fun getPresenter(): ComplaintPresenter {
+        return ComplaintPresenter()
     }
 
     override fun initView() {
@@ -48,7 +48,7 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
             statusBarDarkFont(true)
         }
 
-        binding.viewHead.tvTitle.text = "商品评价"
+        binding.viewHead.tvTitle.text = "投诉"
         binding.viewHead.ivBack.setOnClickListener {
             finish()
         }
@@ -65,8 +65,7 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
                 val bundle = Bundle()
                 bundle.putStringArrayList("paths", imgList as ArrayList<String>?)
                 bundle.putInt("index", position)
-                IntentUtil.get()!!
-                    .goActivity(this@EvaluationActivity, ShowListImageActivity::class.java, bundle)
+                IntentUtil.get()!!.goActivity(this@ComplaintActivity, ShowListImageActivity::class.java, bundle)
             }
 
             @SuppressLint("NotifyDataSetChanged")
@@ -81,6 +80,9 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
         })
     }
 
+    /*
+    * 上传图片
+    * */
     @SuppressLint("NotifyDataSetChanged")
     override fun upload(mData: BaseNetModel<UploadBean>) {
         imgList.add(mData.data!!.url)
@@ -98,7 +100,7 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
     @SuppressLint("CheckResult")
     fun chooseImg() {
         //获取写的权限
-        val rxPermission = RxPermissions(this@EvaluationActivity)
+        val rxPermission = RxPermissions(this)
         rxPermission.requestEach(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
@@ -137,7 +139,7 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
                         })
                 } else {
                     Toast.makeText(
-                        this@EvaluationActivity,
+                        this,
                         "拒绝",
                         Toast.LENGTH_SHORT
                     ).show()

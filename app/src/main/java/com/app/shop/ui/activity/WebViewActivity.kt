@@ -9,7 +9,11 @@ import com.app.shop.manager.Constants
 import com.gyf.immersionbar.ImmersionBar
 import com.just.agentweb.AgentWeb
 
-
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：WebView
+ */
 class WebViewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWebViewBinding

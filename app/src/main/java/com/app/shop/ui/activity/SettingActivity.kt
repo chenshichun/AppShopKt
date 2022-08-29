@@ -12,6 +12,11 @@ import com.app.shop.ui.presenter.SettingPresenter
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
 
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：设置
+ */
 class SettingActivity : BaseActivity<ActivitySettingBinding, SettingPresenter>(),
     SettingContract.View,
     View.OnClickListener {

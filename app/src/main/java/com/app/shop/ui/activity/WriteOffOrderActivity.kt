@@ -9,9 +9,11 @@ import com.app.shop.ui.contract.WriteOffOrderContract
 import com.app.shop.ui.presenter.WriteOffOrderPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
-/*
-* 核销订单
-* */
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：核销订单
+ */
 class WriteOffOrderActivity : BaseActivity<ActivityWriteOffOrderBinding, WriteOffOrderPresenter>(),
     WriteOffOrderContract.View {
 

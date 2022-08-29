@@ -9,9 +9,11 @@ import com.app.shop.ui.contract.MyTeamContract
 import com.app.shop.ui.presenter.MyTeamPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
-/*
-* 我的团队
-* */
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：我的团队
+ */
 class MyTeamActivity : BaseActivity<ActivityMyTeamBinding, MyTeamPresenter>(), MyTeamContract.View {
 
     private lateinit var myTeamAdapter: MyTeamAdapter

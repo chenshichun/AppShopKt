@@ -9,9 +9,11 @@ import com.app.shop.ui.contract.ReservationOrderContract
 import com.app.shop.ui.presenter.ReservationOrderPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
-/*
-* 预约订单
-* */
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：预约订单
+ */
 class ReservationOrderActivity :
     BaseActivity<ActivityReservationOrderBinding, ReservationOrderPresenter>(),
     ReservationOrderContract.View {

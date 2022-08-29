@@ -4,7 +4,7 @@ import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
-import com.app.shop.ui.contract.EvaluationContract
+import com.app.shop.ui.contract.ComplaintContract
 import com.app.shop.util.ToastUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +14,11 @@ import okhttp3.RequestBody
 
 /**
  * @author chenshichun
- * 创建日期：2022/8/25
+ * 创建日期：2022/8/29
  * 描述：
  */
-class EvaluationPresenter : BasePresenter<EvaluationContract.View>(), EvaluationContract.Presenter {
+class ComplaintPresenter : BasePresenter<ComplaintContract.View>(), ComplaintContract.Presenter {
+
     override fun upload(file: MultipartBody.Part, description: RequestBody) {
         CoroutineScope(Dispatchers.Main).launch {
             mView!!.showLoading()

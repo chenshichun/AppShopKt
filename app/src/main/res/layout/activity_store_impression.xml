@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/layout_head" />
+
+    <include layout="@layout/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/iv_shop"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/icon_default_pic"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="店铺名字"
+                android:textColor="@color/color_333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toRightOf="@id/iv_shop"
+                app:layout_constraintTop_toTopOf="@id/iv_shop" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="销量：0"
+                android:textColor="@color/color_999"
+                app:layout_constraintLeft_toLeftOf="@id/tv_shop_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_shop_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_red_20"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="关注"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_shop"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_shop" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/line" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_dp_10"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="综合评分"
+                android:textColor="@color/red"
+                android:textSize="12sp" />
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                style="@style/Widget.MaterialRatingBar.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_dp_5"
+                android:maxHeight="10dp"
+                android:minHeight="10dp"
+                android:rating="2"
+                app:mrb_progressTint="@color/red"
+                app:mrb_secondaryProgressTint="@color/red" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="由易货君评估，含品质,物流,售后等多项内容，星星越多体验越好" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="基础信息"
+            android:textColor="@color/color_333"
+            android:textSize="14sp" />
+
+        <com.allen.library.SuperTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:sLeftTextColor="@color/color_333"
+            app:sLeftTextSize="14sp"
+            app:sLeftTextString="掌柜名"
+            app:sRightTextColor="@color/color_333"
+            app:sRightTextSize="14sp"
+            app:sRightTextString="cuckoo" />
+
+        <com.allen.library.SuperTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:sLeftTextColor="@color/color_333"
+            app:sLeftTextSize="14sp"
+            app:sLeftTextString="联系电话"
+            app:sRightTextColor="@color/color_333"
+            app:sRightTextSize="14sp"
+            app:sRightTextString="15067156432" />
+
+        <com.allen.library.SuperTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:sLeftTextColor="@color/color_333"
+            app:sLeftTextSize="14sp"
+            app:sLeftTextString="开店时间"
+            app:sRightTextColor="@color/color_333"
+            app:sRightTextSize="14sp"
+            app:sRightTextString="2022-12-22 10:22" />
+
+        <com.allen.library.SuperTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:sLeftTextColor="@color/color_333"
+            app:sLeftTextSize="14sp"
+            app:sLeftTextString="地址"
+            app:sRightTextColor="@color/color_333"
+            app:sRightTextSize="14sp"
+            app:sRightTextString="义乌市苏溪镇" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_store_complaint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingVertical="15dp"
+        android:text="店铺投诉"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+</LinearLayout>

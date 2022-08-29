@@ -13,6 +13,7 @@
         <ImageView
             android:id="@+id/img_pic"
             android:layout_width="match_parent"
+            android:scaleType="centerCrop"
             android:layout_height="match_parent" />
 
         <ImageView
@@ -25,8 +26,8 @@
 
         <Button
             android:id="@+id/btn_delete"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/delete" />
 

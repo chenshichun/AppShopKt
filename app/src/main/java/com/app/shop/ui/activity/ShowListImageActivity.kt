@@ -16,7 +16,6 @@ import com.gyf.immersionbar.ktx.immersionBar
  * @author chenshichun
  * 创建日期：2022/7/12
  * 描述：图片查看
- *
  */
 class ShowListImageActivity : BaseActivity<ActivityShowListImageBinding, ShowListImagePresenter>(),
     ShowListImageContract.View {

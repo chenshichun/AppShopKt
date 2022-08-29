@@ -1,5 +1,6 @@
 package com.app.shop.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class WelcomeGuideActivity : AppCompatActivity() {
             .addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     //避免重复回调        出于兼容性考虑，使用了过时的方法
-                    binding!!.ivRed.viewTreeObserver.removeGlobalOnLayoutListener(this)
+                    binding!!.ivRed.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     //布局完成了就获取第一个小灰点和第二个之间left的距离
                     mPaintDis =
                         binding!!.llContainer.getChildAt(1).left - binding!!.llContainer.getChildAt(
@@ -49,7 +50,7 @@ class WelcomeGuideActivity : AppCompatActivity() {
             })
 
         //ViewPager滑动Pager监听
-        binding!!.mViewPager.setOnPageChangeListener(object : OnPageChangeListener {
+        binding!!.mViewPager.addOnPageChangeListener(object : OnPageChangeListener {
             //滑动过程中的回调
             override fun onPageScrolled(
                 position: Int,
@@ -75,6 +76,7 @@ class WelcomeGuideActivity : AppCompatActivity() {
         })
     }
 
+    @SuppressLint("InflateParams")
     private fun initData() {
         mViewList = ArrayList()
         val view1 = layoutInflater.inflate(R.layout.we_indicator1, null)

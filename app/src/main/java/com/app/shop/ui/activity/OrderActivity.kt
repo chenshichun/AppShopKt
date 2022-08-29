@@ -16,7 +16,6 @@ import com.gyf.immersionbar.ktx.immersionBar
  * @author chenshichun
  * 创建日期：2022/7/4
  * 描述：我的订单
- *
  */
 class OrderActivity : BaseActivity<ActivityOrderBinding, OrderPresenter>(), OrderContract.View {
 

@@ -29,7 +29,11 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import kotlin.system.exitProcess
 
-
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：MainActivity
+ */
 class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainContract.View {
 
     private var mTitles = arrayListOf("首页", "分类", "本地商家", "购物车", "我的")

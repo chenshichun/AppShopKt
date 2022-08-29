@@ -73,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
+            android:textSize="14sp"
             android:background="@drawable/bg_evaluation_et"
             android:gravity="left"
             android:hint="写出您的感受，可以帮助更多小朋友哦~"

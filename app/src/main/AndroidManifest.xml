@@ -122,6 +122,8 @@
         <activity android:name=".ui.activity.CommentDetailActivity" />
         <activity android:name=".ui.activity.OperationCenterApplyActivity" />
         <activity android:name=".ui.activity.BusinessSchoolActivity" />
+        <activity android:name=".ui.activity.StoreImpressionActivity"/>
+        <activity android:name=".ui.activity.ComplaintActivity"/>
     </application>
 
 </manifest>

@@ -8,11 +8,10 @@ import okhttp3.RequestBody
 
 /**
  * @author chenshichun
- * 创建日期：2022/8/25
+ * 创建日期：2022/8/29
  * 描述：
- *
  */
-interface EvaluationContract : BaseContract {
+interface ComplaintContract : BaseContract {
     interface View : BaseContract.BaseView {
         fun upload(mData: BaseNetModel<UploadBean>)
     }

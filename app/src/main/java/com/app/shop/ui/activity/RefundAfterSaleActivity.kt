@@ -9,9 +9,11 @@ import com.app.shop.ui.contract.RefundAfterSaleContract
 import com.app.shop.ui.presenter.RefundAfterSalePresenter
 import com.gyf.immersionbar.ktx.immersionBar
 
-/*
-* 退款售后
-* */
+/**
+ * @author chenshichun
+ * 创建日期：2022/8/26
+ * 描述：退款售后
+ */
 class RefundAfterSaleActivity :
     BaseActivity<ActivityRefundAfterSaleBinding, RefundAfterSalePresenter>(),
     RefundAfterSaleContract.View {
