@@ -11,7 +11,6 @@ import com.lxj.xpopup.core.BasePopupView
  * @author chenshichun
  * 创建日期：2022/7/4
  * 描述：
- *
  */
 abstract class BaseActivity<VB : ViewBinding, P : BaseContract.BasePresenter> : AppCompatActivity(),
     BaseContract.BaseView {

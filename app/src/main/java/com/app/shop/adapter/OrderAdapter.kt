@@ -14,9 +14,9 @@ import com.app.shop.databinding.ItemOrderBinding
  */
 class OrderAdapter (private val context: Context, val mData: List<String>?) :
     RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
-    private var mOnItemClickListener: OnItemClickLisenter? = null
+    private var mOnItemClickListener: OnItemClickListener? = null
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickLisenter?) {
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
         mOnItemClickListener = onItemClickListener
     }
 
@@ -41,7 +41,7 @@ class OrderAdapter (private val context: Context, val mData: List<String>?) :
         }
     }
 
-    interface OnItemClickLisenter {
+    interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 

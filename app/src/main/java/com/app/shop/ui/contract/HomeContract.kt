@@ -12,7 +12,6 @@ import retrofit2.http.Query
  * @author chenshichun
  * 创建日期：2022/7/4
  * 描述：
- *
  */
 interface HomeContract : BaseContract {
     interface View : BaseContract.BaseView {

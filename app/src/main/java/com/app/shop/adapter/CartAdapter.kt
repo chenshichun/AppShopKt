@@ -14,7 +14,6 @@ import com.app.shop.databinding.ItemCartBinding
  * @author chenshichun
  * 创建日期：2022/7/13
  * 描述：购物车Adapter
- *
  */
 class CartAdapter(private val context: Context, val mData: List<ShopBean>?) :
     RecyclerView.Adapter<CartAdapter.ViewHolder>() {

@@ -11,7 +11,6 @@ import com.app.shop.databinding.ItemNewInStoreBinding
  * @author chenshichun
  * 创建日期：2022/8/24
  * 描述：
- *
  */
 class NewInStoreAdapter(val context: Context, val mData: List<String>?) :
     RecyclerView.Adapter<NewInStoreAdapter.ViewHolder>() {

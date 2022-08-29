@@ -1,10 +1,7 @@
 package com.app.shop.ui.activity
 
-import android.view.KeyEvent
-import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.app.shop.R
-import com.app.shop.adapter.OrderAdapter
 import com.app.shop.adapter.SearchAdapter
 import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivitySearchBinding
@@ -15,7 +12,6 @@ import com.app.shop.ui.contract.SearchContract
 import com.app.shop.ui.presenter.SearchPresenter
 import com.google.android.flexbox.*
 import com.gyf.immersionbar.ktx.immersionBar
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.launch
 
 /**
@@ -54,7 +50,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchPresenter>(), S
         binding.mRecyclerView.layoutManager = layoutManager
         binding.mRecyclerView.adapter = searchAdapter
 
-        searchAdapter.setOnItemClickListener(object : SearchAdapter.OnItemClickLisenter {
+        searchAdapter.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
 
             }

@@ -9,7 +9,6 @@ import com.app.shop.databinding.ItemRecentAttentionBinding
  * @author chenshichun
  * 创建日期：2022/8/24
  * 描述：
- *
  */
 class RecentAttentionAdapter(val mData: List<String>?) :
     RecyclerView.Adapter<RecentAttentionAdapter.ViewHolder>() {

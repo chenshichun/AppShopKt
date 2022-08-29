@@ -5,27 +5,20 @@ import android.os.Bundle
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
-import com.app.shop.base.BaseConstant
 import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.type.SmsType
 import com.app.shop.bean.UserDataBean
+import com.app.shop.bean.type.SmsType
 import com.app.shop.databinding.ActivityLoginBinding
 import com.app.shop.manager.AccountManager
 import com.app.shop.manager.Constants
 import com.app.shop.req.SmsLoginReq
 import com.app.shop.req.SmsSendReq
-import com.app.shop.req.WxLoginReq
 import com.app.shop.ui.contract.LoginContract
 import com.app.shop.ui.presenter.LoginPresenter
-import com.app.shop.util.AppUtil
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.TimerUnit
 import com.app.shop.util.ToastUtil
-import com.app.shop.wxapi.WXEntryActivity
 import com.gyf.immersionbar.ktx.immersionBar
-import com.tencent.mm.opensdk.modelmsg.SendAuth
-import com.tencent.mm.opensdk.openapi.IWXAPI
-import com.tencent.mm.opensdk.openapi.WXAPIFactory
 
 
 /**
@@ -34,9 +27,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * 描述：登录
  */
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), LoginContract.View,
-    View.OnClickListener, WXEntryActivity.Back {
-
-    private var api: IWXAPI? = null
+    View.OnClickListener {
 
     override fun getPresenter(): LoginPresenter {
         return LoginPresenter()
@@ -47,25 +38,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
             statusBarDarkFont(true)
         }
 
-        api = WXAPIFactory.createWXAPI(this, BaseConstant.WX_APP_ID, true)
-        api!!.registerApp(BaseConstant.WX_APP_ID)
-
-        WXEntryActivity.registAuthBack(this)
-
         binding.ivBack.setOnClickListener(this)
         binding.tvLogin.setOnClickListener(this)
-        binding.tvWxLogin.setOnClickListener(this)
         binding.tvRegister.setOnClickListener(this)
         binding.tvPasswordLogin.setOnClickListener(this)
         binding.tvGetCode.setOnClickListener(this)
         binding.tvPrivacyPolicy.setOnClickListener(this)
         binding.tvUserAgreement.setOnClickListener(this)
-    }
-
-    override fun onDestroy() {
-        api!!.unregisterApp()
-        WXEntryActivity.unregistAuthBack()
-        super.onDestroy()
     }
 
     private var timer: TimerUnit? = null
@@ -83,12 +62,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
                 bundle.putString(Constants.WEB_URL, Constants.USET_AGREEMENT_URL)
                 IntentUtil.get()!!.goActivity(this, WebViewActivity::class.java, bundle)
             }
-            R.id.tv_password_login -> startActivity(
-                Intent(
-                    this@LoginActivity,
-                    AccountLoginActivity::class.java
-                )
-            )
+            R.id.tv_password_login -> finish()
+
             R.id.tv_register -> startActivity(
                 Intent(
                     this@LoginActivity,
@@ -124,21 +99,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
                 smsLoginReq.verify_code = binding.etCode.text.toString()
                 mPresenter!!.smsLogin(smsLoginReq)
             }
-            R.id.tv_wx_login -> {
-                if (!binding.checkbox.isChecked) {
-                    ToastUtil.showToast("请阅读并同意《隐私政策》和《用户服务协议》")
-                    return
-                }
-                if (AppUtil.isWeixinAvilible(this)) {
-                    //初始化登录请求对象
-                    val req = SendAuth.Req()
-                    req.scope = "snsapi_userinfo"
-                    req.state = System.currentTimeMillis().toString()
-                    api!!.sendReq(req)
-                } else {
-                    ToastUtil.showToast("请先安装微信")
-                }
-            }
+
         }
     }
 
@@ -162,23 +123,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
         finish()
     }
 
-    /*
-    * 微信登录成功
-    * */
-    override fun wechatLogin(mData: BaseNetModel<UserDataBean>) {
-        ToastUtil.showToast(mData.msg!!)
-        AccountManager.signIn(mData.data!!.user!!)
-        AccountManager.signInToken(mData.data!!.user!!.token!!)
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        finish()
-    }
-
-    /*
-    * 绑定手机号
-    * */
-    override fun bindPhone() {
-        startActivity(Intent(this@LoginActivity, BindActivity::class.java))
-    }
 
     override fun showLoading() {
         showLoadingDialog()
@@ -188,13 +132,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginPresenter>(), Logi
         closeLoadingDialog()
     }
 
-    override fun onWxLoginFiled(errorCode: Int) {
-        ToastUtil.showToast("微信登录失败，请换个方式登录")
-    }
-
-    override fun onWxLoginSuccess(code: String?, state: String?) {
-        val wxLoginReq = WxLoginReq()
-        wxLoginReq.wechat_id = code
-        mPresenter!!.wechatLogin(wxLoginReq)
-    }
 }

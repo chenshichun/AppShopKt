@@ -6,7 +6,6 @@ import com.app.shop.base.BaseContract
  * @author chenshichun
  * 创建日期：2022/8/29
  * 描述：
- *
  */
 interface BusinessSchoolContract : BaseContract {
     interface View : BaseContract.BaseView {

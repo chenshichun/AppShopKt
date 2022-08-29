@@ -18,9 +18,9 @@ import com.app.shop.room.SearchBean
  */
 class SearchAdapter(private val context: Context, private val mData: List<SearchBean>?) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
-    private var mOnItemClickListener: OnItemClickLisenter? = null
+    private var mOnItemClickListener: OnItemClickListener? = null
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickLisenter?) {
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
         mOnItemClickListener = onItemClickListener
     }
 
@@ -47,7 +47,7 @@ class SearchAdapter(private val context: Context, private val mData: List<Search
         }
     }
 
-    interface OnItemClickLisenter {
+    interface OnItemClickListener {
         fun onItemClick(position: Int)
         fun deleteItem(position: Int)
     }

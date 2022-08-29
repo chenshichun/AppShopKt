@@ -9,7 +9,6 @@ import com.app.shop.req.SmsSendReq
  * @author chenshichun
  * 创建日期：2022/7/23
  * 描述：
- *
  */
 interface BindContract : BaseContract {
     interface View : BaseContract.BaseView {

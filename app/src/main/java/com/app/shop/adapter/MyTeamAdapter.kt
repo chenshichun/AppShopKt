@@ -10,7 +10,6 @@ import com.app.shop.databinding.ItemTeamBinding
  * @author chenshichun
  * 创建日期：2022/8/22
  * 描述：
- *
  */
 class MyTeamAdapter (private val context: Context, val mData: List<String>?) :
     RecyclerView.Adapter<MyTeamAdapter.ViewHolder>() {

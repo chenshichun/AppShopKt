@@ -15,7 +15,6 @@ import com.app.shop.R
  * @author chenshichun
  * 创建日期：2022/7/4
  * 描述：
- *
  */
 class MyAdapter(context: Context?, images: Array<Int>, text: Array<String>) :
     BaseAdapter() {

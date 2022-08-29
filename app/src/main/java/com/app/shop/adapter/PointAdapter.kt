@@ -12,7 +12,6 @@ import com.app.shop.databinding.ItemPointsBinding
  * @author chenshichun
  * 创建日期：2022/7/25
  * 描述：
- *
  */
 class PointAdapter(private val context: Context, val mData: List<PlBean>?) :
     RecyclerView.Adapter<PointAdapter.ViewHolder>() {

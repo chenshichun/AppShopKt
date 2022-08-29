@@ -13,7 +13,6 @@ import com.app.shop.databinding.ItemCartShopGoodsBinding
  * @author chenshichun
  * 创建日期：2022/7/13
  * 描述：购物车2级adapter
- *
  */
 class CartGoodsAdapter(private val context: Context, val mData: List<ProdCartBean>?) :
     RecyclerView.Adapter<CartGoodsAdapter.ViewHolder>() {

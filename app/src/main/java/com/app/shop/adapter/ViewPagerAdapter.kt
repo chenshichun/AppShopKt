@@ -8,7 +8,6 @@ import androidx.viewpager.widget.PagerAdapter
  * @author chenshichun
  * 创建日期：2022/8/20
  * 描述：
- *
  */
 class ViewPagerAdapter(mViewList: List<View>) :
     PagerAdapter() {

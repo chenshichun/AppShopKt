@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.app.shop",
+  "variantName": "ProductRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 1,
+      "versionName": "1.0",
+      "outputFile": "shop-Product-v1.0-2208291333.apk"
+    }
+  ],
+  "elementType": "File"
+}

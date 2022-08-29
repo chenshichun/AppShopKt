@@ -9,7 +9,6 @@ import com.app.shop.databinding.ItemReservationOrderBinding
  * @author chenshichun
  * 创建日期：2022/8/24
  * 描述：
- *
  */
 class ReservationOrderAdapter(val mData: List<String>?) :
     RecyclerView.Adapter<ReservationOrderAdapter.ViewHolder>() {

@@ -8,6 +8,7 @@ import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.LoadingCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.AccountManager
+import com.app.shop.util.MmkvUtil
 import com.app.shop.util.ToastUtil
 import com.kingja.loadsir.core.LoadSir
 import com.orhanobut.logger.AndroidLogAdapter
@@ -52,10 +53,31 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         mContext = applicationContext
-        // Logger日志初始化
-        initLogger()
+
         // 腾讯mmkv存储初始化
         MMKV.initialize(this)
+        if (!(MmkvUtil["APP_START", true] as Boolean)) {
+            initialization()
+        }
+    }
+
+    /*
+    * 初始化日志
+    * */
+    private fun initLogger() {
+        val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
+            .showThreadInfo(false) // 是否显示线程信息，默认为ture
+            .methodCount(5) // 显示的方法行数，默认为2
+            .tag("cuckoo") // 每个日志的全局标记。默认PRETTY_LOGGER
+            .build()
+
+        Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
+    }
+
+    open fun initialization() {
+        // Logger日志初始化
+        initLogger()
+
         // toast初始化
         ToastUtil.init(this)
         AccountManager.init(this)
@@ -74,18 +96,5 @@ class BaseApplication : Application() {
             .commit()
 
         ZXingLibrary.initDisplayOpinion(this)
-    }
-
-    /*
-    * 初始化日志
-    * */
-    private fun initLogger() {
-        val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
-            .showThreadInfo(false) // 是否显示线程信息，默认为ture
-            .methodCount(5) // 显示的方法行数，默认为2
-            .tag("cuckoo") // 每个日志的全局标记。默认PRETTY_LOGGER
-            .build()
-
-        Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
     }
 }

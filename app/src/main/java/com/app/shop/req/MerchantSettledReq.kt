@@ -4,7 +4,6 @@ package com.app.shop.req
  * @author chenshichun
  * 创建日期：2022/7/21
  * 描述：
- *
  */
 class MerchantSettledReq(
     var m_name: String? = null,
