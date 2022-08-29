@@ -119,7 +119,9 @@
         <activity android:name=".ui.activity.OperationsCenterActivity" />
         <activity android:name=".ui.activity.EvaluationActivity" />
         <activity android:name=".ui.activity.MessageActivity" />
-        <activity android:name=".ui.activity.CommentDetailActivity"/>
+        <activity android:name=".ui.activity.CommentDetailActivity" />
+        <activity android:name=".ui.activity.OperationCenterApplyActivity" />
+        <activity android:name=".ui.activity.BusinessSchoolActivity" />
     </application>
 
 </manifest>

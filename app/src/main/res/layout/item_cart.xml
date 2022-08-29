@@ -26,7 +26,7 @@
             android:id="@+id/tv_shop_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_cart_shop"
+            android:drawableLeft="@drawable/icon_new_shop"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="一通商场"

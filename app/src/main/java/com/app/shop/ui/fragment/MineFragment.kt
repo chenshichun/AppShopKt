@@ -84,6 +84,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvOrder6.setOnClickListener(this)
         binding.tvOrder7.setOnClickListener(this)
         binding.tvShowAllOrder.setOnClickListener(this)
+        binding.llOperationCenterApply.setOnClickListener(this)
+        binding.llBusinessSchool.setOnClickListener(this)
 
         // 注册扫描二维码
         register = registerForActivityResult(
@@ -150,8 +152,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)
             }
             R.id.tv_order_4 -> {
-             /*   bundle.putInt(Constants.ORDER_TPYE, 4)
-                IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)*/
+                /*   bundle.putInt(Constants.ORDER_TPYE, 4)
+                   IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)*/
                 IntentUtil.get()!!.goActivity(activity, EvaluationActivity::class.java)
             }
             R.id.tv_order_5 -> IntentUtil.get()!!
@@ -201,7 +203,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 builder.create().show()
             }
             R.id.tv_invite_friends -> {
-                startActivity(Intent(activity, InviteFriendsActivity::class.java))
+                IntentUtil.get()!!.goActivity(activity, InviteFriendsActivity::class.java)
             }
             R.id.ll_merchant_settled -> {// 商户入驻
                 XPopup.Builder(context)
@@ -239,13 +241,19 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                     }
             }
             R.id.ll_address -> {// 地址
-                startActivity(Intent(activity, AddressListActivity::class.java))
+                IntentUtil.get()!!.goActivity(activity, AddressListActivity::class.java)
             }
             R.id.ll_verified -> {// 实名认证
-                startActivity(Intent(activity, VerifiedActivity::class.java))
+                IntentUtil.get()!!.goActivity(activity, VerifiedActivity::class.java)
+            }
+            R.id.ll_operation_center_apply -> {// 运营中心申请
+                IntentUtil.get()!!.goActivity(activity, OperationCenterApplyActivity::class.java)
+            }
+            R.id.ll_business_school -> {// 商学院
+                IntentUtil.get()!!.goActivity(activity, BusinessSchoolActivity::class.java)
             }
             R.id.ll_setting -> {// 设置
-                startActivity(Intent(activity, SettingActivity::class.java))
+                IntentUtil.get()!!.goActivity(activity, SettingActivity::class.java)
             }
         }
     }

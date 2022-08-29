@@ -71,9 +71,9 @@
             <ImageView
                 android:id="@+id/iv_qr_code"
                 android:layout_width="73dp"
-                android:visibility="invisible"
                 android:layout_height="73dp"
                 android:layout_marginRight="18dp"
+                android:visibility="invisible"
                 app:layout_constraintRight_toLeftOf="@id/iv_customer_service"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:background="@drawable/icon_qr_code" />
@@ -546,17 +546,73 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:paddingLeft="15dp"
+                android:paddingLeft="13dp"
                 android:paddingRight="22dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:drawableLeft="@drawable/icon_cart_shop"
-                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/icon_new_shop"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
                     android:text="商家后台"
+                    android:textColor="#ff282828"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/go_right" />
+            </RelativeLayout>
+
+            <include layout="@layout/line" />
+
+            <RelativeLayout
+                android:id="@+id/ll_operation_center_apply"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="13dp"
+                android:paddingRight="22dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/icon_operation_center_application"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:text="运营中心申请"
+                    android:textColor="#ff282828"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/go_right" />
+            </RelativeLayout>
+
+            <include layout="@layout/line" />
+
+            <RelativeLayout
+                android:id="@+id/ll_business_school"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="13dp"
+                android:paddingRight="22dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/icon_business_school"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:text="商学院"
                     android:textColor="#ff282828"
                     android:textSize="16sp" />
 
