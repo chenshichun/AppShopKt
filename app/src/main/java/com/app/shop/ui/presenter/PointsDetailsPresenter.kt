@@ -18,9 +18,9 @@ import kotlinx.coroutines.launch
  */
 class PointsDetailsPresenter : BasePresenter<PointsDetailsContract.View>(),
     PointsDetailsContract.Presenter {
-    override fun listPoint(page: Int, size: Int) {
+    override fun listPoint(page: Int, size: Int, type: String) {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = ApiRequest.create(HomeService::class.java).listPoint(page, size)
+            val response = ApiRequest.create(HomeService::class.java).listPoint(page, size, type)
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
                 mView!!.noNetworkView()

@@ -3,6 +3,7 @@ package com.app.shop.service
 import com.app.shop.bean.*
 import com.app.shop.req.CertReq
 import com.app.shop.req.MerchantSettledReq
+import com.app.shop.req.WalletSetReq
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -110,7 +111,8 @@ interface HomeService {
     @GET("user/list/point")
     suspend fun listPoint(
         @Query("page") page: Int,
-        @Query("size") size: Int
+        @Query("size") size: Int,
+        @Query("type") type: String
     ): Response<BaseNetModel<PointBean>>
 
     /*
@@ -118,4 +120,32 @@ interface HomeService {
     * */
     @POST("user/cert")
     suspend fun cert(@Body certReq: CertReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 我的钱包
+    * */
+    @GET("user/wallet/info")
+    suspend fun walletInfo(): Response<BaseNetModel<WalletBean>>
+
+    /*
+    * 提现账号
+    * */
+    @POST("user/wallet/set")
+    suspend fun walletSet(@Body walletSetReq: WalletSetReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 我的团队头部信息
+    * */
+    @GET("user/team/my")
+    suspend fun teamMy(): Response<BaseNetModel<MyTeamBean>>
+
+    /*
+    * 团队页面中直属会员信息
+    * */
+    @GET("/user/team/all")
+    suspend fun teamAll(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<BaseNetModel<TeamAllBean>>
+
 }

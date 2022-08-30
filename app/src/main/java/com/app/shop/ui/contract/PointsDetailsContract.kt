@@ -18,6 +18,6 @@ interface PointsDetailsContract : BaseContract {
     }
 
     interface Presenter {
-        fun listPoint(page:Int,size:Int)
+        fun listPoint(page:Int,size:Int, type: String)
     }
 }

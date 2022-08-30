@@ -9,5 +9,20 @@
     <string name="goods_sell">已售%d件</string>
     <string name="goods_integral">%s 易货积分</string>
     <string name="goods_price">￥%s</string>
+    <string name="price">￥%s</string>
     <string name="detail_pic">&lt;img src=\%s&gt;</string>
+    <string name="nickname">昵称：%s</string>
+    <string name="account">账号：%s</string>
+    <string name="level">身份：%s</string>
+    <string name="dt_count">一级人数：%d</string>
+    <string name="all_count">团队总人数：%d</string>
+    <string name="dt_valid_count">一级活跃：%d</string>
+    <string name="all_valid_count">团队活跃总人数：%d</string>
+    <string name="type">类型：%s</string>
+    <string name="content">内容：%s</string>
+    <string name="time">时间：%s</string>
+    <string name="add_price">+ ￥%s</string>
+    <string name="alipay_name">支付宝姓名：%s</string>
+    <string name="alipay_account">支付宝账号：%s</string>
+    <string name="start_time">发起时间：%s</string>
 </resources>

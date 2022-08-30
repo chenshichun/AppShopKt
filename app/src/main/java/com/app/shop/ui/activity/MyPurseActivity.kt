@@ -3,6 +3,8 @@ package com.app.shop.ui.activity
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.WalletBean
 import com.app.shop.databinding.ActivityMyPurseBinding
 import com.app.shop.ui.contract.MyPurseContract
 import com.app.shop.ui.presenter.MyPursePresenter
@@ -22,6 +24,7 @@ class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>()
 
     override fun initView() {
         immersionBar {
+            statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
         binding.viewHead.tvTitle.text = "我的钱包"
@@ -34,6 +37,15 @@ class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>()
         binding.stv1.setOnClickListener(this)
         binding.stv2.setOnClickListener(this)
         binding.stv3.setOnClickListener(this)
+
+        mPresenter!!.walletInfo()
+    }
+
+    override fun walletInfo(mData: BaseNetModel<WalletBean>) {
+        binding.tvTotalAssets.text = mData.data!!.wallet.cash
+        binding.tvAmountCanWithdrawn.text = mData.data!!.wallet.avail_cash
+        binding.tvWithdrawnAmount.text = mData.data!!.wallet.accu_cash
+        binding.tvBalanceAmount.text = mData.data!!.wallet.cash
     }
 
     override fun showLoading() {
@@ -49,14 +61,14 @@ class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>()
             R.id.tv_withdraw -> {// 提现
                 IntentUtil.get()!!.goActivity(this, WithdrawActivity::class.java)
             }
-            R.id.stv_1 -> {
-
+            R.id.stv_1 -> {// 钱包明细
+                IntentUtil.get()!!.goActivity(this, WalletDetailsActivity::class.java)
             }
             R.id.stv_2 -> {// 修改提现账号
                 IntentUtil.get()!!.goActivity(this, ReflectAccountActivity::class.java)
             }
-            R.id.stv_3 -> {
-
+            R.id.stv_3 -> {// 提现记录
+                IntentUtil.get()!!.goActivity(this, WithdrawalsRecordActivity::class.java)
             }
         }
     }

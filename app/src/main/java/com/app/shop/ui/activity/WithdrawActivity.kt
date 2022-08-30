@@ -21,7 +21,7 @@ class WithdrawActivity : BaseActivity<ActivityWithdrawBinding, WithdrawPresenter
 
     private lateinit var withdrawPriceAdapter: WithdrawPriceAdapter
     private var withdrawPriceList = mutableListOf<WithdrawPriceBean>()
-    private val priceList = listOf(10, 20, 30, 50, 100, 200)
+    private val priceList = listOf(10, 20, 30, 50, 100, 200, 500, 1000)
 
     override fun getPresenter(): WithdrawPresenter {
         return WithdrawPresenter()

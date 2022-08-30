@@ -7,5 +7,5 @@ package com.app.shop.bean.type
  *
  */
 enum class SmsType {
-    login,register,findpwd,resetpwd
+    login,register,findpwd,resetpwd,setwallet
 }

@@ -34,6 +34,7 @@ class PointsDetailsActivity : BaseActivity<ActivityPointsDetailsBinding, PointsD
     private var size: Int = 10
 
     private var type = 0
+    private var typeString = "reward"
 
     override fun getPresenter(): PointsDetailsPresenter {
         return PointsDetailsPresenter()
@@ -47,9 +48,18 @@ class PointsDetailsActivity : BaseActivity<ActivityPointsDetailsBinding, PointsD
 
         type = intent.getIntExtra("point_type", 0)
         when (type) {
-            0 -> binding.viewHead.tvTitle.text = "赠送积分明细"
-            1 -> binding.viewHead.tvTitle.text = "易货积分明细"
-            2 -> binding.viewHead.tvTitle.text = "消费积分明细"
+            0 -> {
+                binding.viewHead.tvTitle.text = "奖励积分明细"
+                typeString = "reward"
+            }
+            1 -> {
+                binding.viewHead.tvTitle.text = "易货积分明细"
+                typeString = "barter"
+            }
+            2 -> {
+                binding.viewHead.tvTitle.text = "消费积分明细"
+                typeString = "expend"
+            }
         }
         binding.viewHead.ivBack.setOnClickListener {
             finish()
@@ -80,7 +90,7 @@ class PointsDetailsActivity : BaseActivity<ActivityPointsDetailsBinding, PointsD
     * */
     private fun initData() {
         loadService.showCallback(LoadingCallback::class.java)
-        mPresenter!!.listPoint(page, size)
+        mPresenter!!.listPoint(page, size, typeString)
     }
 
     @SuppressLint("NotifyDataSetChanged")
