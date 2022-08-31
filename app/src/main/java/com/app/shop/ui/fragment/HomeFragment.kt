@@ -157,8 +157,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             EventBus.getDefault().post(PageEvent(1))
         }
 
-        binding.ivMessage.setOnClickListener{// 消息
-            IntentUtil.get()!!.goActivity(activity,MessageActivity::class.java)
+        binding.ivMessage.setOnClickListener {// 消息
+            IntentUtil.get()!!.goActivity(activity, MessageActivity::class.java)
         }
         getCurrentLocationLatLng()
         getLocation()
@@ -430,6 +430,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                 IntentUtil.get()!!.goActivity(activity, CategoryListActivity::class.java, bundle)
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     @SuppressLint("CheckResult")

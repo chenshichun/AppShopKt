@@ -1,6 +1,7 @@
 package com.app.shop.service
 
 import com.app.shop.bean.*
+import com.app.shop.req.CartReq
 import com.app.shop.req.CertReq
 import com.app.shop.req.MerchantSettledReq
 import com.app.shop.req.WalletSetReq
@@ -77,6 +78,12 @@ interface HomeService {
     suspend fun getCartData(
     ): Response<BaseNetModel<CartBean>>
 
+    /*
+    * 删除购物车
+    * */
+    @POST("user/cart/del")
+    suspend fun cartDel(@Body cartReq: CartReq): Response<BaseNetModel<Any>>
+    
     /*
     * 用户信息
     * */

@@ -13,6 +13,7 @@ import com.app.shop.databinding.FragmentCartBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
+import com.app.shop.req.CartReq
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
 import com.kingja.loadsir.core.LoadService
@@ -79,7 +80,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             }
 
             override fun deleteClick(position: Int, position1: Int) {
-
+                mPresenter!!.cartDel(CartReq(cartList[position].prods[position1].basket_id))
             }
 
             override fun reduceClick(position: Int, position1: Int) {
@@ -170,6 +171,13 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
                 goodsAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    /*
+    * 删除购物车
+    * */
+    override fun cartDel(mData: BaseNetModel<Any>) {
+        mPresenter!!.getCartData()
     }
 
     override fun noNetworkView() {

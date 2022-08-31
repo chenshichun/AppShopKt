@@ -1,5 +1,6 @@
 package com.app.shop.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.app.shop.R
