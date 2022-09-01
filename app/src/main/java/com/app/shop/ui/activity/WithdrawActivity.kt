@@ -56,6 +56,7 @@ class WithdrawActivity : BaseActivity<ActivityWithdrawBinding, WithdrawPresenter
                 withdrawPriceList[position].isCheck = true
                 withdrawPriceAdapter.notifyDataSetChanged()
             }
+
         })
     }
 

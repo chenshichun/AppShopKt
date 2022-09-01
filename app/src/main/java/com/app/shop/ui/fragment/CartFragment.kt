@@ -140,6 +140,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
     /*
     * 购物车数据
     * */
+    @SuppressLint("NotifyDataSetChanged")
     override fun getCartData(mData: BaseNetModel<CartBean>) {
         cartList.clear()
         cartList.addAll(mData.data!!.list)
@@ -149,6 +150,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
     /*
     * 猜你喜欢
     * */
+    @SuppressLint("NotifyDataSetChanged")
     override fun getGoodsData(mData: BaseNetModel<ProdBean>) {
         binding.refreshLayout.finishRefresh()
         binding.refreshLayout.finishLoadMore()
@@ -210,6 +212,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
         binding.checkbox.isChecked = isAllCheck
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.checkbox -> {

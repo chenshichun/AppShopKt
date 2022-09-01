@@ -12,8 +12,6 @@ import com.app.shop.bean.CateBean
 import com.app.shop.bean.ChildrenBean
 import com.app.shop.bean.ClassificationBean
 import com.app.shop.bean.event.CateEvent
-import com.app.shop.bean.event.PageEvent
-import com.app.shop.bean.type.CategoryType
 import com.app.shop.databinding.FragmentClassificationBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
@@ -26,10 +24,6 @@ import com.app.shop.ui.presenter.ClassificationPresenter
 import com.app.shop.util.IntentUtil
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -62,6 +56,7 @@ class ClassificationFragment :
         binding.leftRecycleview.adapter = mPrimaryClassificationAdapter
         mPrimaryClassificationAdapter.setOnItemClickListener(object :
             PrimaryClassificationAdapter.OnItemClickListener {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onItemClick(position: Int) {
                 for (cateBean in cateBeanList) {
                     cateBean.isCheck = false

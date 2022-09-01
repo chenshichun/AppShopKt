@@ -1,14 +1,15 @@
 package com.app.shop.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.base.BaseActivity
-import com.app.shop.bean.*
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.Prod
+import com.app.shop.bean.ProdBean
 import com.app.shop.bean.type.CategoryType
 import com.app.shop.bean.type.SortType
 import com.app.shop.databinding.ActivityCategoryListBinding
@@ -22,7 +23,6 @@ import com.app.shop.ui.presenter.CategoryListPresenter
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun

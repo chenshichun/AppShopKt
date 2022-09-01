@@ -17,7 +17,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -88,7 +87,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     private lateinit var tabAdapter: TabAdapter
     private lateinit var goodsAdapter: GoodsAdapter
     private var goodsList = mutableListOf<Prod>()
-    private var tabsList = mutableListOf<TabBean>()
 
     private lateinit var mLocationClient: AMapLocationClient
     private lateinit var mLocationOption: AMapLocationClientOption
@@ -107,6 +105,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
         tabAdapter = activity?.let { TabAdapter(cateBeanList) }!!
         tabAdapter.setOnItemClickListener(object : TabAdapter.OnItemClickListener {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onItemClick(position: Int) {
                 for (cateBean in cateBeanList) {
                     cateBean.isCheck = false
@@ -332,6 +331,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
             }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun getCateList(mData: BaseNetModel<ClassificationBean>) {
         cateBeanList.clear()
         val cateBean = CateBean(

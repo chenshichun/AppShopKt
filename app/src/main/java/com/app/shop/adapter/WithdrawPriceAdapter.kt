@@ -53,7 +53,7 @@ class WithdrawPriceAdapter(private val context: Context, val mData: List<Withdra
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return mData!!.size
     }
 
     inner class ViewHolder(binding: ItemWithdrawPriceBinding) :

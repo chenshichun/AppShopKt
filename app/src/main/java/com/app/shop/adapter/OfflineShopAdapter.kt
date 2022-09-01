@@ -3,6 +3,7 @@ package com.app.shop.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.shop.databinding.ItemOfflineShopBinding
 
@@ -27,13 +28,17 @@ class OfflineShopAdapter(private val context: Context, val mData: List<String>?)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.tvNavigation.setOnClickListener {
+            mOnItemClickListener!!.onNavigationClick(position)
+        }
         holder.itemView.setOnClickListener {
-            mOnItemClickListener?.onItemClick(position)
+            mOnItemClickListener!!.onItemClick(position)
         }
     }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+        fun onNavigationClick(position: Int)
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +47,7 @@ class OfflineShopAdapter(private val context: Context, val mData: List<String>?)
 
     inner class ViewHolder(binding: ItemOfflineShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val tvNavigation: TextView = binding.tvNavigation
     }
 
 }

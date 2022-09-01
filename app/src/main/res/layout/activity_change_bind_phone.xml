@@ -33,7 +33,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/et_name"
+                android:id="@+id/et_phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_dp_10"
@@ -60,7 +60,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/et_account"
+                android:id="@+id/et_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_dp_10"
@@ -70,10 +70,11 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_get_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="获取验证码"
-                android:textColor="@color/red"
+                android:textColor="@color/blue"
                 android:textSize="14sp" />
         </LinearLayout>
 

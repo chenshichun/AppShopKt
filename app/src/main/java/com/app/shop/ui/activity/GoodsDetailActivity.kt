@@ -257,6 +257,7 @@ ${"$"}img[img].style.height ='auto'
             }
 
             // 链接跳转都会走这个方法
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url) // 强制在当前 WebView 中加载 url
                 return true
