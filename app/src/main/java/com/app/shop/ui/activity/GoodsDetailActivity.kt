@@ -15,9 +15,12 @@ import androidx.annotation.RequiresApi
 import androidx.viewpager.widget.ViewPager
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.GoodsBean
 import com.app.shop.bean.Prod
 import com.app.shop.bean.event.PageEvent
 import com.app.shop.databinding.ActivityGoodsDetailBinding
+import com.app.shop.manager.Constants
 import com.app.shop.ui.contract.GoodsDetailContract
 import com.app.shop.ui.presenter.GoodsDetailPresenter
 import com.app.shop.util.CommonUtil
@@ -25,6 +28,7 @@ import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideImageLoader
 import com.app.shop.view.pop.SpecificationPop
+import com.bumptech.glide.Glide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lxj.xpopup.XPopup
 import com.orhanobut.logger.Logger
@@ -41,8 +45,8 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
     GoodsDetailContract.View, View.OnClickListener {
     private var alphaH = 0f
 
-    private lateinit var prod: Prod
-
+    private lateinit var goodsBean: GoodsBean
+    private lateinit var id: String
     override fun getPresenter(): GoodsDetailPresenter {
         return GoodsDetailPresenter()
     }
@@ -52,9 +56,9 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         immersionBar {
             statusBarDarkFont(true)
         }
+        id = intent.getStringExtra(Constants.GOODS_ID).toString();
 
-        prod = IntentUtil.getParcelableExtra<Prod>(this)!!
-        updateUi(prod)
+        mPresenter!!.prodGet(id)
 
         binding.viewHead.tvTitle.text = "商品详情"
         binding.viewHead.clHead.alpha = 0f
@@ -86,7 +90,7 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
             R.id.iv_goods_back -> finish()
 
             R.id.tv_buy -> {// 立即购买
-                val specificationPop = SpecificationPop(this)
+                var specificationPop = SpecificationPop(this, goodsBean.prod_info)
                 XPopup.Builder(this)
                     .moveUpToKeyboard(true)
                     .isViewMode(true)
@@ -96,7 +100,7 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
             R.id.tv_buy_reason_share -> {// 分享文案
                 val clipboardManager =
                     getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clipData = ClipData.newPlainText("Label", prod.brief)
+                val clipData = ClipData.newPlainText("Label", goodsBean.prod_info.brief)
                 clipboardManager.setPrimaryClip(clipData)
                 ToastUtil.showToast("已复制文案")
             }
@@ -112,9 +116,16 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
 
             }
             R.id.tv_show_more -> {
-                IntentUtil.get()!!.goActivity(this, CommentDetailActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString(Constants.GOODS_ID, goodsBean.prod_info.prod_id)
+                IntentUtil.get()!!.goActivity(this, CommentDetailActivity::class.java, bundle)
             }
         }
+    }
+
+    override fun prodGet(mData: BaseNetModel<GoodsBean>) {
+        goodsBean = mData.data!!
+        updateUi(goodsBean)
     }
 
     override fun showLoading() {
@@ -128,26 +139,43 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
     /*
     * 更新ui
     * */
-    private fun updateUi(prod: Prod) {
-        getBanner(prod.imgs)
+    private fun updateUi(prod: GoodsBean) {
+        getBanner(prod.prod_info.imgs)
 
         binding.layoutGoodsDetailsHead.tvIntegral.visibility =
-            if (prod.ori_point.equals("0")) View.INVISIBLE else View.VISIBLE
+            if (prod.prod_info.ori_point.equals("0")) View.INVISIBLE else View.VISIBLE
 
         binding.layoutGoodsDetailsHead.tvPrice.visibility =
-            if (prod.ori_point.equals("0")) View.VISIBLE else View.GONE
+            if (prod.prod_info.ori_point.equals("0")) View.VISIBLE else View.GONE
 
         binding.layoutGoodsDetailsHead.tvIntegral.text =
-            String.format(getString(R.string.goods_integral), prod.ori_point)
+            String.format(getString(R.string.goods_integral), prod.prod_info.ori_point)
 
         binding.layoutGoodsDetailsHead.tvPrice.text =
-            String.format(getString(R.string.goods_price), prod.price)
+            String.format(getString(R.string.goods_price), prod.prod_info.price)
 
-        binding.layoutGoodsDetailsHead.tvName.text = prod.prod_name
+        binding.layoutGoodsDetailsHead.tvName.text = prod.prod_info.prod_name
         binding.layoutGoodsDetailsHead.tvSell.text =
-            String.format(getString(R.string.goods_sell), prod.sold_num)
-        binding.layoutGoodsDetailsMiddle.tvBuyReason.text = prod.brief
-        htmlData(prod.content!!)
+            String.format(getString(R.string.goods_sell), prod.prod_info.sold_num)
+        binding.layoutGoodsDetailsMiddle.tvBuyReason.text = prod.prod_info.brief
+        htmlData(prod.prod_info.content)
+
+        binding.layoutGoodsDetailsHead.tvShopName.text = prod.shop_info.name
+
+        binding.layoutGoodsDetailsComment.clComment.visibility =
+            if (prod.comment_count > 0) View.VISIBLE else View.GONE
+
+        if (prod.comment != null) {
+            binding.layoutGoodsDetailsComment.tvCommentCount.text =
+                String.format(getString(R.string.comment_count), prod.comment_count)
+            Glide.with(this).load(prod.comment.profile_pic).placeholder(R.drawable.icon_default_pic)
+                .error(R.drawable.icon_default_pic)
+                .into(binding.layoutGoodsDetailsComment.ivCommentHead)
+            binding.layoutGoodsDetailsComment.tvCommentName.text = prod.comment.name
+            binding.layoutGoodsDetailsComment.tvCommentTime.text = prod.comment.created_at
+            binding.layoutGoodsDetailsComment.tvCommentContent.text = prod.comment.content
+            binding.layoutGoodsDetailsComment.rbCommentScore.rating = prod.comment.score.toFloat()
+        }
     }
 
     /*

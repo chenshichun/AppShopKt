@@ -22,6 +22,7 @@ class Constants {
         const val WEB_TITLE: String = "WEB_TITLE"
         const val ORDER_TPYE: String = "order_type"
 
-
+        const val GOODS_ID: String = "GOODS_ID"
+        const val SEARCH_KEY: String = "SEARCH_KEY"
     }
 }

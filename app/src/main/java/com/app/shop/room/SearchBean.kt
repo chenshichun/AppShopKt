@@ -16,8 +16,7 @@ class SearchBean(
     @PrimaryKey
     var name: String
 ) : Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readString().toString()) {
-    }
+    constructor(parcel: Parcel) : this(parcel.readString().toString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

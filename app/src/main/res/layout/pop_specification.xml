@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_round"
@@ -16,9 +17,10 @@
             android:id="@+id/iv_goods"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="#03A9F4"
+            android:scaleType="centerCrop"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/icon_default_pic" />
 
         <TextView
             android:id="@+id/tv_goods_type"
@@ -43,28 +45,23 @@
             app:layout_constraintLeft_toLeftOf="@id/tv_goods_type" />
 
         <TextView
+            android:id="@+id/tv_stocks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="库存：100"
+            android:text="@string/stocks"
             android:textColor="@color/color_333"
             android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@id/tv_price"
             app:layout_constraintTop_toTopOf="@id/tv_price" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="包"
-        android:textColor="@color/color_333"
-        android:textSize="14sp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_spec" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -88,28 +85,36 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_reduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_dp_10"
                 android:text="-"
                 android:textColor="@color/color_333"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/et_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:background="#E8E3E3"
+                android:inputType="number"
                 android:paddingHorizontal="@dimen/dimen_dp_20"
                 android:paddingVertical="@dimen/dimen_dp_5"
                 android:text="1"
                 android:textColor="@color/color_333" />
 
             <TextView
+                android:id="@+id/tv_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_dp_10"
                 android:text="+"
                 android:textColor="@color/color_333"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 

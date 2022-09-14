@@ -144,17 +144,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="X1"
+                        android:text="@string/num"
                         android:textColor="@color/color_333"
                         android:textSize="8sp"
                         app:layout_constraintLeft_toRightOf="@id/tv_price"
                         app:layout_constraintTop_toTopOf="@id/tv_price" />
 
                     <TextView
+                        android:id="@+id/tv_attr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:text="商品规格：%s"
+                        android:text="@string/attr"
                         android:textColor="@color/color_333"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@id/tv_price"

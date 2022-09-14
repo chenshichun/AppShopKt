@@ -5,7 +5,6 @@ import android.text.TextUtils
 import com.app.shop.base.BaseConstant
 import com.app.shop.bean.UserBean
 import com.app.shop.util.MmkvUtil
-import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun

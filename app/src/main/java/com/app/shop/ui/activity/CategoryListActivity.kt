@@ -1,6 +1,7 @@
 package com.app.shop.ui.activity
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,9 +21,11 @@ import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.ui.contract.CategoryListContract
 import com.app.shop.ui.presenter.CategoryListPresenter
+import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -33,8 +36,8 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
     CategoryListContract.View, View.OnClickListener {
 
     private var type: Int = 0
-    private lateinit var cateId: String
-    private lateinit var cateName: String
+    private var cateId: String = ""
+    private var cateName: String = ""
 
     private lateinit var goodsAdapter: GoodsAdapter
     private var goodsList = mutableListOf<Prod>()
@@ -42,6 +45,8 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
     private var page: Int = 1
     private var size: Int = 10
     private var sort: String = SortType.ASC_FINAL.sortType
+
+    private var keyword: String = ""
 
     override fun getPresenter(): CategoryListPresenter {
         return CategoryListPresenter()
@@ -56,13 +61,24 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
             finish()
         }
 
+        keyword = intent.getStringExtra(Constants.SEARCH_KEY).toString()
         cateName = intent.getStringExtra(Constants.CATEGORY_NAME).toString()
         cateId = intent.getStringExtra(Constants.CATEGORY_ID).toString()
-
         type = intent.getIntExtra(Constants.CATEGORY_TYPE, 0)
+        Logger.d(cateName)
+        Logger.d(keyword)
 
-        binding.viewHead.tvTitle.text =
-            if (cateName != "null") cateName else CategoryType.values()[type].categoryName
+        Logger.d(keyword == "")
+        Logger.d(cateId == "")
+        Logger.d(cateName == "")
+
+        if (keyword == "null") {
+            binding.viewHead.tvTitle.text =
+                if (cateName != "null") cateName else CategoryType.values()[type].categoryName
+        } else {
+            binding.viewHead.tvTitle.text = keyword
+        }
+
 
         binding.llComplex.setOnClickListener(this)
         binding.llSales.setOnClickListener(this)
@@ -74,7 +90,10 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
 
         goodsAdapter.setOnItemClickListener(object : GoodsAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                // startActivity(Intent(this@CategoryListActivity, GoodsDetailActivity::class.java))
+                val bundle = Bundle()
+                bundle.putString(Constants.GOODS_ID, goodsList[position].prod_id)
+                IntentUtil.get()!!
+                    .goActivity(this@CategoryListActivity, GoodsDetailActivity::class.java, bundle)
             }
         })
 
@@ -97,14 +116,20 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
 
     private fun initData() {
         loadService.showCallback(LoadingCallback::class.java)
-        if (cateId != "null") {
-            mPresenter!!.getCateByIdData(page, size, cateId, sort)
-        } else {
-            when (type) {
-                0 -> mPresenter!!.getProdRecommendData(page, size, sort)
-                1 -> mPresenter!!.getProdFeaturedData(page, size, sort)
-                else -> mPresenter!!.getProdFeaturedData(page, size, sort)
+
+        if (keyword == "null") {
+
+            if (cateId != "null") {
+                mPresenter!!.getCateByIdData(page, size, cateId, sort)
+            } else {
+                when (type) {
+                    0 -> mPresenter!!.getProdRecommendData(page, size, sort)
+                    1 -> mPresenter!!.getProdFeaturedData(page, size, sort)
+                    else -> mPresenter!!.getProdFeaturedData(page, size, sort)
+                }
             }
+        } else {
+            mPresenter!!.getSearchData(page, size, sort, keyword)
         }
     }
 

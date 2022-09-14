@@ -69,4 +69,21 @@ class CategoryListPresenter : BasePresenter<CategoryListContract.View>(),
             }
         }
     }
+
+    override fun getSearchData(page: Int, size: Int, sort: String, keywords: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response =
+                ApiRequest.create(HomeService::class.java).getSearchData(page, size, sort, keywords)
+            if (response.body() == null) {
+                mView!!.noNetworkView()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.getProdHomeData(response.body()!!)
+                } else {
+                    mView!!.showError()
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.app.shop.ui.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.ui.activity.CategoryListActivity
 import com.app.shop.ui.activity.MessageActivity
+import com.app.shop.ui.activity.SearchActivity
 import com.app.shop.ui.contract.ClassificationContract
 import com.app.shop.ui.presenter.ClassificationPresenter
 import com.app.shop.util.IntentUtil
@@ -95,6 +97,9 @@ class ClassificationFragment :
 
         initData()
 
+        binding.tvSearch.setOnClickListener{
+            startActivity(Intent(activity, SearchActivity::class.java))
+        }
     }
 
     private fun initData() {

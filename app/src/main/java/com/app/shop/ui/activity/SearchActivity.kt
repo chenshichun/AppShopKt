@@ -1,15 +1,18 @@
 package com.app.shop.ui.activity
 
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.app.shop.R
 import com.app.shop.adapter.SearchAdapter
 import com.app.shop.base.BaseActivity
 import com.app.shop.databinding.ActivitySearchBinding
+import com.app.shop.manager.Constants
 import com.app.shop.room.SearchBean
 import com.app.shop.room.SearchDao
 import com.app.shop.room.SearchDatabase
 import com.app.shop.ui.contract.SearchContract
 import com.app.shop.ui.presenter.SearchPresenter
+import com.app.shop.util.IntentUtil
 import com.google.android.flexbox.*
 import com.gyf.immersionbar.ktx.immersionBar
 import kotlinx.coroutines.launch
@@ -52,7 +55,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchPresenter>(), S
 
         searchAdapter.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-
+                val bundle = Bundle()
+                bundle.putString(Constants.SEARCH_KEY, searchBeanList[position].name)
+                IntentUtil.get()!!
+                    .goActivity(this@SearchActivity, CategoryListActivity::class.java, bundle)
             }
 
             override fun deleteItem(position: Int) {
@@ -67,6 +73,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchPresenter>(), S
             lifecycleScope.launch {
                 searchDao.putSearchBean(SearchBean(view.text.toString()))
                 queryAllData()
+
+                val bundle = Bundle()
+                bundle.putString(Constants.SEARCH_KEY, view.text.toString())
+                IntentUtil.get()!!
+                    .goActivity(this@SearchActivity, CategoryListActivity::class.java, bundle)
             }
             true
         }

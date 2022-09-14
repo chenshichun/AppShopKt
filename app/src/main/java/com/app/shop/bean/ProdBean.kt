@@ -31,7 +31,7 @@ data class Prod(
     val ori_price: Int,
     val pic: String?,
     val price: String?,
-    val prod_id: Long,
+    val prod_id: String?,
     val prod_name: String?,
     val prod_type: Int,
     val putaway_time: String?,
@@ -61,7 +61,7 @@ data class Prod(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readLong(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
         parcel.readString(),
@@ -92,7 +92,7 @@ data class Prod(
         parcel.writeInt(ori_price)
         parcel.writeString(pic)
         parcel.writeString(price)
-        parcel.writeLong(prod_id)
+        parcel.writeString(prod_id)
         parcel.writeString(prod_name)
         parcel.writeInt(prod_type)
         parcel.writeString(putaway_time)

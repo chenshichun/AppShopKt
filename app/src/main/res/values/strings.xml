@@ -25,4 +25,9 @@
     <string name="alipay_name">支付宝姓名：%s</string>
     <string name="alipay_account">支付宝账号：%s</string>
     <string name="start_time">发起时间：%s</string>
+    <string name="comment_count">宝贝评论（%d）</string>
+    <string name="all">全部(%d)</string>
+    <string name="stocks">库存：%d</string>
+    <string name="num">X%s</string>
+    <string name="attr">商品规格：%s</string>
 </resources>

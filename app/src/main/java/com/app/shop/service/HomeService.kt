@@ -1,10 +1,7 @@
 package com.app.shop.service
 
 import com.app.shop.bean.*
-import com.app.shop.req.CartReq
-import com.app.shop.req.CertReq
-import com.app.shop.req.MerchantSettledReq
-import com.app.shop.req.WalletSetReq
+import com.app.shop.req.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -72,6 +69,17 @@ interface HomeService {
     ): Response<BaseNetModel<ProdBean>>
 
     /*
+    * 商品搜索
+    * */
+    @GET("prod/home/search")
+    suspend fun getSearchData(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String,
+        @Query("keywords") cateId: String,
+    ): Response<BaseNetModel<ProdBean>>
+
+    /*
     * 购物车
     * */
     @GET("user/cart/list")
@@ -83,7 +91,7 @@ interface HomeService {
     * */
     @POST("user/cart/del")
     suspend fun cartDel(@Body cartReq: CartReq): Response<BaseNetModel<Any>>
-    
+
     /*
     * 用户信息
     * */
@@ -149,10 +157,52 @@ interface HomeService {
     /*
     * 团队页面中直属会员信息
     * */
-    @GET("/user/team/all")
+    @GET("user/team/all")
     suspend fun teamAll(
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<BaseNetModel<TeamAllBean>>
+
+    /*
+    * 商品详情
+    * */
+    @GET("prod/get")
+    suspend fun prodGet(@Query("id") id: String): Response<BaseNetModel<GoodsBean>>
+
+    /*
+    * 商品评论
+    * */
+    @GET("prod/comm/all")
+    suspend fun prodCommAll(@Query("id") id: String): Response<BaseNetModel<CommentBean>>
+
+    /*
+    * 新增地址
+    * */
+    @POST("user/addr/save")
+    suspend fun addrSave(@Body addrReq: AddrReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 删除地址
+    * */
+    @POST("user/addr/del")
+    suspend fun addrDel(@Body addrIdReq: AddrIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 地址列表
+    * */
+    @GET("user/addr/list")
+    suspend fun addrList(): Response<BaseNetModel<AddressBean>>
+
+    /*
+    * 设置默认地址
+    * */
+    @POST("user/addr/default/set")
+    suspend fun addrDefultSet(@Body addrIdReq: AddrIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 获取默认地址
+    * */
+    @GET("user/addr/default/get")
+    suspend fun addrDefault(): Response<BaseNetModel<Addr>>
 
 }

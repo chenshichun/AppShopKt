@@ -1,11 +1,14 @@
 package com.app.shop.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.shop.bean.Addr
 import com.app.shop.databinding.ItemAddressBinding
 
 /**
@@ -14,7 +17,7 @@ import com.app.shop.databinding.ItemAddressBinding
  * 描述：
  *
  */
-class AddressAdapter(private val context: Context, val mData: List<String>?) :
+class AddressAdapter(private val context: Context, val mData: List<Addr>?) :
     RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     private var mOnItemClickListener: OnItemClickListener? = null
 
@@ -28,10 +31,13 @@ class AddressAdapter(private val context: Context, val mData: List<String>?) :
         return ViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nameTv.text = "cuckoo"
-        holder.tvPhone.text = "15068156432"
-        holder.tvAddress.text = "浙江省义乌市苏溪镇123号大马路拉面"
+        holder.nameTv.text = mData!![position].receiver
+        holder.tvPhone.text = mData[position].mobile
+        holder.tvAddress.text =
+            mData[position].province + mData[position].city + mData[position].area + mData[position].addr
+        holder.checkBox.isChecked = mData[position].is_default
 
         holder.itemView.setOnClickListener {
             mOnItemClickListener!!.onItemClick(position)
@@ -58,7 +64,7 @@ class AddressAdapter(private val context: Context, val mData: List<String>?) :
     }
 
     override fun getItemCount(): Int {
-        return 15
+        return mData!!.size
     }
 
     inner class ViewHolder(binding: ItemAddressBinding) :

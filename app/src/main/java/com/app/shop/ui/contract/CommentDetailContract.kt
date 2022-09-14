@@ -1,6 +1,8 @@
 package com.app.shop.ui.contract
 
 import com.app.shop.base.BaseContract
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.CommentBean
 
 /**
  * @author chenshichun
@@ -10,8 +12,10 @@ import com.app.shop.base.BaseContract
  */
 interface CommentDetailContract : BaseContract {
     interface View : BaseContract.BaseView {
+        fun prodCommAll(mData: BaseNetModel<CommentBean>)
     }
 
     interface Presenter {
+        fun prodCommAll(id: String)
     }
 }

@@ -6,9 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.AddressAdapter
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.Addr
+import com.app.shop.bean.AddressBean
+import com.app.shop.bean.BaseNetModel
 import com.app.shop.databinding.ActivityAddressListBinding
+import com.app.shop.req.AddrIdReq
 import com.app.shop.ui.contract.AddressListContract
 import com.app.shop.ui.presenter.AddressListPresenter
+import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
 
 /**
@@ -20,6 +25,7 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
     AddressListContract.View {
 
     private lateinit var addressAdapter: AddressAdapter
+    private var addrList = mutableListOf<Addr>()
 
     override fun getPresenter(): AddressListPresenter {
         return AddressListPresenter()
@@ -36,7 +42,7 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
             finish()
         }
 
-        addressAdapter = AddressAdapter(this, null)
+        addressAdapter = AddressAdapter(this, addrList)
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = addressAdapter
         addressAdapter.setOnItemClickListener(object : AddressAdapter.OnItemClickListener {
@@ -50,6 +56,8 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
                 )
                 builder.setTitle("删除地址")
                 builder.setPositiveButton("确定") { dialog, _ ->
+                    val addrIdReq = AddrIdReq(addrList[position].addr_id!!)
+                    mPresenter!!.addrDelete(addrIdReq)
                     dialog.dismiss()
                 }
                 builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
@@ -57,9 +65,17 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
             }
 
             override fun onItemEditClick(position: Int) {// 编辑
+                IntentUtil.get()!!
+                    .goActivity(
+                        this@AddressListActivity,
+                        AddAddressActivity::class.java,
+                        addrList[position]
+                    )
             }
 
             override fun onDefaultCheck(position: Int) {// 默认地址
+                val addrIdReq = AddrIdReq(addrList[position].addr_id!!)
+                mPresenter!!.addrDefultSet(addrIdReq)
             }
 
         })
@@ -67,6 +83,29 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
         binding.tvAddAddress.setOnClickListener {
             startActivity(Intent(this, AddAddressActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        getData()
+        super.onResume()
+    }
+
+    private fun getData() {
+        mPresenter!!.addrList()
+    }
+
+    override fun addrList(mData: BaseNetModel<AddressBean>) {
+        addrList.clear()
+        addrList.addAll(mData.data!!.addr_list)
+        addressAdapter.notifyDataSetChanged()
+    }
+
+    override fun addrDelete(mData: BaseNetModel<Any>) {
+        getData()
+    }
+
+    override fun addrDefultSet(mData: BaseNetModel<Any>) {
+        getData()
     }
 
     override fun showLoading() {

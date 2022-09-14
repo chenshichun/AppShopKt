@@ -131,8 +131,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
 
         goodsAdapter.setOnItemClickListener(object : GoodsAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
+                val bundle = Bundle()
+                bundle.putString(Constants.GOODS_ID, goodsList[position].prod_id)
                 IntentUtil.get()!!
-                    .goActivity(activity, GoodsDetailActivity::class.java, goodsList[position])
+                    .goActivity(activity, GoodsDetailActivity::class.java, bundle)
             }
         })
 

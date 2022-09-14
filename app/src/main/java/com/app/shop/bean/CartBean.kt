@@ -21,7 +21,7 @@ data class ProdCartBean(
     val distribution_card_no: String,
     val prod_id: String,
     val shop_id: String,
-    val sku_id: Int,
+    val sku_id: String,
     val updated_at: String,
     val user_id: String,
     var isCheck: Boolean

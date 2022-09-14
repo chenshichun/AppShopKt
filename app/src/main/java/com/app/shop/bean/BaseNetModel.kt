@@ -5,8 +5,4 @@ class BaseNetModel<T> {
     var msg: String? = null
     var data: T? = null
         private set
-
-    fun setData(data: T) {
-        this.data = data
-    }
 }

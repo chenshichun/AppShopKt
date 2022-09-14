@@ -1,6 +1,8 @@
 package com.app.shop.ui.contract
 
 import com.app.shop.base.BaseContract
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.GoodsBean
 
 /**
  * @author chenshichun
@@ -9,8 +11,10 @@ import com.app.shop.base.BaseContract
  */
 interface GoodsDetailContract {
     interface View : BaseContract.BaseView {
+        fun prodGet(mData: BaseNetModel<GoodsBean>)
     }
 
     interface Presenter {
+        fun prodGet(id: String)
     }
 }

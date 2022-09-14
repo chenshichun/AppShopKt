@@ -4,8 +4,13 @@ import android.content.Context
 import com.app.shop.base.BasePresenter
 import com.app.shop.bean.AddressInfoPO
 import com.app.shop.bean.PCACodePO
+import com.app.shop.manager.Constants
+import com.app.shop.req.AddrReq
+import com.app.shop.retrofit.ApiRequest
+import com.app.shop.service.HomeService
 import com.app.shop.ui.contract.AddAddressContract
 import com.app.shop.util.FileUtil
+import com.app.shop.util.ToastUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineScope
@@ -56,6 +61,20 @@ class AddAddressPresenter :BasePresenter<AddAddressContract.View>(),AddAddressCo
                 areaItems.add(areaList)
             }
             mView!!.initAddressPicker(provinceItems, cityItems, areaItems)
+        }
+    }
+
+    override fun addrSave(addrReq: AddrReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).addrSave(addrReq)
+            if (response.body() == null) {
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.addrSave(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
         }
     }
 }
