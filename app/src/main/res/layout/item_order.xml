@@ -49,15 +49,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_dp_10" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/hollow_blue_5_bg"
-        android:paddingHorizontal="@dimen/dimen_dp_10"
-        android:paddingVertical="@dimen/dimen_dp_5"
-        android:text="确认收货"
-        android:textColor="@color/blue" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_confirm_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/hollow_blue_5_bg"
+            android:paddingHorizontal="@dimen/dimen_dp_10"
+            android:paddingVertical="@dimen/dimen_dp_5"
+            android:text="确认收货"
+            android:textColor="@color/blue"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_dp_10"
+            android:background="@drawable/hollow_blue_5_bg"
+            android:paddingHorizontal="@dimen/dimen_dp_10"
+            android:paddingVertical="@dimen/dimen_dp_5"
+            android:text="确认收货"
+            android:textColor="@color/blue" />
+    </LinearLayout>
+
 
 </LinearLayout>

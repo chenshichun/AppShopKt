@@ -104,7 +104,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
     }
 
     override fun smsRegister(mData: BaseNetModel<Any>) {
-
+        finish()
     }
 
     override fun showLoading() {

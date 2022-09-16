@@ -87,6 +87,12 @@ interface HomeService {
     ): Response<BaseNetModel<CartBean>>
 
     /*
+    * 添加购物车
+    * */
+    @POST("user/cart/add")
+    suspend fun cartAdd(@Body cartAddReq: CartAddReq): Response<BaseNetModel<Any>>
+
+    /*
     * 删除购物车
     * */
     @POST("user/cart/del")
@@ -203,6 +209,35 @@ interface HomeService {
     * 获取默认地址
     * */
     @GET("user/addr/default/get")
-    suspend fun addrDefault(): Response<BaseNetModel<Addr>>
+    suspend fun addrDefault(): Response<BaseNetModel<DefaultDaarBean>>
 
+    /*
+    *  单商品生成订单
+    * */
+    @POST("order/submit/direct")
+    suspend fun orderSubmit(@Body createOrderReq: CreateOrderReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 购物车生成订单
+    * */
+    @POST("order/submit/cart")
+    suspend fun orderSubmitCart(@Body cartIdReq: CartIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    *  订单列表
+    * */
+    @GET("order/list")
+    suspend fun orderList(@Query("status") status: Int): Response<BaseNetModel<OrderListBean>>
+
+    /*
+    * 店铺收藏
+    * */
+    @POST("user/store/add")
+    suspend fun storeAdd(@Body storeIdReq: StoreIdReq): Response<BaseNetModel<Any>>
+
+    /*
+   * 取消店铺收藏
+   * */
+    @POST("user/store/del")
+    suspend fun storeDel(@Body storeIdReq: StoreIdReq): Response<BaseNetModel<Any>>
 }

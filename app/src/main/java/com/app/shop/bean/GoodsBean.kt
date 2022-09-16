@@ -4,8 +4,9 @@ data class GoodsBean(
     val comment: Comment,
     val comment_count: Int,
     val prod_info: ProdInfo,
-    val shop_info: ShopInfo
-
+    val shop_info: ShopInfo,
+    val delivery_cost: String,// 邮费
+    val service_cost: String,// 服务费
 )
 
 data class Comment(
@@ -62,7 +63,9 @@ data class ProdInfo(
     val update_time: String,
     val updated_at: String,
     val version: Int,
-    val views_count: Int
+    val views_count: Int,
+    var delivery_cost: String,// 邮费
+    var service_cost: String,// 服务费
 )
 
 data class SkuInfo(

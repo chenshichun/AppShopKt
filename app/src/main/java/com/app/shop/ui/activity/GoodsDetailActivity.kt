@@ -21,6 +21,7 @@ import com.app.shop.bean.Prod
 import com.app.shop.bean.event.PageEvent
 import com.app.shop.databinding.ActivityGoodsDetailBinding
 import com.app.shop.manager.Constants
+import com.app.shop.req.CartAddReq
 import com.app.shop.ui.contract.GoodsDetailContract
 import com.app.shop.ui.presenter.GoodsDetailPresenter
 import com.app.shop.util.CommonUtil
@@ -70,10 +71,10 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         binding.layoutGoodsDetailsBottom.llGoodsHome.setOnClickListener(this)
         binding.layoutGoodsDetailsBottom.llGoodsCollect.setOnClickListener(this)
         binding.layoutGoodsDetailsBottom.llGoodsCart.setOnClickListener(this)
+        binding.layoutGoodsDetailsBottom.tvAddCart.setOnClickListener(this)
         binding.layoutGoodsDetailsComment.tvShowMore.setOnClickListener(this)
         alphaH = CommonUtil.dip2px(this, 200f).toFloat()
         binding.scrollview.setOnScrollChangeListener { _, _, p2, _, _ ->
-            Logger.d(p2)
             var alpha: Float = p2 / alphaH
             if (alpha > 1) {
                 alpha = 1f
@@ -88,14 +89,11 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         when (view?.id) {
             R.id.iv_back -> finish()
             R.id.iv_goods_back -> finish()
-
+            R.id.tv_add_cart -> {// 添加购物车
+                showAttrPop(0)
+            }
             R.id.tv_buy -> {// 立即购买
-                var specificationPop = SpecificationPop(this, goodsBean.prod_info)
-                XPopup.Builder(this)
-                    .moveUpToKeyboard(true)
-                    .isViewMode(true)
-                    .isDestroyOnDismiss(true)
-                    .asCustom(specificationPop).show()
+                showAttrPop(1)
             }
             R.id.tv_buy_reason_share -> {// 分享文案
                 val clipboardManager =
@@ -126,6 +124,10 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
     override fun prodGet(mData: BaseNetModel<GoodsBean>) {
         goodsBean = mData.data!!
         updateUi(goodsBean)
+    }
+
+    override fun cartAdd(mData: BaseNetModel<Any>) {
+
     }
 
     override fun showLoading() {
@@ -210,6 +212,24 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
             IntentUtil.get()!!.goActivity(this, ShowListImageActivity::class.java, bundle)
         }
         binding.banner.start()
+    }
+
+    private fun showAttrPop(type: Int) {
+        goodsBean.prod_info.delivery_cost = goodsBean.delivery_cost
+        goodsBean.prod_info.service_cost = goodsBean.service_cost
+        var specificationPop = SpecificationPop(this, type, goodsBean.prod_info)
+        specificationPop.setOnClickListener(object : SpecificationPop.OnClickListener {
+            override fun addCartClick(count: Int, gid: String, sku: String) {
+                val cartAddReq = CartAddReq("0", count, gid, sku)
+                mPresenter!!.cartAdd(cartAddReq)
+                specificationPop.dismiss()
+            }
+        })
+        XPopup.Builder(this)
+            .moveUpToKeyboard(true)
+            .isViewMode(true)
+            .isDestroyOnDismiss(true)
+            .asCustom(specificationPop).show()
     }
 
     /*

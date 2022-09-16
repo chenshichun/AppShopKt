@@ -2,6 +2,7 @@ package com.app.shop.ui.presenter
 
 import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
+import com.app.shop.req.CartAddReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
 import com.app.shop.ui.contract.GoodsDetailContract
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
  * 描述：
  *
  */
-class GoodsDetailPresenter : BasePresenter<GoodsDetailContract.View>(), GoodsDetailContract.Presenter {
+class GoodsDetailPresenter : BasePresenter<GoodsDetailContract.View>(),
+    GoodsDetailContract.Presenter {
     override fun prodGet(id: String) {
         CoroutineScope(Dispatchers.Main).launch {
             val response = ApiRequest.create(HomeService::class.java).prodGet(id)
@@ -24,6 +26,21 @@ class GoodsDetailPresenter : BasePresenter<GoodsDetailContract.View>(), GoodsDet
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.prodGet(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun cartAdd(cartAddReq: CartAddReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).cartAdd(cartAddReq)
+            if (response.body() == null) {
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.cartAdd(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

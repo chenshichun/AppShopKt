@@ -4,6 +4,7 @@ import com.app.shop.base.BaseContract
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.CartBean
 import com.app.shop.bean.ProdBean
+import com.app.shop.req.CartIdReq
 import com.app.shop.req.CartReq
 import retrofit2.Response
 import retrofit2.http.Body
@@ -19,6 +20,7 @@ interface CartContract : BaseContract {
         fun getCartData(mData: BaseNetModel<CartBean>)
         fun getGoodsData(mData: BaseNetModel<ProdBean>)
         fun cartDel(mData: BaseNetModel<Any>)
+        fun orderSubmitCart(mData: BaseNetModel<Any>)
         fun noNetworkView()
         fun showError()
     }
@@ -27,5 +29,6 @@ interface CartContract : BaseContract {
         fun getCartData()
         fun getGoodsData(page: Int, size: Int)
         fun cartDel(cartReq: CartReq)
+        fun orderSubmitCart(cartIdReq: CartIdReq)
     }
 }

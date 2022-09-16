@@ -152,9 +152,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)
             }
             R.id.tv_order_4 -> {
-                /*   bundle.putInt(Constants.ORDER_TPYE, 4)
-                   IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)*/
-                IntentUtil.get()!!.goActivity(activity, EvaluationActivity::class.java)
+                   bundle.putInt(Constants.ORDER_TPYE, 4)
+                   IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)
             }
             R.id.tv_order_5 -> IntentUtil.get()!!
                 .goActivity(activity, RefundAfterSaleActivity::class.java)

@@ -14,7 +14,7 @@ import retrofit2.http.Body
  * 描述：
  *
  */
-interface LoginContract {
+interface LoginContract : BaseContract {
     interface View : BaseContract.BaseView {
         fun smsCode(mData: BaseNetModel<Any>)
         fun smsLogin(mData: BaseNetModel<UserDataBean>)

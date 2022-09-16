@@ -3,8 +3,10 @@ package com.app.shop.ui.activity
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.type.SmsType
 import com.app.shop.databinding.ActivityBindBinding
+import com.app.shop.manager.Constants
 import com.app.shop.req.BindWechatReq
 import com.app.shop.req.SmsSendReq
 import com.app.shop.ui.contract.BindContract
@@ -19,7 +21,9 @@ import com.gyf.immersionbar.ktx.immersionBar
  * 描述：绑定手机号
  */
 class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
-    BindContract.Presenter, View.OnClickListener {
+    BindContract.View, View.OnClickListener {
+
+    private var wechatId: String? = null
 
     override fun getPresenter(): BindPresenter {
         return BindPresenter()
@@ -30,6 +34,9 @@ class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
+
+        wechatId = intent.getStringExtra(Constants.WECHAT_ID)
+
         binding.ivBack.setOnClickListener(this)
         binding.tvGetSmsCode.setOnClickListener(this)
         binding.tvBind.setOnClickListener(this)
@@ -62,15 +69,26 @@ class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
                     return
                 }
                 val bindWechatReq = BindWechatReq(
-                    "1234",
+                    binding.etInvCode.text.toString(),
                     binding.etPassword.text.toString(),
                     binding.etPhone.text.toString(),
                     binding.etCode.text.toString(),
-                    ""
+                    wechatId!!
                 )
                 mPresenter!!.bindWechat(bindWechatReq)
             }
         }
+    }
+
+    private var timer: TimerUnit? = null
+    override fun smsCode(mData: BaseNetModel<Any>) {
+        if (timer == null) {
+            timer = TimerUnit(binding.tvGetSmsCode)
+        }
+        timer?.startTime()
+    }
+
+    override fun bindWechat(mData: BaseNetModel<Any>) {
     }
 
     override fun showLoading() {
@@ -81,15 +99,4 @@ class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
         closeLoadingDialog()
     }
 
-    private var timer: TimerUnit? = null
-    override fun smsCode(smsSendReq: SmsSendReq) {
-        if (timer == null) {
-            timer = TimerUnit(binding.tvGetSmsCode)
-        }
-        timer?.startTime()
-    }
-
-    override fun bindWechat(bindWechatReq: BindWechatReq) {
-
-    }
 }

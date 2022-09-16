@@ -10,6 +10,7 @@
     <string name="goods_integral">%s 易货积分</string>
     <string name="goods_price">￥%s</string>
     <string name="price">￥%s</string>
+    <string name="price_goods_integral">￥%s,%s 易货积分</string>
     <string name="detail_pic">&lt;img src=\%s&gt;</string>
     <string name="nickname">昵称：%s</string>
     <string name="account">账号：%s</string>

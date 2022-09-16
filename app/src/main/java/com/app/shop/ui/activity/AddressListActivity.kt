@@ -1,5 +1,6 @@
 package com.app.shop.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.app.shop.bean.Addr
 import com.app.shop.bean.AddressBean
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.databinding.ActivityAddressListBinding
+import com.app.shop.manager.Constants
 import com.app.shop.req.AddrIdReq
 import com.app.shop.ui.contract.AddressListContract
 import com.app.shop.ui.presenter.AddressListPresenter
@@ -26,7 +28,7 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
 
     private lateinit var addressAdapter: AddressAdapter
     private var addrList = mutableListOf<Addr>()
-
+    private var type  = 0
     override fun getPresenter(): AddressListPresenter {
         return AddressListPresenter()
     }
@@ -36,6 +38,7 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
+        type = intent.getIntExtra(Constants.ADDR_TYPE,0)
 
         binding.viewHead.tvTitle.text = "收货地址"
         binding.viewHead.ivBack.setOnClickListener {
@@ -47,6 +50,19 @@ class AddressListActivity : BaseActivity<ActivityAddressListBinding, AddressList
         binding.mRecyclerView.adapter = addressAdapter
         addressAdapter.setOnItemClickListener(object : AddressAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
+                if(type==1) {
+                    val resultIntent = Intent()
+                    resultIntent.putExtra(Constants.ADDR_ID, addrList[position].addr_id)
+                    resultIntent.putExtra(Constants.ADDR_NAME, addrList[position].receiver)
+                    resultIntent.putExtra(Constants.ADDR_PHONE, addrList[position].mobile)
+                    resultIntent.putExtra(
+                        Constants.ADDR_ADDR,
+                        addrList[position].province + addrList[position].city +
+                                addrList[position].area + addrList[position].addr
+                    )
+                    setResult(Activity.RESULT_OK, resultIntent)
+                    finish()
+                }
             }
 
             override fun onItemDeleteClick(position: Int) {// 删除地址

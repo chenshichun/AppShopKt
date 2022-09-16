@@ -24,5 +24,13 @@ class Constants {
 
         const val GOODS_ID: String = "GOODS_ID"
         const val SEARCH_KEY: String = "SEARCH_KEY"
+
+        const val ADDR_TYPE: String = "ADDR_TYPE"
+        const val ADDR_ID: String = "ADDR_ID"
+        const val ADDR_NAME: String = "ADDR_NAME"
+        const val ADDR_PHONE: String = "ADDR_PHONE"
+        const val ADDR_ADDR: String = "ADDR_ADDR"
+
+        const val WECHAT_ID: String = "WECHAT_ID"
     }
 }

@@ -1,9 +1,16 @@
 package com.app.shop.ui.activity
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.CreateOrderBean
+import com.app.shop.bean.DefaultDaarBean
 import com.app.shop.databinding.ActivityConfirmOrderBinding
+import com.app.shop.manager.Constants
+import com.app.shop.req.CreateOrderReq
 import com.app.shop.ui.contract.ConfirmOrderContract
 import com.app.shop.ui.presenter.ConfirmOrderPresenter
 import com.app.shop.util.IntentUtil
@@ -19,6 +26,7 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
     ConfirmOrderContract.View {
 
     private var createOrderBean = CreateOrderBean()
+    private var addr_id: String? = null
 
     override fun getPresenter(): ConfirmOrderPresenter {
         return ConfirmOrderPresenter()
@@ -44,16 +52,55 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
                 getString(if (createOrderBean.ori_point!!.toInt() != 0) R.string.goods_integral else R.string.price),
                 if (createOrderBean.ori_point!!.toInt() != 0) createOrderBean.ori_point else createOrderBean.price
             )
+
+        binding.tvTotle.text = String.format(
+            getString(if (createOrderBean.ori_point!!.toInt() != 0) R.string.goods_integral else R.string.price),
+            if (createOrderBean.ori_point!!.toInt() != 0) (createOrderBean.ori_point!!.toFloat() *
+                    createOrderBean.count * 1.2).toString()
+            else (createOrderBean.price!!.toFloat() * createOrderBean.count * 1.2).toString()
+        )
+
         binding.tvAttr.text = String.format(getString(R.string.attr), createOrderBean.attr)
-        binding.tvNum.text = createOrderBean.count.toString()
+        binding.tvNum.text =
+            String.format(getString(R.string.num), createOrderBean.count.toString())
+
+        binding.tvDeliveryCost.text = createOrderBean.delivery_cost
+        binding.tvServiceCost.text =
+            (createOrderBean.service_cost!!.toFloat() * 100).toString() + "%"
 
         binding.llAddress.setOnClickListener {
-            IntentUtil.get()!!.goActivityResult(this, AddressListActivity::class.java, 100)
+            val bundle = Bundle()
+            bundle.putInt(Constants.ADDR_TYPE, 1)
+            IntentUtil.get()!!.goActivityResult(this, AddressListActivity::class.java, 100, bundle)
         }
 
         binding.tvConfirm.setOnClickListener {
-            IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java)
+            val createOrderReq = CreateOrderReq(
+                addr_id,
+                createOrderBean.count,
+                createOrderBean.prod_id,
+                createOrderBean.prod_name,
+                binding.etRemark.text.toString(),
+                createOrderBean.shop_id,
+                createOrderBean.sku_id
+            )
+            mPresenter!!.orderSubmit(createOrderReq)
         }
+
+        mPresenter!!.addrDefault()
+    }
+
+    override fun addrDefault(mData: BaseNetModel<DefaultDaarBean>) {
+        addr_id = mData.data!!.addr.addr_id
+        binding.tvAddrName.text = mData.data!!.addr.receiver
+        binding.tvAddrPhone.text = mData.data!!.addr.mobile
+        binding.tvAddr.text =
+            mData.data!!.addr.province + mData.data!!.addr.city + mData.data!!.addr.area + mData.data!!.addr.addr
+    }
+
+    override fun orderSubmit(mData: BaseNetModel<Any>) {
+        IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java)
+        finish()
     }
 
     override fun showLoading() {
@@ -62,6 +109,20 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
 
     override fun hideLoading() {
         closeLoadingDialog()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
+
+        /* Inserts flower into viewModel. */
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            intentData?.let { data ->
+                binding.tvAddrName.text = data.getStringExtra(Constants.ADDR_NAME)
+                binding.tvAddrPhone.text = data.getStringExtra(Constants.ADDR_PHONE)
+                binding.tvAddr.text = data.getStringExtra(Constants.ADDR_ADDR)
+                addr_id = data.getStringExtra(Constants.ADDR_ID)
+            }
+        }
     }
 
 }

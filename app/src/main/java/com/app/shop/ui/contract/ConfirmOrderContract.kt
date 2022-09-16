@@ -1,6 +1,10 @@
 package com.app.shop.ui.contract
 
 import com.app.shop.base.BaseContract
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.DefaultDaarBean
+import com.app.shop.req.CreateOrderReq
+import retrofit2.http.Body
 
 /**
  * @author chenshichun
@@ -10,8 +14,12 @@ import com.app.shop.base.BaseContract
  */
 interface ConfirmOrderContract : BaseContract {
     interface View : BaseContract.BaseView {
+        fun addrDefault(mData: BaseNetModel<DefaultDaarBean>)
+        fun orderSubmit(mData: BaseNetModel<Any>)
     }
 
     interface Presenter {
+        fun addrDefault()
+        fun orderSubmit(createOrderReq: CreateOrderReq)
     }
 }

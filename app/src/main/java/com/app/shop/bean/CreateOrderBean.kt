@@ -20,6 +20,8 @@ class CreateOrderBean() : Parcelable {
     var attr: String? = null
     var price: String? = null
     var ori_point: String? = null
+    var delivery_cost: String? = null// 邮费
+    var service_cost: String? = null// 服务费
 
     constructor(parcel: Parcel) : this() {
         prod_id = parcel.readString()
@@ -33,6 +35,8 @@ class CreateOrderBean() : Parcelable {
         attr = parcel.readString()
         price = parcel.readString()
         ori_point = parcel.readString()
+        delivery_cost = parcel.readString()
+        service_cost = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -47,6 +51,8 @@ class CreateOrderBean() : Parcelable {
         parcel.writeString(attr)
         parcel.writeString(price)
         parcel.writeString(ori_point)
+        parcel.writeString(delivery_cost)
+        parcel.writeString(service_cost)
     }
 
     override fun describeContents(): Int {

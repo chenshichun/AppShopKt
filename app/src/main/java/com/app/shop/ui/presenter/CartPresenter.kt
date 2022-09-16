@@ -3,6 +3,7 @@ package com.app.shop.ui.presenter
 import com.app.shop.base.BasePresenter
 import com.app.shop.bean.type.SortType
 import com.app.shop.manager.Constants
+import com.app.shop.req.CartIdReq
 import com.app.shop.req.CartReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
@@ -63,6 +64,22 @@ class CartPresenter : BasePresenter<CartContract.View>(),
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.cartDel(response.body()!!)
+                } else {
+                    mView!!.showError()
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun orderSubmitCart(cartIdReq: CartIdReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).orderSubmitCart(cartIdReq)
+            if (response.body() == null) {
+                mView!!.noNetworkView()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.orderSubmitCart(response.body()!!)
                 } else {
                     mView!!.showError()
                     ToastUtil.showToast(response.body()!!.msg.toString())

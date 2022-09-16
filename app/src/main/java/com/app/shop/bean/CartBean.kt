@@ -13,16 +13,17 @@ data class ShopBean(
 )
 
 data class ProdCartBean(
-    val basket_count: Int,
-    val basket_date: String,
-    val basket_id: String,
     val created_at: String,
-    val discount_id: Any,
-    val distribution_card_no: String,
-    val prod_id: String,
-    val shop_id: String,
-    val sku_id: String,
     val updated_at: String,
+    val shop_id: String,
+    val prod_id: String,
+    val sku_id: String,
     val user_id: String,
+    val count: Int,
+    val discount_id: String,
+    val distribution_card_no: String,
+    val cart_id: String,
+    val price: String,
+    var point: Int,
     var isCheck: Boolean
 )

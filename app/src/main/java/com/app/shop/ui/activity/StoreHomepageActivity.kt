@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
 import com.app.shop.databinding.ActivityStoreHomepageBinding
+import com.app.shop.req.StoreIdReq
 import com.app.shop.ui.contract.StoreHomepageContract
 import com.app.shop.ui.presenter.StoreHomepagePresenter
 import com.app.shop.util.IntentUtil
@@ -20,6 +22,8 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
     StoreHomepageContract.View, View.OnClickListener {
 
     private lateinit var goodsAdapter: GoodsAdapter
+    private val id: String = ""
+    private var isAttention = false
 
     override fun getPresenter(): StoreHomepagePresenter {
         return StoreHomepagePresenter()
@@ -41,6 +45,17 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
 
         binding.ivBack.setOnClickListener(this)
         binding.tvShopName.setOnClickListener(this)
+        binding.tvAttention.setOnClickListener(this)
+    }
+
+    override fun storeAdd(mData: BaseNetModel<Any>) {
+        isAttention = true
+        binding.tvAttention.text = "已关注"
+    }
+
+    override fun storeDel(mData: BaseNetModel<Any>) {
+        isAttention = false
+        binding.tvAttention.text = "关注"
     }
 
     override fun showLoading() {
@@ -58,6 +73,14 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
             }
             R.id.tv_shop_name -> IntentUtil.get()!!
                 .goActivity(this, StoreImpressionActivity::class.java)
+            R.id.tv_attention -> {
+                val storeIdReq = StoreIdReq(id)
+                if (!isAttention) {
+                    mPresenter!!.storeAdd(storeIdReq)
+                }else{
+                    mPresenter!!.storeDel(storeIdReq)
+                }
+            }
         }
     }
 }

@@ -13,11 +13,15 @@ import com.app.shop.databinding.FragmentCartBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
+import com.app.shop.req.CartIdReq
 import com.app.shop.req.CartReq
+import com.app.shop.ui.activity.PayOrderActivity
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
+import com.app.shop.util.IntentUtil
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -37,12 +41,16 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
     private var goodsList = mutableListOf<Prod>()
     private var cartList = mutableListOf<ShopBean>()
 
+    private var allCartId = ""
+
     override fun getPresenter(): CartPresenter {
         return CartPresenter()
     }
 
     override fun initView() {
         binding.checkbox.setOnClickListener(this)
+        binding.tvConfirm.setOnClickListener(this)
+
         // 购物车
         cartAdapter = activity?.let { CartAdapter(it, cartList) }!!
         binding.mRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -80,7 +88,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             }
 
             override fun deleteClick(position: Int, position1: Int) {
-                mPresenter!!.cartDel(CartReq(cartList[position].prods[position1].basket_id))
+                mPresenter!!.cartDel(CartReq(cartList[position].prods[position1].cart_id))
             }
 
             override fun reduceClick(position: Int, position1: Int) {
@@ -182,6 +190,13 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
         mPresenter!!.getCartData()
     }
 
+    /*
+    * 生成订单
+    * */
+    override fun orderSubmitCart(mData: BaseNetModel<Any>) {
+        IntentUtil.get()!!.goActivity(activity, PayOrderActivity::class.java)
+    }
+
     override fun noNetworkView() {
         loadService.showCallback(NetWorkErrorCallBack::class.java)
     }
@@ -210,6 +225,38 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             }
         }
         binding.checkbox.isChecked = isAllCheck
+        totalPrice()
+    }
+
+    private fun totalPrice() {
+        var allPrice = 0.0// 总金额
+        var allPoint = 0//  总积分
+        allCartId = ""
+        for (cartBean in cartList) {
+            for (item in cartBean.prods) {
+                if (item.isCheck) {
+                    allPrice += item.price.toDouble() * item.count
+                    allPoint += item.point * item.count
+                    allCartId = item.cart_id + "," + allCartId
+                }
+            }
+        }
+        allCartId = allCartId.substring(0, allCartId.length - 1)
+
+        if (allPoint > 0) {
+            binding.tvPrice.text = if (allPrice > 0) {
+                String.format(
+                    getString(
+                        R.string.price_goods_integral,
+                        allPrice.toString(), allPoint.toString()
+                    )
+                )
+            } else {
+                String.format(getString(R.string.goods_integral, allPoint.toString()))
+            }
+        } else {
+            binding.tvPrice.text = String.format(getString(R.string.price, allPrice.toString()))
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -223,6 +270,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
                     }
                 }
                 cartAdapter.notifyDataSetChanged()
+                totalPrice()
+            }
+            R.id.tv_confirm -> {
+                val cartIdReq = CartIdReq(allCartId)
+                mPresenter!!.orderSubmitCart(cartIdReq)
             }
         }
     }

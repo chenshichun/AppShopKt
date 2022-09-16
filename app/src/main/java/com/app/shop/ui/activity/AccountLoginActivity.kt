@@ -34,6 +34,7 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
     AccountLoginContract.View, View.OnClickListener, WXEntryActivity.Back {
 
     private var api: IWXAPI? = null
+    private var wechatId: String? = null
 
     override fun getPresenter(): AccountLoginPresenter {
         return AccountLoginPresenter()
@@ -163,7 +164,9 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
     * 绑定手机号
     * */
     override fun bindPhone() {
-        startActivity(Intent(this, BindActivity::class.java))
+        val bundle = Bundle()
+        bundle.putString(Constants.WECHAT_ID, wechatId)
+        IntentUtil.get()!!.goActivity(this, BindActivity::class.java, bundle)
     }
 
     override fun onWxLoginFiled(errorCode: Int) {
@@ -171,6 +174,7 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
     }
 
     override fun onWxLoginSuccess(code: String?, state: String?) {
+        wechatId = code
         val wxLoginReq = WxLoginReq()
         wxLoginReq.wechat_id = code
         mPresenter!!.wechatLogin(wxLoginReq)

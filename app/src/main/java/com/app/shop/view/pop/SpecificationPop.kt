@@ -17,6 +17,7 @@ import com.app.shop.bean.ProdInfo
 import com.app.shop.ui.activity.ConfirmOrderActivity
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
+import com.app.shop.view.dialog.PrivacyDialog
 import com.bumptech.glide.Glide
 import com.lxj.xpopup.core.BottomPopupView
 import com.orhanobut.logger.Logger
@@ -28,7 +29,7 @@ import org.w3c.dom.Text
  * 描述：
  *
  */
-class SpecificationPop(context: Context, prodInfo: ProdInfo) : BottomPopupView(context) {
+class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : BottomPopupView(context) {
     lateinit var tvBuy: TextView
     lateinit var ivGoods: ImageView
     lateinit var mRecyclerView: RecyclerView
@@ -39,6 +40,9 @@ class SpecificationPop(context: Context, prodInfo: ProdInfo) : BottomPopupView(c
     lateinit var etNum: EditText
 
     private var prodInfo: ProdInfo
+
+    private var type: Int = 0
+
     var binding: ViewBinding? = null
     lateinit var specAdapter: SpecAdapter
 
@@ -48,6 +52,7 @@ class SpecificationPop(context: Context, prodInfo: ProdInfo) : BottomPopupView(c
 
     init {
         this.prodInfo = prodInfo
+        this.type = type
     }
 
     override fun getImplLayoutId(): Int {
@@ -125,15 +130,28 @@ class SpecificationPop(context: Context, prodInfo: ProdInfo) : BottomPopupView(c
         })
 
         tvBuy.setOnClickListener {
-            Logger.d("立即购买")
-            val createOrderBean = CreateOrderBean()
-            createOrderBean.pic = prodInfo.pic
-            createOrderBean.count = etNum.text.toString().toInt()
-            createOrderBean.attr = attr
-            createOrderBean.ori_point = prodInfo.ori_point
-            createOrderBean.price = prodInfo.price
-            IntentUtil.get()!!
-                .goActivity(context, ConfirmOrderActivity::class.java, createOrderBean)
+            if (type == 0) {// 加入购物车
+                onClickListener!!.addCartClick(
+                    etNum.text.toString().toInt(),
+                    prodInfo.prod_id,
+                    sku_id
+                )
+            } else {// 生成订单页
+                val createOrderBean = CreateOrderBean()
+                createOrderBean.pic = prodInfo.pic
+                createOrderBean.count = etNum.text.toString().toInt()
+                createOrderBean.attr = attr
+                createOrderBean.ori_point = prodInfo.ori_point
+                createOrderBean.price = prodInfo.price
+                createOrderBean.delivery_cost = prodInfo.delivery_cost
+                createOrderBean.service_cost = prodInfo.service_cost
+                createOrderBean.prod_id = prodInfo.prod_id
+                createOrderBean.prod_name = prodInfo.prod_name
+                createOrderBean.shop_id = prodInfo.shop_id
+                createOrderBean.sku_id = sku_id
+                IntentUtil.get()!!
+                    .goActivity(context, ConfirmOrderActivity::class.java, createOrderBean)
+            }
             dismiss()
         }
     }
@@ -173,4 +191,17 @@ class SpecificationPop(context: Context, prodInfo: ProdInfo) : BottomPopupView(c
             }
         }
     }
+
+    var onClickListener: OnClickListener? = null
+
+    fun setOnClickListener(onClickListener: OnClickListener?): SpecificationPop? {
+        this.onClickListener = onClickListener
+        return this
+    }
+
+    interface OnClickListener {
+        fun addCartClick(count: Int, gid: String, sku: String)
+    }
+
 }
+

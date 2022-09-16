@@ -41,14 +41,14 @@ class OrderActivity : BaseActivity<ActivityOrderBinding, OrderPresenter>(), Orde
 
         orderType = intent.getIntExtra(Constants.ORDER_TPYE, 0)
 
-        for (title in mTitles) {
-            mFragments.add(OrderFragment())
+        for (i in mTitles.indices) {
+            mFragments.add(OrderFragment(i))
         }
         mAdapter = MyPagerAdapter(supportFragmentManager)
         binding.viewPager.adapter = mAdapter
         binding.slidingTabLayout.setViewPager(binding.viewPager)
-        binding.slidingTabLayout.showMsg(3, 5)
-        binding.slidingTabLayout.setMsgMargin(3, 0f, 10f)
+        // binding.slidingTabLayout.showMsg(3, 5)
+        // binding.slidingTabLayout.setMsgMargin(3, 0f, 10f)
 
         binding.viewPager.currentItem = orderType
     }
