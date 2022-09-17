@@ -93,7 +93,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/go_right" />
-                />
             </LinearLayout>
 
             <LinearLayout

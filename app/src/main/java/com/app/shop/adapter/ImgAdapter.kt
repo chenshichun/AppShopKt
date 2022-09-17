@@ -1,16 +1,20 @@
 package com.app.shop.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.shop.bean.Product
 import com.app.shop.databinding.ItemImgBinding
+import com.bumptech.glide.Glide
 
 /**
  * @author chenshichun
  * 创建日期：2022/8/24
  * 描述：
  */
-class ImgAdapter(val mData: List<String>?) :
+class ImgAdapter(val context: Context, val mData: List<Product>?) :
     RecyclerView.Adapter<ImgAdapter.ViewHolder>() {
     private var mOnItemClickListener: OnItemClickListener? = null
 
@@ -25,6 +29,7 @@ class ImgAdapter(val mData: List<String>?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Glide.with(context).load(mData!![position].pic).into(holder.ivGoods)
 
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)
@@ -36,11 +41,12 @@ class ImgAdapter(val mData: List<String>?) :
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return mData!!.size
     }
 
     inner class ViewHolder(binding: ItemImgBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val ivGoods: ImageView = binding.ivGoods
     }
 
 }

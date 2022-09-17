@@ -99,6 +99,7 @@
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_operation_center_apply.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_operations_center.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_order.xml" value="0.22" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_order_detail.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_pay_order.xml" value="0.16390041493775934" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_pay_password.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/activity_points_details.xml" value="0.22" />
@@ -143,6 +144,7 @@
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_new_in_store.xml" value="0.20153985507246377" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_offline_shop.xml" value="0.16666666666666666" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_order.xml" value="0.24003623188405798" />
+        <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_order_detail_goods.xml" value="0.3333333333333333" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_order_goods.xml" value="0.20199275362318841" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_points.xml" value="0.22" />
         <entry key="..\:/csc/AppShopKt/app/src/main/res/layout/item_recent_attention.xml" value="0.20153985507246377" />

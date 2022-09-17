@@ -12,50 +12,56 @@
 
     <include layout="@layout/line" />
 
-    <androidx.core.widget.NestedScrollView
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="最近关注"
-                android:textColor="@color/color_333"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_recent_attention"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_recent_attention">
+                android:orientation="vertical">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="最近关注"
+                    android:textColor="@color/color_333"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:text="店铺上新"
-                android:textColor="@color/color_333"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_recent_attention"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_recent_attention">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_new_in_store"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:text="店铺上新"
+                    android:textColor="@color/color_333"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_new_in_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </LinearLayout>

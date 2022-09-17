@@ -236,8 +236,14 @@ interface HomeService {
     suspend fun storeAdd(@Body storeIdReq: StoreIdReq): Response<BaseNetModel<Any>>
 
     /*
-   * 取消店铺收藏
-   * */
+    * 取消店铺收藏
+    * */
     @POST("user/store/del")
     suspend fun storeDel(@Body storeIdReq: StoreIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 获取收藏列表
+    * */
+    @GET("user/store/list")
+    suspend fun storeList(): Response<BaseNetModel<SotreListBean>>
 }

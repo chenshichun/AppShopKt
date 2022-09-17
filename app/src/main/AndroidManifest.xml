@@ -127,6 +127,7 @@
         <activity android:name=".ui.activity.ComplaintActivity" />
         <activity android:name=".ui.activity.WalletDetailsActivity" />
         <activity android:name=".ui.activity.WithdrawalsRecordActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity" />
     </application>
 
 </manifest>
