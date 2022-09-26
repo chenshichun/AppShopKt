@@ -31,4 +31,9 @@
     <string name="stocks">库存：%d</string>
     <string name="num">X%s</string>
     <string name="attr">商品规格：%s</string>
+    <string name="address">地址：%s</string>
+    <string name="phone">联系电话：%s</string>
+    <string name="sales">销量：%d</string>
+    <string name="score">评分：%d</string>
+    <string name="fans">粉丝：%d</string>
 </resources>

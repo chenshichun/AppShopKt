@@ -246,4 +246,40 @@ interface HomeService {
     * */
     @GET("user/store/list")
     suspend fun storeList(): Response<BaseNetModel<SotreListBean>>
+
+    /*
+    * 修改昵称
+    * */
+    @POST("user/update")
+    suspend fun modifyNickName(@Body nickNameReq: NickNameReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 本地商家列表
+    * */
+    @GET("store/list/local")
+    suspend fun storeLocalList(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("dist") dist: Int,
+        @Query("search_name") search_name: String
+    ): Response<BaseNetModel<LocatStoreListBean>>
+
+    /*
+    * 运营中心
+    * */
+    @GET("store/list/service")
+    suspend fun storeServiceList(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("dist") dist: Int,
+        @Query("search_name") search_name: String
+    ): Response<BaseNetModel<ServiceStoreListBean>>
+
+    /*
+    *  商家详情
+    * */
+    @GET("store/list/service")
+    suspend fun getStoreDetail(
+        @Query("shop_id") shopId: String
+    ): Response<BaseNetModel<ShopInfoBean>>
 }

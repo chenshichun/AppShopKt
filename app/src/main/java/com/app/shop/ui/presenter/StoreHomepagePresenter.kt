@@ -19,6 +19,24 @@ import kotlinx.coroutines.launch
  */
 class StoreHomepagePresenter : BasePresenter<StoreHomepageContract.View>(),
     StoreHomepageContract.Presenter {
+    override fun getStoreDetail(storeId: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java).getStoreDetail(storeId)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.getStoreDetail(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
     override fun storeAdd(storeIdReq: StoreIdReq) {
         CoroutineScope(Dispatchers.Main).launch {
             mView!!.showLoading()

@@ -5,7 +5,9 @@ import android.text.TextUtils
 import com.app.shop.base.BaseApplication
 import com.app.shop.base.BaseConstant
 import com.app.shop.manager.AccountManager
+import com.app.shop.manager.Constants
 import com.app.shop.util.AppUtil
+import com.app.shop.util.MmkvUtil
 import com.blankj.utilcode.util.NetworkUtils
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -52,6 +54,8 @@ class NetworkInterceptor : Interceptor {
                 .addHeader("User-Agent", "android")
                 .addHeader("X-API-VERSION",
                     BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
+                .addHeader("lat", (MmkvUtil[Constants.LOCATION_LAT, "0"] as String))
+                .addHeader("lng", (MmkvUtil[Constants.LOCATION_LNG, "0"] as String))
                 .header(
                     "Cache-Control",
                     "public,max-age=" + CACHE_AGE_SEC
@@ -62,6 +66,8 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Pragma")
                 .removeHeader("Cache-Control")
                 .addHeader("User-Agent", "android")
+                .addHeader("lat", (MmkvUtil[Constants.LOCATION_LAT, "0"] as String))
+                .addHeader("lng", (MmkvUtil[Constants.LOCATION_LNG, "0"] as String))
                 .addHeader("X-API-VERSION",
                     BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header("Cache-Control", "public,max-age=" + CACHE_AGE_SEC)
@@ -71,6 +77,8 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Pragma")
                 .removeHeader("Cache-Control") //
                 .addHeader("User-Agent", "android")
+                .addHeader("lat", (MmkvUtil[Constants.LOCATION_LAT, "0"] as String))
+                .addHeader("lng", (MmkvUtil[Constants.LOCATION_LNG, "0"] as String))
                 .addHeader("X-API-VERSION",
                     BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header(
@@ -82,6 +90,8 @@ class NetworkInterceptor : Interceptor {
                 .removeHeader("Pragma")
                 .removeHeader("Cache-Control") //
                 .addHeader("User-Agent", "android")
+                .addHeader("lat", (MmkvUtil[Constants.LOCATION_LAT, "0"] as String))
+                .addHeader("lng", (MmkvUtil[Constants.LOCATION_LNG, "0"] as String))
                 .addHeader("X-API-VERSION",
                     BaseApplication.mContext?.let { AppUtil.getVersionCode(it) })
                 .header("Cache-Control", "public,only-if-cached,max-stale=" + CACHE_STALE_SEC)

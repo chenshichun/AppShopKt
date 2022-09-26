@@ -1,16 +1,25 @@
 package com.app.shop.ui.activity
 
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.OfflineShopAdapter
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.LocalStore
+import com.app.shop.bean.ServiceStoreListBean
 import com.app.shop.databinding.ActivityOperationsCenterBinding
+import com.app.shop.loadsir.EmptyCallBack
+import com.app.shop.loadsir.LoadingCallback
 import com.app.shop.ui.contract.OperationsCenterContract
 import com.app.shop.ui.presenter.OperationsCenterPresenter
 import com.app.shop.util.AMapUtil
 import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import com.lxj.xpopup.XPopup
+import kotlinx.coroutines.launch
 
 /**
  * @author chenshichun
@@ -22,6 +31,13 @@ class OperationsCenterActivity :
     OperationsCenterContract.View {
 
     private lateinit var offlineShopAdapter: OfflineShopAdapter
+
+    val locatStoreList = mutableListOf<LocalStore>()
+    private var page: Int = 1
+    private var size: Int = 10
+    private var dist: Int = 0
+    private var search_name: String = ""
+    private lateinit var loadService: LoadService<Any>
 
     override fun getPresenter(): OperationsCenterPresenter {
         return OperationsCenterPresenter()
@@ -38,7 +54,20 @@ class OperationsCenterActivity :
             finish()
         }
 
-        offlineShopAdapter = OfflineShopAdapter(this, null)
+        binding.etSearch.setOnEditorActionListener { view, _, _ ->
+            lifecycleScope.launch {
+                search_name = view.text.toString()
+                initData()
+            }
+            true
+        }
+
+        binding.tvSearch.setOnClickListener {
+            search_name = binding.tvSearch.text.toString()
+            initData()
+        }
+
+        offlineShopAdapter = OfflineShopAdapter(this, locatStoreList)
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = offlineShopAdapter
         offlineShopAdapter.setOnItemClickListener(object : OfflineShopAdapter.OnItemClickListener {
@@ -87,6 +116,50 @@ class OperationsCenterActivity :
                     }.show()
             }
         })
+
+        loadService = LoadSir.getDefault().register(binding.refreshLayout) {
+            initData()
+        }
+
+        binding.refreshLayout.setOnRefreshListener {
+            page = 1
+            initData()
+        }
+
+        binding.refreshLayout.setOnLoadMoreListener {
+            page++
+            initData()
+        }
+        initData()
+    }
+
+    private fun initData() {
+        loadService.showCallback(LoadingCallback::class.java)
+        mPresenter!!.storeServiceList(page, size, dist, search_name)
+    }
+
+    override fun storeServiceList(mData: BaseNetModel<ServiceStoreListBean>) {
+        binding.refreshLayout.finishRefresh()
+        binding.refreshLayout.finishLoadMore()
+
+        if (page == 1) {
+            if (mData.data!!.service_center_list.isEmpty()) {// 空数据
+                loadService.showCallback(EmptyCallBack::class.java)
+            } else {
+                locatStoreList.clear()
+                locatStoreList.addAll(mData.data!!.service_center_list)
+                offlineShopAdapter.notifyDataSetChanged()
+                loadService.showSuccess()
+            }
+        } else {
+            loadService.showSuccess()
+            if (mData.data!!.service_center_list.isEmpty()) {
+                page--
+            } else {
+                locatStoreList.addAll(mData.data!!.service_center_list)
+                offlineShopAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun showLoading() {

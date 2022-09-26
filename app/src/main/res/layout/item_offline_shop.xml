@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="6dp"
     android:layout_marginTop="13dp"
     app:cardCornerRadius="10dp">
@@ -20,9 +21,11 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/iv_shop"
                 android:layout_width="107dp"
                 android:layout_height="129dp"
-                android:background="@drawable/icon_clothing" />
+                android:scaleType="centerCrop"
+                tools:background="@drawable/icon_default_pic" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,17 +35,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="地址：浙江省金华市义乌市xxx路"
+                    android:text="@string/address"
                     android:textColor="@color/color_333"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="联系电话：152xxxx8596"
+                    android:text="@string/phone"
                     android:textColor="@color/color_333"
                     android:textSize="15sp" />
 
@@ -68,6 +73,7 @@
             android:layout_marginTop="10dp">
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_merchant_label"
@@ -84,12 +90,13 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_sales"
                     android:drawablePadding="6dp"
                     android:gravity="center"
-                    android:text="销量：0"
+                    android:text="@string/sales"
                     android:textColor="@color/color_666"
                     android:textSize="10sp" />
 
@@ -102,12 +109,13 @@
                     android:textSize="10sp" />
 
                 <TextView
+                    android:id="@+id/tv_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_liked"
                     android:drawablePadding="6dp"
                     android:gravity="center"
-                    android:text=" 评分：100"
+                    android:text="@string/score"
                     android:textColor="@color/color_666"
                     android:textSize="10sp" />
             </LinearLayout>

@@ -57,8 +57,11 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         return MinePresenter()
     }
 
-    override fun initView() {
+    override fun onResume() {
         mPresenter!!.getMyInfo()
+        super.onResume()
+    }
+    override fun initView() {
         binding.ivHead.setOnClickListener(this)
         binding.tvNickName.setOnClickListener(this)
         binding.tvInvCode.setOnClickListener(this)

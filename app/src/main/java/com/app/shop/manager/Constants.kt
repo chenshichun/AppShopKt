@@ -32,5 +32,12 @@ class Constants {
         const val ADDR_ADDR: String = "ADDR_ADDR"
 
         const val WECHAT_ID: String = "WECHAT_ID"
+        const val ORDER_ID: String = "ORDER_ID"
+
+        const val LOCATION_LAT: String = "LAT"
+        const val LOCATION_LNG: String = "LNG"
+
+        const val SHOP_ID: String = "SHOP_ID"
+
     }
 }

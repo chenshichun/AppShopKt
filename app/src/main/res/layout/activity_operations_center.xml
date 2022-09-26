@@ -20,7 +20,7 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/tv_search"
+            android:id="@+id/et_search"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -28,11 +28,13 @@
             android:drawableLeft="@drawable/icon_search"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
-            android:paddingHorizontal="8dp"
             android:hint="输入商家搜索"
+            android:imeOptions="actionSearch"
+            android:paddingHorizontal="8dp"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/tv_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -43,11 +45,16 @@
 
     <include layout="@layout/line" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mRecyclerView"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_offline_shop" />
+        android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_offline_shop" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </LinearLayout>

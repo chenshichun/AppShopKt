@@ -19,7 +19,7 @@ data class Order(
     val freight_amount: Int,
     val is_payed: Int,
     val items: List<Item>,
-    val order_id: Long,
+    val order_id: String,
     val order_number: String,
     val order_type: Int,
     val pay_time: String,

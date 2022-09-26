@@ -41,6 +41,7 @@ import com.app.shop.ui.activity.*
 import com.app.shop.ui.contract.HomeContract
 import com.app.shop.ui.presenter.HomePresenter
 import com.app.shop.util.IntentUtil
+import com.app.shop.util.MmkvUtil
 import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideImageLoader
 import com.desmond.citypicker.bin.CityPicker
@@ -260,9 +261,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                     val location = Location("")
                     location.longitude = currentLon
                     location.latitude = currentLat
+                    MmkvUtil.put(Constants.LOCATION_LAT, "" + location.latitude)
+                    MmkvUtil.put(Constants.LOCATION_LNG, "" + location.longitude)
+
                     binding.tvAddress.text = getAddress(location)!![0].locality
 
                     mLocationClient.stopLocation()
+                    Logger.d(
+                        "经纬度 " + (MmkvUtil[Constants.LOCATION_LAT, "0"] as String) +
+                                "  " + (MmkvUtil[Constants.LOCATION_LNG, "0"] as String)
+                    )
                 } else {
                     //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                     Logger.e(

@@ -6,11 +6,15 @@ import com.app.shop.R
 import com.app.shop.adapter.GoodsAdapter
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.ServiceStoreListBean
+import com.app.shop.bean.ShopInfoBean
 import com.app.shop.databinding.ActivityStoreHomepageBinding
+import com.app.shop.manager.Constants
 import com.app.shop.req.StoreIdReq
 import com.app.shop.ui.contract.StoreHomepageContract
 import com.app.shop.ui.presenter.StoreHomepagePresenter
 import com.app.shop.util.IntentUtil
+import com.bumptech.glide.Glide
 import com.gyf.immersionbar.ktx.immersionBar
 
 /**
@@ -22,7 +26,7 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
     StoreHomepageContract.View, View.OnClickListener {
 
     private lateinit var goodsAdapter: GoodsAdapter
-    private val id: String = ""
+    private var id: String = ""
     private var isAttention = false
 
     override fun getPresenter(): StoreHomepagePresenter {
@@ -34,6 +38,7 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
             transparentStatusBar()
                 .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
         }
+        id = intent.getStringExtra(Constants.SHOP_ID) as String
 
         goodsAdapter = GoodsAdapter(this, null)
         binding.mRecyclerView.layoutManager = GridLayoutManager(this, 2)
@@ -46,6 +51,8 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
         binding.ivBack.setOnClickListener(this)
         binding.tvShopName.setOnClickListener(this)
         binding.tvAttention.setOnClickListener(this)
+
+        mPresenter!!.getStoreDetail(id)
     }
 
     override fun storeAdd(mData: BaseNetModel<Any>) {
@@ -56,6 +63,14 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
     override fun storeDel(mData: BaseNetModel<Any>) {
         isAttention = false
         binding.tvAttention.text = "关注"
+    }
+
+    override fun getStoreDetail(mData: BaseNetModel<ShopInfoBean>) {
+        Glide.with(this).load(mData.data!!.shop_info.shop_logo).error(R.drawable.icon_default_pic)
+            .placeholder(R.drawable.icon_default_pic).into(binding.ivShop)
+        binding.tvShopName.text = mData.data!!.shop_info.shop_name
+        binding.rbScore.rating = mData.data!!.shop_info.score.toFloat()
+        binding.tvFans.text = String.format(getString(R.string.fans), mData.data!!.shop_info.fans)
     }
 
     override fun showLoading() {
@@ -77,7 +92,7 @@ class StoreHomepageActivity : BaseActivity<ActivityStoreHomepageBinding, StoreHo
                 val storeIdReq = StoreIdReq(id)
                 if (!isAttention) {
                     mPresenter!!.storeAdd(storeIdReq)
-                }else{
+                } else {
                     mPresenter!!.storeDel(storeIdReq)
                 }
             }
