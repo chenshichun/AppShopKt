@@ -186,7 +186,8 @@ dependencies {
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
     // 滑动删除
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
-
+    // 视频
+    implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
 }
 
 def releaseTime() {

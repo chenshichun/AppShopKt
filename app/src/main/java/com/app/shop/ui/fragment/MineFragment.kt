@@ -61,6 +61,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         mPresenter!!.getMyInfo()
         super.onResume()
     }
+
     override fun initView() {
         binding.ivHead.setOnClickListener(this)
         binding.tvNickName.setOnClickListener(this)
@@ -100,7 +101,12 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 if (bundle!!.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     val result = bundle.getString(CodeUtils.RESULT_STRING)
                     Logger.d(result)
-                    ToastUtil.showToast(result)
+                    if (result!!.contains("积分二维码")) {
+                        val bundle = Bundle()
+                        bundle.putString(Constants.CODE_QR, result.substring(5))
+                        IntentUtil.get()!!
+                            .goActivity(activity, ConversionIntegralActivity::class.java, bundle)
+                    }
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     ToastUtil.showToast("解析二维码失败")
                 }
@@ -155,8 +161,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)
             }
             R.id.tv_order_4 -> {
-                   bundle.putInt(Constants.ORDER_TPYE, 4)
-                   IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)
+                bundle.putInt(Constants.ORDER_TPYE, 4)
+                IntentUtil.get()!!.goActivity(activity, OrderActivity::class.java, bundle)
             }
             R.id.tv_order_5 -> IntentUtil.get()!!
                 .goActivity(activity, RefundAfterSaleActivity::class.java)
@@ -272,14 +278,17 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvNickName.text = mData.data!!.user!!.nick_name
         binding.tvAccount.text = mData.data!!.user!!.phone
         binding.tvInvCode.text = "邀请码：${mData.data!!.user!!.inv_code}"
-        binding.ivQrCode.setImageBitmap(
+        Glide.with(requireContext()).load(mData.data!!.user!!.my_qr)
+            .error(R.drawable.icon_default_pic)
+            .placeholder(R.drawable.icon_default_pic).into(binding.ivQrCode)
+        /*binding.ivQrCode.setImageBitmap(
             CodeUtils.createImage(
                 mData.data!!.user!!.inv_code,
                 200,
                 200,
                 null
             )
-        )
+        )*/
     }
 
     override fun showLoading() {

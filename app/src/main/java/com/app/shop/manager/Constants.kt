@@ -39,5 +39,6 @@ class Constants {
 
         const val SHOP_ID: String = "SHOP_ID"
         const val PRICE: String = "PRICE"
+        const val CODE_QR = "CODE_QR"
     }
 }

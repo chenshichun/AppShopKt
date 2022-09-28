@@ -337,4 +337,9 @@ interface HomeService {
     @POST("user/wallet/cashout")
     suspend fun cashout(@Body cashReq: CashReq): Response<BaseNetModel<Any>>
 
+    /*
+    * 转积分
+    * */
+    @POST("user/transfer/point/byphone")
+    suspend fun transferPoint(@Body transferPointrReq: TransferPointrReq): Response<BaseNetModel<Any>>
 }
