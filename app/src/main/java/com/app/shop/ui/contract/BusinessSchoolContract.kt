@@ -1,6 +1,8 @@
 package com.app.shop.ui.contract
 
 import com.app.shop.base.BaseContract
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.CollegeListBean
 
 /**
  * @author chenshichun
@@ -9,8 +11,10 @@ import com.app.shop.base.BaseContract
  */
 interface BusinessSchoolContract : BaseContract {
     interface View : BaseContract.BaseView {
+        fun getCollegeList(mData: BaseNetModel<CollegeListBean>)
     }
 
     interface Presenter {
+        fun getCollegeList()
     }
 }

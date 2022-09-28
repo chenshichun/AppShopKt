@@ -41,5 +41,6 @@ data class ShopPageInfo(
     val transport_type: Int,
     val update_time: String,
     val updated_at: String,
-    val user_id: String
+    val user_id: String,
+    val is_collected:Boolean
 )

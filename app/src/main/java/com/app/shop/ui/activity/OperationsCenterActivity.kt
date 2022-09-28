@@ -1,5 +1,6 @@
 package com.app.shop.ui.activity
 
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.R
@@ -11,6 +12,7 @@ import com.app.shop.bean.ServiceStoreListBean
 import com.app.shop.databinding.ActivityOperationsCenterBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.LoadingCallback
+import com.app.shop.manager.Constants
 import com.app.shop.ui.contract.OperationsCenterContract
 import com.app.shop.ui.presenter.OperationsCenterPresenter
 import com.app.shop.util.AMapUtil
@@ -72,8 +74,10 @@ class OperationsCenterActivity :
         binding.mRecyclerView.adapter = offlineShopAdapter
         offlineShopAdapter.setOnItemClickListener(object : OfflineShopAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
+                val bundle = Bundle()
+                bundle.putString(Constants.SHOP_ID, locatStoreList[position].shop_id)
                 IntentUtil.get()!!
-                    .goActivity(this@OperationsCenterActivity, StoreHomepageActivity::class.java)
+                    .goActivity(this@OperationsCenterActivity, StoreHomepageActivity::class.java,bundle)
             }
 
             override fun onNavigationClick(position: Int) {

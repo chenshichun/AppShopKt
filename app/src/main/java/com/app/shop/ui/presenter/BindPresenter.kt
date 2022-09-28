@@ -46,6 +46,7 @@ class BindPresenter : BasePresenter<BindContract.View>(), BindContract.Presenter
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.bindWechat(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

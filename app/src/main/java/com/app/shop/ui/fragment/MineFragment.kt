@@ -208,7 +208,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 IntentUtil.get()!!.goActivity(activity, InviteFriendsActivity::class.java)
             }
             R.id.ll_merchant_settled -> {// 商户入驻
-                XPopup.Builder(context)
+                /*XPopup.Builder(context)
                     .isDestroyOnDismiss(true)
                     .isDarkTheme(false)
                     .hasShadowBg(true)
@@ -225,7 +225,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                             1 -> {// 商户修改
                             }
                         }
-                    }.show()
+                    }.show()*/
+                startActivity(Intent(activity, MerchantSettledActivity::class.java))
             }
             R.id.ll_scan -> {//  扫码
                 RxPermissions(this)

@@ -48,6 +48,6 @@ interface LoginService {
     /*
     * 绑定手机
     * */
-    @POST("register/bind/wechat")
+    @POST("user/register/bind/wechat")
     suspend fun bindWechat(@Body bindWechatReq: BindWechatReq): Response<BaseNetModel<Any>>
 }

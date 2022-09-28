@@ -33,7 +33,7 @@
                 android:layout_marginLeft="13dp"
                 android:text="易货之道"
                 android:textColor="#ffffffff"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toRightOf="@id/iv_head"
                 app:layout_constraintTop_toTopOf="@id/iv_head" />
 
@@ -70,9 +70,9 @@
 
             <ImageView
                 android:id="@+id/iv_qr_code"
-                android:layout_width="73dp"
-                android:layout_height="73dp"
-                android:layout_marginRight="18dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="10dp"
                 app:layout_constraintRight_toLeftOf="@id/iv_customer_service"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:background="@drawable/icon_qr_code" />
@@ -322,7 +322,7 @@
                     android:layout_marginLeft="14.5dp"
                     android:text="易货君"
                     android:textColor="#fff5f5f5"
-                    android:textSize="19sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -330,7 +330,7 @@
                     android:layout_height="wrap_content"
                     android:text="商城"
                     android:textColor="#FFDE00"
-                    android:textSize="19sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -377,10 +377,10 @@
                 android:layout_marginRight="12.5dp"
                 android:background="@drawable/bg_white_20"
                 android:paddingHorizontal="14dp"
-                android:paddingVertical="8.5dp"
+                android:paddingVertical="6dp"
                 android:text="邀请好友"
                 android:textColor="#ff1868ff"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 

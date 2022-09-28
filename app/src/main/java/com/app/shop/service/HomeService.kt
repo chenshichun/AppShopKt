@@ -215,7 +215,7 @@ interface HomeService {
     *  单商品生成订单
     * */
     @POST("order/submit/direct")
-    suspend fun orderSubmit(@Body createOrderReq: CreateOrderReq): Response<BaseNetModel<Any>>
+    suspend fun orderSubmit(@Body createOrderReq: CreateOrderReq): Response<BaseNetModel<OrderIdBean>>
 
     /*
     * 购物车生成订单
@@ -278,8 +278,63 @@ interface HomeService {
     /*
     *  商家详情
     * */
-    @GET("store/list/service")
+    @GET("store/detail")
     suspend fun getStoreDetail(
         @Query("shop_id") shopId: String
     ): Response<BaseNetModel<ShopInfoBean>>
+
+    /*
+    * 商家详情商品列表
+    * */
+    @GET("prod/by_shop_id")
+    suspend fun getStoreGoodsDetail(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("sort") sort: String,
+        @Query("keywords") keywords: String,
+        @Query("shop_id") shopId: String
+    ): Response<BaseNetModel<StoreGoodsBean>>
+
+    /*
+    * 钱包明细
+    * */
+    @GET("user/wallet/detail")
+    suspend fun getWalletDetail(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<BaseNetModel<WalletDetailBean>>
+
+    /*
+    * 提现记录
+    * */
+    @GET("user/wallet/cashdetail")
+    suspend fun getCashdetail(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<BaseNetModel<CashDetailListBean>>
+
+    /*
+    * 商学院
+    * */
+    @GET("comm/college/list")
+    suspend fun getCollegeList(): Response<BaseNetModel<CollegeListBean>>
+
+    /*
+    * 支付寶
+    * */
+    @POST("order/pay/ali")
+    suspend fun aliPay(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<AliPayDataBean>>
+
+    /*
+    * 修改支付密码
+    * */
+    @POST("user/setpwd/pay")
+    suspend fun setPwdPay(@Body modifyPasReq: ModifyPasReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 提现
+    * */
+    @POST("user/wallet/cashout")
+    suspend fun cashout(@Body cashReq: CashReq): Response<BaseNetModel<Any>>
+
 }

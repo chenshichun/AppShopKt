@@ -32,7 +32,7 @@ class WithdrawPriceAdapter(private val context: Context, val mData: List<Withdra
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.tvPrice.text = mData!![position].price.toString()
+        holder.tvPrice.text = mData!![position].price
         holder.tvPrice.setTextColor(
             ContextCompat.getColor(
                 context,

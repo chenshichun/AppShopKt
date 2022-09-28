@@ -1,11 +1,13 @@
 package com.app.shop.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.WalletBean
 import com.app.shop.databinding.ActivityMyPurseBinding
+import com.app.shop.manager.Constants
 import com.app.shop.ui.contract.MyPurseContract
 import com.app.shop.ui.presenter.MyPursePresenter
 import com.app.shop.util.IntentUtil
@@ -59,7 +61,9 @@ class MyPurseActivity : BaseActivity<ActivityMyPurseBinding, MyPursePresenter>()
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.tv_withdraw -> {// 提现
-                IntentUtil.get()!!.goActivity(this, WithdrawActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString(Constants.PRICE, binding.tvAmountCanWithdrawn.text.toString())
+                IntentUtil.get()!!.goActivity(this, WithdrawActivity::class.java, bundle)
             }
             R.id.stv_1 -> {// 钱包明细
                 IntentUtil.get()!!.goActivity(this, WalletDetailsActivity::class.java)

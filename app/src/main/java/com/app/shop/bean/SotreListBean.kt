@@ -6,7 +6,7 @@ data class SotreListBean(
 data class Store(
     val created_at: String,
     val products: List<Product>,
-    val store_id: Long,
+    val store_id: String,
     val store_name: String,
     val store_pic: String,
     val updated_at: String,

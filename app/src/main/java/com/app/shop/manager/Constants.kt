@@ -38,6 +38,6 @@ class Constants {
         const val LOCATION_LNG: String = "LNG"
 
         const val SHOP_ID: String = "SHOP_ID"
-
+        const val PRICE: String = "PRICE"
     }
 }

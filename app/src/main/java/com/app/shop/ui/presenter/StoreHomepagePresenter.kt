@@ -29,7 +29,30 @@ class StoreHomepagePresenter : BasePresenter<StoreHomepageContract.View>(),
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.getStoreDetail(response.body()!!)
-                    ToastUtil.showToast(response.body()!!.msg)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun getStoreGoodsDetail(
+        page: Int,
+        size: Int,
+        sort: String,
+        keywords: String,
+        shopId: String
+    ) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java)
+                .getStoreGoodsDetail(page, size, sort,keywords, shopId)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.getStoreGoodsDetail(response.body()!!)
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

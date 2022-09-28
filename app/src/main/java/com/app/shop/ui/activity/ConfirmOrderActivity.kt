@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
-import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.CreateOrderBean
-import com.app.shop.bean.DefaultDaarBean
+import com.app.shop.bean.*
 import com.app.shop.databinding.ActivityConfirmOrderBinding
 import com.app.shop.manager.Constants
 import com.app.shop.req.CreateOrderReq
@@ -98,8 +96,15 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
             mData.data!!.addr.province + mData.data!!.addr.city + mData.data!!.addr.area + mData.data!!.addr.addr
     }
 
-    override fun orderSubmit(mData: BaseNetModel<Any>) {
-        IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java)
+    override fun orderSubmit(mData: BaseNetModel<OrderIdBean>) {
+        val bundle = Bundle()
+        val orderInfoBean = OrderInfoBean(
+            createOrderBean.prod_name,
+            createOrderBean.price,
+            createOrderBean.pic,
+            mData.data!!.order_id
+        );
+        IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java,orderInfoBean)
         finish()
     }
 

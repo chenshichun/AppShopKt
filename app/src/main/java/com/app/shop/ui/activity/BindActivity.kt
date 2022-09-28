@@ -89,6 +89,7 @@ class BindActivity : BaseActivity<ActivityBindBinding, BindPresenter>(),
     }
 
     override fun bindWechat(mData: BaseNetModel<Any>) {
+        finish()
     }
 
     override fun showLoading() {

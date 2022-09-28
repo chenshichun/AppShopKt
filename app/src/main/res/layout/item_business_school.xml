@@ -8,6 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
+        android:id="@+id/iv_video"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         tools:background="@drawable/icon_default_pic"
@@ -15,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/iv_paly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/video_icon"

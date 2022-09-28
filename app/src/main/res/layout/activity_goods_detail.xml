@@ -24,7 +24,7 @@
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
-                    tools:background="@drawable/txt1" />
+                    tools:background="@drawable/icon_default_pic" />
 
                 <TextView
                     android:id="@+id/tv_page_count"

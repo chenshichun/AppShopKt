@@ -65,12 +65,6 @@ class CategoryListActivity : BaseActivity<ActivityCategoryListBinding, CategoryL
         cateName = intent.getStringExtra(Constants.CATEGORY_NAME).toString()
         cateId = intent.getStringExtra(Constants.CATEGORY_ID).toString()
         type = intent.getIntExtra(Constants.CATEGORY_TYPE, 0)
-        Logger.d(cateName)
-        Logger.d(keyword)
-
-        Logger.d(keyword == "")
-        Logger.d(cateId == "")
-        Logger.d(cateName == "")
 
         if (keyword == "null") {
             binding.viewHead.tvTitle.text =

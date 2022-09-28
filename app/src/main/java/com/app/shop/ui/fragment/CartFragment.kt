@@ -1,6 +1,7 @@
 package com.app.shop.ui.fragment
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +14,10 @@ import com.app.shop.databinding.FragmentCartBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
+import com.app.shop.manager.Constants
 import com.app.shop.req.CartIdReq
 import com.app.shop.req.CartReq
+import com.app.shop.ui.activity.GoodsDetailActivity
 import com.app.shop.ui.activity.PayOrderActivity
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
@@ -107,6 +110,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
         binding.goodsRv.adapter = goodsAdapter
         goodsAdapter.setOnItemClickListener(object : GoodsAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
+                val bundle = Bundle()
+                bundle.putString(Constants.GOODS_ID, goodsList[position].prod_id)
+                IntentUtil.get()!!
+                    .goActivity(activity, GoodsDetailActivity::class.java, bundle)
             }
         })
 

@@ -46,7 +46,7 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
     var binding: ViewBinding? = null
     lateinit var specAdapter: SpecAdapter
 
-    private lateinit var sku_id: String
+    private var sku_id = ""
     private var stocksCount: Int = 0
     private var attr: String = ""
 

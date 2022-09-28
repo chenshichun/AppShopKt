@@ -1,9 +1,11 @@
 package com.app.shop.ui.activity
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.R
+import com.app.shop.adapter.ImgAdapter
 import com.app.shop.adapter.NewInStoreAdapter
 import com.app.shop.adapter.RecentAttentionAdapter
 import com.app.shop.base.BaseActivity
@@ -14,8 +16,10 @@ import com.app.shop.databinding.ActivityAttentionBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
+import com.app.shop.manager.Constants
 import com.app.shop.ui.contract.AttentionContract
 import com.app.shop.ui.presenter.AttentionPresenter
+import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
@@ -52,10 +56,26 @@ class AttentionActivity : BaseActivity<ActivityAttentionBinding, AttentionPresen
         recentAttentionAdapter = RecentAttentionAdapter(this, storeList)
         binding.rvRecentAttention.layoutManager = GridLayoutManager(this, 4)
         binding.rvRecentAttention.adapter = recentAttentionAdapter
+        recentAttentionAdapter.setOnItemClickListener(object : RecentAttentionAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val bundle = Bundle()
+                bundle.putString(Constants.SHOP_ID, storeList[position].store_id)
+                IntentUtil.get()!!
+                    .goActivity(this@AttentionActivity, StoreHomepageActivity::class.java,bundle)
+            }
+        })
 
         newInStoreAdapter = NewInStoreAdapter(this, storeList)
         binding.rvNewInStore.layoutManager = LinearLayoutManager(this)
         binding.rvNewInStore.adapter = newInStoreAdapter
+        newInStoreAdapter.setOnItemClickListener(object : NewInStoreAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                val bundle = Bundle()
+                bundle.putString(Constants.SHOP_ID, storeList[position].store_id)
+                IntentUtil.get()!!
+                    .goActivity(this@AttentionActivity, StoreHomepageActivity::class.java,bundle)
+            }
+        })
 
         loadService = LoadSir.getDefault().register(binding.refreshLayout) {
             mPresenter!!.storeList()
