@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_color"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/bg_white_8"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_goods"
@@ -58,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_white_8"
         android:orientation="vertical"
         android:padding="10dp">
@@ -70,14 +72,15 @@
             android:textSize="14sp" />
 
         <EditText
+            android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
-            android:textSize="14sp"
             android:background="@drawable/bg_evaluation_et"
             android:gravity="left"
             android:hint="写出您的感受，可以帮助更多小朋友哦~"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,24 +96,26 @@
                 android:textSize="14sp" />
 
             <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                android:id="@+id/mMaterialRatingBar"
                 style="@style/Widget.MaterialRatingBar.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_dp_10"
                 android:maxHeight="16dp"
+                android:stepSize="1"
                 android:minHeight="16dp"
-                app:mrb_progressTint="@color/red"
-                app:mrb_secondaryProgressTint="@color/red" />
+                app:mrb_progressTint="@color/blue"
+                app:mrb_secondaryProgressTint="@color/blue" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRecyclerView"
-            tools:listitem="@layout/item_multiple_images"
-            tools:itemCount="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_multiple_images" />
     </LinearLayout>
 
     <Button

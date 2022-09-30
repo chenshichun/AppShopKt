@@ -2,6 +2,7 @@ package com.app.shop.ui.presenter
 
 import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
+import com.app.shop.req.OrderIdReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
 import com.app.shop.ui.contract.OrderFragmentContract
@@ -27,6 +28,64 @@ class OrderFragmentPresenter : BasePresenter<OrderFragmentContract.View>(),Order
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.orderList(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+
+    override fun orderCancel(orderIdReq: OrderIdReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java)
+                .orderCancel(orderIdReq)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.orderCancel(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun orderConfirm(orderIdReq: OrderIdReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java)
+                .orderConfirm(orderIdReq)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.orderConfirm(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun orderDelete(orderIdReq: OrderIdReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java)
+                .orderDelete(orderIdReq)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.orderDelete(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

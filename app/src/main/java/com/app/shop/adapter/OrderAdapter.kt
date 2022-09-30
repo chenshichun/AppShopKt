@@ -71,7 +71,7 @@ class OrderAdapter(private val context: Context, val mData: List<Order>?) :
         holder.recyclerView.adapter = orderShopAdapter
         orderShopAdapter.setOnItemClickListener(object : OrderShopAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-
+                mOnItemClickListener?.onItemClick(position)
             }
         })
 

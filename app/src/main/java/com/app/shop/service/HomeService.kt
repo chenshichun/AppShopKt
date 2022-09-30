@@ -342,4 +342,43 @@ interface HomeService {
     * */
     @POST("user/transfer/point/byphone")
     suspend fun transferPoint(@Body transferPointrReq: TransferPointrReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 订单详情
+    * */
+    @GET("order/detail")
+    suspend fun orderDetail(
+        @Query("order_id") orderId: String
+    ): Response<BaseNetModel<OrderDetailBean>>
+
+    /*
+    * 取消订单
+    * */
+    @POST("order/cancel")
+    suspend fun orderCancel(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 确认收货
+    * */
+    @POST("order/confirm")
+    suspend fun orderConfirm(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 删除订单
+    * */
+    @POST("order/delete")
+    suspend fun orderDelete(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 运营中心申请
+    * */
+    @POST("user/service/apply")
+    suspend fun serviceApply(@Body serviceApplyReq: ServiceApplyReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 订单评价
+    * */
+    @POST("order/comment/save")
+    suspend fun commentSave(@Body commentReq: CommentReq): Response<BaseNetModel<Any>>
+
 }

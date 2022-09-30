@@ -11,6 +11,8 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UploadBean
 import com.app.shop.databinding.ActivityEvaluationBinding
+import com.app.shop.manager.Constants
+import com.app.shop.req.CommentReq
 import com.app.shop.ui.contract.EvaluationContract
 import com.app.shop.ui.presenter.EvaluationPresenter
 import com.app.shop.util.CommonUtil
@@ -37,6 +39,7 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
 
     private lateinit var multipleImagesAdapter: MultipleImagesAdapter
     private var imgList = mutableListOf<String>()
+    private var orderId = ""
 
     override fun getPresenter(): EvaluationPresenter {
         return EvaluationPresenter()
@@ -47,6 +50,7 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
+        orderId = intent.getStringExtra(Constants.ORDER_ID).toString()
 
         binding.viewHead.tvTitle.text = "商品评价"
         binding.viewHead.ivBack.setOnClickListener {
@@ -79,12 +83,32 @@ class EvaluationActivity : BaseActivity<ActivityEvaluationBinding, EvaluationPre
                 chooseImg()
             }
         })
+
+        binding.btConfirm.setOnClickListener {
+            var pics = "";
+            for (str in imgList) {
+                pics = pics + "," + str
+            }
+            pics = pics.substring(0, pics.length - 1)
+
+            val commentReq = CommentReq(
+                binding.tvContent.text.toString(),
+                orderId,
+                pics,
+                binding.mMaterialRatingBar.rating.toInt().toString()
+            )
+            mPresenter!!.commentSave(commentReq)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun upload(mData: BaseNetModel<UploadBean>) {
         imgList.add(mData.data!!.url)
         multipleImagesAdapter.notifyDataSetChanged()
+    }
+
+    override fun commentSave(mData: BaseNetModel<Any>) {
+        finish()
     }
 
     override fun showLoading() {
