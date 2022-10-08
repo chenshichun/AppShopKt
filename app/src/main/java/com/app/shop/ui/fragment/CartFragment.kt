@@ -243,7 +243,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             for (item in cartBean.prods) {
                 if (item.isCheck) {
                     allPrice += item.price.toDouble() * item.count
-                    allPoint += item.point * item.count
+                    allPoint += item.point.toInt() * item.count
                     allCartId = item.cart_id + "," + allCartId
                 }
             }

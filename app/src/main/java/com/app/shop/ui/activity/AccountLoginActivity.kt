@@ -119,15 +119,15 @@ class AccountLoginActivity : BaseActivity<ActivityAccountLoginBinding, AccountLo
                     ToastUtil.showToast("请阅读并同意《隐私政策》和《用户服务协议》")
                     return
                 }
-                if (AppUtil.isWeixinAvilible(this)) {
-                    //初始化登录请求对象
-                    val req = SendAuth.Req()
-                    req.scope = "snsapi_userinfo"
-                    req.state = System.currentTimeMillis().toString()
-                    api!!.sendReq(req)
-                } else {
-                    ToastUtil.showToast("请先安装微信")
-                }
+                // if (AppUtil.isWeixinAvilible(this)) {
+                //初始化登录请求对象
+                val req = SendAuth.Req()
+                req.scope = "snsapi_userinfo"
+                req.state = System.currentTimeMillis().toString()
+                api!!.sendReq(req)
+                //} else {
+                //    ToastUtil.showToast("请先安装微信")
+                //}
             }
         }
     }

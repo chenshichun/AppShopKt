@@ -29,7 +29,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="07190215-1f58-4e61-b275-7b2a62a31ed5">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[create table event_tb(id integer primary key autoincrement,title varchar(255),time varchar(255),content varchar(255),pic blob)]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -39,17 +39,17 @@
     <connection id="07190215-1f58-4e61-b275-7b2a62a31ed5" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" dataset="main.tb_history" active-filter-id="6c17dc2a-211c-45e7-9b03-0d60b402050c">
+    <filter-actions connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" dataset="main.tb_history" active-filter-id="EMPTY_FILTER">
       <filter id="6c17dc2a-211c-45e7-9b03-0d60b402050c" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="_id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
-    <filter-actions connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" dataset="main.sqlite_sequence" active-filter-id="69d50588-3049-4691-a4cd-ff4702398801">
+    <filter-actions connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" dataset="main.sqlite_sequence" active-filter-id="">
       <filter id="69d50588-3049-4691-a4cd-ff4702398801" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="name" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
-    <filter-actions connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" dataset="main.tb_city" active-filter-id="78efde61-f415-46f9-a093-edbbd573a3ba">
+    <filter-actions connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" dataset="main.tb_city" active-filter-id="EMPTY_FILTER">
       <filter id="78efde61-f415-46f9-a093-edbbd573a3ba" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="city_name" operator="=" value="" active="true" />
       </filter>
@@ -60,6 +60,9 @@
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/app/src/main/assets/android.sql" connection-id="07190215-1f58-4e61-b275-7b2a62a31ed5" session-id="MAIN" current-schema="main" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
@@ -80,7 +83,9 @@
     <diagnostics-history />
   </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
-    <recently-used-interfaces />
+    <recently-used-interfaces>
+      <mapping database-type="SQLITE" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
@@ -100,6 +105,7 @@
           <database value="" />
           <files>
             <file path="G:\csc\AppShopKt\app\src\main\assets\city.sqlite" schema="main" />
+            <file path="G:\csc\AppShopKt\app\src\main\assets\android.sql" schema="android" />
           </files>
           <type value="NONE" />
           <user value="" />

@@ -15,11 +15,12 @@ data class Comment(
     val created_at: String,
     val evaluate: Int,
     val is_anonymous: Int,
-    val order_item_id: Int,
+    val name: String,
+    val order_item_id: Long,
     val pics: String,
     val postip: String,
-    val prod_comm_id: Int,
-    val prod_id: Long,
+    val prod_comm_id: Long,
+    val prod_id: String,
     val profile_pic: String,
     val rec_time: String,
     val reply_content: String,
@@ -29,8 +30,7 @@ data class Comment(
     val status: Int,
     val updated_at: String,
     val useful_counts: Int,
-    val user_id: String,
-    val name: String
+    val user_id: String
 )
 
 data class ProdInfo(
@@ -42,14 +42,16 @@ data class ProdInfo(
     val delivery_mode: String,
     val delivery_template_id: Int,
     val imgs: List<String>,
+    val is_appt: Boolean,
     val is_featured: Boolean,
     val is_home: Boolean,
+    val is_local: Boolean,
     val is_locked: Boolean,
     val is_recommend: Boolean,
     val ori_point: String,
     val ori_price: String,
     val pic: String,
-    val point: Int,
+    val point: String,
     val price: String,
     val prod_id: String,
     val prod_name: String,
@@ -82,7 +84,7 @@ data class SkuInfoName(
 data class SkuCount(
     val point: Int,
     val price: String,
-    val prod_id: Long,
+    val prod_id: String,
     val properties: String,
     val sku_id: String,
     val sku_name: String,
@@ -90,7 +92,7 @@ data class SkuCount(
 )
 
 data class ShopInfo(
-    val id: Long,
+    val id: String,
     val name: String,
     val service_phone: String
 )

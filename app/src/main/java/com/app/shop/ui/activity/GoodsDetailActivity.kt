@@ -145,10 +145,10 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
         getBanner(prod.prod_info.imgs)
 
         binding.layoutGoodsDetailsHead.tvIntegral.visibility =
-            if (prod.prod_info.ori_point.equals("0")) View.INVISIBLE else View.VISIBLE
+            if (prod.prod_info.ori_point == "0") View.INVISIBLE else View.VISIBLE
 
         binding.layoutGoodsDetailsHead.tvPrice.visibility =
-            if (prod.prod_info.ori_point.equals("0")) View.VISIBLE else View.GONE
+            if (prod.prod_info.ori_point == "0") View.VISIBLE else View.GONE
 
         binding.layoutGoodsDetailsHead.tvIntegral.text =
             String.format(getString(R.string.goods_integral), prod.prod_info.ori_point)
