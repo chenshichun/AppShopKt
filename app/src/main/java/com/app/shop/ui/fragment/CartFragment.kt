@@ -15,13 +15,15 @@ import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.loadsir.ErrorCallback
 import com.app.shop.loadsir.NetWorkErrorCallBack
 import com.app.shop.manager.Constants
-import com.app.shop.req.CartIdReq
+import com.app.shop.req.CartAddReq
 import com.app.shop.req.CartReq
+import com.app.shop.ui.activity.ConfirmCartOrderActivity
 import com.app.shop.ui.activity.GoodsDetailActivity
 import com.app.shop.ui.activity.PayOrderActivity
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
 import com.app.shop.util.IntentUtil
+import com.app.shop.util.ToastUtil
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.orhanobut.logger.Logger
@@ -43,6 +45,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
     private var size: Int = 10
     private var goodsList = mutableListOf<Prod>()
     private var cartList = mutableListOf<ShopBean>()
+    private var cartListChecked = mutableListOf<ShopBean>()
 
     private var allCartId = ""
 
@@ -66,7 +69,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             @SuppressLint("NotifyDataSetChanged")
             override fun checkClick(position: Int) {// 店铺选择
                 cartList[position].isCheck = !cartList[position].isCheck
-                for (prodBean in cartList[position].prods) {
+                for (prodBean in cartList[position].prods!!) {
                     prodBean.isCheck = cartList[position].isCheck
                 }
                 cartAdapter.notifyDataSetChanged()
@@ -75,11 +78,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
 
             @SuppressLint("NotifyDataSetChanged")
             override fun checkClick(position: Int, position1: Int) {//  商品选择
-                cartList[position].prods[position1].isCheck =
-                    !cartList[position].prods[position1].isCheck
+                cartList[position].prods?.get(position1)!!.isCheck =
+                    !cartList[position].prods?.get(position1)!!.isCheck
 
                 var isShopCheck = true
-                for (cartGoodsBean in cartList[position].prods) {
+                for (cartGoodsBean in cartList[position].prods!!) {
                     if (!cartGoodsBean.isCheck) {
                         isShopCheck = false
                     }
@@ -91,13 +94,28 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             }
 
             override fun deleteClick(position: Int, position1: Int) {
-                mPresenter!!.cartDel(CartReq(cartList[position].prods[position1].cart_id))
+                mPresenter!!.cartDel(CartReq(cartList[position].prods!![position1].cart_id!!))
             }
 
             override fun reduceClick(position: Int, position1: Int) {
+                if (cartList[position].prods!![position1].count > 1) {
+
+                    val cartAddReq = CartAddReq(
+                        cartList[position].prods!![position1].cart_id!!,
+                        cartList[position].prods!![position1].count - 1, "", ""
+                    )
+                    mPresenter!!.cartAdd(cartAddReq)
+                } else {
+                    ToastUtil.showToast("不能再减了~")
+                }
             }
 
             override fun addClick(position: Int, position1: Int) {
+                val cartAddReq = CartAddReq(
+                    cartList[position].prods!![position1].cart_id!!,
+                    cartList[position].prods!![position1].count + 1, "", ""
+                )
+                mPresenter!!.cartAdd(cartAddReq)
             }
 
             override fun modifyClick(position: Int, position1: Int) {
@@ -143,10 +161,13 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             page++
             mPresenter!!.getGoodsData(page, size)
         }
-        initData()
 
     }
 
+    override fun onResume() {
+        initData()
+        super.onResume()
+    }
     private fun initData() {
         mPresenter!!.getGoodsData(page, size)
         mPresenter!!.getCartData()
@@ -197,13 +218,6 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
         mPresenter!!.getCartData()
     }
 
-    /*
-    * 生成订单
-    * */
-    override fun orderSubmitCart(mData: BaseNetModel<Any>) {
-        IntentUtil.get()!!.goActivity(activity, PayOrderActivity::class.java)
-    }
-
     override fun noNetworkView() {
         loadService.showCallback(NetWorkErrorCallBack::class.java)
     }
@@ -212,6 +226,9 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
         loadService.showCallback(ErrorCallback::class.java)
     }
 
+    override fun cartAdd(mData: BaseNetModel<Any>) {
+        mPresenter!!.getCartData()
+    }
 
     override fun showLoading() {
         showLoadingDialog()
@@ -240,15 +257,16 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
         var allPoint = 0//  总积分
         allCartId = ""
         for (cartBean in cartList) {
-            for (item in cartBean.prods) {
+            for (item in cartBean.prods!!) {
                 if (item.isCheck) {
-                    allPrice += item.price.toDouble() * item.count
-                    allPoint += item.point.toInt() * item.count
+                    allPrice += item.price!!.toDouble() * item.count
+                    allPoint += item.point!!.toInt() * item.count
                     allCartId = item.cart_id + "," + allCartId
                 }
             }
         }
-        allCartId = allCartId.substring(0, allCartId.length - 1)
+        if (allCartId.isNotEmpty())
+            allCartId = allCartId.substring(0, allCartId.length - 1)
 
         if (allPoint > 0) {
             binding.tvPrice.text = if (allPrice > 0) {
@@ -272,7 +290,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
             R.id.checkbox -> {
                 for (cartBean in cartList) {
                     cartBean.isCheck = binding.checkbox.isChecked
-                    for (cartGoodsBean in cartBean.prods) {
+                    for (cartGoodsBean in cartBean.prods!!) {
                         cartGoodsBean.isCheck = binding.checkbox.isChecked
                     }
                 }
@@ -280,8 +298,18 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartPresenter>(),
                 totalPrice()
             }
             R.id.tv_confirm -> {
-                val cartIdReq = CartIdReq(allCartId)
-                mPresenter!!.orderSubmitCart(cartIdReq)
+                if (allCartId.isEmpty()) {
+                    ToastUtil.showToast("至少选择一款商品")
+                    return
+                }
+                val bundle = Bundle()
+                bundle.putParcelableArrayList(
+                    Constants.CART_LIST,
+                    cartList as ArrayList<ShopBean>
+                )
+                bundle.putString(Constants.PRICE, binding.tvPrice.text.toString())
+                IntentUtil.get()!!
+                    .goActivity(activity, ConfirmCartOrderActivity::class.java, bundle)
             }
         }
     }

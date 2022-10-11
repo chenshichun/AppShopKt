@@ -38,18 +38,16 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
             statusBarColor(R.color.white)
             statusBarDarkFont(true)
         }
-
+        binding.viewHead.tvTitle.text = "确认订单"
+        binding.viewHead.ivBack.setOnClickListener {
+            finish()
+        }
         val orderInfoBean = IntentUtil.getParcelableExtra<OrderInfoBean>(this)!!
         Glide.with(this).load(orderInfoBean.ivGoods).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(binding.ivGoods)
         binding.tvPrice.text = String.format(getString(R.string.price), orderInfoBean.goodsPrice)
         binding.tvName.text = orderInfoBean.goodsName
         orderId = orderInfoBean.orderId.toString()
-
-        binding.viewHead.tvTitle.text = "确认订单"
-        binding.viewHead.ivBack.setOnClickListener {
-            finish()
-        }
 
         binding.btConfirm.setOnClickListener {
             val orderIdReq = OrderIdReq(orderId);

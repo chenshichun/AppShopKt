@@ -17,7 +17,6 @@ import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.GoodsBean
-import com.app.shop.bean.Prod
 import com.app.shop.bean.event.PageEvent
 import com.app.shop.databinding.ActivityGoodsDetailBinding
 import com.app.shop.manager.Constants
@@ -32,7 +31,6 @@ import com.app.shop.view.pop.SpecificationPop
 import com.bumptech.glide.Glide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lxj.xpopup.XPopup
-import com.orhanobut.logger.Logger
 import com.youth.banner.BannerConfig
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -215,8 +213,6 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
     }
 
     private fun showAttrPop(type: Int) {
-        goodsBean.prod_info.delivery_cost = goodsBean.delivery_cost
-        goodsBean.prod_info.service_cost = goodsBean.service_cost
         var specificationPop = SpecificationPop(this, type, goodsBean.prod_info)
         specificationPop.setOnClickListener(object : SpecificationPop.OnClickListener {
             override fun addCartClick(count: Int, gid: String, sku: String) {

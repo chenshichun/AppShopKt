@@ -221,7 +221,7 @@ interface HomeService {
     * 购物车生成订单
     * */
     @POST("order/submit/cart")
-    suspend fun orderSubmitCart(@Body cartIdReq: CartIdReq): Response<BaseNetModel<Any>>
+    suspend fun orderSubmitCart(@Body cartIdReq: CartIdReq): Response<BaseNetModel<CartOrderBean>>
 
     /*
     *  订单列表

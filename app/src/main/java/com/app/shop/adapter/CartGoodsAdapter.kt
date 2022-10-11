@@ -36,6 +36,7 @@ class CartGoodsAdapter(private val context: Context, val mData: List<ProdCartBea
             .placeholder(R.drawable.icon_default_pic).into(holder.ivGoods)
         holder.tvName.text = mData[position].prod_name
         holder.tvSpecification.text = mData[position].sku_name
+        holder.tvNum.text = mData[position].count.toString()
 
         holder.tvIntegral.visibility =
             if (mData[position].point == "0") View.INVISIBLE else View.VISIBLE

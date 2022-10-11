@@ -18,7 +18,9 @@
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
@@ -129,6 +131,9 @@
         <activity android:name=".ui.activity.WithdrawalsRecordActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.ConversionIntegralActivity" />
+        <activity android:name=".ui.activity.ConfirmCartOrderActivity"/>
+        <activity android:name=".ui.activity.PayCartOrderActivity"/>
+
     </application>
 
 </manifest>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_order"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_goods"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="#2196F3" />
+
+            <TextView
+                android:id="@+id/tv_goods_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingLeft="90dp"
+                android:textColor="@color/color_333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toRightOf="@id/iv_goods"
+                app:layout_constraintTop_toTopOf="@id/iv_goods"
+                tools:text="这个是标题名字很长这个是标题名字很长这个是标题名字很长" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="0易货积分"
+                android:textColor="@color/color_333"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_goods"
+                app:layout_constraintLeft_toRightOf="@id/iv_goods" />
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/num"
+                android:textColor="@color/color_333"
+                android:textSize="8sp"
+                app:layout_constraintLeft_toRightOf="@id/tv_price"
+                app:layout_constraintTop_toTopOf="@id/tv_price" />
+
+            <TextView
+                android:id="@+id/tv_attr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/attr"
+                android:textColor="@color/color_333"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_price"
+                app:layout_constraintLeft_toLeftOf="@id/tv_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -5,8 +5,6 @@ data class GoodsBean(
     val comment_count: Int,
     val prod_info: ProdInfo,
     val shop_info: ShopInfo,
-    val delivery_cost: String,// 邮费
-    val service_cost: String,// 服务费
     val is_collected: Boolean
 )
 
