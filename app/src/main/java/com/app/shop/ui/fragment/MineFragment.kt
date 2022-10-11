@@ -106,6 +106,11 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                         bundle.putString(Constants.CODE_QR, result.substring(5))
                         IntentUtil.get()!!
                             .goActivity(activity, ConversionIntegralActivity::class.java, bundle)
+                    }else if(result!!.contains("核销二维码")){
+                        val bundle = Bundle()
+                        bundle.putString(Constants.CODE_QR, result.substring(5))
+                        IntentUtil.get()!!
+                            .goActivity(activity, SubmitVeriActivity::class.java, bundle)
                     }
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     ToastUtil.showToast("解析二维码失败")
@@ -281,14 +286,6 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         Glide.with(requireContext()).load(mData.data!!.user!!.my_qr)
             .error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(binding.ivQrCode)
-        /*binding.ivQrCode.setImageBitmap(
-            CodeUtils.createImage(
-                mData.data!!.user!!.inv_code,
-                200,
-                200,
-                null
-            )
-        )*/
     }
 
     override fun showLoading() {

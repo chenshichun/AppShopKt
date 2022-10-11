@@ -13,6 +13,7 @@
         style="@style/CustomCheckBoxTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="订单编号：568931232434"
+        android:text="@string/order_num"
         android:textColor="#FFC107"
         app:layout_constraintLeft_toRightOf="@id/checkbox"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="￥100"
+        android:text="￥%s"
         android:textColor="@color/red"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@id/tv_shop_name"
@@ -102,6 +103,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_price" />
 
     <TextView
+        android:id="@+id/tv_detele"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

@@ -381,4 +381,25 @@ interface HomeService {
     @POST("order/comment/save")
     suspend fun commentSave(@Body commentReq: CommentReq): Response<BaseNetModel<Any>>
 
+    /*
+    * 核销订单列表
+    * */
+    @GET("order/verify/list")
+    suspend fun getVerifyList(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<BaseNetModel<VerifyListBean>>
+
+    /*
+    * 分享海报
+    * */
+    @GET("user/share/info")
+    suspend fun getShareInfo(): Response<BaseNetModel<ShareBean>>
+
+    /*
+    * 订单核销
+    * */
+    @POST("order/submit/veri")
+    suspend fun submitVeri(@Body submitVeriReq: SubmitVeriReq): Response<BaseNetModel<AliPayDataBean>>
+
 }

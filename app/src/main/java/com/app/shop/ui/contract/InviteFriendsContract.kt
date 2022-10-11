@@ -1,6 +1,8 @@
 package com.app.shop.ui.contract
 
 import com.app.shop.base.BaseContract
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.ShareBean
 
 /**
  * @author chenshichun
@@ -10,8 +12,10 @@ import com.app.shop.base.BaseContract
  */
 interface InviteFriendsContract : BaseContract {
     interface View : BaseContract.BaseView {
+        fun getShareInfo(mData: BaseNetModel<ShareBean>)
     }
 
     interface Presenter {
+        fun getShareInfo()
     }
 }

@@ -1,6 +1,8 @@
 package com.app.shop.ui.activity
 
+import android.content.ClipboardManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -16,6 +18,7 @@ import com.app.shop.util.IntentUtil
 import com.app.shop.util.TimerUnit
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -40,6 +43,15 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         binding.tvGetSmsCode.setOnClickListener(this)
         binding.tvPrivacyPolicy.setOnClickListener(this)
         binding.tvUserAgreement.setOnClickListener(this)
+        val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        if (clipboardManager.text != null) {
+            val myString = clipboardManager.text as String
+            Logger.d(myString)
+            if (myString.isNotEmpty()) {
+                binding.etInvCode.setText(myString)
+            }
+        }
+
     }
 
     override fun onClick(view: View?) {
@@ -114,4 +126,5 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
     override fun hideLoading() {
         closeLoadingDialog()
     }
+
 }
