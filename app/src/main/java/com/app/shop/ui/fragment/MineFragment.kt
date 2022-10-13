@@ -106,7 +106,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                         bundle.putString(Constants.CODE_QR, result.substring(5))
                         IntentUtil.get()!!
                             .goActivity(activity, ConversionIntegralActivity::class.java, bundle)
-                    }else if(result!!.contains("核销二维码")){
+                    } else if (result!!.contains("核销二维码")) {
                         val bundle = Bundle()
                         bundle.putString(Constants.CODE_QR, result.substring(5))
                         IntentUtil.get()!!
@@ -283,6 +283,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvNickName.text = mData.data!!.user!!.nick_name
         binding.tvAccount.text = mData.data!!.user!!.phone
         binding.tvInvCode.text = "邀请码：${mData.data!!.user!!.inv_code}"
+        binding.tvIdentity.text = "当前身份 :${mData.data!!.user!!.identity}"
         Glide.with(requireContext()).load(mData.data!!.user!!.my_qr)
             .error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(binding.ivQrCode)

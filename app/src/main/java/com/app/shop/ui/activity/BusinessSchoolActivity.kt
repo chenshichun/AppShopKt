@@ -11,6 +11,7 @@ import com.app.shop.bean.VideoBean
 import com.app.shop.databinding.ActivityBusinessSchoolBinding
 import com.app.shop.ui.contract.BusinessSchoolContract
 import com.app.shop.ui.presenter.BusinessSchoolPresenter
+import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
 import com.kingja.loadsir.core.LoadService
 
@@ -41,6 +42,13 @@ class BusinessSchoolActivity :
         businessSchoolAdapter = BusinessSchoolAdapter(this, videoBeanList)
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = businessSchoolAdapter
+        businessSchoolAdapter.setOnItemClickListener(object :
+            BusinessSchoolAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                IntentUtil.get()!!
+                    .goActivity(this@BusinessSchoolActivity, ShowVideoActivity::class.java,videoBeanList[position])
+            }
+        })
 
         binding.refreshLayout.setOnRefreshListener {
             mPresenter!!.getCollegeList()

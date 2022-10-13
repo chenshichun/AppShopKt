@@ -34,6 +34,9 @@ class BusinessSchoolAdapter(private val context: Context, val mData: List<VideoB
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(mData!![position].cover).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(holder.ivVideo)
+        holder.itemView.setOnClickListener{
+            mOnItemClickListener!!.onItemClick(position)
+        }
     }
 
     interface OnItemClickListener {

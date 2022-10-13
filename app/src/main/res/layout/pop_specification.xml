@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_round"
-    android:maxHeight="500dp"
+    android:maxHeight="800dp"
     android:orientation="vertical"
     android:padding="15dp">
 
@@ -104,7 +104,7 @@
                 android:background="#E8E3E3"
                 android:inputType="number"
                 android:paddingHorizontal="@dimen/dimen_dp_20"
-                android:paddingVertical="@dimen/dimen_dp_5"
+                android:paddingVertical="@dimen/dimen_dp_3"
                 android:text="1"
                 android:textColor="@color/color_333" />
 

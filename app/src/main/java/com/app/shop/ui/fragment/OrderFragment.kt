@@ -11,6 +11,7 @@ import com.app.shop.bean.Order
 import com.app.shop.bean.OrderCommentBean
 import com.app.shop.bean.OrderListBean
 import com.app.shop.databinding.FragmentOrderBinding
+import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.manager.AccountManager
 import com.app.shop.manager.Constants
 import com.app.shop.req.OrderIdReq
@@ -20,6 +21,8 @@ import com.app.shop.ui.activity.OrderDetailActivity
 import com.app.shop.ui.contract.OrderFragmentContract
 import com.app.shop.ui.presenter.OrderFragmentPresenter
 import com.app.shop.util.IntentUtil
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 
 /**
  * @author chenshichun
@@ -31,6 +34,7 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
 
     private lateinit var orderAdapter: OrderAdapter
     private var orderBeanList = mutableListOf<Order>()
+    private lateinit var loadService: LoadService<Any>
 
     override fun initView() {
         orderAdapter = activity?.let { OrderAdapter(it, orderBeanList) }!!
@@ -88,7 +92,14 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
                 }
             }
         })
+        loadService = LoadSir.getDefault().register(binding.refreshLayout) {
+            mPresenter!!.orderList(status)
 
+        }
+        binding.refreshLayout.setEnableLoadMore(false)
+        binding.refreshLayout.setOnRefreshListener {
+            mPresenter!!.orderList(status)
+        }
         mPresenter!!.orderList(status)
     }
 
@@ -101,9 +112,16 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
     }
 
     override fun orderList(mData: BaseNetModel<OrderListBean>) {
-        orderBeanList.clear()
-        orderBeanList.addAll(mData.data!!.orders)
-        orderAdapter.notifyDataSetChanged()
+
+        binding.refreshLayout.finishRefresh()
+        if (mData.data!!.orders.isNotEmpty()) {
+            orderBeanList.clear()
+            orderBeanList.addAll(mData.data!!.orders)
+            orderAdapter.notifyDataSetChanged()
+            loadService.showSuccess()
+        } else {
+            loadService.showCallback(EmptyCallBack::class.java)
+        }
     }
 
     override fun orderCancel(mData: BaseNetModel<Any>) {

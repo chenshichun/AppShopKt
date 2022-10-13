@@ -1,5 +1,6 @@
 package com.app.shop.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,7 @@ import com.app.shop.req.OrderIdReq
 import com.app.shop.ui.contract.OrderDetailContract
 import com.app.shop.ui.presenter.OrderDetailPresenter
 import com.app.shop.util.IntentUtil
+import com.bumptech.glide.Glide
 import com.gyf.immersionbar.ktx.immersionBar
 
 /*
@@ -105,8 +107,20 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
         }
     }
 
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun orderDetail(mData: BaseNetModel<OrderDetailBean>) {
-        //binding.tvShopName.text = mData.data.detail.
+        binding.tvShopName.text = mData.data!!.detail.shop.shop_name
+        binding.tvAddrName.text = mData.data!!.detail.addr.receiver
+        binding.tvAddrPhone.text = mData.data!!.detail.addr.mobile
+        binding.tvAddr.text =
+            mData.data!!.detail.addr.province + mData.data!!.detail.addr.city +
+                    mData.data!!.detail.addr.area + mData.data!!.detail.addr.addr
+
+        binding.ivCode.visibility =
+            if (mData.data!!.detail.verify_code.isEmpty()) View.GONE else View.VISIBLE
+        Glide.with(this).load(mData.data!!.detail.verify_code).error(R.drawable.icon_default_pic)
+            .placeholder(R.drawable.icon_default_pic)
+            .into(binding.ivCode)
 
         binding.tvExpressDelivery.text = mData.data!!.detail.dvy_type
         binding.tvDeliveryCost.text = mData.data!!.detail.order_number

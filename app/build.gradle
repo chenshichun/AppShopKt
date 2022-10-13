@@ -188,6 +188,8 @@ dependencies {
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     // 视频
     //implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+    //implementation 'cn.jzvd:jiaozivideoplayer:7.7.0'
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
 }
 
 def releaseTime() {

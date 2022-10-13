@@ -1,8 +1,8 @@
 package com.app.shop.ui.activity
 
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -19,6 +19,7 @@ import com.app.shop.util.TimerUnit
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
+
 
 /**
  * @author chenshichun
@@ -43,15 +44,27 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         binding.tvGetSmsCode.setOnClickListener(this)
         binding.tvPrivacyPolicy.setOnClickListener(this)
         binding.tvUserAgreement.setOnClickListener(this)
-        val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboardManager.text != null) {
-            val myString = clipboardManager.text as String
-            Logger.d(myString)
-            if (myString.isNotEmpty()) {
-                binding.etInvCode.setText(myString)
-            }
+        Logger.d(getClipboardContent())
+        if (getClipboardContent()!!.isNotEmpty()) {
+            binding.etInvCode.setText(getClipboardContent())
         }
+    }
 
+    /**
+     * 系统剪贴板-获取:
+     */
+    fun getClipboardContent(): String? {
+        // 获取系统剪贴板
+        val clipboard = this.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        // 返回数据
+        val clipData = clipboard.primaryClip
+        if (clipData == null || clipData.itemCount <= 0) {
+            return ""
+        }
+        val item: ClipData.Item? = clipData.getItemAt(0)
+        return if (item == null || item.getText() == null) {
+            ""
+        } else item.getText().toString()
     }
 
     override fun onClick(view: View?) {

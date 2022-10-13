@@ -31,7 +31,8 @@ class UserBean() : Parcelable {
     var isvarid = false
     var token: String? = null
     var my_qr: String? = null
-    var share_qr:String?=null
+    var share_qr: String? = null
+    var identity: String? = null
 
     constructor(parcel: Parcel) : this() {
         created_at = parcel.readString()
@@ -56,6 +57,7 @@ class UserBean() : Parcelable {
         token = parcel.readString()
         my_qr = parcel.readString()
         share_qr = parcel.readString()
+        identity = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -81,6 +83,7 @@ class UserBean() : Parcelable {
         parcel.writeString(token)
         parcel.writeString(my_qr)
         parcel.writeString(share_qr)
+        parcel.writeString(identity)
     }
 
     override fun describeContents(): Int {
@@ -96,6 +99,4 @@ class UserBean() : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
-
 }

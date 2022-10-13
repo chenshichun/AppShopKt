@@ -174,6 +174,7 @@
             android:background="@drawable/bg_mine_vip">
 
             <TextView
+                android:id="@+id/tv_identity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -183,7 +184,7 @@
                 android:drawableLeft="@drawable/icon_mine_vip"
                 android:gravity="center"
                 android:paddingHorizontal="8dp"
-                android:text="当前身份 联合创始人"
+                android:text="当前身份 %s"
                 android:textColor="@color/color_333"
                 android:textSize="14sp" />
 
@@ -294,6 +295,7 @@
                 <TextView
                     android:id="@+id/tv_order_7"
                     style="@style/tv_order"
+                    android:visibility="gone"
                     android:drawableTop="@drawable/icon_order_7"
                     android:text="已核销" />
 

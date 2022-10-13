@@ -19,7 +19,6 @@ class ReservationOrderActivity :
     ReservationOrderContract.View {
 
     private lateinit var reservationOrderAdapter: ReservationOrderAdapter
-
     override fun getPresenter(): ReservationOrderPresenter {
         return ReservationOrderPresenter()
     }

@@ -94,26 +94,29 @@ class OperationsCenterActivity :
                         when (position) {
                             0 -> {// 高德地图
                                 AMapUtil.openGaoDeMap(
-                                    this@OperationsCenterActivity,
-                                    "",
-                                    "",
-                                    "义乌市国际商务服务中心"
+                                    this@OperationsCenterActivity!!,
+                                    locatStoreList[position].shop_lat,
+                                    locatStoreList[position].shop_lng,
+                                    locatStoreList[position].province + locatStoreList[position].city
+                                            + locatStoreList[position].area + locatStoreList[position].shop_address
                                 )
                             }
                             1 -> {// 百度地图
                                 AMapUtil.openBaiduMap(
-                                    this@OperationsCenterActivity,
-                                    "",
-                                    "",
-                                    "义乌市国际商务服务中心"
+                                    this@OperationsCenterActivity!!,
+                                    locatStoreList[position].shop_lat,
+                                    locatStoreList[position].shop_lng,
+                                    locatStoreList[position].province + locatStoreList[position].city
+                                            + locatStoreList[position].area + locatStoreList[position].shop_address
                                 )
                             }
                             2 -> {//腾讯地图
                                 AMapUtil.openTencent(
-                                    this@OperationsCenterActivity,
-                                    "",
-                                    "",
-                                    "义乌市国际商务服务中心"
+                                    this@OperationsCenterActivity!!,
+                                    locatStoreList[position].shop_lat,
+                                    locatStoreList[position].shop_lng,
+                                    locatStoreList[position].province + locatStoreList[position].city
+                                            + locatStoreList[position].area + locatStoreList[position].shop_address
                                 )
                             }
                         }

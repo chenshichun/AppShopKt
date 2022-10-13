@@ -42,5 +42,8 @@ class Constants {
         const val CODE_QR = "CODE_QR"
 
         const val CART_LIST="CART_LIST"
+
+        const val VIDEO_TITLE="VIDEO_TITLE"
+
     }
 }

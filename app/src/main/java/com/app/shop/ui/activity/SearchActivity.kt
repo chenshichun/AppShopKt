@@ -1,6 +1,7 @@
 package com.app.shop.ui.activity
 
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.lifecycle.lifecycleScope
 import com.app.shop.R
 import com.app.shop.adapter.SearchAdapter

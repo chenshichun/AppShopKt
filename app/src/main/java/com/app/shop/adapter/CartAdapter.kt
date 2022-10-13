@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.shop.bean.ShopBean
@@ -32,7 +33,7 @@ class CartAdapter(private val context: Context, val mData: List<ShopBean>?) :
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         holder.checkBox.isChecked = mData!![position].isCheck
-
+        holder.tvShopName.text = mData[position].shop_name
         val cartGoodsAdapter = CartGoodsAdapter(context, mData[position].prods)
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
         holder.recyclerView.adapter = cartGoodsAdapter
@@ -93,6 +94,7 @@ class CartAdapter(private val context: Context, val mData: List<ShopBean>?) :
         RecyclerView.ViewHolder(binding.root) {
         val recyclerView: RecyclerView = binding.mRecyclerView
         val checkBox: CheckBox = binding.checkbox
+        val tvShopName: TextView = binding.tvShopName
     }
 
 }
