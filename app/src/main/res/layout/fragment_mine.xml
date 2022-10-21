@@ -127,7 +127,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/icon_mine_3"
                 android:gravity="center"
-                android:text="奖励积分"
+                android:text="签到积分"
                 android:textColor="#ffffffff"
                 android:textSize="12sp" />
 
@@ -275,6 +275,7 @@
                 <TextView
                     android:id="@+id/tv_order_5"
                     style="@style/tv_order"
+                    android:visibility="gone"
                     android:drawableTop="@drawable/icon_order_5"
                     android:text="退款售后" />
             </LinearLayout>
@@ -642,6 +643,34 @@
                     android:drawableLeft="@drawable/icon_tools_6"
                     android:gravity="center"
                     android:text="设置"
+                    android:textColor="#ff282828"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/go_right" />
+            </RelativeLayout>
+
+            <include layout="@layout/line" />
+
+            <RelativeLayout
+                android:id="@+id/ll_out_login"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="13dp"
+                android:paddingRight="22dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/icon_out_login"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:text="退出登录"
                     android:textColor="#ff282828"
                     android:textSize="16sp" />
 

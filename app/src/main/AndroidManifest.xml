@@ -18,6 +18,7 @@
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
     <queries>
         <package android:name="com.tencent.mm" />
     </queries>
@@ -61,7 +62,8 @@
 
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,27 +72,69 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".ui.activity.GoodsDetailActivity" />
-        <activity android:name=".ui.activity.ShowListImageActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.ForgetPasswordActivity" />
-        <activity android:name=".ui.activity.AccountLoginActivity" />
-        <activity android:name=".ui.activity.OrderActivity" />
-        <activity android:name=".ui.activity.CollectActivity" />
-        <activity android:name=".ui.activity.AttentionActivity" />
-        <activity android:name=".ui.activity.SearchActivity" />
-        <activity android:name=".ui.activity.MerchantSettledActivity" />
-        <activity android:name=".ui.activity.BindActivity" />
-        <activity android:name=".ui.activity.ModifyNickNameActivity" />
-        <activity android:name=".ui.activity.AccountSecurityActivity" />
-        <activity android:name=".ui.activity.PointsDetailsActivity" />
-        <activity android:name=".ui.activity.ReflectAccountActivity" />
-        <activity android:name=".ui.activity.PayPasswordActivity" />
-        <activity android:name=".ui.activity.ChangeBindPhoneActivity" />
-        <activity android:name=".ui.activity.VerifiedActivity" />
-        <activity android:name=".ui.activity.AboutUsActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.GoodsDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.activity.ShowListImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AccountLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CollectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AttentionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MerchantSettledActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.BindActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ModifyNickNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AccountSecurityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PointsDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ReflectAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PayPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ChangeBindPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.VerifiedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
@@ -103,38 +147,105 @@
                 <data android:scheme="wx47fcab0bc471c79a" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.InviteFriendsActivity" />
-        <activity android:name=".ui.activity.AddressListActivity" />
-        <activity android:name=".ui.activity.AddAddressActivity" />
-        <activity android:name=".ui.activity.CategoryListActivity" />
-        <activity android:name=".ui.activity.WebViewActivity" />
-        <activity android:name=".ui.activity.ConfirmOrderActivity" />
-        <activity android:name=".ui.activity.PayOrderActivity" />
-        <activity android:name=".ui.activity.StoreHomepageActivity" />
-        <activity android:name=".ui.activity.SettingActivity" />
-        <activity android:name=".ui.activity.WelcomeGuideActivity" />
-        <activity android:name=".ui.activity.MyTeamActivity" />
-        <activity android:name=".ui.activity.MyPurseActivity" />
-        <activity android:name=".ui.activity.WithdrawActivity" />
-        <activity android:name=".ui.activity.RefundAfterSaleActivity" />
-        <activity android:name=".ui.activity.ReservationOrderActivity" />
-        <activity android:name=".ui.activity.WriteOffOrderActivity" />
-        <activity android:name=".ui.activity.OperationsCenterActivity" />
-        <activity android:name=".ui.activity.EvaluationActivity" />
-        <activity android:name=".ui.activity.MessageActivity" />
-        <activity android:name=".ui.activity.CommentDetailActivity" />
-        <activity android:name=".ui.activity.OperationCenterApplyActivity" />
-        <activity android:name=".ui.activity.BusinessSchoolActivity" />
-        <activity android:name=".ui.activity.StoreImpressionActivity" />
-        <activity android:name=".ui.activity.ComplaintActivity" />
-        <activity android:name=".ui.activity.WalletDetailsActivity" />
-        <activity android:name=".ui.activity.WithdrawalsRecordActivity" />
-        <activity android:name=".ui.activity.OrderDetailActivity" />
-        <activity android:name=".ui.activity.ConversionIntegralActivity" />
-        <activity android:name=".ui.activity.ConfirmCartOrderActivity"/>
-        <activity android:name=".ui.activity.PayCartOrderActivity"/>
-        <activity android:name=".ui.activity.SubmitVeriActivity"/>
-        <activity android:name=".ui.activity.ShowVideoActivity"/>
+        <activity
+            android:name=".ui.activity.InviteFriendsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddressListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CategoryListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ConfirmOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PayOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.StoreHomepageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WelcomeGuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MyTeamActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MyPurseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WithdrawActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.RefundAfterSaleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ReservationOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WriteOffOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OperationsCenterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.EvaluationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CommentDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OperationCenterApplyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.BusinessSchoolActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.StoreImpressionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ComplaintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WalletDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WithdrawalsRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ConversionIntegralActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ConfirmCartOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PayCartOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SubmitVeriActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ShowVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SignInActvity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

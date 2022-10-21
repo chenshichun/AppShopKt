@@ -3,7 +3,9 @@ package com.app.shop.ui.contract
 import com.app.shop.base.BaseContract
 import com.app.shop.bean.AliPayDataBean
 import com.app.shop.bean.BaseNetModel
-import com.app.shop.req.OrderIdReq
+import com.app.shop.bean.PointInfoBean
+import com.app.shop.req.BalancePayReq
+import com.app.shop.req.ZFBPayReq
 
 /**
  * @author chenshichun
@@ -13,9 +15,13 @@ import com.app.shop.req.OrderIdReq
 class PayCartOrderContract  : BaseContract {
     interface View : BaseContract.BaseView {
         fun aliPay(mData: BaseNetModel<AliPayDataBean>)
+        fun payBalance(mData: BaseNetModel<Any>)
+        fun pointInfo(mData: BaseNetModel<PointInfoBean>)
     }
 
     interface Presenter {
-        fun aliPay(orderIdReq: OrderIdReq)
+        fun aliPay(zfbPayReq: ZFBPayReq)
+        fun payBalance(balancePayReq: BalancePayReq)
+        fun pointInfo()
     }
 }

@@ -1,6 +1,5 @@
 package com.app.shop.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,14 +7,11 @@ import com.app.shop.adapter.OrderAdapter
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.Order
-import com.app.shop.bean.OrderCommentBean
 import com.app.shop.bean.OrderListBean
 import com.app.shop.databinding.FragmentOrderBinding
 import com.app.shop.loadsir.EmptyCallBack
-import com.app.shop.manager.AccountManager
 import com.app.shop.manager.Constants
 import com.app.shop.req.OrderIdReq
-import com.app.shop.ui.activity.AccountLoginActivity
 import com.app.shop.ui.activity.EvaluationActivity
 import com.app.shop.ui.activity.OrderDetailActivity
 import com.app.shop.ui.contract.OrderFragmentContract

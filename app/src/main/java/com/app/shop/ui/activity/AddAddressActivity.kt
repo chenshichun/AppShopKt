@@ -12,6 +12,7 @@ import com.app.shop.req.AddrReq
 import com.app.shop.ui.contract.AddAddressContract
 import com.app.shop.ui.presenter.AddAddressPresenter
 import com.app.shop.util.IntentUtil
+import com.app.shop.util.KeyboardUtil
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.gyf.immersionbar.ktx.immersionBar
 
@@ -58,6 +59,7 @@ class AddAddressActivity : BaseActivity<ActivityAddAddressBinding, AddAddressPre
         }
 
         binding.tvArea.setOnClickListener {
+            KeyboardUtil.hideKeyboard(this)
             mPresenter!!.initAddressPicker(this@AddAddressActivity)
         }
 

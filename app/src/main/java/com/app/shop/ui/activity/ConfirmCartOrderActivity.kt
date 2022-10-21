@@ -21,6 +21,7 @@ import com.app.shop.ui.contract.ConfirmCartOrderContract
 import com.app.shop.ui.presenter.ConfirmCartOrderPresenter
 import com.app.shop.util.IntentUtil
 import com.gyf.immersionbar.ktx.immersionBar
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -105,6 +106,7 @@ class ConfirmCartOrderActivity :
     }
 
     override fun orderSubmitCart(mData: BaseNetModel<CartOrderBean>) {
+        Logger.d(mData.data)
         IntentUtil.get()!!.goActivity(this, PayCartOrderActivity::class.java, mData.data)
         finish()
     }

@@ -50,30 +50,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="支付宝"
-            android:textColor="@color/color_333"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:checked="true" />
-    </RelativeLayout>
-
     <Button
         android:id="@+id/bt_confirm"
         android:layout_width="match_parent"

@@ -7,8 +7,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.shop.R
 import com.app.shop.bean.CartOrderDetailBean
 import com.app.shop.databinding.ItemCartOrderBinding
+import com.bumptech.glide.Glide
 
 /**
  * @author chenshichun

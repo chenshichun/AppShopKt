@@ -66,6 +66,8 @@ class OrderAdapter(private val context: Context, val mData: List<Order>?) :
                 holder.tvStatus.text = "取消"
             }
         }
+       // holder.tvStatus.text = mData[position].status_text
+
         val orderShopAdapter = OrderShopAdapter(context, mData[position].items)
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
         holder.recyclerView.adapter = orderShopAdapter

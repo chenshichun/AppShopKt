@@ -1,5 +1,6 @@
 package com.app.shop.view.pop
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +15,8 @@ import com.app.shop.R
 import com.app.shop.adapter.SpecAdapter
 import com.app.shop.bean.CreateOrderBean
 import com.app.shop.bean.ProdInfo
+import com.app.shop.bean.SkuInfosBean
+import com.app.shop.bean.event.CateEvent
 import com.app.shop.ui.activity.ConfirmOrderActivity
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
@@ -21,6 +24,9 @@ import com.app.shop.view.dialog.PrivacyDialog
 import com.bumptech.glide.Glide
 import com.lxj.xpopup.core.BottomPopupView
 import com.orhanobut.logger.Logger
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.w3c.dom.Text
 
 /**
@@ -63,7 +69,9 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
         super.onCreate()
 
         initView()
-
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
         Glide.with(context).load(prodInfo.pic).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(ivGoods)
 
@@ -82,6 +90,7 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
         mRecyclerView.adapter = specAdapter
 
         specAdapter.setOnItemClickListener(object : SpecAdapter.OnItemClickListener {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onItemClick(position: Int, position1: Int) {
                 for (item in prodInfo.sku_info[position].sku_prop) {
                     item.isCheck = false
@@ -168,24 +177,33 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
 
     private fun updateHeadUi() {
         var name = ""
+        var queryAttr = ""
         for (item in prodInfo.sku_info) {
             for (item1 in item.sku_prop) {
                 if (item1.isCheck) {
                     name += item1.name
+                    queryAttr = queryAttr + item.sku + ":" + item1.name + ","
                 }
             }
         }
         attr = name
+        Logger.d(attr)
+        Logger.d(queryAttr)
+        if (queryAttr.isNotEmpty()) {
+            queryAttr = queryAttr.substring(0, queryAttr.length - 1)
+        }
+        onClickListener!!.queryAttr(queryAttr)
+
         for (skuCountItem in prodInfo.sku_count) {
             if (name == skuCountItem.sku_name) {
-                tvPrice.text = String.format(
+               /* tvPrice.text = String.format(
                     context.getString(R.string.price),
                     skuCountItem.price
                 )
                 tvStocks.text = String.format(
                     context.getString(R.string.stocks),
                     skuCountItem.stocks
-                )
+                )*/
                 sku_id = skuCountItem.sku_id
                 stocksCount = skuCountItem.stocks
             }
@@ -201,7 +219,28 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
 
     interface OnClickListener {
         fun addCartClick(count: Int, gid: String, sku: String)
+        fun queryAttr(props: String)
     }
 
+    override fun onDestroy() {
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
+        super.onDestroy()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun getAttrData(skuInfosBean: SkuInfosBean) {
+        Logger.d(skuInfosBean)
+        tvStocks.text = String.format(
+            context.getString(R.string.stocks),
+            skuInfosBean.stocks
+        )
+        tvPrice.text = String.format(
+            context.getString(if (skuInfosBean.point != 0) R.string.goods_integral else R.string.price),
+            if (skuInfosBean.point != 0) skuInfosBean.point else skuInfosBean.price
+        )
+        Logger.d(skuInfosBean)
+    }
 }
 

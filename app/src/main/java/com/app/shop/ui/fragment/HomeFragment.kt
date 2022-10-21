@@ -198,8 +198,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
                 val bundle: Bundle? = data.extras
                 if (bundle!!.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     val result = bundle.getString(CodeUtils.RESULT_STRING)
-                    Logger.d(result)
-                    ToastUtil.showToast(result)
+                    if (result!!.contains("积分二维码")) {
+                        val bundle = Bundle()
+                        bundle.putString(Constants.CODE_QR, result.substring(5))
+                        IntentUtil.get()!!
+                            .goActivity(activity, ConversionIntegralActivity::class.java, bundle)
+                    } else if (result!!.contains("核销二维码")) {
+                        val bundle = Bundle()
+                        bundle.putString(Constants.CODE_QR, result.substring(5))
+                        IntentUtil.get()!!
+                            .goActivity(activity, SubmitVeriActivity::class.java, bundle)
+                    }
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     ToastUtil.showToast("解析二维码失败")
                 }
@@ -431,7 +440,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomePresenter>(), HomeCon
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         when (p2) {
             0 -> {// 签到
-                mPresenter!!.sign()
+                IntentUtil.get()!!.goActivity(activity,SignInActvity::class.java)
+                //mPresenter!!.sign()
             }
             else -> {
                 val bundle = Bundle()

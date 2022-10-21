@@ -116,6 +116,7 @@
         layout="@layout/layout_goods_details_bottom" />
 
     <LinearLayout
+        android:id="@+id/ll_kefu"
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:layout_alignParentRight="true"

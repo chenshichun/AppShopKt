@@ -38,7 +38,7 @@ class InviteFriendsActivity : BaseActivity<ActivityInviteFriendsBinding, InviteF
             XPopup.Builder(this)
                 .asImageViewer(
                     null,
-                    shareBean.share.inv_img,
+                    shareBean.share.posters,
                     SmartGlideImageLoader()
                 ).show()
         }

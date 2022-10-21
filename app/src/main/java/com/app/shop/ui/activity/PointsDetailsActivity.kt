@@ -49,7 +49,7 @@ class PointsDetailsActivity : BaseActivity<ActivityPointsDetailsBinding, PointsD
         type = intent.getIntExtra("point_type", 0)
         when (type) {
             0 -> {
-                binding.viewHead.tvTitle.text = "奖励积分明细"
+                binding.viewHead.tvTitle.text = "签到积分明细"
                 typeString = "reward"
             }
             1 -> {

@@ -90,6 +90,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.tvShowAllOrder.setOnClickListener(this)
         binding.llOperationCenterApply.setOnClickListener(this)
         binding.llBusinessSchool.setOnClickListener(this)
+        binding.llOutLogin.setOnClickListener(this)
 
         // 注册扫描二维码
         register = registerForActivityResult(
@@ -268,6 +269,17 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
             }
             R.id.ll_setting -> {// 设置
                 IntentUtil.get()!!.goActivity(activity, SettingActivity::class.java)
+            }
+            R.id.ll_out_login ->{// 退出登录
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setMessage("您确定要退出登录吗？")
+                builder.setTitle("提示")
+                builder.setPositiveButton("确定") { _, _ ->
+                    AccountManager.signOut()
+                    startActivity(Intent(requireContext(), AccountLoginActivity::class.java))
+                }
+                builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
+                builder.create().show()
             }
         }
     }

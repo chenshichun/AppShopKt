@@ -17,12 +17,15 @@ import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.GoodsBean
+import com.app.shop.bean.SkuInfoBean
 import com.app.shop.bean.event.PageEvent
 import com.app.shop.databinding.ActivityGoodsDetailBinding
 import com.app.shop.manager.Constants
 import com.app.shop.req.CartAddReq
+import com.app.shop.req.SkuQueryReq
 import com.app.shop.ui.contract.GoodsDetailContract
 import com.app.shop.ui.presenter.GoodsDetailPresenter
+import com.app.shop.util.AppUtil
 import com.app.shop.util.CommonUtil
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
@@ -31,6 +34,7 @@ import com.app.shop.view.pop.SpecificationPop
 import com.bumptech.glide.Glide
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lxj.xpopup.XPopup
+import com.orhanobut.logger.Logger
 import com.youth.banner.BannerConfig
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -81,6 +85,10 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
             binding.viewTop.alpha = alpha
             binding.viewHead.clHead.alpha = alpha
         }
+
+        binding.llKefu.setOnClickListener {
+            AppUtil.call(this,"057985796696")
+        }
     }
 
     override fun onClick(view: View?) {
@@ -126,6 +134,11 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
 
     override fun cartAdd(mData: BaseNetModel<Any>) {
 
+    }
+
+    override fun skuQuery(mData: BaseNetModel<SkuInfoBean>) {
+        Logger.d(mData.data.toString())
+        EventBus.getDefault().post(mData.data!!.sku_info)
     }
 
     override fun showLoading() {
@@ -219,6 +232,11 @@ class GoodsDetailActivity : BaseActivity<ActivityGoodsDetailBinding, GoodsDetail
                 val cartAddReq = CartAddReq("0", count, gid, sku)
                 mPresenter!!.cartAdd(cartAddReq)
                 specificationPop.dismiss()
+            }
+
+            override fun queryAttr(props: String) {
+                Logger.d(props)
+                mPresenter!!.skuQuery(goodsBean.prod_info.prod_id, props)
             }
         })
         XPopup.Builder(this)

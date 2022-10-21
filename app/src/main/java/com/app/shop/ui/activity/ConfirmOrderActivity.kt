@@ -3,6 +3,7 @@ package com.app.shop.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.*
@@ -24,7 +25,7 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
     ConfirmOrderContract.View {
 
     private var createOrderBean = CreateOrderBean()
-    private var addr_id: String? = null
+    private var addr_id: String=""
 
     override fun getPresenter(): ConfirmOrderPresenter {
         return ConfirmOrderPresenter()
@@ -41,6 +42,10 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
             finish()
         }
 
+        binding.radiobutton1.setOnCheckedChangeListener { _, b ->
+            binding.llAddress.visibility = if (b) View.GONE else View.VISIBLE
+        }
+
         createOrderBean = IntentUtil.getParcelableExtra<CreateOrderBean>(this)!!
         Glide.with(this).load(createOrderBean.pic).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(binding.ivGoods)
@@ -54,8 +59,12 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
         binding.tvTotle.text = String.format(
             getString(if (createOrderBean.ori_point!!.toInt() != 0) R.string.goods_integral else R.string.price),
             if (createOrderBean.ori_point!!.toInt() != 0) (createOrderBean.ori_point!!.toFloat() *
-                    createOrderBean.count * 1.2).toString()
-            else (createOrderBean.price!!.toFloat() * createOrderBean.count * 1.2).toString()
+                    createOrderBean.count
+                    /** 1.2*/
+                    ).toString()
+            else (createOrderBean.price!!.toFloat() * createOrderBean.count
+                    /** 1.2*/
+                    ).toString()
         )
 
         binding.tvAttr.text = String.format(getString(R.string.attr), createOrderBean.attr)
@@ -80,7 +89,8 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
                 createOrderBean.prod_name,
                 binding.etRemark.text.toString(),
                 createOrderBean.shop_id,
-                createOrderBean.sku_id
+                createOrderBean.sku_id,
+                if (binding.radiobutton1.isChecked) "自提" else "快递",
             )
             mPresenter!!.orderSubmit(createOrderReq)
         }
@@ -89,7 +99,7 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
     }
 
     override fun addrDefault(mData: BaseNetModel<DefaultDaarBean>) {
-        addr_id = mData.data!!.addr.addr_id
+        addr_id = mData.data!!.addr.addr_id.toString()
         binding.tvAddrName.text = mData.data!!.addr.receiver
         binding.tvAddrPhone.text = mData.data!!.addr.mobile
         binding.tvAddr.text =
@@ -102,9 +112,9 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
             createOrderBean.prod_name,
             createOrderBean.price,
             createOrderBean.pic,
-            mData.data!!.order_id
-        );
-        IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java,orderInfoBean)
+            mData.data!!.detail.order_id
+        )
+        IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java, orderInfoBean)
         finish()
     }
 
@@ -125,7 +135,7 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
                 binding.tvAddrName.text = data.getStringExtra(Constants.ADDR_NAME)
                 binding.tvAddrPhone.text = data.getStringExtra(Constants.ADDR_PHONE)
                 binding.tvAddr.text = data.getStringExtra(Constants.ADDR_ADDR)
-                addr_id = data.getStringExtra(Constants.ADDR_ID)
+                addr_id = data.getStringExtra(Constants.ADDR_ID).toString()
             }
         }
     }

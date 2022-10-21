@@ -7,5 +7,6 @@ data class CreateOrderReq(
     val prod_name: String?,
     val remark: String?,
     val shop_id: String?,
-    val sku_id: String?
-)
+    val sku_id: String?,
+    val delivery_type: String?
+    )

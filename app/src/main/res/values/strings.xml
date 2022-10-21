@@ -37,4 +37,8 @@
     <string name="score">评分：%d</string>
     <string name="fans">粉丝：%d</string>
     <string name="order_num">订单编号：%s</string>
+    <string name="qdjf">签到积分(%d积分)</string>
+    <string name="yhjf">易货积分(%d积分)</string>
+    <string name="xfjf">消费积分(%d积分)</string>
+    <string name="ye">余额(￥%s)</string>
 </resources>

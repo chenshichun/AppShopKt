@@ -162,10 +162,9 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
             }
             5 -> {
                 binding.tvStatus.text = "已完成"
-                binding.tvConfirmLeft.visibility = View.VISIBLE
+                binding.tvConfirmLeft.visibility = View.GONE
                 binding.tvConfirmRight.visibility = View.GONE
-                binding.tvStatus.text = "待发货"
-                binding.tvConfirmLeft.text = "售后"
+                //binding.tvConfirmLeft.text = "售后"
             }
             9 -> binding.tvStatus.text = "已取消"
         }

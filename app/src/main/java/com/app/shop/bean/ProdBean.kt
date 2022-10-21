@@ -28,7 +28,7 @@ data class Prod(
     val is_locked: Boolean,
     val is_recommend: Boolean,
     val ori_point: String?,
-    val ori_price: Int,
+    val ori_price: String?,
     val pic: String?,
     val price: String?,
     val prod_id: String?,
@@ -58,7 +58,7 @@ data class Prod(
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
         parcel.readString(),
-        parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -89,7 +89,7 @@ data class Prod(
         parcel.writeByte(if (is_locked) 1 else 0)
         parcel.writeByte(if (is_recommend) 1 else 0)
         parcel.writeString(ori_point)
-        parcel.writeInt(ori_price)
+        parcel.writeString(ori_price)
         parcel.writeString(pic)
         parcel.writeString(price)
         parcel.writeString(prod_id)

@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="15dp"
-        android:text="选择地址"
+        android:text="请点击选择区域"
         android:textColor="@color/color_333"
         android:textSize="14sp" />
 

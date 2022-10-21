@@ -10,12 +10,15 @@ import com.app.shop.adapter.OrderCartAdapter
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.*
 import com.app.shop.databinding.ActivityPayCartOrderBinding
-import com.app.shop.req.OrderIdReq
+import com.app.shop.req.BalancePayReq
+import com.app.shop.req.ZFBPayReq
 import com.app.shop.ui.contract.PayCartOrderContract
 import com.app.shop.ui.presenter.PayCartOrderPresenter
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
+import com.app.shop.view.dialog.PasswordDialog
 import com.gyf.immersionbar.ktx.immersionBar
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -43,6 +46,7 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
             finish()
         }
         cartOrderBean = IntentUtil.getParcelableExtra<CartOrderBean>(this)!!
+        Logger.d(cartOrderBean)
         cartOrderBeanList.clear()
         cartOrderBeanList.addAll(cartOrderBean.detail!!)
         orderCartAdapter = OrderCartAdapter(this, cartOrderBeanList)
@@ -56,14 +60,67 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
 
             override fun onPayClick(position: Int) {
                 currentPos = position
-                val orderIdReq = OrderIdReq(cartOrderBean.detail!![position].order_id!!)
-                mPresenter!!.aliPay(orderIdReq)
+
+                var point_type = ""
+                if (binding.rb1.isChecked) {
+                    point_type = "reward"
+                } else if (binding.rb2.isChecked) {
+                    point_type = "barter"
+                } else if (binding.rb3.isChecked) {
+                    point_type = "expend"
+                }
+                if (binding.rb4.isChecked) {
+                    val ZFBPayReq =
+                        ZFBPayReq(cartOrderBean.detail!![position].order_id!!, point_type)
+                    mPresenter!!.aliPay(ZFBPayReq)
+                } else {
+                    val passwordDialog =
+                        PasswordDialog(this@PayCartOrderActivity, R.style.CustomDialog)
+                    passwordDialog.setOnClickListener(object : PasswordDialog.OnClickListener {
+                        override fun cancel() {
+                            passwordDialog.dismiss()
+                        }
+
+                        override fun pay(psw: String) {
+                            val balancePayReq =
+                                BalancePayReq(
+                                    cartOrderBean.detail!![position].order_id!!,
+                                    point_type,
+                                    psw
+                                )
+                            mPresenter!!.payBalance(balancePayReq)
+                            passwordDialog.dismiss()
+                        }
+                    })
+                    passwordDialog.show()
+                }
             }
         })
     }
 
+    override fun onResume() {
+        mPresenter!!.pointInfo()
+        super.onResume()
+    }
+
     override fun aliPay(mData: BaseNetModel<AliPayDataBean>) {
         toZFB(mData.data!!.ali_pay_data)
+    }
+
+    override fun payBalance(mData: BaseNetModel<Any>) {
+        if (cartOrderBeanList.size > 1) {
+            cartOrderBeanList.removeAt(currentPos)
+            orderCartAdapter.notifyDataSetChanged()
+        } else {
+            finish()
+        }
+    }
+
+    override fun pointInfo(mData: BaseNetModel<PointInfoBean>) {
+        binding.rb1.text = String.format(getString(R.string.qdjf), mData.data!!.point.reward)
+        binding.rb2.text = String.format(getString(R.string.yhjf), mData.data!!.point.barter)
+        binding.rb3.text = String.format(getString(R.string.xfjf), mData.data!!.point.expend)
+        binding.tvYe.text = String.format(getString(R.string.ye), mData.data!!.point.balance)
     }
 
     private fun toZFB(info: String) {

@@ -323,7 +323,13 @@ interface HomeService {
     * 支付寶
     * */
     @POST("order/pay/ali")
-    suspend fun aliPay(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<AliPayDataBean>>
+    suspend fun aliPay(@Body zfbPayReq: ZFBPayReq): Response<BaseNetModel<AliPayDataBean>>
+
+    /*
+    * 余额
+    * */
+    @POST("order/pay/balance")
+    suspend fun payBalance(@Body balancePayReq: BalancePayReq): Response<BaseNetModel<Any>>
 
     /*
     * 修改支付密码
@@ -401,5 +407,26 @@ interface HomeService {
     * */
     @POST("order/submit/veri")
     suspend fun submitVeri(@Body submitVeriReq: SubmitVeriReq): Response<BaseNetModel<AliPayDataBean>>
+
+    /*
+    * 规格查询
+    * */
+    @GET("prod/sku/query")
+    suspend fun skuQuery(
+        @Query("prod_id") prod_id: String,
+        @Query("props") props: String
+    ): Response<BaseNetModel<SkuInfoBean>>
+
+    /*
+    * 是否签到
+    * */
+    @GET("user/is_signed")
+    suspend fun isSign(): Response<BaseNetModel<SignBean>>
+
+    /*
+    * 积分信息
+    * */
+    @GET("user/point/info")
+    suspend fun pointInfo(): Response<BaseNetModel<PointInfoBean>>
 
 }

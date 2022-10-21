@@ -23,11 +23,36 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/dimen_dp_20"
+                android:paddingVertical="10dp">
+
+                <RadioButton
+                    android:id="@+id/radiobutton1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="自提" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="快递" />
+            </RadioGroup>
+
             <LinearLayout
                 android:id="@+id/ll_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/dimen_dp_10"
                 android:background="@drawable/bg_white_8"
                 android:gravity="center_vertical"
