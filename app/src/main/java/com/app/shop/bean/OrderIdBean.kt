@@ -8,13 +8,13 @@ data class DetailOrderBean(
     val items: List<DetailOrderBeanItem>,
     val order_id: String,
     val order_name: String,
-    val point: Int,
+    val point: String,
     val price: String
 )
 
 data class DetailOrderBeanItem(
     val pic: String,
-    val point: Int,
+    val point: String,
     val price: String,
     val prod_count: Int,
     val prod_name: String,

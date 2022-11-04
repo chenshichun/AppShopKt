@@ -91,6 +91,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
         binding.llOperationCenterApply.setOnClickListener(this)
         binding.llBusinessSchool.setOnClickListener(this)
         binding.llOutLogin.setOnClickListener(this)
+        binding.rlSjht.setOnClickListener(this)
 
         // 注册扫描二维码
         register = registerForActivityResult(
@@ -270,7 +271,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
             R.id.ll_setting -> {// 设置
                 IntentUtil.get()!!.goActivity(activity, SettingActivity::class.java)
             }
-            R.id.ll_out_login ->{// 退出登录
+            R.id.ll_out_login -> {// 退出登录
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setMessage("您确定要退出登录吗？")
                 builder.setTitle("提示")
@@ -280,6 +281,11 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 }
                 builder.setNegativeButton("取消") { dialog, _ -> dialog.dismiss() }
                 builder.create().show()
+            }
+            R.id.rl_sjht -> {// 商家后台
+                bundle.putString(Constants.WEB_TITLE, "商家后台")
+                bundle.putString(Constants.WEB_URL, Constants.SJHT)
+                IntentUtil.get()!!.goActivity(activity, WebViewActivity::class.java, bundle)
             }
         }
     }

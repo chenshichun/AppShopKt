@@ -27,7 +27,6 @@ class SubmitVeriPresenter : BasePresenter<SubmitVeriContract.View>(), SubmitVeri
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.submitVeri(response.body()!!)
-                    ToastUtil.showToast(response.body()!!.msg.toString())
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

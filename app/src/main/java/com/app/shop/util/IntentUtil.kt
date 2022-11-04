@@ -2,10 +2,10 @@ package com.app.shop.util
 
 import android.app.Activity
 import android.content.Context
-import com.app.shop.util.IntentUtil
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.content.Intent
+import com.app.shop.util.IntentUtil
 
 /**
  * Intent跳转封装

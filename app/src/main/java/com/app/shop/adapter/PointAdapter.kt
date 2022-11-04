@@ -30,7 +30,8 @@ class PointAdapter(private val context: Context, val mData: List<PlBean>?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvTitle.text = mData!![position].source
         holder.tvTime.text = mData[position].created_at
-        holder.tvPoint.text = "+${mData[position].points}"
+        holder.tvPoint.text =
+            if (mData[position].points > 0) "+${mData[position].points}" else "${mData[position].points}"
 
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)

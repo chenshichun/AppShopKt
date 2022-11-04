@@ -14,6 +14,7 @@ class Constants {
 
         const val PRIVACT_POLICY_URL = "https://dev.kjmall.cc/d/privacypolicy.txt"
         const val USET_AGREEMENT_URL = "https://dev.kjmall.cc/d/eula.txt"
+        const val SJHT = "https://b.kjmall.cc/"
 
         const val CATEGORY_TYPE: String = "CATEGORY_TYPE"
         const val CATEGORY_ID: String = "CATEGORY_ID"

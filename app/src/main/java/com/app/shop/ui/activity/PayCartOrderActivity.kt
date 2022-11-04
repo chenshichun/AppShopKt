@@ -53,6 +53,17 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = orderCartAdapter
 
+        binding.rb4.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.rb5.isChecked = false
+            }
+        }
+        binding.rb5.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.rb4.isChecked = false
+            }
+        }
+
         orderCartAdapter.setOnItemClickListener(object : OrderCartAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
 
@@ -78,6 +89,11 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
                         PasswordDialog(this@PayCartOrderActivity, R.style.CustomDialog)
                     passwordDialog.setOnClickListener(object : PasswordDialog.OnClickListener {
                         override fun cancel() {
+                            IntentUtil.get()!!
+                                .goActivity(
+                                    this@PayCartOrderActivity,
+                                    PayPasswordActivity::class.java
+                                )
                             passwordDialog.dismiss()
                         }
 
@@ -117,9 +133,21 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
     }
 
     override fun pointInfo(mData: BaseNetModel<PointInfoBean>) {
-        binding.rb1.text = String.format(getString(R.string.qdjf), mData.data!!.point.reward)
-        binding.rb2.text = String.format(getString(R.string.yhjf), mData.data!!.point.barter)
-        binding.rb3.text = String.format(getString(R.string.xfjf), mData.data!!.point.expend)
+        binding.rb1.text = String.format(
+            getString(R.string.qdjf),
+            mData.data!!.point.reward,
+            (mData.data!!.point.reward_rank.toDouble() * 100).toString()
+        )
+        binding.rb2.text = String.format(
+            getString(R.string.yhjf),
+            mData.data!!.point.barter,
+            (mData.data!!.point.barter_rank.toDouble() * 100).toString()
+        )
+        binding.rb3.text = String.format(
+            getString(R.string.xfjf),
+            mData.data!!.point.expend,
+            (mData.data!!.point.expend_rank.toDouble() * 100).toString()
+        )
         binding.tvYe.text = String.format(getString(R.string.ye), mData.data!!.point.balance)
     }
 

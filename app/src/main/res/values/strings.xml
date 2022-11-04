@@ -22,7 +22,7 @@
     <string name="type">类型：%s</string>
     <string name="content">内容：%s</string>
     <string name="time">时间：%s</string>
-    <string name="add_price">+ ￥%s</string>
+    <string name="add_price">￥%s</string>
     <string name="alipay_name">支付宝姓名：%s</string>
     <string name="alipay_account">支付宝账号：%s</string>
     <string name="start_time">发起时间：%s</string>
@@ -37,8 +37,8 @@
     <string name="score">评分：%d</string>
     <string name="fans">粉丝：%d</string>
     <string name="order_num">订单编号：%s</string>
-    <string name="qdjf">签到积分(%d积分)</string>
-    <string name="yhjf">易货积分(%d积分)</string>
-    <string name="xfjf">消费积分(%d积分)</string>
+    <string name="qdjf">签到积分(%s积分，费率%s %%)</string>
+    <string name="yhjf">易货积分(%s积分，费率%s %%)</string>
+    <string name="xfjf">消费积分(%s积分，费率%s %%)</string>
     <string name="ye">余额(￥%s)</string>
 </resources>

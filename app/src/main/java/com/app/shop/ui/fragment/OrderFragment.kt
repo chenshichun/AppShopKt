@@ -5,20 +5,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.adapter.OrderAdapter
 import com.app.shop.base.BaseFragment
-import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.Order
-import com.app.shop.bean.OrderListBean
+import com.app.shop.bean.*
 import com.app.shop.databinding.FragmentOrderBinding
 import com.app.shop.loadsir.EmptyCallBack
 import com.app.shop.manager.Constants
 import com.app.shop.req.OrderIdReq
-import com.app.shop.ui.activity.EvaluationActivity
-import com.app.shop.ui.activity.OrderDetailActivity
+import com.app.shop.ui.activity.*
 import com.app.shop.ui.contract.OrderFragmentContract
 import com.app.shop.ui.presenter.OrderFragmentPresenter
 import com.app.shop.util.IntentUtil
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
@@ -39,7 +37,10 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
         orderAdapter.setOnItemClickListener(object : OrderAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
-                bundle.putString(Constants.ORDER_ID, orderBeanList!![position].order_id)
+                bundle.putString(Constants.ORDER_ID, orderBeanList[position].order_id)
+                Logger.d(position)
+
+                Logger.d(orderBeanList[position].order_id)
                 IntentUtil.get()!!.goActivity(activity, OrderDetailActivity::class.java, bundle)
             }
 
@@ -62,7 +63,23 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
             override fun onRightClick(position: Int) {
                 when (orderBeanList[position].status) {
                     1 -> {// 待付款-去付款
+                        if (orderBeanList[position].items.size == 1) {// 单商品付款
+                            val orderInfoBean = OrderInfoBean(
+                                orderBeanList[position].items[0].prod_name,
+                                orderBeanList[position].items[0].point,
+                                orderBeanList[position].items[0].price,
+                                orderBeanList[position].items[0].pic,
+                                orderBeanList[position].order_id
+                            )
+                            IntentUtil.get()!!
+                                .goActivity(activity, PayOrderActivity::class.java, orderInfoBean)
+                        } else {// 多商品付款
+                            /*val cartOrderDetailBeans: List<CartOrderDetailBean> = arrayListOf()
 
+                            IntentUtil.get()!!
+                                .goActivity(activity, PayCartOrderActivity::class.java, cartOrderDetailBeans)*/
+
+                        }
                     }
                     2 -> {// 待发货-取消订单
                         val builder = AlertDialog.Builder(activity!!)

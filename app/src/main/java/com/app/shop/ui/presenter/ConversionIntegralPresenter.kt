@@ -21,7 +21,8 @@ class ConversionIntegralPresenter : BasePresenter<ConversionIntegralContract.Vie
     override fun transferPoint(transferPointrReq: TransferPointrReq) {
         CoroutineScope(Dispatchers.Main).launch {
             mView!!.showLoading()
-            val response = ApiRequest.create(HomeService::class.java).transferPoint(transferPointrReq)
+            val response =
+                ApiRequest.create(HomeService::class.java).transferPoint(transferPointrReq)
             mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
@@ -29,6 +30,21 @@ class ConversionIntegralPresenter : BasePresenter<ConversionIntegralContract.Vie
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.transferPoint(response.body()!!)
                     ToastUtil.showToast(response.body()!!.msg.toString())
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun pointInfo() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).pointInfo()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.pointInfo(response.body()!!)
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.*
@@ -25,7 +26,8 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
     ConfirmOrderContract.View {
 
     private var createOrderBean = CreateOrderBean()
-    private var addr_id: String=""
+    private var addr_id: String = ""
+    private var delivery_type = "预约"
 
     override fun getPresenter(): ConfirmOrderPresenter {
         return ConfirmOrderPresenter()
@@ -47,13 +49,17 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
         }
 
         createOrderBean = IntentUtil.getParcelableExtra<CreateOrderBean>(this)!!
+
+        binding.appointmentRg.visibility =
+            if (createOrderBean.isAppointment) View.GONE else View.VISIBLE
+
         Glide.with(this).load(createOrderBean.pic).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(binding.ivGoods)
         binding.tvGoodsTitle.text = createOrderBean.prod_name
         binding.tvPrice.text =
             String.format(
-                getString(if (createOrderBean.ori_point!!.toInt() != 0) R.string.goods_integral else R.string.price),
-                if (createOrderBean.ori_point!!.toInt() != 0) createOrderBean.ori_point else createOrderBean.price
+                getString(if (createOrderBean.ori_point!!.toDouble() > 0) R.string.goods_integral else R.string.price),
+                if (createOrderBean.ori_point!!.toDouble() > 0) createOrderBean.ori_point else createOrderBean.price
             )
 
         binding.tvTotle.text = String.format(
@@ -82,6 +88,11 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
         }
 
         binding.tvConfirm.setOnClickListener {
+            if (createOrderBean.isAppointment) {
+                delivery_type = "预约"
+            } else {
+                delivery_type = if (binding.radiobutton1.isChecked) "自提" else "快递"
+            }
             val createOrderReq = CreateOrderReq(
                 addr_id,
                 createOrderBean.count,
@@ -90,12 +101,13 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
                 binding.etRemark.text.toString(),
                 createOrderBean.shop_id,
                 createOrderBean.sku_id,
-                if (binding.radiobutton1.isChecked) "自提" else "快递",
+                delivery_type,
             )
             mPresenter!!.orderSubmit(createOrderReq)
         }
-
-        mPresenter!!.addrDefault()
+        if (!createOrderBean.isAppointment) {
+            mPresenter!!.addrDefault()
+        }
     }
 
     override fun addrDefault(mData: BaseNetModel<DefaultDaarBean>) {
@@ -110,6 +122,7 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
         val bundle = Bundle()
         val orderInfoBean = OrderInfoBean(
             createOrderBean.prod_name,
+            createOrderBean.ori_point,
             createOrderBean.price,
             createOrderBean.pic,
             mData.data!!.detail.order_id

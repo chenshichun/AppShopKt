@@ -1,5 +1,6 @@
 package com.app.shop.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,7 @@ class OrderAdapter(private val context: Context, val mData: List<Order>?) :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.tvShopName.text = mData!![position].shop_name
         when (mData[position].status) {//1:待付款 2:待发货 3:待收货 4:待评价 5:成功 6:失败
             1 -> {
@@ -66,13 +67,17 @@ class OrderAdapter(private val context: Context, val mData: List<Order>?) :
                 holder.tvStatus.text = "取消"
             }
         }
-       // holder.tvStatus.text = mData[position].status_text
-
+        // holder.tvStatus.text = mData[position].status_text
+        if (mData[position].verify_code.isEmpty()) {
+            holder.tvConfirm.visibility = View.VISIBLE
+        } else {
+            holder.tvConfirm.visibility = View.GONE
+        }
         val orderShopAdapter = OrderShopAdapter(context, mData[position].items)
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
         holder.recyclerView.adapter = orderShopAdapter
         orderShopAdapter.setOnItemClickListener(object : OrderShopAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
+            override fun onItemClick(position1: Int) {
                 mOnItemClickListener?.onItemClick(position)
             }
         })

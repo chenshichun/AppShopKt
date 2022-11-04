@@ -7,7 +7,7 @@ data class OrderListBean(
 )
 
 data class Order(
-    val actual_total: Int,
+    val actual_total: String,
     val addr_order_id: String,
     val cancel_time: String,
     val close_type: Int,
@@ -26,7 +26,7 @@ data class Order(
     val order_type: Int,
     val pay_time: String,
     val pay_type: Int,
-    val point: Int,
+    val point: String,
     val prod_name: String,
     val product_nums: Int,
     val reduce_amount: Int,
@@ -36,9 +36,13 @@ data class Order(
     val shop_name: String,
     val status: Int,
     val status_text: String,
-    val total: Int,
+    val total: String,
     val updated_at: String,
-    val user_id: String
+    val user_id: String,
+    val verify_code: String,
+    val delivery_cost: String,
+    val service_cost: String,
+    val isAppointment: Boolean,
 )
 
 data class Item(
@@ -46,15 +50,15 @@ data class Item(
     val comm_sts: Int,
     val created_at: String,
     val distribution_card_no: String,
-    val order_item_id: Long,
+    val order_item_id: String,
     val order_number: String,
     val pic: String,
-    val point: Int,
-    val price: Int,
+    val point: String,
+    val price: String,
     val prod_count: Int,
     val prod_id: String,
     val prod_name: String,
-    val product_total_amount: Int,
+    val product_total_amount: String,
     val rec_time: String,
     val shop_id: String,
     val sku_id: String,

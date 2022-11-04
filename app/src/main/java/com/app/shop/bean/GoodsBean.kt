@@ -67,6 +67,7 @@ data class ProdInfo(
     val views_count: Int,
     var delivery_cost: String,// 邮费
     var service_cost: String,// 服务费
+    var tags: String,
 )
 
 data class SkuInfo(

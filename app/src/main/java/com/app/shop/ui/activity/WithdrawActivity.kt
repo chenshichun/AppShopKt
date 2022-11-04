@@ -69,7 +69,7 @@ class WithdrawActivity : BaseActivity<ActivityWithdrawBinding, WithdrawPresenter
         })
 
         binding.btConfirm.setOnClickListener {
-            if (withdrawPriceList[position].price.toInt() > price.toInt()) {
+            if (withdrawPriceList[position].price.toDouble() > price.toDouble()) {
                 ToastUtil.showToast("超出可提现金额")
                 return@setOnClickListener
             }

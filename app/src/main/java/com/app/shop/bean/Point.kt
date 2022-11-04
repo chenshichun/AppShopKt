@@ -1,11 +1,14 @@
 package com.app.shop.bean
 
 data class Point(
-    val balance: Int,
-    val barter: Int,
-    val barter_rank: Double,
-    val expend: Int,
-    val expend_rank: Int,
-    val reward: Int,
-    val reward_rank: Double
-)
+    val balance: String,
+    val barter: String,
+    val barter_rank: String,
+    val expend: String,
+    val expend_rank: String,
+    val reward: String,
+    val reward_rank: String,
+    val trans_reward_rank:String,
+    val trans_barter_rank:String,
+    val trans_expend_rank:String,
+    )

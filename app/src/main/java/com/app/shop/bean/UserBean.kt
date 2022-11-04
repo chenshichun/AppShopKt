@@ -15,9 +15,9 @@ class UserBean() : Parcelable {
     var lv = 0
     var direct_team_count = 0
     var all_team_count = 0
-    var cash = 0
+    var cash : String? = null
     var coupon = 0
-    var points = 0
+    var points : String? = null
     var is_certified = false
     var username: String? = null
     var date_joined: String? = null
@@ -40,9 +40,9 @@ class UserBean() : Parcelable {
         lv = parcel.readInt()
         direct_team_count = parcel.readInt()
         all_team_count = parcel.readInt()
-        cash = parcel.readInt()
+        cash = parcel.readString()
         coupon = parcel.readInt()
-        points = parcel.readInt()
+        points = parcel.readString()
         is_certified = parcel.readByte() != 0.toByte()
         username = parcel.readString()
         date_joined = parcel.readString()
@@ -66,9 +66,9 @@ class UserBean() : Parcelable {
         parcel.writeInt(lv)
         parcel.writeInt(direct_team_count)
         parcel.writeInt(all_team_count)
-        parcel.writeInt(cash)
+        parcel.writeString(cash)
         parcel.writeInt(coupon)
-        parcel.writeInt(points)
+        parcel.writeString(points)
         parcel.writeByte(if (is_certified) 1 else 0)
         parcel.writeString(username)
         parcel.writeString(date_joined)

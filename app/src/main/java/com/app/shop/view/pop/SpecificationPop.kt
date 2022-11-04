@@ -56,6 +56,9 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
     private var stocksCount: Int = 0
     private var attr: String = ""
 
+    private var sku_price = "0";
+    private var sku_point = "0";
+
     init {
         this.prodInfo = prodInfo
         this.type = type
@@ -146,18 +149,23 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
                     sku_id
                 )
             } else {// 生成订单页
+                var isAppointment = false
+                if (prodInfo.tags.contains("预约")) {
+                    isAppointment = true
+                }
                 val createOrderBean = CreateOrderBean()
                 createOrderBean.pic = prodInfo.pic
                 createOrderBean.count = etNum.text.toString().toInt()
                 createOrderBean.attr = attr
-                createOrderBean.ori_point = prodInfo.ori_point
-                createOrderBean.price = prodInfo.price
+                createOrderBean.ori_point = sku_point
+                createOrderBean.price = sku_price
                 createOrderBean.delivery_cost = prodInfo.delivery_cost
                 createOrderBean.service_cost = prodInfo.service_cost
                 createOrderBean.prod_id = prodInfo.prod_id
                 createOrderBean.prod_name = prodInfo.prod_name
                 createOrderBean.shop_id = prodInfo.shop_id
                 createOrderBean.sku_id = sku_id
+                createOrderBean.isAppointment = isAppointment
                 IntentUtil.get()!!
                     .goActivity(context, ConfirmOrderActivity::class.java, createOrderBean)
             }
@@ -196,14 +204,14 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
 
         for (skuCountItem in prodInfo.sku_count) {
             if (name == skuCountItem.sku_name) {
-               /* tvPrice.text = String.format(
-                    context.getString(R.string.price),
-                    skuCountItem.price
-                )
-                tvStocks.text = String.format(
-                    context.getString(R.string.stocks),
-                    skuCountItem.stocks
-                )*/
+                /* tvPrice.text = String.format(
+                     context.getString(R.string.price),
+                     skuCountItem.price
+                 )
+                 tvStocks.text = String.format(
+                     context.getString(R.string.stocks),
+                     skuCountItem.stocks
+                 )*/
                 sku_id = skuCountItem.sku_id
                 stocksCount = skuCountItem.stocks
             }
@@ -237,9 +245,11 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
             skuInfosBean.stocks
         )
         tvPrice.text = String.format(
-            context.getString(if (skuInfosBean.point != 0) R.string.goods_integral else R.string.price),
-            if (skuInfosBean.point != 0) skuInfosBean.point else skuInfosBean.price
+            context.getString(if (skuInfosBean.point.toDouble() > 0) R.string.goods_integral else R.string.price),
+            if (skuInfosBean.point.toDouble() > 0) skuInfosBean.point else skuInfosBean.price
         )
+        sku_price = skuInfosBean.price
+        sku_point = skuInfosBean.point
         Logger.d(skuInfosBean)
     }
 }

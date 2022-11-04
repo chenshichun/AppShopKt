@@ -6,7 +6,7 @@ package com.app.shop.bean
  * 描述：
  */
 class VeriBean {
-    var id: String? = null
+    var order_number: String? = null
     var prod_name: String? = null
     var user_id: String? = null
     var cost: String? = null

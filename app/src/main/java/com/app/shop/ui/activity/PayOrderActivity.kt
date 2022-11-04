@@ -44,7 +44,13 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
         val orderInfoBean = IntentUtil.getParcelableExtra<OrderInfoBean>(this)!!
         Glide.with(this).load(orderInfoBean.ivGoods).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(binding.ivGoods)
-        binding.tvPrice.text = String.format(getString(R.string.price), orderInfoBean.goodsPrice)
+
+        binding.tvPrice.text =
+            String.format(
+                getString(if (orderInfoBean.goodsPoint!!.toDouble() > 0) R.string.goods_integral else R.string.price),
+                if (orderInfoBean.goodsPoint!!.toDouble() > 0) orderInfoBean.goodsPoint else orderInfoBean.goodsPrice
+            )
+
         binding.tvName.text = orderInfoBean.goodsName
         orderId = orderInfoBean.orderId.toString()
 
@@ -65,10 +71,13 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
                     PasswordDialog(this@PayOrderActivity, R.style.CustomDialog)
                 passwordDialog.setOnClickListener(object : PasswordDialog.OnClickListener {
                     override fun cancel() {
+                        IntentUtil.get()!!
+                            .goActivity(this@PayOrderActivity, PayPasswordActivity::class.java)
                         passwordDialog.dismiss()
                     }
+
                     override fun pay(psw: String) {
-                        val balancePayReq = BalancePayReq(orderId, point_type,psw)
+                        val balancePayReq = BalancePayReq(orderId, point_type, psw)
                         mPresenter!!.payBalance(balancePayReq)
                         passwordDialog.dismiss()
                     }
@@ -99,9 +108,21 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
     }
 
     override fun pointInfo(mData: BaseNetModel<PointInfoBean>) {
-        binding.rb1.text = String.format(getString(R.string.qdjf), mData.data!!.point.reward)
-        binding.rb2.text = String.format(getString(R.string.yhjf), mData.data!!.point.barter)
-        binding.rb3.text = String.format(getString(R.string.xfjf), mData.data!!.point.expend)
+        binding.rb1.text = String.format(
+                getString(R.string.qdjf),
+        mData.data!!.point.reward,
+        (mData.data!!.point.reward_rank.toDouble() * 100).toString()
+        )
+        binding.rb2.text = String.format(
+            getString(R.string.yhjf),
+            mData.data!!.point.barter,
+            (mData.data!!.point.barter_rank.toDouble() * 100).toString()
+        )
+        binding.rb3.text = String.format(
+            getString(R.string.xfjf),
+            mData.data!!.point.expend,
+            (mData.data!!.point.expend_rank.toDouble() * 100).toString()
+        )
         binding.tvYe.text = String.format(getString(R.string.ye), mData.data!!.point.balance)
     }
 

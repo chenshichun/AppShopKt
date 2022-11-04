@@ -15,11 +15,12 @@ import com.app.shop.ui.presenter.SubmitVeriPresenter
 import com.app.shop.util.JsonUtils
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
+import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun
  * 创建日期：2022/10/11
- * 描述：
+ * 描述：订单核销
  */
 class SubmitVeriActivity : BaseActivity<ActivitySubmitVeriBinding, SubmitVeriPresenter>(),
     SubmitVeriContract.View {
@@ -43,10 +44,10 @@ class SubmitVeriActivity : BaseActivity<ActivitySubmitVeriBinding, SubmitVeriPre
         }
         result = intent.getStringExtra(Constants.CODE_QR).toString()
         val veriBean: VeriBean = JsonUtils.jsonToBean(result, VeriBean::class.java)
-
+        Logger.d(veriBean)
         binding.tvConfirm.setOnClickListener {
             val submitVeriReq =
-                SubmitVeriReq(veriBean.id!!, binding.etPoint.text.toString(), veriBean.user_id!!)
+                SubmitVeriReq(veriBean.order_number!!, binding.etPoint.text.toString(), veriBean.user_id!!)
             mPresenter!!.submitVeri(submitVeriReq)
         }
     }
@@ -84,7 +85,7 @@ class SubmitVeriActivity : BaseActivity<ActivitySubmitVeriBinding, SubmitVeriPre
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         finish()
-                        ToastUtil.showToast("支付成功")
+                        ToastUtil.showToast("核销成功")
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         ToastUtil.showToast("退出支付")
