@@ -19,14 +19,12 @@ import com.app.shop.req.CartAddReq
 import com.app.shop.req.CartReq
 import com.app.shop.ui.activity.ConfirmCartOrderActivity
 import com.app.shop.ui.activity.GoodsDetailActivity
-import com.app.shop.ui.activity.PayOrderActivity
 import com.app.shop.ui.contract.CartContract
 import com.app.shop.ui.presenter.CartPresenter
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import com.orhanobut.logger.Logger
 
 /**
  * @author chenshichun

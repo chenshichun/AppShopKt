@@ -16,6 +16,7 @@ import com.app.shop.R
 import com.app.shop.base.BaseFragment
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UploadBean
+import com.app.shop.bean.UserBean
 import com.app.shop.bean.UserDataBean
 import com.app.shop.databinding.FragmentMineBinding
 import com.app.shop.manager.AccountManager
@@ -52,7 +53,7 @@ import java.io.File
 class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineContract.View,
     View.OnClickListener {
     private lateinit var register: ActivityResultLauncher<Intent>
-
+    private lateinit var userBean: UserBean
     override fun getPresenter(): MinePresenter {
         return MinePresenter()
     }
@@ -239,6 +240,14 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                             }
                         }
                     }.show()*/
+                if (userBean.m_apply_status == "审核中") {
+                    ToastUtil.showToast("审核中");
+                    return
+                }
+                if (userBean.m_apply_status == "通过") {
+                    ToastUtil.showToast("已通过");
+                    return
+                }
                 startActivity(Intent(activity, MerchantSettledActivity::class.java))
             }
             R.id.ll_scan -> {//  扫码
@@ -263,6 +272,14 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 IntentUtil.get()!!.goActivity(activity, VerifiedActivity::class.java)
             }
             R.id.ll_operation_center_apply -> {// 运营中心申请
+                if (userBean.s_apply_info == "审核中") {
+                    ToastUtil.showToast("审核中");
+                    return
+                }
+                if (userBean.s_apply_info == "通过") {
+                    ToastUtil.showToast("已通过");
+                    return
+                }
                 IntentUtil.get()!!.goActivity(activity, OperationCenterApplyActivity::class.java)
             }
             R.id.ll_business_school -> {// 商学院
@@ -296,6 +313,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
 
     @SuppressLint("SetTextI18n")
     override fun getMyInfo(mData: BaseNetModel<UserDataBean>) {
+        userBean = mData.data!!.user!!
         AccountManager.signIn(mData.data!!.user!!)
         context?.let { Glide.with(it).load(mData.data!!.user!!.profile_pic).into(binding.ivHead) }
         binding.tvNickName.text = mData.data!!.user!!.nick_name

@@ -1,5 +1,6 @@
 package com.app.shop.ui.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -46,6 +47,7 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
 
         binding.radiobutton1.setOnCheckedChangeListener { _, b ->
             binding.llAddress.visibility = if (b) View.GONE else View.VISIBLE
+            getDetailData()
         }
 
         createOrderBean = IntentUtil.getParcelableExtra<CreateOrderBean>(this)!!
@@ -62,16 +64,14 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
                 if (createOrderBean.ori_point!!.toDouble() > 0) createOrderBean.ori_point else createOrderBean.price
             )
 
-        binding.tvTotle.text = String.format(
+        /*binding.tvTotle.text = String.format(
             getString(if (createOrderBean.ori_point!!.toInt() != 0) R.string.goods_integral else R.string.price),
             if (createOrderBean.ori_point!!.toInt() != 0) (createOrderBean.ori_point!!.toFloat() *
                     createOrderBean.count
-                    /** 1.2*/
                     ).toString()
             else (createOrderBean.price!!.toFloat() * createOrderBean.count
-                    /** 1.2*/
                     ).toString()
-        )
+        )*/
 
         binding.tvAttr.text = String.format(getString(R.string.attr), createOrderBean.attr)
         binding.tvNum.text =
@@ -108,6 +108,28 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
         if (!createOrderBean.isAppointment) {
             mPresenter!!.addrDefault()
         }
+
+        getDetailData()
+    }
+
+    // 获取详细信息
+    fun getDetailData() {
+        if (createOrderBean.isAppointment) {
+            delivery_type = "预约"
+        } else {
+            delivery_type = if (binding.radiobutton1.isChecked) "自提" else "快递"
+        }
+        val createOrderReq = CreateOrderReq(
+            addr_id,
+            createOrderBean.count,
+            createOrderBean.prod_id,
+            createOrderBean.prod_name,
+            binding.etRemark.text.toString(),
+            createOrderBean.shop_id,
+            createOrderBean.sku_id,
+            delivery_type,
+        )
+        mPresenter!!.calcDirect(createOrderReq)
     }
 
     override fun addrDefault(mData: BaseNetModel<DefaultDaarBean>) {
@@ -119,7 +141,6 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
     }
 
     override fun orderSubmit(mData: BaseNetModel<OrderIdBean>) {
-        val bundle = Bundle()
         val orderInfoBean = OrderInfoBean(
             createOrderBean.prod_name,
             createOrderBean.ori_point,
@@ -129,6 +150,47 @@ class ConfirmOrderActivity : BaseActivity<ActivityConfirmOrderBinding, ConfirmOr
         )
         IntentUtil.get()!!.goActivity(this, PayOrderActivity::class.java, orderInfoBean)
         finish()
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun calcDirect(mData: BaseNetModel<CalcDirectBean>) {
+        binding.tvDetail1.text =
+            String.format(getString(R.string.num), mData.data!!.calc_result.prod_count)
+        binding.tvDetail2.text =
+            String.format(
+                getString(if (mData.data!!.calc_result.point.toDouble() > 0) R.string.goods_integral else R.string.price),
+                if (mData.data!!.calc_result.point.toDouble() > 0) mData.data!!.calc_result.point else mData.data!!.calc_result.cash
+            )
+        binding.tvDetail3.text =
+            String.format(getString(R.string.price), mData.data!!.calc_result.service_cost)
+        binding.tvDetail4.text =
+            String.format(getString(R.string.price), mData.data!!.calc_result.express_cost)
+        if (mData.data!!.calc_result.point.toDouble() > 0) {
+            binding.tvDetail5.text =
+                String.format(
+                    getString(R.string.goods_integral),
+                    mData.data!!.calc_result.point
+                ) + "+" + String.format(
+                    getString(R.string.price),
+                    mData.data!!.calc_result.total_cash
+                )
+            binding.tvTotle.text = String.format(
+                getString(R.string.goods_integral),
+                mData.data!!.calc_result.point
+            ) + "+" + String.format(
+                getString(R.string.price),
+                mData.data!!.calc_result.total_cash
+            )
+        }else{
+            binding.tvDetail5.text =String.format(
+                getString(R.string.price),
+                mData.data!!.calc_result.total_cash
+            )
+            binding.tvTotle.text =String.format(
+                getString(R.string.price),
+                mData.data!!.calc_result.total_cash
+            )
+        }
     }
 
     override fun showLoading() {

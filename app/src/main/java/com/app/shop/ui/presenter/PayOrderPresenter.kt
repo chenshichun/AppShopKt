@@ -3,6 +3,7 @@ package com.app.shop.ui.presenter
 import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
 import com.app.shop.req.BalancePayReq
+import com.app.shop.req.OrderIdReq
 import com.app.shop.req.ZFBPayReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.HomeService
@@ -58,6 +59,21 @@ class PayOrderPresenter : BasePresenter<PayOrderContract.View>(), PayOrderContra
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.pointInfo(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun calcOrder(orderIdReq: OrderIdReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = ApiRequest.create(HomeService::class.java).calcOrder(orderIdReq)
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.calcOrder(response.body()!!)
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

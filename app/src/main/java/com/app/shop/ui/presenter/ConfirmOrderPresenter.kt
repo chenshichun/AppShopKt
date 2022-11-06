@@ -53,4 +53,21 @@ class ConfirmOrderPresenter : BasePresenter<ConfirmOrderContract.View>(),
             }
         }
     }
+
+    override fun calcDirect(createOrderReq: CreateOrderReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java).calcDirect(createOrderReq)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.calcDirect(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
 }

@@ -37,8 +37,10 @@ data class OrderDataBean(
     val total: String,
     val updated_at: String,
     val user_id: String,
-    val verify_code: String
-)
+    val verify_code: String,
+    val pay_point:String,
+    val pay_cash:String,
+    )
 
 data class OrderItem(
     val basket_date: String,
@@ -48,7 +50,7 @@ data class OrderItem(
     val order_item_id: String,
     val order_number: String,
     val pic: String,
-    val point: Int,
+    val point: String,
     val price: String,
     val prod_count: Int,
     val prod_id: String,

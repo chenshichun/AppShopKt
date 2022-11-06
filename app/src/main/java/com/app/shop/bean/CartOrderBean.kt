@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class CartOrderBean(
-    val detail: List<CartOrderDetailBean>?
+    var detail: List<CartOrderDetailBean>?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.createTypedArrayList(CartOrderDetailBean)) {
     }
@@ -32,15 +32,15 @@ data class CartOrderDetailBean(
     val items: List<CartOrderItem>?,
     val order_id: String?,
     val order_name: String?,
-    val point: Int,
-    val price: Int
+    val point: String?,
+    val price: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createTypedArrayList(CartOrderItem),
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt(),
-        parcel.readInt()
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
@@ -48,8 +48,8 @@ data class CartOrderDetailBean(
         parcel.writeTypedList(items)
         parcel.writeString(order_id)
         parcel.writeString(order_name)
-        parcel.writeInt(point)
-        parcel.writeInt(price)
+        parcel.writeString(point)
+        parcel.writeString(price)
     }
 
     override fun describeContents(): Int {
@@ -69,16 +69,16 @@ data class CartOrderDetailBean(
 
 data class CartOrderItem(
     val pic: String?,
-    val point: Int,
-    val price: Int,
+    val point: String?,
+    val price: String?,
     val prod_count: Int,
     val prod_name: String?,
     val sku_name: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readInt(),
-        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readInt(),
         parcel.readString(),
         parcel.readString()
@@ -87,8 +87,8 @@ data class CartOrderItem(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(pic)
-        parcel.writeInt(point)
-        parcel.writeInt(price)
+        parcel.writeString(point)
+        parcel.writeString(price)
         parcel.writeInt(prod_count)
         parcel.writeString(prod_name)
         parcel.writeString(sku_name)

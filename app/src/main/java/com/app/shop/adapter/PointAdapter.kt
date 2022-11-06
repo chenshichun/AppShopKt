@@ -31,7 +31,7 @@ class PointAdapter(private val context: Context, val mData: List<PlBean>?) :
         holder.tvTitle.text = mData!![position].source
         holder.tvTime.text = mData[position].created_at
         holder.tvPoint.text =
-            if (mData[position].points > 0) "+${mData[position].points}" else "${mData[position].points}"
+            if (mData[position].points.toDouble() > 0) "+${mData[position].points}" else "${mData[position].points}"
 
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)

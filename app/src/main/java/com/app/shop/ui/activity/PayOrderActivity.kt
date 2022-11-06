@@ -9,6 +9,7 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.bean.*
 import com.app.shop.databinding.ActivityPayOrderBinding
 import com.app.shop.req.BalancePayReq
+import com.app.shop.req.OrderIdReq
 import com.app.shop.req.ZFBPayReq
 import com.app.shop.ui.contract.PayOrderContract
 import com.app.shop.ui.presenter.PayOrderPresenter
@@ -27,6 +28,7 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
     PayOrderContract.View {
     private var orderId: String = ""
     private val SDK_PAY_FLAG = 1
+    private lateinit var calcDirectBean: CalcDirectBean
 
     override fun getPresenter(): PayOrderPresenter {
         return PayOrderPresenter()
@@ -85,7 +87,39 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
                 passwordDialog.show()
             }
         }
-
+        binding.rb1.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.tvPay.text = "总金额：" + String.format(
+                    getString(R.string.goods_integral),
+                    calcDirectBean.calc_result.point
+                ) + "+" + String.format(
+                    getString(R.string.price),
+                    calcDirectBean.calc_result.total_cash_with_reward
+                )
+            }
+        }
+        binding.rb2.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.tvPay.text = "总金额：" + String.format(
+                    getString(R.string.goods_integral),
+                    calcDirectBean.calc_result.point
+                ) + "+" + String.format(
+                    getString(R.string.price),
+                    calcDirectBean.calc_result.total_cash_with_barter
+                )
+            }
+        }
+        binding.rb3.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.tvPay.text = "总金额：" + String.format(
+                    getString(R.string.goods_integral),
+                    calcDirectBean.calc_result.point
+                ) + "+" + String.format(
+                    getString(R.string.price),
+                    calcDirectBean.calc_result.total_cash_with_expend
+                )
+            }
+        }
         binding.rb4.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 binding.rb5.isChecked = false
@@ -100,6 +134,8 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
 
     override fun onResume() {
         mPresenter!!.pointInfo()
+        val orderIdReq = OrderIdReq(orderId)
+        mPresenter!!.calcOrder(orderIdReq)
         super.onResume()
     }
 
@@ -109,9 +145,9 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
 
     override fun pointInfo(mData: BaseNetModel<PointInfoBean>) {
         binding.rb1.text = String.format(
-                getString(R.string.qdjf),
-        mData.data!!.point.reward,
-        (mData.data!!.point.reward_rank.toDouble() * 100).toString()
+            getString(R.string.qdjf),
+            mData.data!!.point.reward,
+            (mData.data!!.point.reward_rank.toDouble() * 100).toString()
         )
         binding.rb2.text = String.format(
             getString(R.string.yhjf),
@@ -124,6 +160,17 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
             (mData.data!!.point.expend_rank.toDouble() * 100).toString()
         )
         binding.tvYe.text = String.format(getString(R.string.ye), mData.data!!.point.balance)
+    }
+
+    override fun calcOrder(mData: BaseNetModel<CalcDirectBean>) {
+        calcDirectBean = mData.data!!
+        binding.tvPay.text = "总金额：" + String.format(
+            getString(R.string.goods_integral),
+            calcDirectBean.calc_result.point
+        ) + "+" + String.format(
+            getString(R.string.price),
+            calcDirectBean.calc_result.total_cash_with_reward
+        )
     }
 
     override fun payBalance(mData: BaseNetModel<Any>) {

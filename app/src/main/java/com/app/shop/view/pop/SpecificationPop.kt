@@ -250,6 +250,7 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
         )
         sku_price = skuInfosBean.price
         sku_point = skuInfosBean.point
+        sku_id=skuInfosBean.sku_id
         Logger.d(skuInfosBean)
     }
 }

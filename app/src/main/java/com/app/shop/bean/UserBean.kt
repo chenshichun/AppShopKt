@@ -7,7 +7,6 @@ import android.os.Parcelable
  * @author chenshichun
  * 创建日期：2022/7/15
  * 描述：
- *
  */
 class UserBean() : Parcelable {
     var created_at: String? = null
@@ -33,6 +32,8 @@ class UserBean() : Parcelable {
     var my_qr: String? = null
     var share_qr: String? = null
     var identity: String? = null
+    var m_apply_status:String?=null
+    var s_apply_info:String?=null
 
     constructor(parcel: Parcel) : this() {
         created_at = parcel.readString()
@@ -58,6 +59,8 @@ class UserBean() : Parcelable {
         my_qr = parcel.readString()
         share_qr = parcel.readString()
         identity = parcel.readString()
+        m_apply_status = parcel.readString()
+        s_apply_info = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -84,6 +87,8 @@ class UserBean() : Parcelable {
         parcel.writeString(my_qr)
         parcel.writeString(share_qr)
         parcel.writeString(identity)
+        parcel.writeString(m_apply_status)
+        parcel.writeString(s_apply_info)
     }
 
     override fun describeContents(): Int {
@@ -99,4 +104,5 @@ class UserBean() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }

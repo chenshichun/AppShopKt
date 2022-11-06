@@ -53,12 +53,12 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = orderCartAdapter
 
-        binding.rb4.setOnCheckedChangeListener { compoundButton, b ->
+        binding.rb4.setOnCheckedChangeListener { _, b ->
             if (b) {
                 binding.rb5.isChecked = false
             }
         }
-        binding.rb5.setOnCheckedChangeListener { compoundButton, b ->
+        binding.rb5.setOnCheckedChangeListener { _, b ->
             if (b) {
                 binding.rb4.isChecked = false
             }

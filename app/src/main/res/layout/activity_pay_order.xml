@@ -14,158 +14,177 @@
 
     <include layout="@layout/line" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_address"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:gravity="center_vertical"
-        android:padding="15dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_goods"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="#2196F3" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="￥%s"
-            android:textColor="@color/red"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toRightOf="@id/iv_goods"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="90dp"
-            android:text="这是商品标题这是商品标题这是商品标题这是商品标题这是商品标题这是商品标题"
-            android:textColor="@color/color_333"
-            app:layout_constraintLeft_toLeftOf="@id/tv_price"
-            app:layout_constraintTop_toBottomOf="@id/tv_price" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="积分抵扣"
-            android:textColor="@color/color_333"
-            android:textSize="14sp" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/rb_1"
-                style="@style/CustomCheckBoxTheme"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_dp_10"
-                android:checked="true"
-                android:text="@string/qdjf" />
+                android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:background="@drawable/bg_white_8"
+                android:gravity="center_vertical"
+                android:padding="15dp">
 
-            <RadioButton
-                android:id="@+id/rb_2"
-                style="@style/CustomCheckBoxTheme"
+                <ImageView
+                    android:id="@+id/iv_goods"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:background="#2196F3" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="￥%s"
+                    android:textColor="@color/red"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toRightOf="@id/iv_goods"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="90dp"
+                    android:text="这是商品标题这是商品标题这是商品标题这是商品标题这是商品标题这是商品标题"
+                    android:textColor="@color/color_333"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_price"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_dp_10"
-                android:text="@string/yhjf" />
+                android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:background="@drawable/bg_white_8"
+                android:orientation="vertical"
+                android:padding="15dp">
 
-            <RadioButton
-                android:id="@+id/rb_3"
-                style="@style/CustomCheckBoxTheme"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="积分抵扣"
+                    android:textColor="@color/color_333"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rb_1"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:padding="@dimen/dimen_dp_10"
+                        android:text="@string/qdjf" />
+
+                    <RadioButton
+                        android:id="@+id/rb_2"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_dp_10"
+                        android:text="@string/yhjf" />
+
+                    <RadioButton
+                        android:id="@+id/rb_3"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_dp_10"
+                        android:text="@string/xfjf" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_dp_10"
-                android:text="@string/xfjf" />
+                android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:background="@drawable/bg_white_8"
+                android:orientation="vertical"
+                android:padding="15dp">
 
-        </RadioGroup>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
 
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="支付宝"
+                        android:textColor="@color/color_333"
+                        android:textSize="14sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:orientation="vertical"
-        android:padding="15dp">
+                    <RadioButton
+                        android:id="@+id/rb_4"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:checked="true" />
+                </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_ye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/ye"
+                        android:textColor="@color/color_333"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_5"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="支付宝"
+                android:layout_margin="15dp"
+                android:text="总金额:"
                 android:textColor="@color/color_333"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/rb_4"
-                style="@style/CustomCheckBoxTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:checked="true" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/tv_ye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/ye"
-                android:textColor="@color/color_333"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/rb_5"
-                style="@style/CustomCheckBoxTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/bt_confirm"

@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.shop.R
 import com.app.shop.adapter.OrderDetailGoodsAdapter
 import com.app.shop.base.BaseActivity
-import com.app.shop.bean.BaseNetModel
-import com.app.shop.bean.OrderDetailBean
-import com.app.shop.bean.OrderItem
+import com.app.shop.bean.*
 import com.app.shop.databinding.ActivityOrderDetailBinding
 import com.app.shop.manager.Constants
 import com.app.shop.req.OrderIdReq
@@ -29,6 +27,11 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
     private lateinit var orderDetailGoodsAdapter: OrderDetailGoodsAdapter
     private val orderItemList = mutableListOf<OrderItem>()
     private var status = 0
+    private lateinit var orderDetailBean: OrderDetailBean
+
+    private lateinit var cartOrderBean: CartOrderBean
+    private lateinit var cartOrderDetailBeanList: List<CartOrderDetailBean>
+
     override fun getPresenter(): OrderDetailPresenter {
         return OrderDetailPresenter()
     }
@@ -87,7 +90,26 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
         binding.tvConfirmRight.setOnClickListener {
             when (status) {
                 1 -> {// 去支付
-
+                    if (orderDetailBean.detail.items.size == 1) {// 单商品付款
+                        val orderInfoBean = OrderInfoBean(
+                            orderDetailBean.detail.prod_name,
+                            orderDetailBean.detail.items[0].point,
+                            orderDetailBean.detail.items[0].price,
+                            orderDetailBean.detail.items[0].pic,
+                            orderDetailBean.detail.order_id
+                        )
+                        IntentUtil.get()!!
+                            .goActivity(
+                                this@OrderDetailActivity,
+                                PayOrderActivity::class.java,
+                                orderInfoBean
+                            )
+                    } else {// 多商品付款
+                        cartOrderBean.detail = cartOrderDetailBeanList
+                        /*val cartOrderDetailBeans: List<CartOrderDetailBean> = arrayListOf()
+                        IntentUtil.get()!!
+                            .goActivity(activity, PayCartOrderActivity::class.java, cartOrderDetailBeans)*/
+                    }
                 }
                 3 -> {// 确认收货
                     val orderIdReq = OrderIdReq(orderId)
@@ -109,6 +131,7 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun orderDetail(mData: BaseNetModel<OrderDetailBean>) {
+        orderDetailBean = mData.data!!
         binding.tvShopName.text = mData.data!!.detail.shop.shop_name
         binding.tvAddrName.text = mData.data!!.detail.addr.receiver
         binding.tvAddrPhone.text = mData.data!!.detail.addr.mobile
@@ -125,7 +148,14 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
         binding.tvExpressDelivery.text = mData.data!!.detail.dvy_type
         binding.tvDeliveryCost.text = mData.data!!.detail.order_number
         binding.tvTime.text = mData.data!!.detail.pay_time
-
+        binding.tvPayPoint.text = String.format(
+            getString(R.string.goods_integral),
+            mData.data!!.detail.pay_point
+        )
+        binding.tvPayCash.text = String.format(
+            getString(R.string.price),
+            mData.data!!.detail.pay_cash
+        )
         orderItemList.clear()
         orderItemList.addAll(mData.data!!.detail.items)
         orderDetailGoodsAdapter.notifyDataSetChanged()

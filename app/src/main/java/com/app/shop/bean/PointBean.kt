@@ -7,9 +7,9 @@ data class PointBean(
 )
 data class PlBean(
     val created_at: String,
-    val points: Int,
+    val points: String,
     val remark: String,
     val source: String,
     val updated_at: String,
-    val userid: Long
+    val userid: String
 )

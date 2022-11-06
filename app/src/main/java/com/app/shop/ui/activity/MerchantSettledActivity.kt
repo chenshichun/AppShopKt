@@ -3,6 +3,7 @@ package com.app.shop.ui.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.app.shop.R
@@ -11,9 +12,12 @@ import com.app.shop.bean.AddressInfoPO
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.UploadBean
 import com.app.shop.databinding.ActivityMerchantSettledBinding
+import com.app.shop.manager.Constants
 import com.app.shop.req.MerchantSettledReq
 import com.app.shop.ui.contract.MerchantSettledContract
 import com.app.shop.ui.presenter.MerchantSettledPresenter
+import com.app.shop.util.IntentUtil
+import com.app.shop.util.ToastUtil
 import com.app.shop.view.GlideEngine
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bumptech.glide.Glide
@@ -67,12 +71,13 @@ class MerchantSettledActivity :
         binding.tvAddress.setOnClickListener(this)
         binding.tvSave.setOnClickListener(this)
         binding.tvEType.setOnClickListener(this)
+        binding.tvShrzxy.setOnClickListener(this)
         binding.layoutSubjectInformation.tvLiceAreaFull.setOnClickListener(this)
         binding.layoutSubjectInformation.tvSubjectInformation.setOnClickListener(this)
 
         binding.mMultiLineRadioGroup.setOnCheckedChangeListener(
             MultiLineRadioGroup.OnCheckedChangeListener { _, button ->
-                Logger.d(button.text )
+                Logger.d(button.text)
                 if (button.text == "个人") {
                     binding.layoutSubjectInformation.layoutSubjectInformation.visibility = View.GONE
                     binding.layoutSubjectInformation.llSubjectInformation.visibility = View.GONE
@@ -128,7 +133,12 @@ class MerchantSettledActivity :
     @SuppressLint("CheckResult")
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.iv_back -> finish()
+            R.id.iv_back ->// 商户类型不是个人//身份证＝0// 商户类型 线上＝1线下＝2易货＝3
+// 商户类型
+                //  注册地区全名
+            {
+                finish()
+            }
             R.id.iv0 -> {
                 imageType = 0
                 chooseImg()
@@ -167,6 +177,10 @@ class MerchantSettledActivity :
                 build.show()
             }
             R.id.tv_save -> {
+                if(!binding.checkbox.isChecked){
+                    ToastUtil.showToast("请先阅读并同意商户入驻协议")
+                    return
+                }
                 val merchantSettledReq = MerchantSettledReq()
                 merchantSettledReq.m_name = binding.etMName.text.toString()
                 merchantSettledReq.legal_name = binding.etLegalName.text.toString()
@@ -202,6 +216,12 @@ class MerchantSettledActivity :
             R.id.tv_subject_information -> {
                 binding.layoutSubjectInformation.tvSubjectInformation.visibility = View.GONE
                 binding.layoutSubjectInformation.llSubjectInformation.visibility = View.VISIBLE
+            }
+            R.id.tv_shrzxy -> {
+                val bundle = Bundle()
+                bundle.putString(Constants.WEB_TITLE, "商户入驻协议")
+                bundle.putString(Constants.WEB_URL, Constants.SHRZ)
+                IntentUtil.get()!!.goActivity(this, WebViewActivity::class.java, bundle)
             }
         }
     }

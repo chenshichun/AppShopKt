@@ -429,4 +429,16 @@ interface HomeService {
     @GET("user/point/info")
     suspend fun pointInfo(): Response<BaseNetModel<PointInfoBean>>
 
+    /*
+    * 单商品计算订单金额
+    * */
+    @POST("order/calc/direct")
+    suspend fun calcDirect(@Body createOrderReq: CreateOrderReq): Response<BaseNetModel<CalcDirectBean>>
+
+    /*
+    * 单商品计算订单金额
+    * */
+    @POST("order/calc/order")
+    suspend fun calcOrder(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<CalcDirectBean>>
+
 }
