@@ -3,6 +3,7 @@ package com.app.shop.ui.activity
 import android.os.Handler
 import android.os.Message
 import android.text.TextUtils
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alipay.sdk.app.PayTask
 import com.app.shop.R
@@ -10,8 +11,8 @@ import com.app.shop.adapter.OrderCartAdapter
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.*
 import com.app.shop.databinding.ActivityPayCartOrderBinding
-import com.app.shop.req.BalancePayReq
-import com.app.shop.req.ZFBPayReq
+import com.app.shop.manager.Constants
+import com.app.shop.req.*
 import com.app.shop.ui.contract.PayCartOrderContract
 import com.app.shop.ui.presenter.PayCartOrderPresenter
 import com.app.shop.util.IntentUtil
@@ -31,7 +32,10 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
     lateinit var orderCartAdapter: OrderCartAdapter
     val SDK_PAY_FLAG = 1
     var currentPos = 0;
-    private val cartOrderBeanList = mutableListOf<CartOrderDetailBean>()
+    private val cartOrderBeanList = mutableListOf<OrderFilterDetailBean>()
+    var orderIds = ""
+    private lateinit var calcDirectBean: CalcDirectBean
+
     override fun getPresenter(): PayCartOrderPresenter {
         return PayCartOrderPresenter()
     }
@@ -45,13 +49,53 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
         binding.viewHead.ivBack.setOnClickListener {
             finish()
         }
-        cartOrderBean = IntentUtil.getParcelableExtra<CartOrderBean>(this)!!
-        Logger.d(cartOrderBean)
+        orderIds = intent.getStringExtra(Constants.ORDER_IDS).toString()
+
         cartOrderBeanList.clear()
-        cartOrderBeanList.addAll(cartOrderBean.detail!!)
         orderCartAdapter = OrderCartAdapter(this, cartOrderBeanList)
         binding.mRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.mRecyclerView.adapter = orderCartAdapter
+
+        binding.rb1.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.tvPay.text =
+                    "总金额：" + "签到积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                        getString(R.string.price),
+                        calcDirectBean.calc_result.total_cash_with_reward
+                    )
+                binding.rlZfb.visibility =
+                    if (calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0) View.GONE else View.VISIBLE
+                binding.rb5.isChecked =
+                    calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0
+            }
+        }
+
+        binding.rb2.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.tvPay.text =
+                    "总金额：" + "易货积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                        getString(R.string.price),
+                        calcDirectBean.calc_result.total_cash_with_barter
+                    )
+                binding.rlZfb.visibility =
+                    if (calcDirectBean.calc_result.total_cash_with_barter.toDouble() == 0.0) View.GONE else View.VISIBLE
+                binding.rb5.isChecked =
+                    calcDirectBean.calc_result.total_cash_with_barter.toDouble() == 0.0
+            }
+        }
+        binding.rb3.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                binding.tvPay.text =
+                    "总金额：" + "消费积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                        getString(R.string.price),
+                        calcDirectBean.calc_result.total_cash_with_expend
+                    )
+                binding.rlZfb.visibility =
+                    if (calcDirectBean.calc_result.total_cash_with_expend.toDouble() == 0.0) View.GONE else View.VISIBLE
+                binding.rb5.isChecked =
+                    calcDirectBean.calc_result.total_cash_with_expend.toDouble() == 0.0
+            }
+        }
 
         binding.rb4.setOnCheckedChangeListener { _, b ->
             if (b) {
@@ -63,73 +107,73 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
                 binding.rb4.isChecked = false
             }
         }
+        binding.btConfirm.setOnClickListener {
+            var point_type = ""
+            if (binding.rb1.isChecked) {
+                point_type = "reward"
+            } else if (binding.rb2.isChecked) {
+                point_type = "barter"
+            } else if (binding.rb3.isChecked) {
+                point_type = "expend"
+            }
+            if (binding.rb4.isChecked) {
+                val ZFBPayReq = ZFBPayReq(orderIds, point_type)
+                mPresenter!!.aliPay(ZFBPayReq)
+            } else {
+                val passwordDialog =
+                    PasswordDialog(this@PayCartOrderActivity, R.style.CustomDialog)
+                passwordDialog.setOnClickListener(object : PasswordDialog.OnClickListener {
+                    override fun cancel() {
+                        IntentUtil.get()!!
+                            .goActivity(
+                                this@PayCartOrderActivity,
+                                PayPasswordActivity::class.java
+                            )
+                        passwordDialog.dismiss()
+                    }
 
+                    override fun pay(psw: String) {
+                        val balancePayReq = BalancePayReq(orderIds, point_type, psw)
+                        mPresenter!!.payBalance(balancePayReq)
+                        passwordDialog.dismiss()
+                    }
+                })
+                passwordDialog.show()
+            }
+        }
         orderCartAdapter.setOnItemClickListener(object : OrderCartAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
 
             }
 
             override fun onPayClick(position: Int) {
-                currentPos = position
-
-                var point_type = ""
-                if (binding.rb1.isChecked) {
-                    point_type = "reward"
-                } else if (binding.rb2.isChecked) {
-                    point_type = "barter"
-                } else if (binding.rb3.isChecked) {
-                    point_type = "expend"
-                }
-                if (binding.rb4.isChecked) {
-                    val ZFBPayReq =
-                        ZFBPayReq(cartOrderBean.detail!![position].order_id!!, point_type)
-                    mPresenter!!.aliPay(ZFBPayReq)
-                } else {
-                    val passwordDialog =
-                        PasswordDialog(this@PayCartOrderActivity, R.style.CustomDialog)
-                    passwordDialog.setOnClickListener(object : PasswordDialog.OnClickListener {
-                        override fun cancel() {
-                            IntentUtil.get()!!
-                                .goActivity(
-                                    this@PayCartOrderActivity,
-                                    PayPasswordActivity::class.java
-                                )
-                            passwordDialog.dismiss()
-                        }
-
-                        override fun pay(psw: String) {
-                            val balancePayReq =
-                                BalancePayReq(
-                                    cartOrderBean.detail!![position].order_id!!,
-                                    point_type,
-                                    psw
-                                )
-                            mPresenter!!.payBalance(balancePayReq)
-                            passwordDialog.dismiss()
-                        }
-                    })
-                    passwordDialog.show()
-                }
             }
         })
     }
 
     override fun onResume() {
+        var point_type = ""
+        if (binding.rb1.isChecked) {
+            point_type = "reward"
+        } else if (binding.rb2.isChecked) {
+            point_type = "barter"
+        } else if (binding.rb3.isChecked) {
+            point_type = "expend"
+        }
+        mPresenter!!.orderFilter(orderIds)
+        val order_ids = OrderIdsReq(orderIds, point_type)
+        mPresenter!!.calcMultipleOrder(order_ids)
         mPresenter!!.pointInfo()
         super.onResume()
     }
+
 
     override fun aliPay(mData: BaseNetModel<AliPayDataBean>) {
         toZFB(mData.data!!.ali_pay_data)
     }
 
     override fun payBalance(mData: BaseNetModel<Any>) {
-        if (cartOrderBeanList.size > 1) {
-            cartOrderBeanList.removeAt(currentPos)
-            orderCartAdapter.notifyDataSetChanged()
-        } else {
-            finish()
-        }
+        finish()
     }
 
     override fun pointInfo(mData: BaseNetModel<PointInfoBean>) {
@@ -149,6 +193,24 @@ class PayCartOrderActivity : BaseActivity<ActivityPayCartOrderBinding, PayCartOr
             (mData.data!!.point.expend_rank.toDouble() * 100).toString()
         )
         binding.tvYe.text = String.format(getString(R.string.ye), mData.data!!.point.balance)
+    }
+
+    override fun calcMultipleOrder(mData: BaseNetModel<CalcDirectBean>) {
+        calcDirectBean = mData.data!!
+        binding.tvPay.text =
+            "总金额：" + "签到积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                getString(R.string.price),
+                calcDirectBean.calc_result.total_cash_with_reward
+            )
+        binding.rlZfb.visibility =
+            if (calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0) View.GONE else View.VISIBLE
+        binding.rb5.isChecked = calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0
+    }
+
+    override fun orderFilter(mData: BaseNetModel<OrderFilterBean>) {
+        cartOrderBeanList.clear()
+        cartOrderBeanList.addAll(mData.data!!.detail)
+        orderCartAdapter.notifyDataSetChanged()
     }
 
     private fun toZFB(info: String) {

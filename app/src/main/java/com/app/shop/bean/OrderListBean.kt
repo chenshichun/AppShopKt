@@ -64,5 +64,6 @@ data class Item(
     val sku_id: String,
     val sku_name: String,
     val updated_at: String,
-    val user_id: String
-)
+    val user_id: String,
+    val pay_point_type:String,
+    )

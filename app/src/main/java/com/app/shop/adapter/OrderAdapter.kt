@@ -34,6 +34,8 @@ class OrderAdapter(private val context: Context, val mData: List<Order>?) :
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.tvShopName.text = mData!![position].shop_name
+        holder.tvConfirm.visibility = View.VISIBLE
+
         when (mData[position].status) {//1:待付款 2:待发货 3:待收货 4:待评价 5:成功 6:失败
             1 -> {
                 holder.tvStatus.text = "待付款"
@@ -48,6 +50,7 @@ class OrderAdapter(private val context: Context, val mData: List<Order>?) :
             }
             3 -> {
                 holder.tvConfirmLeft.visibility = View.GONE
+                holder.tvConfirm.visibility = View.GONE
                 holder.tvStatus.text = "待收货"
                 holder.tvConfirm.text = "确认收货"
             }

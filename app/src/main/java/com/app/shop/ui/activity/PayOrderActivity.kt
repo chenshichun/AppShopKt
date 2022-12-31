@@ -3,6 +3,8 @@ package com.app.shop.ui.activity
 import android.os.Handler
 import android.os.Message
 import android.text.TextUtils
+import android.view.View
+import androidx.core.view.isVisible
 import com.alipay.sdk.app.PayTask
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
@@ -87,37 +89,43 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
                 passwordDialog.show()
             }
         }
-        binding.rb1.setOnCheckedChangeListener { compoundButton, b ->
+        binding.rb1.setOnCheckedChangeListener { _, b ->
             if (b) {
-                binding.tvPay.text = "总金额：" + String.format(
-                    getString(R.string.goods_integral),
-                    calcDirectBean.calc_result.point
-                ) + "+" + String.format(
-                    getString(R.string.price),
-                    calcDirectBean.calc_result.total_cash_with_reward
-                )
+                binding.tvPay.text =
+                    "总金额：" + "签到积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                        getString(R.string.price),
+                        calcDirectBean.calc_result.total_cash_with_reward
+                    )
+                binding.rlZfb.visibility =
+                    if (calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0) View.GONE else View.VISIBLE
+                binding.rb5.isChecked =
+                    calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0
             }
         }
-        binding.rb2.setOnCheckedChangeListener { compoundButton, b ->
+        binding.rb2.setOnCheckedChangeListener { _, b ->
             if (b) {
-                binding.tvPay.text = "总金额：" + String.format(
-                    getString(R.string.goods_integral),
-                    calcDirectBean.calc_result.point
-                ) + "+" + String.format(
-                    getString(R.string.price),
-                    calcDirectBean.calc_result.total_cash_with_barter
-                )
+                binding.tvPay.text =
+                    "总金额：" + "易货积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                        getString(R.string.price),
+                        calcDirectBean.calc_result.total_cash_with_barter
+                    )
+                binding.rlZfb.visibility =
+                    if (calcDirectBean.calc_result.total_cash_with_barter.toDouble() == 0.0) View.GONE else View.VISIBLE
+                binding.rb5.isChecked =
+                    calcDirectBean.calc_result.total_cash_with_barter.toDouble() == 0.0
             }
         }
-        binding.rb3.setOnCheckedChangeListener { compoundButton, b ->
+        binding.rb3.setOnCheckedChangeListener { _, b ->
             if (b) {
-                binding.tvPay.text = "总金额：" + String.format(
-                    getString(R.string.goods_integral),
-                    calcDirectBean.calc_result.point
-                ) + "+" + String.format(
-                    getString(R.string.price),
-                    calcDirectBean.calc_result.total_cash_with_expend
-                )
+                binding.tvPay.text =
+                    "总金额：" + "消费积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                        getString(R.string.price),
+                        calcDirectBean.calc_result.total_cash_with_expend
+                    )
+                binding.rlZfb.visibility =
+                    if (calcDirectBean.calc_result.total_cash_with_expend.toDouble() == 0.0) View.GONE else View.VISIBLE
+                binding.rb5.isChecked =
+                    calcDirectBean.calc_result.total_cash_with_expend.toDouble() == 0.0
             }
         }
         binding.rb4.setOnCheckedChangeListener { compoundButton, b ->
@@ -164,13 +172,14 @@ class PayOrderActivity : BaseActivity<ActivityPayOrderBinding, PayOrderPresenter
 
     override fun calcOrder(mData: BaseNetModel<CalcDirectBean>) {
         calcDirectBean = mData.data!!
-        binding.tvPay.text = "总金额：" + String.format(
-            getString(R.string.goods_integral),
-            calcDirectBean.calc_result.point
-        ) + "+" + String.format(
-            getString(R.string.price),
-            calcDirectBean.calc_result.total_cash_with_reward
-        )
+        binding.tvPay.text =
+            "总金额：" + "签到积分" + calcDirectBean.calc_result.point + " + " + String.format(
+                getString(R.string.price),
+                calcDirectBean.calc_result.total_cash_with_reward
+            )
+        binding.rlZfb.visibility =
+            if (calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0) View.GONE else View.VISIBLE
+        binding.rb5.isChecked = calcDirectBean.calc_result.total_cash_with_reward.toDouble() == 0.0
     }
 
     override fun payBalance(mData: BaseNetModel<Any>) {

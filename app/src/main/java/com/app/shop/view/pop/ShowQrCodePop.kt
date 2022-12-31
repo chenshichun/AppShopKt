@@ -2,16 +2,11 @@ package com.app.shop.view.pop
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.view.View
 import android.widget.ImageView
 import com.app.shop.R
 import com.app.shop.manager.AccountManager
-import com.app.shop.util.BitmapUtil
-import com.app.shop.util.ToastUtil
 import com.bumptech.glide.Glide
 import com.lxj.xpopup.core.CenterPopupView
-import com.uuzuche.lib_zxing.activity.CodeUtils
 
 /**
  * @author chenshichun

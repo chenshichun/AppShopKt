@@ -227,7 +227,11 @@ interface HomeService {
     *  订单列表
     * */
     @GET("order/list")
-    suspend fun orderList(@Query("status") status: Int): Response<BaseNetModel<OrderListBean>>
+    suspend fun orderList(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("status") status: Int,
+    ): Response<BaseNetModel<OrderListBean>>
 
     /*
     * 店铺收藏
@@ -326,10 +330,23 @@ interface HomeService {
     suspend fun aliPay(@Body zfbPayReq: ZFBPayReq): Response<BaseNetModel<AliPayDataBean>>
 
     /*
+    * 支付宝多订单支付
+    * */
+    @POST("order/pay/multiple/ali")
+    suspend fun orderIdsAliPay(@Body orderIdsReq: OrderIdsReq): Response<BaseNetModel<AliPayDataBean>>
+
+
+    /*
     * 余额
     * */
     @POST("order/pay/balance")
     suspend fun payBalance(@Body balancePayReq: BalancePayReq): Response<BaseNetModel<Any>>
+
+    /*
+    * 余额
+    * */
+    @POST("order/pay/multiple/balance")
+    suspend fun payMultipleBalance(@Body balanceMulPayReq: BalanceMulPayReq): Response<BaseNetModel<Any>>
 
     /*
     * 修改支付密码
@@ -440,5 +457,25 @@ interface HomeService {
     * */
     @POST("order/calc/order")
     suspend fun calcOrder(@Body orderIdReq: OrderIdReq): Response<BaseNetModel<CalcDirectBean>>
+
+    /*
+    * 多商品计算订单金额
+    * */
+    @POST("order/calc/multiple/order")
+    suspend fun calcMultipleOrder(@Body order_ids: OrderIdsReq): Response<BaseNetModel<CalcDirectBean>>
+
+    /*
+    * 获取指定ID的订单列表
+    * */
+    @GET("order/filter")
+    suspend fun orderFilter(
+        @Query("order_ids") order_ids: String,
+    ): Response<BaseNetModel<OrderFilterBean>>
+
+    /*
+    * 获取android更新信息
+    * */
+    @GET("comm/android/update")
+    suspend fun androidUpdate(): Response<BaseNetModel<UpdateBean>>
 
 }

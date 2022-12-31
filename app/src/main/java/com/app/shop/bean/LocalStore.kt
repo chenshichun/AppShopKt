@@ -19,7 +19,7 @@ data class LocalStore(
     val province: String,
     val remark: String,
     val sales: Int,
-    val score: Int,
+    val score: String,
     val shop_address: String,
     val shop_id: String,
     val shop_industry: Int,

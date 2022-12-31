@@ -6,6 +6,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -300,9 +301,15 @@ class MineFragment : BaseFragment<FragmentMineBinding, MinePresenter>(), MineCon
                 builder.create().show()
             }
             R.id.rl_sjht -> {// 商家后台
-                bundle.putString(Constants.WEB_TITLE, "商家后台")
+               /* bundle.putString(Constants.WEB_TITLE, "商家后台")
                 bundle.putString(Constants.WEB_URL, Constants.SJHT)
                 IntentUtil.get()!!.goActivity(activity, WebViewActivity::class.java, bundle)
+*/
+                val intent = Intent()
+                intent.action = "android.intent.action.VIEW"
+                val content_url: Uri = Uri.parse(Constants.SJHT)
+                intent.data = content_url
+                startActivity(intent)
             }
         }
     }

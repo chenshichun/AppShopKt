@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
-            android:text="签到说明文字介绍下，每日签到领取三十积分，想要更多积分请观看下方视频。完成第一个5分，第二个10分，第三个15分，第四个20分，第五个25分"
+            android:text="签到赚积分，玩转易货君。每日签到领取5个签到积分；观看下方视频，每观看一个视频可以再领5个积分！小伙伴们快来一起轻松赚分吧！"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>

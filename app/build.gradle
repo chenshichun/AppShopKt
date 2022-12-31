@@ -11,10 +11,9 @@ android {
     defaultConfig {
         applicationId "com.app.shop"
         minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
-
+        targetSdk 28
+        versionCode 19
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -190,6 +189,10 @@ dependencies {
     //implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
     //implementation 'cn.jzvd:jiaozivideoplayer:7.7.0'
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
+    //okhttp
+    implementation 'com.squareup.okio:okio:1.14.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.zhy:okhttputils:2.6.2'
 }
 
 def releaseTime() {

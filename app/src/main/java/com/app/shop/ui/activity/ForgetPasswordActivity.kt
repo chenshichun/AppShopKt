@@ -6,6 +6,7 @@ import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
 import com.app.shop.bean.type.SmsType
 import com.app.shop.databinding.ActivityForgetPasswordBinding
+import com.app.shop.req.SetPwdReq
 import com.app.shop.req.SmsSendReq
 import com.app.shop.ui.contract.ForgetPasswordContract
 import com.app.shop.ui.presenter.ForgetPasswordPresenter
@@ -18,7 +19,8 @@ import com.gyf.immersionbar.ktx.immersionBar
  * 创建日期：2022/7/13
  * 描述：忘记密码
  */
-class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, ForgetPasswordPresenter>(),
+class ForgetPasswordActivity :
+    BaseActivity<ActivityForgetPasswordBinding, ForgetPasswordPresenter>(),
     ForgetPasswordContract.View, View.OnClickListener {
 
     private var timer: TimerUnit? = null
@@ -64,6 +66,12 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, Forge
                     ToastUtil.showToast("请输入验证码")
                     return
                 }
+                val setPwdReq = SetPwdReq(
+                    binding.etPassword.text.toString(),
+                    binding.etPhone.text.toString(),
+                    binding.etCode.text.toString()
+                )
+                mPresenter!!.setpwd(setPwdReq)
             }
         }
     }
@@ -74,6 +82,10 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding, Forge
             timer = TimerUnit(binding.tvGetSmsCode)
         }
         timer?.startTime()
+    }
+
+    override fun setpwd(mData: BaseNetModel<Any>) {
+        finish()
     }
 
     override fun showLoading() {

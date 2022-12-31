@@ -18,6 +18,9 @@
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
     <queries>
         <package android:name="com.tencent.mm" />
@@ -59,6 +62,15 @@
             android:name="com.amap.api.v2.apikey"
             android:value="e3fd9a8e388a6477778cbb845d10be37" /> <!-- 高德地图定位 -->
         <service android:name="com.amap.api.location.APSService" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.app.shop.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <activity
             android:name=".ui.activity.SplashActivity"

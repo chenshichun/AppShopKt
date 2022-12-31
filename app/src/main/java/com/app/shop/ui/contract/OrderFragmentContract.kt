@@ -20,7 +20,10 @@ interface OrderFragmentContract : BaseContract {
     }
 
     interface Presenter {
-        fun orderList(status: Int)
+        fun orderList(
+            page: Int,
+            size: Int, status: Int
+        )
         fun orderCancel(orderIdReq: OrderIdReq)
         fun orderConfirm(orderIdReq: OrderIdReq)
         fun orderDelete(orderIdReq: OrderIdReq)

@@ -30,7 +30,6 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
     private lateinit var orderDetailBean: OrderDetailBean
 
     private lateinit var cartOrderBean: CartOrderBean
-    private lateinit var cartOrderDetailBeanList: List<CartOrderDetailBean>
 
     override fun getPresenter(): OrderDetailPresenter {
         return OrderDetailPresenter()
@@ -90,26 +89,19 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
         binding.tvConfirmRight.setOnClickListener {
             when (status) {
                 1 -> {// 去支付
-                    if (orderDetailBean.detail.items.size == 1) {// 单商品付款
-                        val orderInfoBean = OrderInfoBean(
-                            orderDetailBean.detail.prod_name,
-                            orderDetailBean.detail.items[0].point,
-                            orderDetailBean.detail.items[0].price,
-                            orderDetailBean.detail.items[0].pic,
-                            orderDetailBean.detail.order_id
+                    val orderInfoBean = OrderInfoBean(
+                        orderDetailBean.detail.prod_name,
+                        orderDetailBean.detail.items[0].point,
+                        orderDetailBean.detail.items[0].price,
+                        orderDetailBean.detail.items[0].pic,
+                        orderDetailBean.detail.order_id
+                    )
+                    IntentUtil.get()!!
+                        .goActivity(
+                            this@OrderDetailActivity,
+                            PayOrderActivity::class.java,
+                            orderInfoBean
                         )
-                        IntentUtil.get()!!
-                            .goActivity(
-                                this@OrderDetailActivity,
-                                PayOrderActivity::class.java,
-                                orderInfoBean
-                            )
-                    } else {// 多商品付款
-                        cartOrderBean.detail = cartOrderDetailBeanList
-                        /*val cartOrderDetailBeans: List<CartOrderDetailBean> = arrayListOf()
-                        IntentUtil.get()!!
-                            .goActivity(activity, PayCartOrderActivity::class.java, cartOrderDetailBeans)*/
-                    }
                 }
                 3 -> {// 确认收货
                     val orderIdReq = OrderIdReq(orderId)
@@ -144,14 +136,16 @@ class OrderDetailActivity : BaseActivity<ActivityOrderDetailBinding, OrderDetail
         Glide.with(this).load(mData.data!!.detail.verify_code).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic)
             .into(binding.ivCode)
-
+        binding.tvResult.text = mData.data!!.detail.verify_result
+        binding.tvResult.visibility = if(mData.data!!.detail.verify_result.isEmpty()) View.GONE else View.VISIBLE
         binding.tvExpressDelivery.text = mData.data!!.detail.dvy_type
         binding.tvDeliveryCost.text = mData.data!!.detail.order_number
         binding.tvTime.text = mData.data!!.detail.pay_time
-        binding.tvPayPoint.text = String.format(
-            getString(R.string.goods_integral),
-            mData.data!!.detail.pay_point
-        )
+        binding.tvPayPoint.text = mData.data!!.detail.pay_point + mData.data!!.detail.pay_point_type
+        /*String.format(
+    getString(R.string.goods_integral),
+    mData.data!!.detail.pay_point
+)*/
         binding.tvPayCash.text = String.format(
             getString(R.string.price),
             mData.data!!.detail.pay_cash

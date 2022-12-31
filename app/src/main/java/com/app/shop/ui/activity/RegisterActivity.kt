@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
 import com.app.shop.bean.BaseNetModel
@@ -19,6 +20,9 @@ import com.app.shop.util.TimerUnit
 import com.app.shop.util.ToastUtil
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
+import android.text.Editable
+
+import android.text.TextWatcher
 
 
 /**
@@ -44,10 +48,23 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterPresenter
         binding.tvGetSmsCode.setOnClickListener(this)
         binding.tvPrivacyPolicy.setOnClickListener(this)
         binding.tvUserAgreement.setOnClickListener(this)
-        Logger.d(getClipboardContent())
+        /*Logger.d(getClipboardContent())
         if (getClipboardContent()!!.isNotEmpty()) {
             binding.etInvCode.setText(getClipboardContent())
-        }
+        }*/
+        binding.etInvCode.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (binding.etInvCode.text.contains("易货君邀请码=")) {
+                    binding.etInvCode.setText(binding.etInvCode.text.substring(7, binding.etInvCode.text.length))
+                }
+            }
+        })
     }
 
     /**

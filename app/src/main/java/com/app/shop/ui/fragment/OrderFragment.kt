@@ -29,6 +29,8 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
     private lateinit var orderAdapter: OrderAdapter
     private var orderBeanList = mutableListOf<Order>()
     private lateinit var loadService: LoadService<Any>
+    var page: Int = 1
+    val size: Int = 10
 
     override fun initView() {
         orderAdapter = activity?.let { OrderAdapter(it, orderBeanList) }!!
@@ -74,11 +76,17 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
                             IntentUtil.get()!!
                                 .goActivity(activity, PayOrderActivity::class.java, orderInfoBean)
                         } else {// 多商品付款
-                            /*val cartOrderDetailBeans: List<CartOrderDetailBean> = arrayListOf()
+                            var orderIds = "";
+                            for (cartOrderDetailBean in orderBeanList) {
+                                orderIds = orderIds + cartOrderDetailBean.order_id + ","
+                            }
+                            if (orderIds.isNotEmpty())
+                                orderIds = orderIds.substring(0, orderIds.length - 1)
 
+                            val bundle = Bundle()
+                            bundle.putString(Constants.ORDER_IDS, orderIds)
                             IntentUtil.get()!!
-                                .goActivity(activity, PayCartOrderActivity::class.java, cartOrderDetailBeans)*/
-
+                                .goActivity(activity, PayCartOrderActivity::class.java, bundle)
                         }
                     }
                     2 -> {// 待发货-取消订单
@@ -106,14 +114,19 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
             }
         })
         loadService = LoadSir.getDefault().register(binding.refreshLayout) {
-            mPresenter!!.orderList(status)
+            mPresenter!!.orderList(page, size, status)
+        }
+        binding.refreshLayout.setOnRefreshListener {
+            page = 1
+            mPresenter!!.orderList(page, size, status)
 
         }
-        binding.refreshLayout.setEnableLoadMore(false)
-        binding.refreshLayout.setOnRefreshListener {
-            mPresenter!!.orderList(status)
+
+        binding.refreshLayout.setOnLoadMoreListener {
+            page++
+            mPresenter!!.orderList(page, size, status)
         }
-        mPresenter!!.orderList(status)
+        mPresenter!!.orderList(page, size, status)
     }
 
     override fun onResume() {
@@ -125,28 +138,39 @@ class OrderFragment(val status: Int) : BaseFragment<FragmentOrderBinding, OrderF
     }
 
     override fun orderList(mData: BaseNetModel<OrderListBean>) {
-
+        binding.refreshLayout.finishLoadMore()
         binding.refreshLayout.finishRefresh()
-        if (mData.data!!.orders.isNotEmpty()) {
-            orderBeanList.clear()
-            orderBeanList.addAll(mData.data!!.orders)
-            orderAdapter.notifyDataSetChanged()
-            loadService.showSuccess()
+
+        if (page == 1) {
+            if (mData.data!!.orders.isEmpty()) {// 空数据
+                loadService.showCallback(EmptyCallBack::class.java)
+            } else {
+                orderBeanList.clear()
+                orderBeanList.addAll(mData.data!!.orders)
+                orderAdapter.notifyDataSetChanged()
+                loadService.showSuccess()
+            }
         } else {
-            loadService.showCallback(EmptyCallBack::class.java)
+            loadService.showSuccess()
+            if (mData.data!!.orders.isEmpty()) {
+                page--
+            } else {
+                orderBeanList.addAll(mData.data!!.orders)
+                orderAdapter.notifyDataSetChanged()
+            }
         }
     }
 
     override fun orderCancel(mData: BaseNetModel<Any>) {
-        mPresenter!!.orderList(status)
+        mPresenter!!.orderList(page, size, status)
     }
 
     override fun orderConfirm(mData: BaseNetModel<Any>) {
-        mPresenter!!.orderList(status)
+        mPresenter!!.orderList(page, size, status)
     }
 
     override fun orderDelete(mData: BaseNetModel<Any>) {
-        mPresenter!!.orderList(status)
+        mPresenter!!.orderList(page, size, status)
     }
 
     override fun showLoading() {

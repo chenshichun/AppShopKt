@@ -1,14 +1,13 @@
 package com.app.shop.util
 
 import android.content.Context
-import com.app.shop.util.AMapUtil
 import android.content.Intent
-import android.text.TextUtils
-import com.app.shop.util.ToastUtil
 import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.text.TextUtils
 import com.app.shop.R
-import java.lang.Exception
+
 
 /**
  * @author chenshichun
@@ -69,7 +68,7 @@ object AMapUtil {
      * @param dname 终点名称
      */
     fun openGaoDeMap(context: Context, dlat: String, dlon: String, dname: String) {
-        if (isInstallApp(context, "com.autonavi.minimap")) {
+        if (isInstalled(context, "com.autonavi.minimap")) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setPackage("com.autonavi.minimap")
             intent.addCategory("android.intent.category.DEFAULT")
@@ -97,7 +96,7 @@ object AMapUtil {
      * @param dname 终点名称
      */
     fun openBaiduMap(context: Context, dlat: String?, dlon: String?, dname: String) {
-        if (isInstallApp(context, "com.baidu.BaiduMap")) {
+        if (isInstalled(context, "com.baidu.BaiduMap")) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(
                 "baidumap://map/direction?origin=我的位置&destination=name:"
@@ -132,7 +131,7 @@ object AMapUtil {
      * @param dname 终点名称
      */
     fun openTencent(context: Context, dlat: String, dlon: String, dname: String) {
-        if (isInstallApp(context, "com.tencent.map")) {
+        if (isInstalled(context, "com.tencent.map")) {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(
                 "qqmap://map/routeplan?type=bus&from=我的位置&fromcoord=0,0"
@@ -149,7 +148,7 @@ object AMapUtil {
     /**
      * 检测应用是否安装
      */
-    fun isInstallApp(context: Context, packageName: String?): Boolean {
+    /*fun isInstallApp(context: Context, packageName: String?): Boolean {
         var packageInfo: PackageInfo?
         try {
             packageInfo = context.packageManager.getPackageInfo(packageName!!, 0)
@@ -158,7 +157,39 @@ object AMapUtil {
             e.printStackTrace()
         }
         return packageInfo != null
+    }*/
+
+    fun isInstalled(context: Context, packageName: String): Boolean {
+        val manager: PackageManager = context.packageManager
+        val installedPackages: List<PackageInfo> = manager.getInstalledPackages(0)
+        if (installedPackages != null) {
+            for (info in installedPackages) {
+                if (info.packageName == packageName) return true
+            }
+        }
+        return false
     }
+
+    /**
+     * 检测是否安装微信
+     *
+     * @param context
+     * @return
+     */
+    fun isInstallApp(context: Context, packageName: String?): Boolean {
+        val packageManager = context.packageManager // 获取packagemanager
+        val pinfo = packageManager.getInstalledPackages(0) // 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (i in pinfo.indices) {
+                val pn = pinfo[i].packageName
+                if (pn == packageName) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
 
     private fun gd2bd(lat: Double, lng: Double): DoubleArray {
         val X_PI = Math.PI * 3000.0 / 180.0

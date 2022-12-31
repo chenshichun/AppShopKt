@@ -75,6 +75,13 @@ class SpecificationPop(context: Context, type: Int, prodInfo: ProdInfo) : Bottom
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
+
+        if(type==0){
+            tvBuy.text = "加入购物车"
+        }else{
+            tvBuy.text = "立即购买"
+        }
+
         Glide.with(context).load(prodInfo.pic).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(ivGoods)
 

@@ -1,5 +1,6 @@
 package com.app.shop.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.Image
 import android.view.LayoutInflater
@@ -31,16 +32,21 @@ class OrderShopAdapter(private val context: Context, val mData: List<Item>?) :
         return ViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(mData!![position].pic).error(R.drawable.icon_default_pic)
             .placeholder(R.drawable.icon_default_pic).into(holder.ivGoods)
         holder.nameTv.text = mData[position].prod_name
         holder.tvSpecification.text = mData[position].sku_name
-        holder.tvPrice.text = String.format(
-            context.getString(if (mData[position].point.toInt() != 0) R.string.goods_integral else R.string.price),
-            if (mData[position].point.toInt() != 0) mData[position].point else mData[position].price
-        )
 
+        if (mData[position].point.toDouble() != 0.0) {
+            holder.tvPrice.text = mData[position].point + mData[position].pay_point_type
+        } else {
+            holder.tvPrice.text = String.format(
+                context.getString(if (mData[position].point.toDouble() != 0.0) R.string.goods_integral else R.string.price),
+                if (mData[position].point.toDouble() != 0.0) mData[position].point else mData[position].price
+            )
+        }
         holder.itemView.setOnClickListener {
             mOnItemClickListener?.onItemClick(position)
         }

@@ -56,6 +56,7 @@
         android:layout_height="@dimen/dimen_dp_50"
         android:layout_marginHorizontal="@dimen/dimen_dp_15"
         android:layout_marginTop="@dimen/dimen_dp_20"
+        android:visibility="gone"
         android:background="@drawable/confirm_bg"
         android:text="确定支付"
         android:textColor="@color/white" />

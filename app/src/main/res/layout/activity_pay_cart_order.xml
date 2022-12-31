@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,120 +13,152 @@
 
     <include layout="@layout/line" />
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="积分抵扣"
-            android:textColor="@color/color_333"
-            android:textSize="14sp" />
-
-        <RadioGroup
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/rb_1"
-                style="@style/CustomCheckBoxTheme"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_dp_10"
-                android:checked="true"
-                android:text="@string/qdjf" />
+                tools:itemCount="1"
+                tools:listitem="@layout/item_cart_order" />
 
-            <RadioButton
-                android:id="@+id/rb_2"
-                style="@style/CustomCheckBoxTheme"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_dp_10"
-                android:text="@string/yhjf" />
+                android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:background="@drawable/bg_white_8"
+                android:orientation="vertical"
+                android:padding="15dp">
 
-            <RadioButton
-                android:id="@+id/rb_3"
-                style="@style/CustomCheckBoxTheme"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="积分抵扣"
+                    android:textColor="@color/color_333"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rb_1"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:padding="@dimen/dimen_dp_10"
+                        android:text="@string/qdjf" />
+
+                    <RadioButton
+                        android:id="@+id/rb_2"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_dp_10"
+                        android:text="@string/yhjf" />
+
+                    <RadioButton
+                        android:id="@+id/rb_3"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_dp_10"
+                        android:text="@string/xfjf" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_dp_10"
-                android:text="@string/xfjf" />
+                android:layout_marginHorizontal="@dimen/dimen_dp_10"
+                android:layout_marginTop="@dimen/dimen_dp_10"
+                android:background="@drawable/bg_white_8"
+                android:orientation="vertical"
+                android:padding="15dp">
 
-        </RadioGroup>
+                <RelativeLayout
+                    android:id="@+id/rl_zfb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
 
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="支付宝"
+                        android:textColor="@color/color_333"
+                        android:textSize="14sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_dp_10"
-        android:layout_marginTop="@dimen/dimen_dp_10"
-        android:background="@drawable/bg_white_8"
-        android:orientation="vertical"
-        android:padding="15dp">
+                    <RadioButton
+                        android:id="@+id/rb_4"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:checked="true" />
+                </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_ye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/ye"
+                        android:textColor="@color/color_333"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_5"
+                        style="@style/CustomCheckBoxTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
 
             <TextView
+                android:id="@+id/tv_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="支付宝"
+                android:layout_margin="15dp"
+                android:text="总金额:"
                 android:textColor="@color/color_333"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/rb_4"
-                style="@style/CustomCheckBoxTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:checked="true" />
-        </RelativeLayout>
+            <Button
+                android:id="@+id/bt_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_dp_50"
+                android:layout_marginHorizontal="@dimen/dimen_dp_15"
+                android:layout_marginTop="@dimen/dimen_dp_20"
+                android:background="@drawable/confirm_bg"
+                android:text="确定支付"
+                android:textColor="@color/white" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/tv_ye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/ye"
-                android:textColor="@color/color_333"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/rb_5"
-                style="@style/CustomCheckBoxTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_cart_order" />
-
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -34,6 +34,12 @@ interface LoginService {
     suspend fun wechatLogin(@Body wxLoginReq: WxLoginReq): Response<BaseNetModel<UserDataBean>>
 
     /*
+    * 忘记密码
+    * */
+    @POST("user/setpwd/login")
+    suspend fun setpwd(@Body setPwdReq: SetPwdReq): Response<BaseNetModel<Any>>
+
+    /*
     * 注册
     * */
     @POST("user/register/sms")

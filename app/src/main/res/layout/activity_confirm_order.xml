@@ -161,7 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="0易货积分"
+                        android:text="0积分"
                         android:textColor="@color/color_333"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="@id/iv_goods"

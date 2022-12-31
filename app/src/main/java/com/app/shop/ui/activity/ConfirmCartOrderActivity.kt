@@ -107,7 +107,16 @@ class ConfirmCartOrderActivity :
 
     override fun orderSubmitCart(mData: BaseNetModel<CartOrderBean>) {
         Logger.d(mData.data)
-        IntentUtil.get()!!.goActivity(this, PayCartOrderActivity::class.java, mData.data)
+        var orderIds = "";
+        for (cartOrderDetailBean in mData.data!!.detail!!) {
+            orderIds = orderIds + cartOrderDetailBean.order_id + ","
+        }
+        if (orderIds.isNotEmpty())
+            orderIds = orderIds.substring(0, orderIds.length - 1)
+
+        val bundle = Bundle()
+        bundle.putString(Constants.ORDER_IDS, orderIds)
+        IntentUtil.get()!!.goActivity(this, PayCartOrderActivity::class.java, bundle/*mData.data*/)
         finish()
     }
 

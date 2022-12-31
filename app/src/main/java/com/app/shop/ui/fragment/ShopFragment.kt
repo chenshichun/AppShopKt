@@ -68,8 +68,8 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopPresenter>(), ShopCon
                     .asBottomList(
                         "",
                         arrayOf("高德地图", "百度地图", "腾讯地图")
-                    ) { position, _ ->
-                        when (position) {
+                    ) { pos, _ ->
+                        when (pos) {
                             0 -> {// 高德地图
                                 AMapUtil.openGaoDeMap(
                                     activity!!,

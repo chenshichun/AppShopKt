@@ -38,8 +38,10 @@ data class OrderDataBean(
     val updated_at: String,
     val user_id: String,
     val verify_code: String,
+    val verify_result: String,
     val pay_point:String,
     val pay_cash:String,
+    val pay_point_type:String,
     )
 
 data class OrderItem(

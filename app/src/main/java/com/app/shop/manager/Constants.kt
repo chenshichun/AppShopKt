@@ -35,6 +35,7 @@ class Constants {
 
         const val WECHAT_ID: String = "WECHAT_ID"
         const val ORDER_ID: String = "ORDER_ID"
+        const val ORDER_IDS: String = "ORDER_IDS"
 
         const val LOCATION_LAT: String = "LAT"
         const val LOCATION_LNG: String = "LNG"

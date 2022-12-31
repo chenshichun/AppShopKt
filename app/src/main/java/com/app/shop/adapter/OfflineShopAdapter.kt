@@ -32,6 +32,11 @@ class OfflineShopAdapter(private val context: Context, val mData: List<LocalStor
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        when(mData!![position].shop_type){
+            0->holder.ivType.setBackgroundResource(R.drawable.icon_merchant_label)
+            1->holder.ivType.setBackgroundResource(R.drawable.zs_icon)
+            2->holder.ivType.setBackgroundResource(R.drawable.hg_icon)
+        }
         Glide.with(context).load(mData!![position].shop_logo)
             .placeholder(R.drawable.icon_default_pic)
             .error(R.drawable.icon_default_pic).into(holder.ivShop)
@@ -72,6 +77,7 @@ class OfflineShopAdapter(private val context: Context, val mData: List<LocalStor
         val tvPhone: TextView = binding.tvPhone
         val tvSales: TextView = binding.tvSales
         val tvScore: TextView = binding.tvScore
+        val ivType: ImageView = binding.ivType
     }
 
 }

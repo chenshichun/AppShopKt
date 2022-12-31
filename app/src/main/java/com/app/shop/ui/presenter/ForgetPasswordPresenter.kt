@@ -2,6 +2,7 @@ package com.app.shop.ui.presenter
 
 import com.app.shop.base.BasePresenter
 import com.app.shop.manager.Constants
+import com.app.shop.req.SetPwdReq
 import com.app.shop.req.SmsSendReq
 import com.app.shop.retrofit.ApiRequest
 import com.app.shop.service.LoginService
@@ -28,6 +29,24 @@ class ForgetPasswordPresenter : BasePresenter<ForgetPasswordContract.View>(), Fo
             } else {
                 if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
                     mView!!.smsCode(response.body()!!)
+                } else {
+                    ToastUtil.showToast(response.body()!!.msg.toString())
+                }
+            }
+        }
+    }
+
+    override fun setpwd(setPwdReq: SetPwdReq) {
+        CoroutineScope(Dispatchers.Main).launch {
+            mView!!.showLoading()
+            val response = ApiRequest.create(LoginService::class.java).setpwd(setPwdReq)
+            mView!!.hideLoading()
+            if (response.body() == null) {
+                ToastUtil.showNoNetworkToast()
+            } else {
+                if (response.body()!!.code == Constants.WEB_RESP_CODE_SUCCESS) {
+                    mView!!.setpwd(response.body()!!)
+                    ToastUtil.showToast(response.body()!!.msg.toString())
                 } else {
                     ToastUtil.showToast(response.body()!!.msg.toString())
                 }

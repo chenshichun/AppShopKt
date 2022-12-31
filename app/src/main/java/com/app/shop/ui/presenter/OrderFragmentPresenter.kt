@@ -17,12 +17,13 @@ import kotlinx.coroutines.launch
  * 描述：
  *
  */
-class OrderFragmentPresenter : BasePresenter<OrderFragmentContract.View>(),OrderFragmentContract.Presenter {
-    override fun orderList(status: Int) {
+class OrderFragmentPresenter : BasePresenter<OrderFragmentContract.View>(),
+    OrderFragmentContract.Presenter {
+    override fun orderList(page: Int, size: Int, status: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            mView!!.showLoading()
-            val response = ApiRequest.create(HomeService::class.java).orderList(status)
-            mView!!.hideLoading()
+            //mView!!.showLoading()
+            val response = ApiRequest.create(HomeService::class.java).orderList(page, size, status)
+            //mView!!.hideLoading()
             if (response.body() == null) {
                 ToastUtil.showNoNetworkToast()
             } else {

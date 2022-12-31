@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.shop.R
-import com.app.shop.bean.CartOrderItem
+import com.app.shop.bean.OrderFilterItemBean
 import com.app.shop.databinding.ItemConfirmOrderBinding
 import com.bumptech.glide.Glide
 
@@ -17,7 +17,7 @@ import com.bumptech.glide.Glide
  * 创建日期：2022/10/11
  * 描述：
  */
-class OrderCartGoodsAdapter(private val context: Context, val mData: List<CartOrderItem>?) :
+class OrderCartGoodsAdapter(private val context: Context, val mData: List<OrderFilterItemBean>?) :
     RecyclerView.Adapter<OrderCartGoodsAdapter.ViewHolder>() {
     private var mOnItemClickListener: OnItemClickListener? = null
 
@@ -61,6 +61,5 @@ class OrderCartGoodsAdapter(private val context: Context, val mData: List<CartOr
         val tvAttr: TextView = binding.tvAttr
         val tvNum: TextView = binding.tvNum
         val llOrder: LinearLayout = binding.llOrder
-
     }
 }

@@ -7,17 +7,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.shop.R
-import com.app.shop.bean.CartOrderDetailBean
+import com.app.shop.bean.OrderFilterDetailBean
 import com.app.shop.databinding.ItemCartOrderBinding
-import com.bumptech.glide.Glide
 
 /**
  * @author chenshichun
  * 创建日期：2022/10/11
  * 描述：
  */
-class OrderCartAdapter(private val context: Context, val mData: List<CartOrderDetailBean>?) :
+class OrderCartAdapter(private val context: Context, val mData: List<OrderFilterDetailBean>?) :
     RecyclerView.Adapter<OrderCartAdapter.ViewHolder>() {
     private lateinit var orderCartGoodsAdapter: OrderCartGoodsAdapter
 
@@ -34,7 +32,7 @@ class OrderCartAdapter(private val context: Context, val mData: List<CartOrderDe
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvShopName.text = mData!![position].order_name
+        holder.tvShopName.text = mData!![position].shop_name
         orderCartGoodsAdapter = OrderCartGoodsAdapter(context, mData[position].items)
         holder.mRecyclerView.layoutManager = LinearLayoutManager(context)
         holder.mRecyclerView.adapter = orderCartGoodsAdapter

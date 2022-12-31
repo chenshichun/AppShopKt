@@ -1,32 +1,48 @@
 package com.app.shop.ui.activity
 
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.*
+import android.view.Gravity
 import android.view.KeyEvent
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.app.shop.BuildConfig
 import com.app.shop.R
 import com.app.shop.base.BaseActivity
+import com.app.shop.bean.BaseNetModel
+import com.app.shop.bean.UpdateBean
 import com.app.shop.bean.event.PageEvent
 import com.app.shop.databinding.ActivityMainBinding
 import com.app.shop.manager.AccountManager
 import com.app.shop.ui.contract.MainContract
 import com.app.shop.ui.presenter.MainPresenter
+import com.app.shop.util.AppUtil
 import com.app.shop.util.IntentUtil
 import com.app.shop.util.ToastUtil
+import com.app.shop.view.dialog.UpdateApkDialog
 import com.app.shop.view.tablayout.HomeFactory
 import com.app.shop.view.tablayout.TabEntity
+import com.blankj.utilcode.util.ToastUtils
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.gyf.immersionbar.ktx.immersionBar
 import com.orhanobut.logger.Logger
+import com.zhy.http.okhttp.OkHttpUtils
+import com.zhy.http.okhttp.callback.FileCallBack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.Call
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.io.File
 import kotlin.system.exitProcess
 
 /**
@@ -68,7 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
 
         initFragments()
         initTabItems()
-
+        // mPresenter!!.androidUpdate()
     }
 
     private fun initFragments() {
@@ -99,7 +115,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
                     2 -> currentPosition = 2
                     3 -> currentPosition = 3
                     4 -> if (!AccountManager.isLogin()) {
-                        IntentUtil.get()!!.goActivity(this@MainActivity, AccountLoginActivity::class.java)
+                        IntentUtil.get()!!
+                            .goActivity(this@MainActivity, AccountLoginActivity::class.java)
                         binding.mBottomNavigationBar.currentTab = currentPosition
                     } else {
                         currentPosition = 4
@@ -112,6 +129,80 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainPresenter>(), MainCon
             }
         })
         binding.mBottomNavigationBar.currentTab = currentPosition
+    }
+
+    lateinit var updateBean: UpdateBean
+    override fun androidUpdate(mData: BaseNetModel<UpdateBean>) {
+        updateBean = mData.data!!
+        if (mData.data!!.apk_info.version_code.toInt() > AppUtil.getVersionCode(this)!!.toInt()) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
+            } else {// 更新
+                showUpdateDialog(mData.data!!);
+            }
+        }
+    }
+
+    private fun showUpdateDialog(updateBean: UpdateBean) {
+        val updateApkDialog =
+            UpdateApkDialog(this@MainActivity, R.style.CustomDialog)
+        updateApkDialog.setOnClickListener(object : UpdateApkDialog.OnClickListener {
+            override fun update() {
+                downloadApp(updateBean)
+                ToastUtil.showToast("后台下载中")
+            }
+        })
+        updateApkDialog.show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            showUpdateDialog(updateBean)
+        }
+    }
+
+    private fun downloadApp(updateBean: UpdateBean) {
+        OkHttpUtils.get()
+            .url(updateBean.apk_info.download_url)
+            .build()
+            .execute(object : FileCallBack(
+                Environment.getExternalStorageDirectory().absolutePath,
+                "yhj.apk"
+            ) {
+                override fun onError(call: Call?, e: Exception?, id: Int) {
+                    ToastUtil.showToast("下载失败")
+                }
+
+                override fun onResponse(response: File?, id: Int) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        val contentUri = FileProvider.getUriForFile(
+                            this@MainActivity, BuildConfig.APPLICATION_ID + ".provider",
+                            response!!
+                        )
+                        intent.setDataAndType(contentUri, "application/vnd.android.package-archive")
+                    } else {
+                        intent.setDataAndType(
+                            Uri.fromFile(response),
+                            "application/vnd.android.package-archive"
+                        )
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                    startActivity(intent)
+                }
+            })
     }
 
     override fun showLoading() {
