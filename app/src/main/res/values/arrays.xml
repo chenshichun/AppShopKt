@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="radio_buttons">
+        <item>个人</item>
+        <item>个体工商户</item>
+        <item>企业</item>
+        <item>其他组织</item>
+    </string-array>
+</resources>

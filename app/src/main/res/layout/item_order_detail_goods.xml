@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_goods"
+        android:layout_width="@dimen/dimen_dp_80"
+        android:layout_height="@dimen/dimen_dp_80"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/icon_default_pic" />
+
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="90dp"
+        android:text="这是商品名字"
+        android:textColor="@color/color_333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/iv_goods"
+        app:layout_constraintTop_toTopOf="@id/iv_goods" />
+
+    <TextView
+        android:id="@+id/tv_specification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_dp_10"
+        android:layout_marginTop="@dimen/dimen_dp_5"
+        android:text="规格"
+        android:textColor="@color/color_999"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_goods_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_goods_name" />
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_dp_5"
+        android:text="实付款："
+        android:textColor="@color/color_333"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_specification"
+        app:layout_constraintTop_toBottomOf="@id/tv_specification" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_dp_5"
+        android:text="¥%"
+        android:textColor="@color/red"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_pay"
+        app:layout_constraintTop_toBottomOf="@id/tv_specification" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

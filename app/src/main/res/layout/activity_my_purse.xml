@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".ui.activity.MyPurseActivity">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/layout_head" />
+
+    <include layout="@layout/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_dp_10"
+        android:background="@drawable/confirm_bg"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总资产（元）"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_total_assets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可提现金额"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_amount_can_withdrawn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="累计提现金额"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_withdrawn_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_dp_10">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="账户余额(元)"
+                android:textColor="@color/color_333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_balance_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="0"
+                android:textColor="@color/color_333"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_blue_5"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="5dp"
+            android:text="提现"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/bg_color" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftIconHeight="25dp"
+        app:sLeftIconRes="@drawable/icon_purse"
+        app:sLeftIconWidth="25dp"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="钱包明细"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftIconHeight="25dp"
+        app:sLeftIconRes="@drawable/icon_withdrawal_account"
+        app:sLeftIconWidth="25dp"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="修改提现账号"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftIconHeight="25dp"
+        app:sLeftIconRes="@drawable/icon_withdrawal_details"
+        app:sLeftIconWidth="25dp"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="提现记录"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+</LinearLayout>

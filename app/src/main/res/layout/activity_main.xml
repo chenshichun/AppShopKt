@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/m_fl_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fl_bottom"
+        android:background="@color/white" />
+
+    <include
+        layout="@layout/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fl_bottom" />
+
+    <FrameLayout
+        android:id="@+id/fl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <com.app.shop.view.tablayout.MyCommonTabLayout
+            android:id="@+id/m_bottom_navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:clipChildren="false"
+            app:tl_iconMargin="@dimen/dimen_dp_0"
+            app:tl_indicator_height="0dp"
+            app:tl_textSelectColor="@color/blue"
+            app:tl_textUnselectColor="@color/color_999"
+            app:tl_textsize="11sp"
+            app:tl_underline_color="@color/black"
+            app:tl_underline_gravity="TOP"
+            app:tl_underline_height="0dp" />
+    </FrameLayout>
+</RelativeLayout>

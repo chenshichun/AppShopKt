@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.activity.ModifyNickNameActivity">
+
+    <include
+        android:id="@+id/view_head"
+        layout="@layout/layout_head" />
+
+    <include layout="@layout/line" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="提现账号设置"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="支付密码"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="换绑手机号"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="注销"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/stv_5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_dp_50"
+        android:background="@null"
+        android:gravity="center_vertical"
+        app:sDividerLineType="bottom"
+        app:sLeftTextColor="@color/color_333"
+        app:sLeftTextSize="@dimen/dimen_font_16"
+        app:sLeftTextString="实名认证"
+        app:sRightIconRes="@drawable/go_right"
+        app:sUseRipple="false" />
+</LinearLayout>
